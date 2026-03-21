@@ -1,6 +1,12 @@
-import pythonChallenges from '../data/challenges/python.json';
+import novatoChallenges from '../data/challenges/python_novato.json';
+import intermedioChallenges from '../data/challenges/python_intermedio.json';
+import proChallenges from '../data/challenges/python_pro.json';
 
-const ALL_CHALLENGES = [...pythonChallenges];
+const ALL_CHALLENGES = [
+  ...novatoChallenges,
+  ...intermedioChallenges,
+  ...proChallenges,
+];
 
 function normalizeDateToUTC(date = new Date()) {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));

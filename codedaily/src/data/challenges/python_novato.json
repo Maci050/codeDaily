@@ -1,0 +1,1394 @@
+[
+  {
+    "id": "sum_two_numbers",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma dos números",
+      "en": "Add two numbers"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para devolver la suma de `a` y `b`.",
+      "en": "Complete the `solve(a, b)` function to return the sum of `a` and `b`."
+    },
+    "instructions": {
+      "es": "Devuelve el resultado usando `return`.",
+      "en": "Return the result using `return`."
+    },
+    "restrictions": {
+      "es": [
+        "No uses `print()` como solución principal.",
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "Do not use `print()` as the main solution.",
+        "The function must be named `solve`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Puedes sumar con `a + b`.",
+        "Recuerda usar `return`."
+      ],
+      "en": [
+        "You can add with `a + b`.",
+        "Remember to use `return`."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [2, 3], "expected": 5 },
+      { "input": [-1, 4], "expected": 3 },
+      { "input": [0, 0], "expected": 0 }
+    ]
+  },
+  {
+    "id": "subtract_two_numbers",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Resta dos números",
+      "en": "Subtract two numbers"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para devolver `a - b`.",
+      "en": "Complete the `solve(a, b)` function to return `a - b`."
+    },
+    "instructions": {
+      "es": "Devuelve la resta de ambos valores.",
+      "en": "Return the subtraction of both values."
+    },
+    "restrictions": {
+      "es": ["La función debe llamarse `solve`."],
+      "en": ["The function must be named `solve`."]
+    },
+    "hints": {
+      "es": [
+        "La resta se hace con `-`.",
+        "Devuelve `a - b`."
+      ],
+      "en": [
+        "Subtraction uses `-`.",
+        "Return `a - b`."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [7, 2], "expected": 5 },
+      { "input": [0, 3], "expected": -3 },
+      { "input": [-2, -2], "expected": 0 }
+    ]
+  },
+  {
+    "id": "multiply_two_numbers",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Multiplica dos números",
+      "en": "Multiply two numbers"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para devolver el producto de `a` y `b`.",
+      "en": "Complete the `solve(a, b)` function to return the product of `a` and `b`."
+    },
+    "instructions": {
+      "es": "Usa el operador de multiplicación.",
+      "en": "Use the multiplication operator."
+    },
+    "restrictions": {
+      "es": ["La función debe llamarse `solve`."],
+      "en": ["The function must be named `solve`."]
+    },
+    "hints": {
+      "es": [
+        "La multiplicación se hace con `*`.",
+        "Devuelve `a * b`."
+      ],
+      "en": [
+        "Multiplication uses `*`.",
+        "Return `a * b`."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3, 4], "expected": 12 },
+      { "input": [-2, 5], "expected": -10 },
+      { "input": [0, 8], "expected": 0 }
+    ]
+  },
+  {
+    "id": "is_even",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Es par?",
+      "en": "Is it even?"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `True` si `n` es par y `False` si es impar.",
+      "en": "Complete the `solve(n)` function to return `True` if `n` is even and `False` if it is odd."
+    },
+    "instructions": {
+      "es": "Puedes usar `%`.",
+      "en": "You can use `%`."
+    },
+    "restrictions": {
+      "es": ["La función debe devolver un booleano."],
+      "en": ["The function must return a boolean."]
+    },
+    "hints": {
+      "es": [
+        "Un número es par si el resto al dividir entre 2 es 0.",
+        "Prueba con `n % 2 == 0`."
+      ],
+      "en": [
+        "A number is even if dividing by 2 leaves remainder 0.",
+        "Try `n % 2 == 0`."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [4], "expected": true },
+      { "input": [7], "expected": false },
+      { "input": [0], "expected": true }
+    ]
+  },
+  {
+    "id": "is_positive",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Es positivo?",
+      "en": "Is it positive?"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `True` si `n` es mayor que 0.",
+      "en": "Complete the `solve(n)` function to return `True` if `n` is greater than 0."
+    },
+    "instructions": {
+      "es": "Si `n` es 0 o negativo, devuelve `False`.",
+      "en": "If `n` is 0 or negative, return `False`."
+    },
+    "restrictions": {
+      "es": ["Usa un booleano como resultado."],
+      "en": ["Use a boolean as the result."]
+    },
+    "hints": {
+      "es": [
+        "Piensa en la comparación `n > 0`.",
+        "La función debe devolver `True` o `False`."
+      ],
+      "en": [
+        "Think about the comparison `n > 0`.",
+        "The function must return `True` or `False`."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3], "expected": true },
+      { "input": [0], "expected": false },
+      { "input": [-5], "expected": false }
+    ]
+  },
+  {
+    "id": "is_negative",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Es negativo?",
+      "en": "Is it negative?"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `True` si `n` es menor que 0.",
+      "en": "Complete the `solve(n)` function to return `True` if `n` is less than 0."
+    },
+    "instructions": {
+      "es": "Si `n` es 0 o positivo, devuelve `False`.",
+      "en": "If `n` is 0 or positive, return `False`."
+    },
+    "restrictions": {
+      "es": ["Usa `return`."],
+      "en": ["Use `return`."]
+    },
+    "hints": {
+      "es": [
+        "Piensa en `n < 0`.",
+        "El resultado es booleano."
+      ],
+      "en": [
+        "Think about `n < 0`.",
+        "The result is boolean."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [-1], "expected": true },
+      { "input": [0], "expected": false },
+      { "input": [2], "expected": false }
+    ]
+  },
+  {
+    "id": "double_number",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Doble de un número",
+      "en": "Double a number"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver el doble de `n`.",
+      "en": "Complete the `solve(n)` function to return double `n`."
+    },
+    "instructions": {
+      "es": "Devuelve `n * 2`.",
+      "en": "Return `n * 2`."
+    },
+    "restrictions": {
+      "es": ["No uses `print()`."],
+      "en": ["Do not use `print()`."]
+    },
+    "hints": {
+      "es": [
+        "Multiplica por 2.",
+        "Usa `return`."
+      ],
+      "en": [
+        "Multiply by 2.",
+        "Use `return`."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3], "expected": 6 },
+      { "input": [0], "expected": 0 },
+      { "input": [-4], "expected": -8 }
+    ]
+  },
+  {
+    "id": "square_number",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Cuadrado de un número",
+      "en": "Square a number"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `n` al cuadrado.",
+      "en": "Complete the `solve(n)` function to return `n` squared."
+    },
+    "instructions": {
+      "es": "Puedes usar `n * n`.",
+      "en": "You can use `n * n`."
+    },
+    "restrictions": {
+      "es": ["La función debe devolver un número."],
+      "en": ["The function must return a number."]
+    },
+    "hints": {
+      "es": [
+        "Multiplica el número por sí mismo.",
+        "Devuelve `n * n`."
+      ],
+      "en": [
+        "Multiply the number by itself.",
+        "Return `n * n`."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [5], "expected": 25 },
+      { "input": [0], "expected": 0 },
+      { "input": [-3], "expected": 9 }
+    ]
+  },
+  {
+    "id": "cube_number",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Cubo de un número",
+      "en": "Cube a number"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `n` al cubo.",
+      "en": "Complete the `solve(n)` function to return `n` cubed."
+    },
+    "instructions": {
+      "es": "Puedes usar `n * n * n`.",
+      "en": "You can use `n * n * n`."
+    },
+    "restrictions": {
+      "es": ["Usa `return`."],
+      "en": ["Use `return`."]
+    },
+    "hints": {
+      "es": [
+        "Multiplica el número tres veces.",
+        "Piensa en `n * n * n`."
+      ],
+      "en": [
+        "Multiply the number three times.",
+        "Think about `n * n * n`."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [2], "expected": 8 },
+      { "input": [-2], "expected": -8 },
+      { "input": [0], "expected": 0 }
+    ]
+  },
+  {
+    "id": "absolute_value",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Valor absoluto",
+      "en": "Absolute value"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver el valor absoluto de `n`.",
+      "en": "Complete the `solve(n)` function to return the absolute value of `n`."
+    },
+    "instructions": {
+      "es": "Puedes usar `abs()` o hacerlo manualmente.",
+      "en": "You can use `abs()` or do it manually."
+    },
+    "restrictions": {
+      "es": ["Devuelve siempre un número no negativo."],
+      "en": ["Always return a non-negative number."]
+    },
+    "hints": {
+      "es": [
+        "Python tiene `abs(n)`.",
+        "El valor absoluto nunca es negativo."
+      ],
+      "en": [
+        "Python has `abs(n)`.",
+        "Absolute value is never negative."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [-5], "expected": 5 },
+      { "input": [3], "expected": 3 },
+      { "input": [0], "expected": 0 }
+    ]
+  },
+  {
+    "id": "max_of_two",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Mayor de dos",
+      "en": "Maximum of two"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para devolver el mayor de los dos números.",
+      "en": "Complete the `solve(a, b)` function to return the larger of the two numbers."
+    },
+    "instructions": {
+      "es": "Puedes usar `max()`.",
+      "en": "You can use `max()`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un único número."],
+      "en": ["Return a single number."]
+    },
+    "hints": {
+      "es": [
+        "Python tiene la función `max`.",
+        "También puedes usar `if`."
+      ],
+      "en": [
+        "Python has the `max` function.",
+        "You can also use `if`."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3, 8], "expected": 8 },
+      { "input": [10, 2], "expected": 10 },
+      { "input": [5, 5], "expected": 5 }
+    ]
+  },
+  {
+    "id": "min_of_two",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Menor de dos",
+      "en": "Minimum of two"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para devolver el menor de los dos números.",
+      "en": "Complete the `solve(a, b)` function to return the smaller of the two numbers."
+    },
+    "instructions": {
+      "es": "Puedes usar `min()`.",
+      "en": "You can use `min()`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un único número."],
+      "en": ["Return a single number."]
+    },
+    "hints": {
+      "es": [
+        "Python tiene la función `min`.",
+        "También puedes comparar con `if`."
+      ],
+      "en": [
+        "Python has the `min` function.",
+        "You can also compare with `if`."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3, 8], "expected": 3 },
+      { "input": [10, 2], "expected": 2 },
+      { "input": [5, 5], "expected": 5 }
+    ]
+  },
+  {
+    "id": "string_length",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Longitud de texto",
+      "en": "String length"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver cuántos caracteres tiene el texto.",
+      "en": "Complete the `solve(text)` function to return how many characters the text has."
+    },
+    "instructions": {
+      "es": "Puedes usar `len()`.",
+      "en": "You can use `len()`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un entero."],
+      "en": ["Return an integer."]
+    },
+    "hints": {
+      "es": [
+        "`len(text)` devuelve la longitud.",
+        "No olvides usar `return`."
+      ],
+      "en": [
+        "`len(text)` returns the length.",
+        "Do not forget to use `return`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": 4 },
+      { "input": [""], "expected": 0 },
+      { "input": ["abcde"], "expected": 5 }
+    ]
+  },
+  {
+    "id": "first_character",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Primer carácter",
+      "en": "First character"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver el primer carácter del texto.",
+      "en": "Complete the `solve(text)` function to return the first character of the text."
+    },
+    "instructions": {
+      "es": "El texto siempre tendrá al menos un carácter.",
+      "en": "The text will always have at least one character."
+    },
+    "restrictions": {
+      "es": ["Devuelve un string de longitud 1."],
+      "en": ["Return a string of length 1."]
+    },
+    "hints": {
+      "es": [
+        "Los strings usan índices.",
+        "El primer índice es `0`."
+      ],
+      "en": [
+        "Strings use indexes.",
+        "The first index is `0`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": "h" },
+      { "input": ["A"], "expected": "A" },
+      { "input": ["python"], "expected": "p" }
+    ]
+  },
+  {
+    "id": "last_character",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Último carácter",
+      "en": "Last character"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver el último carácter del texto.",
+      "en": "Complete the `solve(text)` function to return the last character of the text."
+    },
+    "instructions": {
+      "es": "El texto siempre tendrá al menos un carácter.",
+      "en": "The text will always have at least one character."
+    },
+    "restrictions": {
+      "es": ["Devuelve un string de longitud 1."],
+      "en": ["Return a string of length 1."]
+    },
+    "hints": {
+      "es": [
+        "Puedes usar índices negativos.",
+        "El último elemento es `-1`."
+      ],
+      "en": [
+        "You can use negative indexes.",
+        "The last element is `-1`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": "a" },
+      { "input": ["Z"], "expected": "Z" },
+      { "input": ["python"], "expected": "n" }
+    ]
+  },
+  {
+    "id": "reverse_word",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Invertir palabra",
+      "en": "Reverse a word"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver el texto invertido.",
+      "en": "Complete the `solve(text)` function to return the reversed text."
+    },
+    "instructions": {
+      "es": "Por ejemplo, `hola` debe devolver `aloh`.",
+      "en": "For example, `hola` should return `aloh`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un string."],
+      "en": ["Return a string."]
+    },
+    "hints": {
+      "es": [
+        "Puedes usar slicing.",
+        "Prueba con `text[::-1]`."
+      ],
+      "en": [
+        "You can use slicing.",
+        "Try `text[::-1]`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": "aloh" },
+      { "input": ["abc"], "expected": "cba" },
+      { "input": [""], "expected": "" }
+    ]
+  },
+  {
+    "id": "to_uppercase",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "A mayúsculas",
+      "en": "To uppercase"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver el texto en mayúsculas.",
+      "en": "Complete the `solve(text)` function to return the text in uppercase."
+    },
+    "instructions": {
+      "es": "Puedes usar `.upper()`.",
+      "en": "You can use `.upper()`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un string."],
+      "en": ["Return a string."]
+    },
+    "hints": {
+      "es": [
+        "Los strings tienen métodos útiles.",
+        "Prueba con `text.upper()`."
+      ],
+      "en": [
+        "Strings have useful methods.",
+        "Try `text.upper()`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": "HOLA" },
+      { "input": ["Python"], "expected": "PYTHON" },
+      { "input": ["123"], "expected": "123" }
+    ]
+  },
+  {
+    "id": "to_lowercase",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "A minúsculas",
+      "en": "To lowercase"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver el texto en minúsculas.",
+      "en": "Complete the `solve(text)` function to return the text in lowercase."
+    },
+    "instructions": {
+      "es": "Puedes usar `.lower()`.",
+      "en": "You can use `.lower()`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un string."],
+      "en": ["Return a string."]
+    },
+    "hints": {
+      "es": [
+        "Prueba con `text.lower()`.",
+        "Devuelve el resultado."
+      ],
+      "en": [
+        "Try `text.lower()`.",
+        "Return the result."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["HOLA"], "expected": "hola" },
+      { "input": ["Python"], "expected": "python" },
+      { "input": ["123"], "expected": "123" }
+    ]
+  },
+  {
+    "id": "append_exclamation",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Añadir exclamación",
+      "en": "Append exclamation"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver el texto con `!` al final.",
+      "en": "Complete the `solve(text)` function to return the text with `!` at the end."
+    },
+    "instructions": {
+      "es": "Concatena el string con `!`.",
+      "en": "Concatenate the string with `!`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un string."],
+      "en": ["Return a string."]
+    },
+    "hints": {
+      "es": [
+        "Puedes concatenar con `+`.",
+        "Prueba con `text + \"!\"`."
+      ],
+      "en": [
+        "You can concatenate with `+`.",
+        "Try `text + \"!\"`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": "hola!" },
+      { "input": [""], "expected": "!" },
+      { "input": ["ok"], "expected": "ok!" }
+    ]
+  },
+  {
+    "id": "starts_with_a",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Empieza por A",
+      "en": "Starts with A"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver `True` si el texto empieza por `a` o `A`.",
+      "en": "Complete the `solve(text)` function to return `True` if the text starts with `a` or `A`."
+    },
+    "instructions": {
+      "es": "El texto siempre tendrá al menos un carácter.",
+      "en": "The text will always have at least one character."
+    },
+    "restrictions": {
+      "es": ["Devuelve un booleano."],
+      "en": ["Return a boolean."]
+    },
+    "hints": {
+      "es": [
+        "Puedes mirar el primer carácter.",
+        "También puedes usar `.lower()`."
+      ],
+      "en": [
+        "You can look at the first character.",
+        "You can also use `.lower()`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["avion"], "expected": true },
+      { "input": ["Arbol"], "expected": true },
+      { "input": ["casa"], "expected": false }
+    ]
+  },
+  {
+    "id": "ends_with_s",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Termina en s",
+      "en": "Ends with s"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver `True` si el texto termina en `s`.",
+      "en": "Complete the `solve(text)` function to return `True` if the text ends with `s`."
+    },
+    "instructions": {
+      "es": "El texto siempre tendrá al menos un carácter.",
+      "en": "The text will always have at least one character."
+    },
+    "restrictions": {
+      "es": ["Devuelve un booleano."],
+      "en": ["Return a boolean."]
+    },
+    "hints": {
+      "es": [
+        "Puedes usar el último carácter.",
+        "También sirve `.endswith(\"s\")`."
+      ],
+      "en": [
+        "You can use the last character.",
+        "`.endswith(\"s\")` also works."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["casas"], "expected": true },
+      { "input": ["sol"], "expected": false },
+      { "input": ["s"], "expected": true }
+    ]
+  },
+  {
+    "id": "sum_list_two_items",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma dos elementos de lista",
+      "en": "Sum two list items"
+    },
+    "description": {
+      "es": "Completa la función `solve(numbers)` para devolver la suma de los dos elementos de la lista.",
+      "en": "Complete the `solve(numbers)` function to return the sum of the two list elements."
+    },
+    "instructions": {
+      "es": "La lista siempre tendrá exactamente 2 números.",
+      "en": "The list will always contain exactly 2 numbers."
+    },
+    "restrictions": {
+      "es": ["Accede a los elementos por índice o usa `sum()`."],
+      "en": ["Access the items by index or use `sum()`."]
+    },
+    "hints": {
+      "es": [
+        "Los índices serían `0` y `1`.",
+        "También puedes usar `sum(numbers)`."
+      ],
+      "en": [
+        "The indexes are `0` and `1`.",
+        "You can also use `sum(numbers)`."
+      ]
+    },
+    "starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [[2, 3]], "expected": 5 },
+      { "input": [[0, 0]], "expected": 0 },
+      { "input": [[-1, 4]], "expected": 3 }
+    ]
+  },
+  {
+    "id": "first_list_item",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Primer elemento de lista",
+      "en": "First list item"
+    },
+    "description": {
+      "es": "Completa la función `solve(items)` para devolver el primer elemento de la lista.",
+      "en": "Complete the `solve(items)` function to return the first item in the list."
+    },
+    "instructions": {
+      "es": "La lista siempre tendrá al menos un elemento.",
+      "en": "The list will always have at least one item."
+    },
+    "restrictions": {
+      "es": ["Devuelve el elemento, no su índice."],
+      "en": ["Return the item, not its index."]
+    },
+    "hints": {
+      "es": [
+        "Las listas se indexan igual que los strings.",
+        "El primer índice es `0`."
+      ],
+      "en": [
+        "Lists are indexed like strings.",
+        "The first index is `0`."
+      ]
+    },
+    "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [[1, 2, 3]], "expected": 1 },
+      { "input": [["a", "b"]], "expected": "a" },
+      { "input": [[true, false]], "expected": true }
+    ]
+  },
+  {
+    "id": "last_list_item",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Último elemento de lista",
+      "en": "Last list item"
+    },
+    "description": {
+      "es": "Completa la función `solve(items)` para devolver el último elemento de la lista.",
+      "en": "Complete the `solve(items)` function to return the last item in the list."
+    },
+    "instructions": {
+      "es": "La lista siempre tendrá al menos un elemento.",
+      "en": "The list will always have at least one item."
+    },
+    "restrictions": {
+      "es": ["Devuelve el elemento, no su índice."],
+      "en": ["Return the item, not its index."]
+    },
+    "hints": {
+      "es": [
+        "Puedes usar `-1`.",
+        "El último elemento está al final de la lista."
+      ],
+      "en": [
+        "You can use `-1`.",
+        "The last item is at the end of the list."
+      ]
+    },
+    "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [[1, 2, 3]], "expected": 3 },
+      { "input": [["a", "b"]], "expected": "b" },
+      { "input": [[true, false]], "expected": false }
+    ]
+  },
+  {
+    "id": "list_length",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Longitud de lista",
+      "en": "List length"
+    },
+    "description": {
+      "es": "Completa la función `solve(items)` para devolver cuántos elementos tiene la lista.",
+      "en": "Complete the `solve(items)` function to return how many items are in the list."
+    },
+    "instructions": {
+      "es": "Puedes usar `len()`.",
+      "en": "You can use `len()`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un entero."],
+      "en": ["Return an integer."]
+    },
+    "hints": {
+      "es": [
+        "`len(items)` te da la longitud.",
+        "No uses `print()`."
+      ],
+      "en": [
+        "`len(items)` gives you the length.",
+        "Do not use `print()`."
+      ]
+    },
+    "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [[1, 2, 3]], "expected": 3 },
+      { "input": [[]], "expected": 0 },
+      { "input": [["a"]], "expected": 1 }
+    ]
+  },
+  {
+    "id": "add_one",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Sumar uno",
+      "en": "Add one"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `n + 1`.",
+      "en": "Complete the `solve(n)` function to return `n + 1`."
+    },
+    "instructions": {
+      "es": "Incrementa el número en 1.",
+      "en": "Increase the number by 1."
+    },
+    "restrictions": {
+      "es": ["Devuelve un número."],
+      "en": ["Return a number."]
+    },
+    "hints": {
+      "es": [
+        "Usa `+ 1`.",
+        "Devuelve el valor incrementado."
+      ],
+      "en": [
+        "Use `+ 1`.",
+        "Return the incremented value."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3], "expected": 4 },
+      { "input": [0], "expected": 1 },
+      { "input": [-2], "expected": -1 }
+    ]
+  },
+  {
+    "id": "subtract_one",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Restar uno",
+      "en": "Subtract one"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `n - 1`.",
+      "en": "Complete the `solve(n)` function to return `n - 1`."
+    },
+    "instructions": {
+      "es": "Reduce el número en 1.",
+      "en": "Decrease the number by 1."
+    },
+    "restrictions": {
+      "es": ["Devuelve un número."],
+      "en": ["Return a number."]
+    },
+    "hints": {
+      "es": [
+        "Usa `- 1`.",
+        "Devuelve el resultado."
+      ],
+      "en": [
+        "Use `- 1`.",
+        "Return the result."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3], "expected": 2 },
+      { "input": [0], "expected": -1 },
+      { "input": [-2], "expected": -3 }
+    ]
+  },
+  {
+    "id": "is_zero",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Es cero?",
+      "en": "Is it zero?"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para devolver `True` si `n` es exactamente 0.",
+      "en": "Complete the `solve(n)` function to return `True` if `n` is exactly 0."
+    },
+    "instructions": {
+      "es": "En cualquier otro caso devuelve `False`.",
+      "en": "Otherwise return `False`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un booleano."],
+      "en": ["Return a boolean."]
+    },
+    "hints": {
+      "es": [
+        "Compara con `== 0`.",
+        "Usa `return`."
+      ],
+      "en": [
+        "Compare with `== 0`.",
+        "Use `return`."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [0], "expected": true },
+      { "input": [1], "expected": false },
+      { "input": [-1], "expected": false }
+    ]
+  },
+  {
+    "id": "same_numbers",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Son iguales?",
+      "en": "Are they equal?"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para devolver `True` si ambos números son iguales.",
+      "en": "Complete the `solve(a, b)` function to return `True` if both numbers are equal."
+    },
+    "instructions": {
+      "es": "Si son distintos, devuelve `False`.",
+      "en": "If they are different, return `False`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un booleano."],
+      "en": ["Return a boolean."]
+    },
+    "hints": {
+      "es": [
+        "Puedes comparar con `==`.",
+        "La respuesta es `True` o `False`."
+      ],
+      "en": [
+        "You can compare with `==`.",
+        "The answer is `True` or `False`."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [3, 3], "expected": true },
+      { "input": [2, 5], "expected": false },
+      { "input": [0, 0], "expected": true }
+    ]
+  },
+  {
+    "id": "sum_three_numbers",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma tres números",
+      "en": "Add three numbers"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b, c)` para devolver la suma de los tres números.",
+      "en": "Complete the `solve(a, b, c)` function to return the sum of the three numbers."
+    },
+    "instructions": {
+      "es": "Usa `return`.",
+      "en": "Use `return`."
+    },
+    "restrictions": {
+      "es": ["No uses `print()`."],
+      "en": ["Do not use `print()`."]
+    },
+    "hints": {
+      "es": [
+        "Suma `a + b + c`.",
+        "Devuelve el resultado."
+      ],
+      "en": [
+        "Add `a + b + c`.",
+        "Return the result."
+      ]
+    },
+    "starterCode": "def solve(a, b, c):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [1, 2, 3], "expected": 6 },
+      { "input": [0, 0, 0], "expected": 0 },
+      { "input": [-1, 2, 1], "expected": 2 }
+    ]
+  },
+  {
+    "id": "average_of_two",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Media de dos números",
+      "en": "Average of two numbers"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para devolver la media de ambos números.",
+      "en": "Complete the `solve(a, b)` function to return the average of both numbers."
+    },
+    "instructions": {
+      "es": "La media es `(a + b) / 2`.",
+      "en": "The average is `(a + b) / 2`."
+    },
+    "restrictions": {
+      "es": ["Devuelve un número."],
+      "en": ["Return a number."]
+    },
+    "hints": {
+      "es": [
+        "Suma y divide entre 2.",
+        "Usa paréntesis."
+      ],
+      "en": [
+        "Add and divide by 2.",
+        "Use parentheses."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": [2, 4], "expected": 3 },
+      { "input": [0, 10], "expected": 5 },
+      { "input": [-2, 2], "expected": 0 }
+    ]
+  },
+  {
+    "id": "is_long_word",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Palabra larga?",
+      "en": "Is it a long word?"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver `True` si el texto tiene más de 5 caracteres.",
+      "en": "Complete the `solve(text)` function to return `True` if the text has more than 5 characters."
+    },
+    "instructions": {
+      "es": "Si tiene 5 o menos, devuelve `False`.",
+      "en": "If it has 5 or fewer, return `False`."
+    },
+    "restrictions": {
+      "es": ["Usa `len()` o una solución equivalente."],
+      "en": ["Use `len()` or an equivalent solution."]
+    },
+    "hints": {
+      "es": [
+        "Mira la longitud del string.",
+        "Compara con `> 5`."
+      ],
+      "en": [
+        "Check the string length.",
+        "Compare with `> 5`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": false },
+      { "input": ["python"], "expected": true },
+      { "input": ["abcdef"], "expected": true }
+    ]
+  },
+  {
+    "id": "count_letters_simple",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar letras",
+      "en": "Count letters"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para devolver cuántas letras tiene el texto.",
+      "en": "Complete the `solve(text)` function to return how many letters the text has."
+    },
+    "instructions": {
+      "es": "En esta versión simple, el texto no tiene espacios.",
+      "en": "In this simple version, the text has no spaces."
+    },
+    "restrictions": {
+      "es": ["Devuelve un entero."],
+      "en": ["Return an integer."]
+    },
+    "hints": {
+      "es": [
+        "Este reto es equivalente a la longitud del texto.",
+        "Puedes usar `len(text)`."
+      ],
+      "en": [
+        "This challenge is equivalent to the text length.",
+        "You can use `len(text)`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": 4 },
+      { "input": ["abc"], "expected": 3 },
+      { "input": ["z"], "expected": 1 }
+    ]
+  }
+]

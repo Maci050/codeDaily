@@ -1,0 +1,1082 @@
+[ 
+	{
+		"id": "two_sum_indices",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Indices de Two Sum",
+			"en": "Two Sum indices"
+		},
+		"description": {
+			"es": "Completa `solve(numbers, target)` para devolver una lista con los dos indices `[i, j]` tales que `numbers[i] + numbers[j] == target`.",
+			"en": "Complete `solve(numbers, target)` to return a list with the two indices `[i, j]` such that `numbers[i] + numbers[j] == target`."
+		},
+		"instructions": {
+			"es": "Siempre existe una unica respuesta valida y no puedes reutilizar el mismo indice.",
+			"en": "There is always exactly one valid answer, and you cannot reuse the same index."
+		},
+		"restrictions": {
+			"es": ["Devuelve una lista de dos enteros.", "El orden esperado es `[indice_menor, indice_mayor]`."],
+			"en": ["Return a list with two integers.", "Expected order is `[lower_index, higher_index]`." ]
+		},
+		"hints": {
+			"es": ["Un diccionario valor->indice ayuda a resolverlo en O(n).", "Revisa primero si `target - n` ya aparecio."],
+			"en": ["A value->index dictionary helps solve it in O(n).", "First check whether `target - n` has already appeared."]
+		},
+		"starterCode": "def solve(numbers, target):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[2, 7, 11, 15], 9], "expected": [0, 1] },
+			{ "input": [[3, 2, 4], 6], "expected": [1, 2] },
+			{ "input": [[3, 3], 6], "expected": [0, 1] }
+		]
+	},
+	{
+		"id": "flatten_one_level",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Aplanar un nivel",
+			"en": "Flatten one level"
+		},
+		"description": {
+			"es": "Completa `solve(nested)` para aplanar una lista de listas en un solo nivel.",
+			"en": "Complete `solve(nested)` to flatten a list of lists into one level."
+		},
+		"instructions": {
+			"es": "Solo existe un nivel de anidacion.",
+			"en": "There is only one nesting level."
+		},
+		"restrictions": {
+			"es": ["Devuelve una lista."],
+			"en": ["Return a list."]
+		},
+		"hints": {
+			"es": ["Puedes usar dos bucles `for`.", "Tambien sirve una list comprehension."],
+			"en": ["You can use two `for` loops.", "A list comprehension also works."]
+		},
+		"starterCode": "def solve(nested):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 2], [3], [4, 5]]], "expected": [1, 2, 3, 4, 5] },
+			{ "input": [[[], [1], []]], "expected": [1] },
+			{ "input": [[[]]], "expected": [] }
+		]
+	},
+	{
+		"id": "transpose_matrix",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Transponer matriz",
+			"en": "Transpose matrix"
+		},
+		"description": {
+			"es": "Completa `solve(matrix)` para devolver la matriz transpuesta.",
+			"en": "Complete `solve(matrix)` to return the transposed matrix."
+		},
+		"instructions": {
+			"es": "La matriz siempre tendra filas del mismo tamano.",
+			"en": "The matrix will always have rows of equal length."
+		},
+		"restrictions": {
+			"es": ["Devuelve una nueva matriz."],
+			"en": ["Return a new matrix."]
+		},
+		"hints": {
+			"es": ["Puedes resolverlo con indices o con `zip`.", "Las columnas pasan a ser filas."],
+			"en": ["You can solve it with indices or `zip`.", "Columns become rows."]
+		},
+		"starterCode": "def solve(matrix):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 2, 3], [4, 5, 6]]], "expected": [[1, 4], [2, 5], [3, 6]] },
+			{ "input": [[[1], [2], [3]]], "expected": [[1, 2, 3]] },
+			{ "input": [[[1, 2], [3, 4]]], "expected": [[1, 3], [2, 4]] }
+		]
+	},
+	{
+		"id": "diagonal_difference",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Diferencia de diagonales",
+			"en": "Diagonal difference"
+		},
+		"description": {
+			"es": "Completa `solve(matrix)` para devolver el valor absoluto de la diferencia entre la diagonal principal y la secundaria.",
+			"en": "Complete `solve(matrix)` to return the absolute difference between the main and secondary diagonals."
+		},
+		"instructions": {
+			"es": "La matriz siempre sera cuadrada.",
+			"en": "The matrix will always be square."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["La diagonal principal usa `matrix[i][i]`.", "La secundaria usa `matrix[i][n - 1 - i]`."],
+			"en": ["The main diagonal uses `matrix[i][i]`.", "The secondary uses `matrix[i][n - 1 - i]`."]
+		},
+		"starterCode": "def solve(matrix):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 2, 3], [4, 5, 6], [9, 8, 9]]], "expected": 2 },
+			{ "input": [[[1, 1], [1, 1]]], "expected": 0 },
+			{ "input": [[[11, 2, 4], [4, 5, 6], [10, 8, -12]]], "expected": 15 }
+		]
+	},
+	{
+		"id": "count_islands",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Contar islas",
+			"en": "Count islands"
+		},
+		"description": {
+			"es": "Completa `solve(grid)` para contar cuantas islas hay en una matriz de `0` y `1`.",
+			"en": "Complete `solve(grid)` to count islands in a matrix of `0` and `1`."
+		},
+		"instructions": {
+			"es": "Una isla conecta celdas de `1` vertical u horizontalmente (no diagonal).",
+			"en": "An island connects `1` cells vertically or horizontally (not diagonally)."
+		},
+		"restrictions": {
+			"es": ["La matriz puede estar vacia."],
+			"en": ["The matrix may be empty."]
+		},
+		"hints": {
+			"es": ["Usa DFS o BFS para marcar celdas visitadas.", "Cada nuevo `1` no visitado inicia una isla nueva."],
+			"en": ["Use DFS or BFS to mark visited cells.", "Each new unvisited `1` starts a new island."]
+		},
+		"starterCode": "def solve(grid):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[["1", "1", "0", "0"], ["1", "0", "0", "1"], ["0", "0", "1", "1"]]], "expected": 2 },
+			{ "input": [[["1", "1"], ["1", "1"]]], "expected": 1 },
+			{ "input": [[[]]], "expected": 0 }
+		]
+	},
+	{
+		"id": "first_non_repeating_char",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Primer caracter no repetido",
+			"en": "First non-repeating character"
+		},
+		"description": {
+			"es": "Completa `solve(text)` para devolver el primer caracter que aparece una sola vez.",
+			"en": "Complete `solve(text)` to return the first character that appears only once."
+		},
+		"instructions": {
+			"es": "Si no existe, devuelve `None`.",
+			"en": "If none exists, return `None`."
+		},
+		"restrictions": {
+			"es": ["Respeta mayusculas y minusculas."],
+			"en": ["Case-sensitive behavior is required."]
+		},
+		"hints": {
+			"es": ["Primero cuenta frecuencias.", "Luego recorre el texto original para encontrar el primero con frecuencia 1."],
+			"en": ["Count frequencies first.", "Then scan the original text to find the first one with frequency 1."]
+		},
+		"starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["leetcode"], "expected": "l" },
+			{ "input": ["aabb"], "expected": null },
+			{ "input": ["swiss"], "expected": "w" }
+		]
+	},
+	{
+		"id": "longest_substring_without_repeat",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Subcadena sin repetir mas larga",
+			"en": "Longest substring without repeats"
+		},
+		"description": {
+			"es": "Completa `solve(text)` para devolver la longitud de la subcadena mas larga sin caracteres repetidos.",
+			"en": "Complete `solve(text)` to return the length of the longest substring without repeating characters."
+		},
+		"instructions": {
+			"es": "La subcadena debe ser continua.",
+			"en": "The substring must be contiguous."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["La tecnica de ventana deslizante funciona bien.", "Guarda la ultima posicion vista de cada caracter."],
+			"en": ["The sliding window technique works well.", "Store the last seen index of each character."]
+		},
+		"starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["abcabcbb"], "expected": 3 },
+			{ "input": ["bbbbb"], "expected": 1 },
+			{ "input": ["pwwkew"], "expected": 3 }
+		]
+	},
+	{
+		"id": "palindrome_ignore_non_alnum",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Palindromo ignorando simbolos",
+			"en": "Palindrome ignoring symbols"
+		},
+		"description": {
+			"es": "Completa `solve(text)` para devolver `True` si el texto es palindromo ignorando espacios, signos y mayusculas/minusculas.",
+			"en": "Complete `solve(text)` to return `True` if the text is a palindrome ignoring spaces, symbols, and letter case."
+		},
+		"instructions": {
+			"es": "Solo compara caracteres alfanumericos.",
+			"en": "Compare only alphanumeric characters."
+		},
+		"restrictions": {
+			"es": ["Devuelve un booleano."],
+			"en": ["Return a boolean."]
+		},
+		"hints": {
+			"es": ["Filtra caracteres con `isalnum()`.", "Compara el string limpio con su reverso."],
+			"en": ["Filter characters with `isalnum()`.", "Compare the cleaned string with its reverse."]
+		},
+		"starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["A man, a plan, a canal: Panama"], "expected": true },
+			{ "input": ["race a car"], "expected": false },
+			{ "input": ["No 'x' in Nixon"], "expected": true }
+		]
+	},
+	{
+		"id": "run_length_encode",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Compresion RLE",
+			"en": "Run-length encoding"
+		},
+		"description": {
+			"es": "Completa `solve(text)` para codificar el texto usando RLE (`aabccc` -> `a2b1c3`).",
+			"en": "Complete `solve(text)` to encode text with RLE (`aabccc` -> `a2b1c3`)."
+		},
+		"instructions": {
+			"es": "Incluye siempre el caracter seguido de su contador.",
+			"en": "Always include the character followed by its count."
+		},
+		"restrictions": {
+			"es": ["Si el texto es vacio, devuelve `\"\"`."],
+			"en": ["If the text is empty, return `\"\"`."]
+		},
+		"hints": {
+			"es": ["Recorre y cuenta bloques consecutivos.", "Cuando cambie el caracter, guarda el bloque."],
+			"en": ["Traverse and count consecutive blocks.", "When the character changes, store the block."]
+		},
+		"starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["aabccc"], "expected": "a2b1c3" },
+			{ "input": ["abcd"], "expected": "a1b1c1d1" },
+			{ "input": [""], "expected": "" }
+		]
+	},
+	{
+		"id": "run_length_decode",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Descompresion RLE",
+			"en": "Run-length decoding"
+		},
+		"description": {
+			"es": "Completa `solve(encoded)` para decodificar texto RLE donde cada bloque es `letra` + `numero`.",
+			"en": "Complete `solve(encoded)` to decode RLE text where each block is `letter` + `number`."
+		},
+		"instructions": {
+			"es": "Los conteos pueden tener mas de un digito (`a12`).",
+			"en": "Counts may have more than one digit (`a12`)."
+		},
+		"restrictions": {
+			"es": ["Si la entrada es vacia, devuelve `\"\"`."],
+			"en": ["If input is empty, return `\"\"`."]
+		},
+		"hints": {
+			"es": ["Recorre y agrupa los digitos consecutivos para formar el numero.", "Convierte el contador con `int`."],
+			"en": ["Traverse and group consecutive digits to form the number.", "Convert the counter using `int`."]
+		},
+		"starterCode": "def solve(encoded):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["a2b1c3"], "expected": "aabccc" },
+			{ "input": ["x10"], "expected": "xxxxxxxxxx" },
+			{ "input": [""], "expected": "" }
+		]
+	},
+	{
+		"id": "gcd_euclid",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Maximo comun divisor",
+			"en": "Greatest common divisor"
+		},
+		"description": {
+			"es": "Completa `solve(a, b)` para devolver el MCD de dos enteros no negativos.",
+			"en": "Complete `solve(a, b)` to return the GCD of two non-negative integers."
+		},
+		"instructions": {
+			"es": "Usa el algoritmo de Euclides.",
+			"en": "Use Euclid's algorithm."
+		},
+		"restrictions": {
+			"es": ["Si ambos son 0, devuelve 0."],
+			"en": ["If both are 0, return 0."]
+		},
+		"hints": {
+			"es": ["Mientras `b != 0`, reemplaza `(a, b)` por `(b, a % b)`.", "Al final, `a` es el resultado."],
+			"en": ["While `b != 0`, replace `(a, b)` with `(b, a % b)`.", "At the end, `a` is the result."]
+		},
+		"starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [54, 24], "expected": 6 },
+			{ "input": [0, 5], "expected": 5 },
+			{ "input": [0, 0], "expected": 0 }
+		]
+	},
+	{
+		"id": "lcm_from_gcd",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Minimo comun multiplo",
+			"en": "Least common multiple"
+		},
+		"description": {
+			"es": "Completa `solve(a, b)` para devolver el MCM de dos enteros no negativos.",
+			"en": "Complete `solve(a, b)` to return the LCM of two non-negative integers."
+		},
+		"instructions": {
+			"es": "Puedes apoyarte en `MCM(a,b) = 0` si alguno es 0; si no, `abs(a*b) // MCD(a,b)`.",
+			"en": "You can use `LCM(a,b) = 0` if either is 0; otherwise `abs(a*b) // GCD(a,b)`."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["Implementa una funcion auxiliar para el MCD o repite la logica.", "Cuida el caso con 0."],
+			"en": ["Implement a helper for GCD or repeat the logic.", "Handle the 0 case carefully."]
+		},
+		"starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [4, 6], "expected": 12 },
+			{ "input": [0, 7], "expected": 0 },
+			{ "input": [21, 6], "expected": 42 }
+		]
+	},
+	{
+		"id": "is_prime_optimized",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Es primo (optimo)",
+			"en": "Is prime (optimized)"
+		},
+		"description": {
+			"es": "Completa `solve(n)` para devolver `True` si `n` es primo.",
+			"en": "Complete `solve(n)` to return `True` if `n` is prime."
+		},
+		"instructions": {
+			"es": "Solo necesitas probar divisores hasta `sqrt(n)`.",
+			"en": "You only need to test divisors up to `sqrt(n)`."
+		},
+		"restrictions": {
+			"es": ["`n` puede ser 0 o negativo."],
+			"en": ["`n` may be 0 or negative."]
+		},
+		"hints": {
+			"es": ["Todos los `n < 2` no son primos.", "Despues de probar 2, puedes saltar de 2 en 2."],
+			"en": ["All `n < 2` are not prime.", "After checking 2, you can step by 2."]
+		},
+		"starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [2], "expected": true },
+			{ "input": [29], "expected": true },
+			{ "input": [100], "expected": false }
+		]
+	},
+	{
+		"id": "fibonacci_nth_iterative",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Fibonacci n-esimo",
+			"en": "Nth Fibonacci"
+		},
+		"description": {
+			"es": "Completa `solve(n)` para devolver el termino n-esimo de Fibonacci usando base `F(0)=0`, `F(1)=1`.",
+			"en": "Complete `solve(n)` to return the nth Fibonacci term using `F(0)=0`, `F(1)=1`."
+		},
+		"instructions": {
+			"es": "Usa una solucion iterativa eficiente.",
+			"en": "Use an efficient iterative solution."
+		},
+		"restrictions": {
+			"es": ["`n` siempre sera >= 0."],
+			"en": ["`n` will always be >= 0."]
+		},
+		"hints": {
+			"es": ["Mantener solo dos variables es suficiente.", "Recursion simple puede ser muy lenta para n grande."],
+			"en": ["Keeping only two variables is enough.", "Naive recursion may be too slow for large n."]
+		},
+		"starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [0], "expected": 0 },
+			{ "input": [1], "expected": 1 },
+			{ "input": [10], "expected": 55 }
+		]
+	},
+	{
+		"id": "product_except_self",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Producto excepto yo",
+			"en": "Product except self"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver una lista donde cada posicion tiene el producto de todos los otros elementos excepto el actual.",
+			"en": "Complete `solve(numbers)` to return a list where each position contains the product of all other elements except itself."
+		},
+		"instructions": {
+			"es": "No uses division.",
+			"en": "Do not use division."
+		},
+		"restrictions": {
+			"es": ["Devuelve una lista del mismo tamano."],
+			"en": ["Return a list with the same length."]
+		},
+		"hints": {
+			"es": ["Calcula productos prefijo y sufijo.", "Multiplica ambos para cada indice."],
+			"en": ["Compute prefix and suffix products.", "Multiply both for each index."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 2, 3, 4]], "expected": [24, 12, 8, 6] },
+			{ "input": [[0, 1, 2, 3]], "expected": [6, 0, 0, 0] },
+			{ "input": [[-1, 1, 0, -3, 3]], "expected": [0, 0, 9, 0, 0] }
+		]
+	},
+	{
+		"id": "move_zeroes",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Mover ceros al final",
+			"en": "Move zeroes"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para mover todos los ceros al final manteniendo el orden relativo de los no-cero.",
+			"en": "Complete `solve(numbers)` to move all zeroes to the end while preserving the relative order of non-zero values."
+		},
+		"instructions": {
+			"es": "Devuelve una lista nueva.",
+			"en": "Return a new list."
+		},
+		"restrictions": {
+			"es": ["Cuenta solo el valor numerico 0 como cero."],
+			"en": ["Treat only numeric value 0 as zero."]
+		},
+		"hints": {
+			"es": ["Separa no-ceros y luego agrega tantos ceros como falten.", "Tambien puedes usar dos punteros."],
+			"en": ["Separate non-zeroes then append as many zeroes as needed.", "You can also use two pointers."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[0, 1, 0, 3, 12]], "expected": [1, 3, 12, 0, 0] },
+			{ "input": [[0, 0, 1]], "expected": [1, 0, 0] },
+			{ "input": [[4, 5, 6]], "expected": [4, 5, 6] }
+		]
+	},
+	{
+		"id": "sliding_window_max_sum",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Maxima suma por ventana",
+			"en": "Maximum window sum"
+		},
+		"description": {
+			"es": "Completa `solve(numbers, k)` para devolver la suma maxima de cualquier sublista continua de tamano `k`.",
+			"en": "Complete `solve(numbers, k)` to return the maximum sum of any contiguous sublist of length `k`."
+		},
+		"instructions": {
+			"es": "Si `k` es mayor que el largo de la lista o `k <= 0`, devuelve `None`.",
+			"en": "If `k` is greater than list length or `k <= 0`, return `None`."
+		},
+		"restrictions": {
+			"es": ["La solucion esperada usa ventana deslizante O(n)."],
+			"en": ["The expected solution uses an O(n) sliding window."]
+		},
+		"hints": {
+			"es": ["Calcula la suma inicial de los primeros `k`.", "Luego resta el que sale y suma el que entra."],
+			"en": ["Compute the initial sum of the first `k` elements.", "Then subtract the outgoing value and add the incoming one."]
+		},
+		"starterCode": "def solve(numbers, k):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[2, 1, 5, 1, 3, 2], 3], "expected": 9 },
+			{ "input": [[-1, -2, -3, -4], 2], "expected": -3 },
+			{ "input": [[1, 2], 3], "expected": null }
+		]
+	},
+	{
+		"id": "chunk_list",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Dividir lista en bloques",
+			"en": "Chunk list"
+		},
+		"description": {
+			"es": "Completa `solve(items, size)` para dividir la lista en bloques de tamano `size`.",
+			"en": "Complete `solve(items, size)` to split the list into chunks of size `size`."
+		},
+		"instructions": {
+			"es": "El ultimo bloque puede tener menos elementos.",
+			"en": "The last chunk may contain fewer elements."
+		},
+		"restrictions": {
+			"es": ["Si `size <= 0`, devuelve `None`."],
+			"en": ["If `size <= 0`, return `None`."]
+		},
+		"hints": {
+			"es": ["Avanza de `size` en `size` usando slicing.", "Puedes usar `range(0, len(items), size)`."],
+			"en": ["Advance by `size` using slicing.", "You can use `range(0, len(items), size)`."]
+		},
+		"starterCode": "def solve(items, size):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 2, 3, 4, 5], 2], "expected": [[1, 2], [3, 4], [5]] },
+			{ "input": [[1, 2, 3], 3], "expected": [[1, 2, 3]] },
+			{ "input": [[1, 2], 0], "expected": null }
+		]
+	},
+	{
+		"id": "matrix_spiral_order",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Recorrido espiral",
+			"en": "Spiral matrix order"
+		},
+		"description": {
+			"es": "Completa `solve(matrix)` para devolver los elementos de la matriz en orden espiral.",
+			"en": "Complete `solve(matrix)` to return matrix elements in spiral order."
+		},
+		"instructions": {
+			"es": "Empieza arriba a la izquierda y recorre derecha, abajo, izquierda, arriba.",
+			"en": "Start at top-left and move right, down, left, up."
+		},
+		"restrictions": {
+			"es": ["Si la matriz esta vacia, devuelve `[]`."],
+			"en": ["If the matrix is empty, return `[]`."]
+		},
+		"hints": {
+			"es": ["Controla cuatro limites: arriba, abajo, izquierda, derecha.", "Reduce limites despues de cada borde recorrido."],
+			"en": ["Track four boundaries: top, bottom, left, right.", "Shrink boundaries after traversing each edge."]
+		},
+		"starterCode": "def solve(matrix):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 2, 3], [4, 5, 6], [7, 8, 9]]], "expected": [1, 2, 3, 6, 9, 8, 7, 4, 5] },
+			{ "input": [[[1, 2, 3, 4]]], "expected": [1, 2, 3, 4] },
+			{ "input": [[[]]], "expected": [] }
+		]
+	},
+	{
+		"id": "roman_to_int",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Romano a entero",
+			"en": "Roman to integer"
+		},
+		"description": {
+			"es": "Completa `solve(roman)` para convertir un numero romano valido a entero.",
+			"en": "Complete `solve(roman)` to convert a valid Roman numeral to integer."
+		},
+		"instructions": {
+			"es": "Considera reglas sustractivas como `IV`, `IX`, `XL`, `CM`.",
+			"en": "Consider subtractive rules like `IV`, `IX`, `XL`, `CM`."
+		},
+		"restrictions": {
+			"es": ["La entrada siempre sera un romano valido entre 1 y 3999."],
+			"en": ["Input will always be a valid Roman numeral between 1 and 3999."]
+		},
+		"hints": {
+			"es": ["Si un simbolo es menor que el siguiente, se resta en lugar de sumar.", "Recorre de izquierda a derecha."],
+			"en": ["If a symbol is smaller than the next one, subtract instead of add.", "Scan from left to right."]
+		},
+		"starterCode": "def solve(roman):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["III"], "expected": 3 },
+			{ "input": ["MCMXCIV"], "expected": 1994 },
+			{ "input": ["XL"], "expected": 40 }
+		]
+	},
+	{
+		"id": "int_to_roman",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Entero a romano",
+			"en": "Integer to Roman"
+		},
+		"description": {
+			"es": "Completa `solve(n)` para convertir un entero a su forma en numeros romanos.",
+			"en": "Complete `solve(n)` to convert an integer to Roman numerals."
+		},
+		"instructions": {
+			"es": "`n` estara entre 1 y 3999.",
+			"en": "`n` will be between 1 and 3999."
+		},
+		"restrictions": {
+			"es": ["Devuelve un string romano valido."],
+			"en": ["Return a valid Roman string."]
+		},
+		"hints": {
+			"es": ["Usa una tabla de valores de mayor a menor.", "Resta repetidamente mientras puedas agregar simbolos."],
+			"en": ["Use a value table from largest to smallest.", "Repeatedly subtract while appending symbols."]
+		},
+		"starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [3], "expected": "III" },
+			{ "input": [58], "expected": "LVIII" },
+			{ "input": [1994], "expected": "MCMXCIV" }
+		]
+	},
+	{
+		"id": "evaluate_rpn",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Evaluar notacion polaca inversa",
+			"en": "Evaluate RPN"
+		},
+		"description": {
+			"es": "Completa `solve(tokens)` para evaluar una expresion en notacion polaca inversa.",
+			"en": "Complete `solve(tokens)` to evaluate an expression in Reverse Polish Notation."
+		},
+		"instructions": {
+			"es": "Operadores validos: `+`, `-`, `*`, `/`. La division debe truncar hacia 0.",
+			"en": "Valid operators: `+`, `-`, `*`, `/`. Division must truncate toward 0."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["Usa una pila de enteros.", "Cuando veas operador, saca dos valores en orden correcto."],
+			"en": ["Use an integer stack.", "When you see an operator, pop two values in the correct order."]
+		},
+		"starterCode": "def solve(tokens):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [["2", "1", "+", "3", "*"]], "expected": 9 },
+			{ "input": [["4", "13", "5", "/", "+"]], "expected": 6 },
+			{ "input": [["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]], "expected": 22 }
+		]
+	},
+	{
+		"id": "anagram_check_normalized",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Son anagramas (normalizado)",
+			"en": "Are anagrams (normalized)"
+		},
+		"description": {
+			"es": "Completa `solve(a, b)` para devolver `True` si ambos textos son anagramas ignorando espacios y mayusculas/minusculas.",
+			"en": "Complete `solve(a, b)` to return `True` if both texts are anagrams ignoring spaces and letter case."
+		},
+		"instructions": {
+			"es": "Solo considera letras y digitos.",
+			"en": "Consider only letters and digits."
+		},
+		"restrictions": {
+			"es": ["Devuelve un booleano."],
+			"en": ["Return a boolean."]
+		},
+		"hints": {
+			"es": ["Normaliza con `lower()` y filtrado `isalnum()`.", "Compara conteos de caracteres."],
+			"en": ["Normalize with `lower()` and `isalnum()` filtering.", "Compare character counts."]
+		},
+		"starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["Dormitory", "Dirty room"], "expected": true },
+			{ "input": ["Astronomer", "Moon starer"], "expected": true },
+			{ "input": ["hello", "world"], "expected": false }
+		]
+	},
+	{
+		"id": "word_frequency_map",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Mapa de frecuencia de palabras",
+			"en": "Word frequency map"
+		},
+		"description": {
+			"es": "Completa `solve(text)` para devolver un diccionario con la frecuencia de cada palabra en minusculas.",
+			"en": "Complete `solve(text)` to return a dictionary with frequency of each lowercase word."
+		},
+		"instructions": {
+			"es": "Las palabras estan separadas por espacios simples.",
+			"en": "Words are separated by single spaces."
+		},
+		"restrictions": {
+			"es": ["Si `text` es vacio, devuelve `{}`."],
+			"en": ["If `text` is empty, return `{}`."]
+		},
+		"hints": {
+			"es": ["Convierte todo a minusculas antes de contar.", "Un diccionario es suficiente."],
+			"en": ["Convert everything to lowercase before counting.", "A dictionary is enough."]
+		},
+		"starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["to be or not to be"], "expected": { "to": 2, "be": 2, "or": 1, "not": 1 } },
+			{ "input": ["Hello hello"], "expected": { "hello": 2 } },
+			{ "input": [""], "expected": {} }
+		]
+	},
+	{
+		"id": "sort_by_multiple_keys",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Ordenar por claves multiples",
+			"en": "Sort by multiple keys"
+		},
+		"description": {
+			"es": "Completa `solve(records)` para ordenar una lista de pares `[nombre, puntaje]` por `puntaje` descendente y `nombre` ascendente.",
+			"en": "Complete `solve(records)` to sort a list of `[name, score]` pairs by descending `score` and ascending `name`."
+		},
+		"instructions": {
+			"es": "Devuelve una lista nueva ordenada.",
+			"en": "Return a newly sorted list."
+		},
+		"restrictions": {
+			"es": ["No modifiques la entrada original."],
+			"en": ["Do not mutate the original input."]
+		},
+		"hints": {
+			"es": ["Usa `sorted` con `key` apropiada.", "La clave puede ser una tupla como `(-score, name)`."],
+			"en": ["Use `sorted` with an appropriate `key`.", "The key can be a tuple like `(-score, name)`."]
+		},
+		"starterCode": "def solve(records):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[["ana", 90], ["zoe", 90], ["bob", 95]]], "expected": [["bob", 95], ["ana", 90], ["zoe", 90]] },
+			{ "input": [[["x", 1], ["a", 2], ["b", 2]]], "expected": [["a", 2], ["b", 2], ["x", 1]] },
+			{ "input": [[[]]], "expected": [] }
+		]
+	},
+	{
+		"id": "minimum_path_sum_grid",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Ruta minima en grilla",
+			"en": "Minimum path sum"
+		},
+		"description": {
+			"es": "Completa `solve(grid)` para devolver la suma minima desde la esquina superior izquierda hasta la inferior derecha moviendote solo derecha o abajo.",
+			"en": "Complete `solve(grid)` to return the minimum sum from top-left to bottom-right moving only right or down."
+		},
+		"instructions": {
+			"es": "Cada celda contiene un entero no negativo.",
+			"en": "Each cell contains a non-negative integer."
+		},
+		"restrictions": {
+			"es": ["Si la grilla es vacia, devuelve 0."],
+			"en": ["If the grid is empty, return 0."]
+		},
+		"hints": {
+			"es": ["Programacion dinamica funciona muy bien aqui.", "`dp[i][j]` depende de arriba e izquierda."],
+			"en": ["Dynamic programming works very well here.", "`dp[i][j]` depends on top and left cells."]
+		},
+		"starterCode": "def solve(grid):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 3, 1], [1, 5, 1], [4, 2, 1]]], "expected": 7 },
+			{ "input": [[[1, 2, 3], [4, 5, 6]]], "expected": 12 },
+			{ "input": [[[]]], "expected": 0 }
+		]
+	},
+	{
+		"id": "coin_change_min_coins",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Cambio de monedas minimo",
+			"en": "Coin change minimum"
+		},
+		"description": {
+			"es": "Completa `solve(coins, amount)` para devolver el minimo numero de monedas necesarias para formar `amount`.",
+			"en": "Complete `solve(coins, amount)` to return the minimum number of coins needed to make `amount`."
+		},
+		"instructions": {
+			"es": "Si no se puede formar el monto, devuelve `-1`.",
+			"en": "If the amount cannot be formed, return `-1`."
+		},
+		"restrictions": {
+			"es": ["Puedes reutilizar una moneda tantas veces como quieras."],
+			"en": ["You may reuse each coin unlimited times."]
+		},
+		"hints": {
+			"es": ["Usa DP: `dp[x]` como minimo para formar `x`.", "Inicializa con un valor grande salvo `dp[0] = 0`."],
+			"en": ["Use DP: `dp[x]` as minimum coins for `x`.", "Initialize with a large value except `dp[0] = 0`."]
+		},
+		"starterCode": "def solve(coins, amount):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 2, 5], 11], "expected": 3 },
+			{ "input": [[2], 3], "expected": -1 },
+			{ "input": [[1], 0], "expected": 0 }
+		]
+	},
+	{
+		"id": "longest_increasing_subsequence_length",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Longitud LIS",
+			"en": "LIS length"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver la longitud de la subsecuencia estrictamente creciente mas larga.",
+			"en": "Complete `solve(numbers)` to return the length of the longest strictly increasing subsequence."
+		},
+		"instructions": {
+			"es": "Una subsecuencia no tiene que ser contigua.",
+			"en": "A subsequence does not need to be contiguous."
+		},
+		"restrictions": {
+			"es": ["Si la lista esta vacia, devuelve 0."],
+			"en": ["If the list is empty, return 0."]
+		},
+		"hints": {
+			"es": ["Puedes usar DP O(n^2).", "Tambien existe una opcion O(n log n) con busqueda binaria."],
+			"en": ["You can use O(n^2) DP.", "There is also an O(n log n) option with binary search."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[10, 9, 2, 5, 3, 7, 101, 18]], "expected": 4 },
+			{ "input": [[0, 1, 0, 3, 2, 3]], "expected": 4 },
+			{ "input": [[7, 7, 7, 7]], "expected": 1 }
+		]
+	},
+	{
+		"id": "merge_intervals",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Fusionar intervalos",
+			"en": "Merge intervals"
+		},
+		"description": {
+			"es": "Completa `solve(intervals)` para fusionar intervalos solapados.",
+			"en": "Complete `solve(intervals)` to merge overlapping intervals."
+		},
+		"instructions": {
+			"es": "Cada intervalo es `[inicio, fin]` con `inicio <= fin`.",
+			"en": "Each interval is `[start, end]` with `start <= end`."
+		},
+		"restrictions": {
+			"es": ["Devuelve los intervalos fusionados ordenados por inicio."],
+			"en": ["Return merged intervals sorted by start."]
+		},
+		"hints": {
+			"es": ["Primero ordena por inicio.", "Compara el actual con el ultimo intervalo fusionado."],
+			"en": ["Sort by start first.", "Compare current interval with the last merged one."]
+		},
+		"starterCode": "def solve(intervals):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 3], [2, 6], [8, 10], [15, 18]]], "expected": [[1, 6], [8, 10], [15, 18]] },
+			{ "input": [[[1, 4], [4, 5]]], "expected": [[1, 5]] },
+			{ "input": [[[]]], "expected": [] }
+		]
+	},
+	{
+		"id": "kth_largest_element",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "K-esimo mas grande",
+			"en": "Kth largest element"
+		},
+		"description": {
+			"es": "Completa `solve(numbers, k)` para devolver el k-esimo elemento mas grande (1-indexado).",
+			"en": "Complete `solve(numbers, k)` to return the kth largest element (1-indexed)."
+		},
+		"instructions": {
+			"es": "`k` siempre sera valido.",
+			"en": "`k` will always be valid."
+		},
+		"restrictions": {
+			"es": ["No elimines duplicados."],
+			"en": ["Do not remove duplicates."]
+		},
+		"hints": {
+			"es": ["Puedes ordenar descendente o usar heap.", "Con orden descendente, responde `numbers[k-1]`."],
+			"en": ["You can sort descending or use a heap.", "With descending order, answer `numbers[k-1]`."]
+		},
+		"starterCode": "def solve(numbers, k):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[3, 2, 1, 5, 6, 4], 2], "expected": 5 },
+			{ "input": [[3, 2, 3, 1, 2, 4, 5, 5, 6], 4], "expected": 4 },
+			{ "input": [[1], 1], "expected": 1 }
+		]
+	}
+]
