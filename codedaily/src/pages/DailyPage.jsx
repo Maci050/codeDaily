@@ -12,6 +12,7 @@ import {
   updateTodayProgress,
   markTodayCompleted,
 } from '../services/progressService';
+import { ensurePyodideLoaded } from '../services/pythonRunnerService';
 
 function DailyPage() {
   const { language } = useLanguage();
@@ -21,6 +22,9 @@ function DailyPage() {
   const [attemptCount, setAttemptCount] = useState(0);
   const [revealedHints, setRevealedHints] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
+  const [isPythonLoading, setIsPythonLoading] = useState(true);
+  const [pythonLoadError, setPythonLoadError] = useState(null);
 
   const text = useMemo(() => {
     return {
@@ -50,18 +54,19 @@ function DailyPage() {
         editorTitle: 'Tu solución',
         editorPlaceholder: 'Escribe aquí tu solución en Python...',
         checkButton: 'Comprobar solución',
+        checkingButton: 'Comprobando...',
         resetButton: 'Restablecer código',
         attempts: 'Intentos',
         resultTitle: 'Resultado',
         passedTitle: '¡Reto superado!',
-        passedText: 'Tu solución ha pasado todas las comprobaciones de esta V1.',
+        passedText: 'Tu solución ha pasado las comprobaciones con Python real.',
         failedTitle: 'La solución todavía no es válida',
         testsSection: 'Tests',
         errorsSection: 'Detalles',
         hintsSection: 'Pistas',
         noHintsYet: 'Todavía no has desbloqueado pistas.',
         prototypeNote:
-          'Esta V1 valida estructura, restricciones y patrones de solución compatibles.',
+          'Ahora la validación ejecuta Python real en el navegador con Pyodide.',
         difficultyNovatoShort: 'Novato',
         difficultyIntermedioShort: 'Intermedio',
         difficultyProShort: 'Pro',
@@ -70,6 +75,10 @@ function DailyPage() {
         completedBadge: 'Completado hoy',
         testsPassedText: 'tests superados',
         waitingResult: 'Todavía no has comprobado tu solución.',
+        pythonLoading: 'Cargando entorno Python...',
+        pythonReady: 'Python listo',
+        pythonLoadError: 'No se pudo cargar el entorno Python.',
+        runtimeTitle: 'Error de Python',
       },
       en: {
         title: 'Daily Challenge',
@@ -97,18 +106,19 @@ function DailyPage() {
         editorTitle: 'Your solution',
         editorPlaceholder: 'Write your Python solution here...',
         checkButton: 'Check solution',
+        checkingButton: 'Checking...',
         resetButton: 'Reset code',
         attempts: 'Attempts',
         resultTitle: 'Result',
         passedTitle: 'Challenge solved!',
-        passedText: 'Your solution passed all checks in this V1.',
+        passedText: 'Your solution passed the checks with real Python execution.',
         failedTitle: 'The solution is not valid yet',
         testsSection: 'Tests',
         errorsSection: 'Details',
         hintsSection: 'Hints',
         noHintsYet: 'You have not unlocked hints yet.',
         prototypeNote:
-          'This V1 validates structure, restrictions, and supported solution patterns.',
+          'Validation now runs real Python in the browser with Pyodide.',
         difficultyNovatoShort: 'Beginner',
         difficultyIntermedioShort: 'Intermediate',
         difficultyProShort: 'Pro',
@@ -117,6 +127,10 @@ function DailyPage() {
         completedBadge: 'Completed today',
         testsPassedText: 'tests passed',
         waitingResult: 'You have not checked your solution yet.',
+        pythonLoading: 'Loading Python runtime...',
+        pythonReady: 'Python ready',
+        pythonLoadError: 'Could not load the Python runtime.',
+        runtimeTitle: 'Python error',
       },
     }[language];
   }, [language]);
@@ -130,11 +144,11 @@ function DailyPage() {
         WRONG_FUNCTION_NAME: 'La función debe llamarse `solve`.',
         PASS_LEFT_IN_CODE: 'Todavía tienes `pass` en el código.',
         MISSING_RETURN: 'La solución debe usar `return`.',
-        UNSUPPORTED_LOGIC_PATTERN:
-          'La estructura general es correcta, pero esta V1 todavía no reconoce esa forma concreta de resolver el reto.',
         TESTS_FAILED: 'Los tests no se han superado correctamente.',
-        NO_VALIDATOR_FOR_CHALLENGE:
-          'Todavía no existe un validador configurado para este reto.',
+        FUNCTION_NOT_CALLABLE: 'No se ha podido encontrar una función ejecutable llamada `solve`.',
+        PYTHON_SYNTAX_ERROR: 'Python ha detectado un error de sintaxis en tu código.',
+        PYTHON_RUNTIME_ERROR: 'Tu código lanzó un error al ejecutarse.',
+        PYODIDE_LOAD_ERROR: 'No se pudo inicializar Pyodide para ejecutar Python.',
       },
       en: {
         EMPTY_CODE: 'The code is empty.',
@@ -143,11 +157,11 @@ function DailyPage() {
         WRONG_FUNCTION_NAME: 'The function must be named `solve`.',
         PASS_LEFT_IN_CODE: 'You still have `pass` in the code.',
         MISSING_RETURN: 'The solution must use `return`.',
-        UNSUPPORTED_LOGIC_PATTERN:
-          'The overall structure is correct, but this V1 does not yet recognize that specific solution style.',
         TESTS_FAILED: 'The tests were not passed correctly.',
-        NO_VALIDATOR_FOR_CHALLENGE:
-          'There is not a configured validator for this challenge yet.',
+        FUNCTION_NOT_CALLABLE: 'No callable function named `solve` was found.',
+        PYTHON_SYNTAX_ERROR: 'Python found a syntax error in your code.',
+        PYTHON_RUNTIME_ERROR: 'Your code raised an error while running.',
+        PYODIDE_LOAD_ERROR: 'Pyodide could not be initialized to run Python.',
       },
     }[language];
   }, [language]);
@@ -164,6 +178,34 @@ function DailyPage() {
   const dailyChallenge = useMemo(() => {
     return getChallengeText(baseChallenge, language);
   }, [baseChallenge, language]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadPython() {
+      setIsPythonLoading(true);
+      setPythonLoadError(null);
+
+      try {
+        await ensurePyodideLoaded();
+
+        if (isMounted) {
+          setIsPythonLoading(false);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setIsPythonLoading(false);
+          setPythonLoadError(error?.message || 'Pyodide failed to load');
+        }
+      }
+    }
+
+    loadPython();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (!baseChallenge) {
@@ -227,12 +269,14 @@ function DailyPage() {
     return errorMessages[codeValue] || codeValue;
   });
 
-  const handleValidate = () => {
-    if (!baseChallenge || completed) {
+  const handleValidate = async () => {
+    if (!baseChallenge || completed || isChecking || isPythonLoading) {
       return;
     }
 
-    const result = validateChallengeSolution(baseChallenge, code);
+    setIsChecking(true);
+
+    const result = await validateChallengeSolution(baseChallenge, code);
     setValidationResult(result);
 
     const newAttempts = attemptCount + 1;
@@ -242,15 +286,17 @@ function DailyPage() {
       setRevealedHints((previous) =>
         Math.min(previous + 1, dailyChallenge.localizedHints.length)
       );
+      setIsChecking(false);
       return;
     }
 
     setCompleted(true);
     markTodayCompleted();
+    setIsChecking(false);
   };
 
   const handleResetCode = () => {
-    if (!baseChallenge || completed) {
+    if (!baseChallenge || completed || isChecking) {
       return;
     }
 
@@ -301,6 +347,10 @@ function DailyPage() {
                     {completed && (
                       <span className="completed-pill">{text.completedBadge}</span>
                     )}
+
+                    <span className="difficulty-pill">
+                      {isPythonLoading ? text.pythonLoading : text.pythonReady}
+                    </span>
                   </div>
 
                   <h2>{dailyChallenge.localizedTitle}</h2>
@@ -363,6 +413,11 @@ function DailyPage() {
                 <div>
                   <h2>{text.editorTitle}</h2>
                   <p>{text.prototypeNote}</p>
+                  {pythonLoadError && (
+                    <p className="muted-text">
+                      {text.pythonLoadError}: {pythonLoadError}
+                    </p>
+                  )}
                 </div>
 
                 <div className="editor-stats">
@@ -383,22 +438,26 @@ function DailyPage() {
                 onChange={(event) => setCode(event.target.value)}
                 spellCheck={false}
                 placeholder={text.editorPlaceholder}
-                disabled={completed}
+                disabled={completed || isChecking || isPythonLoading}
               />
 
               <div className="editor-actions">
                 <button
                   className="primary-button"
                   onClick={handleValidate}
-                  disabled={completed}
+                  disabled={completed || isChecking || isPythonLoading}
                 >
-                  {completed ? text.completedBadge : text.checkButton}
+                  {completed
+                    ? text.completedBadge
+                    : isChecking
+                    ? text.checkingButton
+                    : text.checkButton}
                 </button>
 
                 <button
                   className="secondary-button"
                   onClick={handleResetCode}
-                  disabled={completed}
+                  disabled={completed || isChecking}
                 >
                   {text.resetButton}
                 </button>
@@ -429,6 +488,15 @@ function DailyPage() {
                     </div>
                   )}
 
+                  {validationResult?.pythonError && (
+                    <div className="result-subsection">
+                      <h4>{text.runtimeTitle}</h4>
+                      <pre className="code-block">
+                        <code>{validationResult.pythonError}</code>
+                      </pre>
+                    </div>
+                  )}
+
                   {validationResult && translatedErrors.length > 0 && (
                     <div className="result-subsection">
                       <h4>{text.errorsSection}</h4>
@@ -455,6 +523,9 @@ function DailyPage() {
                             <code>
                               input: {JSON.stringify(test.input)} | expected:{' '}
                               {JSON.stringify(test.expected)}
+                              {test.actual !== undefined
+                                ? ` | actual: ${JSON.stringify(test.actual)}`
+                                : ''}
                             </code>
                           </div>
                         ))}

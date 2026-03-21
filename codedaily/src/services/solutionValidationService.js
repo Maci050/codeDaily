@@ -1,3 +1,5 @@
+import { runPythonChallengeTests } from './pythonRunnerService';
+
 function normalizeCode(code = '') {
   return code.replace(/\r\n/g, '\n').trim();
 }
@@ -9,6 +11,7 @@ function createResult({
   testResults = [],
   passedCount = 0,
   totalTests = 0,
+  pythonError = null,
 } = {}) {
   return {
     success,
@@ -17,44 +20,8 @@ function createResult({
     testResults,
     passedCount,
     totalTests,
+    pythonError,
   };
-}
-
-function runTestsWithResolver(challenge, resolver) {
-  const testResults = challenge.tests.map((test, index) => {
-    try {
-      const actual = resolver(...test.input);
-      const passed = JSON.stringify(actual) === JSON.stringify(test.expected);
-
-      return {
-        index,
-        passed,
-        input: test.input,
-        expected: test.expected,
-        actual,
-      };
-    } catch (error) {
-      return {
-        index,
-        passed: false,
-        input: test.input,
-        expected: test.expected,
-        actual: null,
-      };
-    }
-  });
-
-  const passedCount = testResults.filter((test) => test.passed).length;
-  const totalTests = testResults.length;
-  const success = passedCount === totalTests;
-
-  return createResult({
-    success,
-    testResults,
-    passedCount,
-    totalTests,
-    errorCodes: success ? [] : ['TESTS_FAILED'],
-  });
 }
 
 function validateCommonStructure(challenge, code) {
@@ -110,144 +77,7 @@ function validateCommonStructure(challenge, code) {
   };
 }
 
-function validateSumTwoNumbers(code, challenge) {
-  const compact = code.replace(/\s+/g, '');
-  const validPattern =
-    compact.includes('returna+b') || compact.includes('returnb+a');
-
-  if (!validPattern) {
-    return createResult({
-      success: false,
-      errorCodes: ['UNSUPPORTED_LOGIC_PATTERN'],
-    });
-  }
-
-  return runTestsWithResolver(challenge, (a, b) => a + b);
-}
-
-function validateIsEven(code, challenge) {
-  const compact = code.replace(/\s+/g, '');
-  const validPattern =
-    compact.includes('returnn%2==0') ||
-    compact.includes('return(n%2==0)') ||
-    compact.includes('returnn%2==0') ||
-    compact.includes('returnnotn%2');
-
-  if (!validPattern) {
-    return createResult({
-      success: false,
-      errorCodes: ['UNSUPPORTED_LOGIC_PATTERN'],
-    });
-  }
-
-  return runTestsWithResolver(challenge, (n) => n % 2 === 0);
-}
-
-function validateMaxOfThree(code, challenge) {
-  const compact = code.replace(/\s+/g, '');
-
-  const usesMax =
-    compact.includes('returnmax(a,b,c)') ||
-    compact.includes('returnmax([a,b,c])') ||
-    compact.includes('returnmax((a,b,c))');
-
-  const usesManualComparisons =
-    /\bif\b/.test(code) &&
-    />/.test(code) &&
-    (code.match(/\breturn\b/g) || []).length >= 2;
-
-  if (!usesMax && !usesManualComparisons) {
-    return createResult({
-      success: false,
-      errorCodes: ['UNSUPPORTED_LOGIC_PATTERN'],
-    });
-  }
-
-  return runTestsWithResolver(challenge, (a, b, c) => Math.max(a, b, c));
-}
-
-function validateReverseWord(code, challenge) {
-  const compact = code.replace(/\s+/g, '');
-
-  const usesSlice = compact.includes('returntext[::-1]');
-  const usesReversed = compact.includes("return''.join(reversed(text))") ||
-    compact.includes('return"".join(reversed(text))');
-
-  if (!usesSlice && !usesReversed) {
-    return createResult({
-      success: false,
-      errorCodes: ['UNSUPPORTED_LOGIC_PATTERN'],
-    });
-  }
-
-  return runTestsWithResolver(challenge, (text) => text.split('').reverse().join(''));
-}
-
-function validateCountVowels(code, challenge) {
-  const compact = code.replace(/\s+/g, '').toLowerCase();
-
-  const mentionsVowels =
-    compact.includes('aeiou') ||
-    compact.includes("['a','e','i','o','u']") ||
-    compact.includes('{"a","e","i","o","u"}') ||
-    compact.includes("{'a','e','i','o','u'}");
-
-  const hasLoop = /\bfor\b/.test(code);
-  const usesLower = compact.includes('.lower()');
-  const usesCountSum = compact.includes('sum(');
-
-  if ((!mentionsVowels || !hasLoop) && !(mentionsVowels && usesCountSum) && !(mentionsVowels && usesLower)) {
-    return createResult({
-      success: false,
-      errorCodes: ['UNSUPPORTED_LOGIC_PATTERN'],
-    });
-  }
-
-  return runTestsWithResolver(challenge, (text) => {
-    const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
-    let count = 0;
-
-    for (const char of text.toLowerCase()) {
-      if (vowels.has(char)) {
-        count += 1;
-      }
-    }
-
-    return count;
-  });
-}
-
-function validateSumList(code, challenge) {
-  const compact = code.replace(/\s+/g, '');
-
-  const usesBuiltInSum = compact.includes('returnsum(numbers)');
-  const usesLoopAccumulator =
-    /\bfor\b/.test(code) &&
-    /\+=/.test(code) &&
-    code.includes('numbers');
-
-  if (!usesBuiltInSum && !usesLoopAccumulator) {
-    return createResult({
-      success: false,
-      errorCodes: ['UNSUPPORTED_LOGIC_PATTERN'],
-    });
-  }
-
-  return runTestsWithResolver(challenge, (numbers) =>
-    numbers.reduce((acc, value) => acc + value, 0)
-  );
-}
-
-const challengeValidators = {
-  sum_two_numbers: validateSumTwoNumbers,
-  is_even: validateIsEven,
-  max_of_three: validateMaxOfThree,
-  reverse_word: validateReverseWord,
-  count_vowels: validateCountVowels,
-  sum_list: validateSumList,
-};
-
-function validateChallengeSolution(challenge, code) {
+async function validateChallengeSolution(challenge, code) {
   const structureValidation = validateCommonStructure(challenge, code);
 
   if (!structureValidation.valid) {
@@ -259,23 +89,29 @@ function validateChallengeSolution(challenge, code) {
     });
   }
 
-  const challengeValidator = challengeValidators[challenge.id];
+  try {
+    const pythonResult = await runPythonChallengeTests(
+      challenge,
+      structureValidation.normalizedCode
+    );
 
-  if (!challengeValidator) {
+    return createResult({
+      success: pythonResult.success,
+      errorCodes: pythonResult.errorCodes || [],
+      testResults: pythonResult.testResults || [],
+      passedCount: pythonResult.passedCount || 0,
+      totalTests: pythonResult.totalTests || challenge.tests.length,
+      pythonError: pythonResult.pythonError || null,
+    });
+  } catch (error) {
     return createResult({
       success: false,
-      errorCodes: ['NO_VALIDATOR_FOR_CHALLENGE'],
+      errorCodes: ['PYODIDE_LOAD_ERROR'],
       totalTests: challenge.tests.length,
       passedCount: 0,
+      pythonError: error?.message || 'Unknown Pyodide error',
     });
   }
-
-  const result = challengeValidator(structureValidation.normalizedCode, challenge);
-
-  return {
-    ...result,
-    totalTests: challenge.tests.length,
-  };
 }
 
 export { validateChallengeSolution };
