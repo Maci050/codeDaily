@@ -9,14 +9,12 @@ function Header({ appName, currentPage, onNavigate }) {
       es: {
         navHome: 'Inicio',
         navDaily: 'Daily Challenge',
-        navUnlimited: 'Unlimited',
         navProfile: 'Progreso',
         language: 'Idioma',
       },
       en: {
         navHome: 'Home',
         navDaily: 'Daily Challenge',
-        navUnlimited: 'Unlimited',
         navProfile: 'Progress',
         language: 'Language',
       },
@@ -26,7 +24,6 @@ function Header({ appName, currentPage, onNavigate }) {
   const navItems = [
     { id: 'home', label: text.navHome },
     { id: 'daily', label: text.navDaily },
-    { id: 'unlimited', label: text.navUnlimited },
     { id: 'profile', label: text.navProfile },
   ];
 

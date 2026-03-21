@@ -3,7 +3,6 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import DailyPage from './pages/DailyPage';
-import UnlimitedPage from './pages/UnlimitedPage';
 import ProfilePage from './pages/ProfilePage';
 import { useLanguage } from './context/LanguageContext';
 
@@ -26,8 +25,6 @@ function App() {
     switch (currentPage) {
       case 'daily':
         return <DailyPage />;
-      case 'unlimited':
-        return <UnlimitedPage />;
       case 'profile':
         return <ProfilePage />;
       case 'home':

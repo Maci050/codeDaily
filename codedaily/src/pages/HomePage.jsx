@@ -10,18 +10,17 @@ function HomePage({ onNavigate }) {
         badge: 'Retos diarios de programación',
         title: 'Mejora programando un reto corto cada día',
         description:
-          'CodeDaily es un juego web de desafíos de programación centrado en funciones cortas, validación automática y progreso local. En esta primera versión empezaremos solo con Python.',
+          'CodeDaily es un juego web de desafíos de programación centrado en funciones cortas, validación automática y progreso local. En esta primera versión empezaremos solo con Python y solo con un reto diario.',
         primaryButton: 'Jugar Daily Challenge',
-        secondaryButton: 'Ir a Unlimited',
-        card1Title: 'Daily Challenge',
+        card1Title: 'Un reto al día',
         card1Text:
-          'Un reto diario elegido de forma determinista según la fecha, igual para todo el mundo.',
-        card2Title: 'Unlimited',
+          'Cada día habrá un único reto elegido de forma determinista según la fecha, igual para todo el mundo.',
+        card2Title: 'Dificultades',
         card2Text:
-          'Práctica libre con retos aleatorios del banco disponible.',
-        card3Title: 'Dificultades',
-        card3Text:
           'Novato, Intermedio y Pro, con base preparada para crecer más adelante.',
+        card3Title: 'Validación',
+        card3Text:
+          'Las soluciones se comprobarán con tests automáticos y restricciones simples.',
         card4Title: 'Idiomas',
         card4Text:
           'El contenido del reto podrá mostrarse en español o en inglés, manteniendo la misma solución.',
@@ -30,18 +29,17 @@ function HomePage({ onNavigate }) {
         badge: 'Daily programming challenges',
         title: 'Improve by solving one short coding challenge every day',
         description:
-          'CodeDaily is a web game built around short programming challenges, automatic validation, and local progress tracking. In this first version we will focus only on Python.',
+          'CodeDaily is a web game built around short programming challenges, automatic validation, and local progress tracking. In this first version we will focus only on Python and only on one daily challenge.',
         primaryButton: 'Play Daily Challenge',
-        secondaryButton: 'Go to Unlimited',
-        card1Title: 'Daily Challenge',
+        card1Title: 'One challenge a day',
         card1Text:
-          'One daily challenge chosen deterministically from the date, the same for everyone.',
-        card2Title: 'Unlimited',
+          'Each day there will be a single challenge chosen deterministically from the date, the same for everyone.',
+        card2Title: 'Difficulties',
         card2Text:
-          'Free practice with random challenges from the available pool.',
-        card3Title: 'Difficulties',
-        card3Text:
           'Beginner, Intermediate, and Pro, with a base ready to grow later.',
+        card3Title: 'Validation',
+        card3Text:
+          'Solutions will be checked with automatic tests and simple restrictions.',
         card4Title: 'Languages',
         card4Text:
           'Challenge content can be shown in Spanish or English while keeping the same solution.',
@@ -59,9 +57,6 @@ function HomePage({ onNavigate }) {
         <div className="hero-actions">
           <button className="primary-button" onClick={() => onNavigate('daily')}>
             {text.primaryButton}
-          </button>
-          <button className="secondary-button" onClick={() => onNavigate('unlimited')}>
-            {text.secondaryButton}
           </button>
         </div>
       </div>
