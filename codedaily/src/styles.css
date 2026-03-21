@@ -20,6 +20,9 @@
   --primary: #7c9cff;
   --primary-strong: #5f84ff;
   --success: #2dd4bf;
+  --success-soft: rgba(45, 212, 191, 0.12);
+  --danger: #ff7b8f;
+  --danger-soft: rgba(255, 123, 143, 0.12);
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
   --radius-xl: 24px;
   --radius-lg: 18px;
@@ -198,7 +201,9 @@ input {
 .feature-card,
 .status-box,
 .challenge-card,
-.stat-card {
+.stat-card,
+.editor-card,
+.result-panel {
   border: 1px solid var(--border);
   background: var(--panel);
   box-shadow: var(--shadow);
@@ -446,6 +451,10 @@ input {
   margin-top: 8px;
 }
 
+.compact-list li + li {
+  margin-top: 6px;
+}
+
 .code-block {
   margin: 0;
   padding: 18px;
@@ -455,6 +464,176 @@ input {
   color: #d7e1ff;
   overflow-x: auto;
   white-space: pre-wrap;
+}
+
+.editor-card {
+  margin-top: 24px;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+}
+
+.editor-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.editor-card-header h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+}
+
+.editor-card-header p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.editor-stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mini-stat {
+  min-width: 120px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+}
+
+.mini-stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.mini-stat strong {
+  font-size: 1.2rem;
+}
+
+.code-editor {
+  width: 100%;
+  min-height: 280px;
+  resize: vertical;
+  border-radius: 18px;
+  padding: 18px;
+  background: #0a1020;
+  color: #d7e1ff;
+  font-family: "Fira Code", "Cascadia Code", Consolas, monospace;
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+.code-editor:focus {
+  border-color: rgba(124, 156, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(124, 156, 255, 0.12);
+}
+
+.editor-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.result-panel {
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.result-panel h3 {
+  margin: 0 0 14px;
+  font-size: 1.08rem;
+}
+
+.result-subsection + .result-subsection {
+  margin-top: 18px;
+}
+
+.result-subsection h4 {
+  margin: 0 0 10px;
+  font-size: 0.98rem;
+}
+
+.feedback-box {
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+}
+
+.feedback-box h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.feedback-box p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.feedback-box p + p {
+  margin-top: 6px;
+}
+
+.success-box {
+  background: var(--success-soft);
+  border-color: rgba(45, 212, 191, 0.22);
+}
+
+.error-box {
+  background: var(--danger-soft);
+  border-color: rgba(255, 123, 143, 0.22);
+}
+
+.tests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.test-item {
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.test-item span {
+  font-weight: 700;
+}
+
+.test-item code {
+  color: var(--muted);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.test-item.passed {
+  background: rgba(45, 212, 191, 0.08);
+}
+
+.test-item.failed {
+  background: rgba(255, 123, 143, 0.08);
+}
+
+.muted-text {
+  margin: 0;
+  color: var(--muted);
 }
 
 .stats-grid {
@@ -511,8 +690,11 @@ input {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .page-top-row {
+  .page-top-row,
+  .editor-card-header,
+  .editor-grid {
     flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .filter-box {
@@ -527,11 +709,13 @@ input {
 
   .hero-card,
   .content-card,
-  .challenge-card {
+  .challenge-card,
+  .editor-card {
     padding: 22px;
   }
 
-  .hero-actions {
+  .hero-actions,
+  .editor-actions {
     flex-direction: column;
   }
 
@@ -561,5 +745,13 @@ input {
 
   .challenge-card-header h2 {
     font-size: 1.35rem;
+  }
+
+  .code-editor {
+    min-height: 220px;
+  }
+
+  .mini-stat {
+    min-width: 100%;
   }
 }

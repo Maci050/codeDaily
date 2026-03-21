@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import {
   getChallengeStats,
@@ -6,10 +6,15 @@ import {
   getDailyChallenge,
   getDaySeed,
 } from '../services/challengeService';
+import { validateChallengeSolution } from '../services/solutionValidationService';
 
 function DailyPage() {
   const { language } = useLanguage();
   const [difficulty, setDifficulty] = useState('all');
+  const [code, setCode] = useState('');
+  const [validationResult, setValidationResult] = useState(null);
+  const [attemptCount, setAttemptCount] = useState(0);
+  const [revealedHints, setRevealedHints] = useState(0);
 
   const text = useMemo(() => {
     return {
@@ -28,12 +33,34 @@ function DailyPage() {
         functionLabel: 'Función esperada',
         instructions: 'Instrucciones',
         restrictions: 'Restricciones',
-        hintsPreview: 'Pistas disponibles',
+        hintsPreview: 'Pistas totales',
+        visibleHints: 'Pistas desbloqueadas',
         testsCount: 'Número de tests',
         emptyTitle: 'No hay retos disponibles',
         emptyText: 'No existe ningún reto para esa selección.',
         statsTitle: 'Banco actual de retos',
         total: 'Total',
+        starterCode: 'Starter code',
+        editorTitle: 'Tu solución',
+        editorPlaceholder: 'Escribe aquí tu solución en Python...',
+        checkButton: 'Comprobar solución',
+        resetButton: 'Restablecer código',
+        attempts: 'Intentos',
+        resultTitle: 'Resultado',
+        passedTitle: '¡Reto superado!',
+        passedText: 'Tu solución ha pasado todas las comprobaciones de esta V1.',
+        failedTitle: 'La solución todavía no es válida',
+        testsSection: 'Tests',
+        errorsSection: 'Detalles',
+        hintsSection: 'Pistas',
+        noHintsYet: 'Todavía no has desbloqueado pistas.',
+        prototypeNote:
+          'Esta V1 valida estructura, restricciones y patrones de solución compatibles. Más adelante podremos ejecutar Python real.',
+        difficultyNovatoShort: 'Novato',
+        difficultyIntermedioShort: 'Intermedio',
+        difficultyProShort: 'Pro',
+        testPassed: 'OK',
+        testFailed: 'Fallo',
       },
       en: {
         title: 'Daily Challenge',
@@ -50,26 +77,96 @@ function DailyPage() {
         functionLabel: 'Expected function',
         instructions: 'Instructions',
         restrictions: 'Restrictions',
-        hintsPreview: 'Available hints',
+        hintsPreview: 'Total hints',
+        visibleHints: 'Unlocked hints',
         testsCount: 'Number of tests',
         emptyTitle: 'No challenges available',
         emptyText: 'There is no challenge for that selection.',
         statsTitle: 'Current challenge pool',
         total: 'Total',
+        starterCode: 'Starter code',
+        editorTitle: 'Your solution',
+        editorPlaceholder: 'Write your Python solution here...',
+        checkButton: 'Check solution',
+        resetButton: 'Reset code',
+        attempts: 'Attempts',
+        resultTitle: 'Result',
+        passedTitle: 'Challenge solved!',
+        passedText: 'Your solution passed all checks in this V1.',
+        failedTitle: 'The solution is not valid yet',
+        testsSection: 'Tests',
+        errorsSection: 'Details',
+        hintsSection: 'Hints',
+        noHintsYet: 'You have not unlocked hints yet.',
+        prototypeNote:
+          'This V1 validates structure, restrictions, and supported solution patterns. Real Python execution can come later.',
+        difficultyNovatoShort: 'Beginner',
+        difficultyIntermedioShort: 'Intermediate',
+        difficultyProShort: 'Pro',
+        testPassed: 'OK',
+        testFailed: 'Failed',
+      },
+    }[language];
+  }, [language]);
+
+  const errorMessages = useMemo(() => {
+    return {
+      es: {
+        EMPTY_CODE: 'El código está vacío.',
+        MISSING_FUNCTION_DEFINITION:
+          'No se ha encontrado una definición de función válida con `def ...:`.',
+        WRONG_FUNCTION_NAME: 'La función debe llamarse `solve`.',
+        PASS_LEFT_IN_CODE: 'Todavía tienes `pass` en el código.',
+        MISSING_RETURN: 'La solución debe usar `return`.',
+        UNSUPPORTED_LOGIC_PATTERN:
+          'La estructura general es correcta, pero esta V1 todavía no reconoce esa forma concreta de resolver el reto.',
+        TESTS_FAILED: 'Los tests no se han superado correctamente.',
+        NO_VALIDATOR_FOR_CHALLENGE:
+          'Todavía no existe un validador configurado para este reto.',
+      },
+      en: {
+        EMPTY_CODE: 'The code is empty.',
+        MISSING_FUNCTION_DEFINITION:
+          'No valid function definition using `def ...:` was found.',
+        WRONG_FUNCTION_NAME: 'The function must be named `solve`.',
+        PASS_LEFT_IN_CODE: 'You still have `pass` in the code.',
+        MISSING_RETURN: 'The solution must use `return`.',
+        UNSUPPORTED_LOGIC_PATTERN:
+          'The overall structure is correct, but this V1 does not yet recognize that specific solution style.',
+        TESTS_FAILED: 'The tests were not passed correctly.',
+        NO_VALIDATOR_FOR_CHALLENGE:
+          'There is not a configured validator for this challenge yet.',
       },
     }[language];
   }, [language]);
 
   const stats = useMemo(() => getChallengeStats('python'), []);
-  const dailyChallenge = useMemo(() => {
-    const challenge = getDailyChallenge({
+  const baseChallenge = useMemo(() => {
+    return getDailyChallenge({
       date: new Date(),
       language: 'python',
       difficulty,
     });
+  }, [difficulty]);
 
-    return getChallengeText(challenge, language);
-  }, [difficulty, language]);
+  const dailyChallenge = useMemo(() => {
+    return getChallengeText(baseChallenge, language);
+  }, [baseChallenge, language]);
+
+  useEffect(() => {
+    if (!baseChallenge) {
+      setCode('');
+      setValidationResult(null);
+      setAttemptCount(0);
+      setRevealedHints(0);
+      return;
+    }
+
+    setCode(baseChallenge.starterCode);
+    setValidationResult(null);
+    setAttemptCount(0);
+    setRevealedHints(0);
+  }, [baseChallenge?.id]);
 
   const difficulties = [
     { value: 'all', label: text.difficultyAll },
@@ -77,6 +174,55 @@ function DailyPage() {
     { value: 'intermedio', label: text.difficultyIntermedio },
     { value: 'pro', label: text.difficultyPro },
   ];
+
+  const difficultyLabelMap = {
+    novato: text.difficultyNovatoShort,
+    intermedio: text.difficultyIntermedioShort,
+    pro: text.difficultyProShort,
+  };
+
+  const translatedErrors = (validationResult?.errorCodes || []).map((codeValue) => {
+    if (codeValue.startsWith('MISSING_REQUIRED_TOKEN:')) {
+      const token = codeValue.split(':')[1];
+      return language === 'es'
+        ? `Falta el token requerido \`${token}\`.`
+        : `The required token \`${token}\` is missing.`;
+    }
+
+    if (codeValue.startsWith('FORBIDDEN_TOKEN_USED:')) {
+      const token = codeValue.split(':')[1];
+      return language === 'es'
+        ? `Se ha usado un token no permitido: \`${token}\`.`
+        : `A forbidden token was used: \`${token}\`.`;
+    }
+
+    return errorMessages[codeValue] || codeValue;
+  });
+
+  const handleValidate = () => {
+    if (!baseChallenge) {
+      return;
+    }
+
+    const result = validateChallengeSolution(baseChallenge, code);
+    setValidationResult(result);
+    setAttemptCount((previous) => previous + 1);
+
+    if (!result.success) {
+      setRevealedHints((previous) =>
+        Math.min(previous + 1, dailyChallenge.localizedHints.length)
+      );
+    }
+  };
+
+  const handleResetCode = () => {
+    if (!baseChallenge) {
+      return;
+    }
+
+    setCode(baseChallenge.starterCode);
+    setValidationResult(null);
+  };
 
   return (
     <section className="page-section">
@@ -109,64 +255,185 @@ function DailyPage() {
             <p>{text.emptyText}</p>
           </div>
         ) : (
-          <div className="challenge-card">
-            <div className="challenge-card-header">
-              <div>
-                <span className="difficulty-pill">{dailyChallenge.difficulty}</span>
-                <h2>{dailyChallenge.localizedTitle}</h2>
+          <>
+            <div className="challenge-card">
+              <div className="challenge-card-header">
+                <div>
+                  <span className="difficulty-pill">
+                    {difficultyLabelMap[dailyChallenge.difficulty] || dailyChallenge.difficulty}
+                  </span>
+                  <h2>{dailyChallenge.localizedTitle}</h2>
+                </div>
+              </div>
+
+              <p className="challenge-description">{dailyChallenge.localizedDescription}</p>
+
+              <div className="challenge-meta-grid">
+                <div className="meta-item">
+                  <span>{text.selectedDate}</span>
+                  <strong>{getDaySeed(new Date())}</strong>
+                </div>
+                <div className="meta-item">
+                  <span>{text.challengeId}</span>
+                  <strong>{dailyChallenge.id}</strong>
+                </div>
+                <div className="meta-item">
+                  <span>{text.languageLabel}</span>
+                  <strong>{dailyChallenge.language}</strong>
+                </div>
+                <div className="meta-item">
+                  <span>{text.functionLabel}</span>
+                  <strong>{dailyChallenge.functionName}</strong>
+                </div>
+                <div className="meta-item">
+                  <span>{text.hintsPreview}</span>
+                  <strong>{dailyChallenge.localizedHints.length}</strong>
+                </div>
+                <div className="meta-item">
+                  <span>{text.testsCount}</span>
+                  <strong>{dailyChallenge.tests.length}</strong>
+                </div>
+              </div>
+
+              <div className="challenge-section">
+                <h3>{text.instructions}</h3>
+                <p>{dailyChallenge.localizedInstructions}</p>
+              </div>
+
+              <div className="challenge-section">
+                <h3>{text.restrictions}</h3>
+                <ul className="challenge-list">
+                  {dailyChallenge.localizedRestrictions.map((restriction) => (
+                    <li key={restriction}>{restriction}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="challenge-section">
+                <h3>{text.starterCode}</h3>
+                <pre className="code-block">
+                  <code>{dailyChallenge.starterCode}</code>
+                </pre>
               </div>
             </div>
 
-            <p className="challenge-description">{dailyChallenge.localizedDescription}</p>
+            <div className="editor-card">
+              <div className="editor-card-header">
+                <div>
+                  <h2>{text.editorTitle}</h2>
+                  <p>{text.prototypeNote}</p>
+                </div>
 
-            <div className="challenge-meta-grid">
-              <div className="meta-item">
-                <span>{text.selectedDate}</span>
-                <strong>{getDaySeed(new Date())}</strong>
+                <div className="editor-stats">
+                  <div className="mini-stat">
+                    <span>{text.attempts}</span>
+                    <strong>{attemptCount}</strong>
+                  </div>
+                  <div className="mini-stat">
+                    <span>{text.visibleHints}</span>
+                    <strong>{revealedHints}</strong>
+                  </div>
+                </div>
               </div>
-              <div className="meta-item">
-                <span>{text.challengeId}</span>
-                <strong>{dailyChallenge.id}</strong>
+
+              <textarea
+                className="code-editor"
+                value={code}
+                onChange={(event) => setCode(event.target.value)}
+                spellCheck={false}
+                placeholder={text.editorPlaceholder}
+              />
+
+              <div className="editor-actions">
+                <button className="primary-button" onClick={handleValidate}>
+                  {text.checkButton}
+                </button>
+                <button className="secondary-button" onClick={handleResetCode}>
+                  {text.resetButton}
+                </button>
               </div>
-              <div className="meta-item">
-                <span>{text.languageLabel}</span>
-                <strong>{dailyChallenge.language}</strong>
-              </div>
-              <div className="meta-item">
-                <span>{text.functionLabel}</span>
-                <strong>{dailyChallenge.functionName}</strong>
-              </div>
-              <div className="meta-item">
-                <span>{text.hintsPreview}</span>
-                <strong>{dailyChallenge.localizedHints.length}</strong>
-              </div>
-              <div className="meta-item">
-                <span>{text.testsCount}</span>
-                <strong>{dailyChallenge.tests.length}</strong>
+
+              <div className="editor-grid">
+                <div className="result-panel">
+                  <h3>{text.resultTitle}</h3>
+
+                  {!validationResult ? (
+                    <p className="muted-text">
+                      {language === 'es'
+                        ? 'Todavía no has comprobado tu solución.'
+                        : 'You have not checked your solution yet.'}
+                    </p>
+                  ) : validationResult.success ? (
+                    <div className="feedback-box success-box">
+                      <h4>{text.passedTitle}</h4>
+                      <p>{text.passedText}</p>
+                      <p>
+                        {validationResult.passedCount} / {validationResult.totalTests}{' '}
+                        {language === 'es' ? 'tests superados' : 'tests passed'}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="feedback-box error-box">
+                      <h4>{text.failedTitle}</h4>
+                      <p>
+                        {validationResult.passedCount} / {validationResult.totalTests}{' '}
+                        {language === 'es' ? 'tests superados' : 'tests passed'}
+                      </p>
+                    </div>
+                  )}
+
+                  {validationResult && translatedErrors.length > 0 && (
+                    <div className="result-subsection">
+                      <h4>{text.errorsSection}</h4>
+                      <ul className="challenge-list compact-list">
+                        {translatedErrors.map((error) => (
+                          <li key={error}>{error}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {validationResult && validationResult.testResults.length > 0 && (
+                    <div className="result-subsection">
+                      <h4>{text.testsSection}</h4>
+                      <div className="tests-list">
+                        {validationResult.testResults.map((test) => (
+                          <div
+                            key={test.index}
+                            className={`test-item ${test.passed ? 'passed' : 'failed'}`}
+                          >
+                            <span>
+                              Test {test.index + 1}: {test.passed ? text.testPassed : text.testFailed}
+                            </span>
+                            <code>
+                              input: {JSON.stringify(test.input)} | expected:{' '}
+                              {JSON.stringify(test.expected)}
+                            </code>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="result-panel">
+                  <h3>{text.hintsSection}</h3>
+
+                  {revealedHints === 0 ? (
+                    <p className="muted-text">{text.noHintsYet}</p>
+                  ) : (
+                    <ul className="challenge-list compact-list">
+                      {dailyChallenge.localizedHints
+                        .slice(0, revealedHints)
+                        .map((hint, index) => (
+                          <li key={`${index}-${hint}`}>{hint}</li>
+                        ))}
+                    </ul>
+                  )}
+                </div>
               </div>
             </div>
-
-            <div className="challenge-section">
-              <h3>{text.instructions}</h3>
-              <p>{dailyChallenge.localizedInstructions}</p>
-            </div>
-
-            <div className="challenge-section">
-              <h3>{text.restrictions}</h3>
-              <ul className="challenge-list">
-                {dailyChallenge.localizedRestrictions.map((restriction) => (
-                  <li key={restriction}>{restriction}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="challenge-section">
-              <h3>Starter code</h3>
-              <pre className="code-block">
-                <code>{dailyChallenge.starterCode}</code>
-              </pre>
-            </div>
-          </div>
+          </>
         )}
 
         <div className="status-box">

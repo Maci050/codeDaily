@@ -55,25 +55,6 @@ function getDailyChallenge({
   return availableChallenges[index];
 }
 
-function getRandomChallenge({
-  language = 'python',
-  difficulty = 'all',
-  excludeId = null,
-} = {}) {
-  let availableChallenges = getChallengesByDifficulty(difficulty, language);
-
-  if (excludeId) {
-    availableChallenges = availableChallenges.filter((challenge) => challenge.id !== excludeId);
-  }
-
-  if (availableChallenges.length === 0) {
-    return null;
-  }
-
-  const index = Math.floor(Math.random() * availableChallenges.length);
-  return availableChallenges[index];
-}
-
 function getChallengeText(challenge, contentLanguage = 'es') {
   if (!challenge) {
     return null;
@@ -107,7 +88,6 @@ export {
   getChallengesByLanguage,
   getChallengesByDifficulty,
   getDailyChallenge,
-  getRandomChallenge,
   getChallengeText,
   getChallengeStats,
   getDaySeed,
