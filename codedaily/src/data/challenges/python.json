@@ -1,0 +1,344 @@
+[
+  {
+    "id": "sum_two_numbers",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma dos números",
+      "en": "Add two numbers"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b)` para que devuelva la suma de `a` y `b`.",
+      "en": "Complete the `solve(a, b)` function so it returns the sum of `a` and `b`."
+    },
+    "instructions": {
+      "es": "Debes devolver el resultado usando `return`.",
+      "en": "You must return the result using `return`."
+    },
+    "restrictions": {
+      "es": [
+        "No uses `print()` como solución principal.",
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "Do not use `print()` as the main solution.",
+        "The function must be named `solve`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recuerda que para sumar dos valores puedes usar `a + b`.",
+        "La función debe devolver el resultado con `return`."
+      ],
+      "en": [
+        "Remember you can sum two values with `a + b`.",
+        "The function must return the result using `return`."
+      ]
+    },
+    "starterCode": "def solve(a, b):\n    # Escribe tu solución aquí\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      {
+        "input": [2, 3],
+        "expected": 5
+      },
+      {
+        "input": [-1, 4],
+        "expected": 3
+      },
+      {
+        "input": [0, 0],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "is_even",
+    "language": "python",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Es par?",
+      "en": "Is it even?"
+    },
+    "description": {
+      "es": "Completa la función `solve(n)` para que devuelva `True` si `n` es par y `False` si es impar.",
+      "en": "Complete the `solve(n)` function so it returns `True` if `n` is even and `False` if it is odd."
+    },
+    "instructions": {
+      "es": "Puedes usar el operador módulo `%`.",
+      "en": "You can use the modulo operator `%`."
+    },
+    "restrictions": {
+      "es": [
+        "La función debe devolver un booleano.",
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "The function must return a boolean.",
+        "The function must be named `solve`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Un número es par si al dividirlo entre 2 el resto es 0.",
+        "Prueba con `n % 2 == 0`."
+      ],
+      "en": [
+        "A number is even if dividing by 2 leaves remainder 0.",
+        "Try `n % 2 == 0`."
+      ]
+    },
+    "starterCode": "def solve(n):\n    # Escribe tu solución aquí\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      {
+        "input": [4],
+        "expected": true
+      },
+      {
+        "input": [7],
+        "expected": false
+      },
+      {
+        "input": [0],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "max_of_three",
+    "language": "python",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Mayor de tres",
+      "en": "Maximum of three"
+    },
+    "description": {
+      "es": "Completa la función `solve(a, b, c)` para que devuelva el valor mayor entre los tres números.",
+      "en": "Complete the `solve(a, b, c)` function so it returns the largest value among the three numbers."
+    },
+    "instructions": {
+      "es": "Puedes usar `max()` o comparaciones manuales.",
+      "en": "You can use `max()` or manual comparisons."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un único número.",
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "Return a single number.",
+        "The function must be named `solve`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Python tiene una función llamada `max`.",
+        "También puedes comparar con `if`."
+      ],
+      "en": [
+        "Python has a built-in function called `max`.",
+        "You can also compare using `if`."
+      ]
+    },
+    "starterCode": "def solve(a, b, c):\n    # Escribe tu solución aquí\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      {
+        "input": [1, 9, 3],
+        "expected": 9
+      },
+      {
+        "input": [7, 7, 2],
+        "expected": 7
+      },
+      {
+        "input": [-5, -2, -8],
+        "expected": -2
+      }
+    ]
+  },
+  {
+    "id": "reverse_word",
+    "language": "python",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Invertir palabra",
+      "en": "Reverse a word"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para que devuelva el texto invertido.",
+      "en": "Complete the `solve(text)` function so it returns the reversed text."
+    },
+    "instructions": {
+      "es": "Por ejemplo, `hola` debería devolver `aloh`.",
+      "en": "For example, `hello` should return `olleh`."
+    },
+    "restrictions": {
+      "es": [
+        "Debes devolver un string.",
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "You must return a string.",
+        "The function must be named `solve`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Puedes usar slicing en Python.",
+        "Prueba con `text[::-1]`."
+      ],
+      "en": [
+        "You can use slicing in Python.",
+        "Try `text[::-1]`."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # Escribe tu solución aquí\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      {
+        "input": ["hola"],
+        "expected": "aloh"
+      },
+      {
+        "input": ["CodeDaily"],
+        "expected": "yliaDedoC"
+      },
+      {
+        "input": [""],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "count_vowels",
+    "language": "python",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar vocales",
+      "en": "Count vowels"
+    },
+    "description": {
+      "es": "Completa la función `solve(text)` para que devuelva cuántas vocales hay en el texto.",
+      "en": "Complete the `solve(text)` function so it returns how many vowels are present in the text."
+    },
+    "instructions": {
+      "es": "Cuenta las vocales `a`, `e`, `i`, `o`, `u` tanto en mayúsculas como en minúsculas.",
+      "en": "Count vowels `a`, `e`, `i`, `o`, `u` in both lowercase and uppercase."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un número entero.",
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "Return an integer.",
+        "The function must be named `solve`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Puedes recorrer el texto carácter a carácter.",
+        "Te puede ayudar definir un conjunto o string con las vocales."
+      ],
+      "en": [
+        "You can iterate through the text character by character.",
+        "It may help to define a set or string containing the vowels."
+      ]
+    },
+    "starterCode": "def solve(text):\n    # Escribe tu solución aquí\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      {
+        "input": ["hola"],
+        "expected": 2
+      },
+      {
+        "input": ["PYTHON"],
+        "expected": 1
+      },
+      {
+        "input": ["bcdfg"],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "sum_list",
+    "language": "python",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma de lista",
+      "en": "Sum a list"
+    },
+    "description": {
+      "es": "Completa la función `solve(numbers)` para que devuelva la suma de todos los números de la lista.",
+      "en": "Complete the `solve(numbers)` function so it returns the sum of all numbers in the list."
+    },
+    "instructions": {
+      "es": "La lista puede estar vacía.",
+      "en": "The list may be empty."
+    },
+    "restrictions": {
+      "es": [
+        "Si la lista está vacía, devuelve 0.",
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "If the list is empty, return 0.",
+        "The function must be named `solve`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Python tiene la función `sum`.",
+        "También podrías recorrer la lista y acumular el resultado."
+      ],
+      "en": [
+        "Python has a built-in `sum` function.",
+        "You could also iterate through the list and accumulate the result."
+      ]
+    },
+    "starterCode": "def solve(numbers):\n    # Escribe tu solución aquí\n    pass",
+    "solutionShape": {
+      "requiredTokens": ["def", "return"],
+      "forbiddenTokens": ["print("]
+    },
+    "tests": [
+      {
+        "input": [[1, 2, 3]],
+        "expected": 6
+      },
+      {
+        "input": [[5]],
+        "expected": 5
+      },
+      {
+        "input": [[]],
+        "expected": 0
+      }
+    ]
+  }
+]
