@@ -1078,5 +1078,725 @@
 			{ "input": [[3, 2, 3, 1, 2, 4, 5, 5, 6], 4], "expected": 4 },
 			{ "input": [[1], 1], "expected": 1 }
 		]
+	},
+	{
+		"id": "search_insert_position",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Posicion de insercion",
+			"en": "Search insert position"
+		},
+		"description": {
+			"es": "Completa `solve(numbers, target)` para devolver el indice donde esta `target` o donde deberia insertarse en orden.",
+			"en": "Complete `solve(numbers, target)` to return the index where `target` exists or should be inserted in order."
+		},
+		"instructions": {
+			"es": "La lista viene ordenada ascendentemente.",
+			"en": "The list is sorted ascending."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["La busqueda binaria encaja bien en este problema.", "Si no encuentras el valor, devuelve el puntero de insercion."],
+			"en": ["Binary search fits this problem well.", "If not found, return the insertion pointer."]
+		},
+		"starterCode": "def solve(numbers, target):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 3, 5, 6], 5], "expected": 2 },
+			{ "input": [[1, 3, 5, 6], 2], "expected": 1 },
+			{ "input": [[1, 3, 5, 6], 7], "expected": 4 }
+		]
+	},
+	{
+		"id": "majority_element",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Elemento mayoritario",
+			"en": "Majority element"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver el elemento que aparece mas de `n/2` veces.",
+			"en": "Complete `solve(numbers)` to return the element that appears more than `n/2` times."
+		},
+		"instructions": {
+			"es": "Siempre existira un elemento mayoritario.",
+			"en": "A majority element always exists."
+		},
+		"restrictions": {
+			"es": ["Devuelve un unico valor."],
+			"en": ["Return a single value."]
+		},
+		"hints": {
+			"es": ["Puedes usar el algoritmo de Boyer-Moore.", "Tambien puedes contar frecuencias."],
+			"en": ["You can use the Boyer-Moore algorithm.", "You can also count frequencies."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[3, 2, 3]], "expected": 3 },
+			{ "input": [[2, 2, 1, 1, 1, 2, 2]], "expected": 2 },
+			{ "input": [[1]], "expected": 1 }
+		]
+	},
+	{
+		"id": "valid_anagram_exact",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Anagrama exacto",
+			"en": "Valid anagram"
+		},
+		"description": {
+			"es": "Completa `solve(a, b)` para devolver `True` si `a` y `b` son anagramas exactos.",
+			"en": "Complete `solve(a, b)` to return `True` if `a` and `b` are exact anagrams."
+		},
+		"instructions": {
+			"es": "No ignores espacios ni mayusculas/minusculas.",
+			"en": "Do not ignore spaces or letter case."
+		},
+		"restrictions": {
+			"es": ["Devuelve un booleano."],
+			"en": ["Return a boolean."]
+		},
+		"hints": {
+			"es": ["Compara longitudes antes de contar.", "Puedes ordenar ambos strings o usar frecuencias."],
+			"en": ["Compare lengths before counting.", "You can sort both strings or use frequencies."]
+		},
+		"starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["anagram", "nagaram"], "expected": true },
+			{ "input": ["rat", "car"], "expected": false },
+			{ "input": ["aab", "aba"], "expected": true }
+		]
+	},
+	{
+		"id": "reverse_words_order",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Invertir orden de palabras",
+			"en": "Reverse words order"
+		},
+		"description": {
+			"es": "Completa `solve(text)` para devolver las palabras en orden inverso separadas por un solo espacio.",
+			"en": "Complete `solve(text)` to return words in reverse order separated by a single space."
+		},
+		"instructions": {
+			"es": "Ignora espacios extra al inicio, final o repetidos.",
+			"en": "Ignore extra leading, trailing, or repeated spaces."
+		},
+		"restrictions": {
+			"es": ["Devuelve un string."],
+			"en": ["Return a string."]
+		},
+		"hints": {
+			"es": ["`split()` sin argumentos limpia espacios extra.", "Invierte la lista de palabras y une con espacios."],
+			"en": ["`split()` with no args removes extra spaces.", "Reverse the words list and join with spaces."]
+		},
+		"starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["the sky is blue"], "expected": "blue is sky the" },
+			{ "input": ["  hello world  "], "expected": "world hello" },
+			{ "input": ["a good   example"], "expected": "example good a" }
+		]
+	},
+	{
+		"id": "longest_word_in_sentence",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Palabra mas larga",
+			"en": "Longest word in sentence"
+		},
+		"description": {
+			"es": "Completa `solve(text)` para devolver la palabra mas larga de la frase.",
+			"en": "Complete `solve(text)` to return the longest word in the sentence."
+		},
+		"instructions": {
+			"es": "Si hay empate, devuelve la primera palabra que aparezca.",
+			"en": "If there is a tie, return the first word that appears."
+		},
+		"restrictions": {
+			"es": ["La entrada tendra al menos una palabra."],
+			"en": ["Input will contain at least one word."]
+		},
+		"hints": {
+			"es": ["Recorre palabras y guarda la mejor actual.", "Compara por longitud."],
+			"en": ["Iterate words and keep the current best.", "Compare by length."]
+		},
+		"starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["hola mundo grande"], "expected": "grande" },
+			{ "input": ["aa bbb cc"], "expected": "bbb" },
+			{ "input": ["python"], "expected": "python" }
+		]
+	},
+	{
+		"id": "prefix_sums",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Sumas prefijo",
+			"en": "Prefix sums"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver la lista de sumas acumuladas prefijo.",
+			"en": "Complete `solve(numbers)` to return the prefix cumulative sums list."
+		},
+		"instructions": {
+			"es": "Cada posicion i debe tener la suma de `numbers[0:i+1]`.",
+			"en": "Each index i should contain sum of `numbers[0:i+1]`."
+		},
+		"restrictions": {
+			"es": ["Si la lista esta vacia, devuelve `[]`."],
+			"en": ["If list is empty, return `[]`."]
+		},
+		"hints": {
+			"es": ["Usa un acumulador progresivo.", "Ve agregando cada nueva suma al resultado."],
+			"en": ["Use a running accumulator.", "Append each new cumulative sum to result."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 2, 3, 4]], "expected": [1, 3, 6, 10] },
+			{ "input": [[5]], "expected": [5] },
+			{ "input": [[]], "expected": [] }
+		]
+	},
+	{
+		"id": "running_average",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Media acumulada",
+			"en": "Running average"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver una lista con la media acumulada en cada posicion.",
+			"en": "Complete `solve(numbers)` to return a list with running averages at each index."
+		},
+		"instructions": {
+			"es": "La posicion i debe contener promedio de `numbers[0:i+1]`.",
+			"en": "Index i should contain average of `numbers[0:i+1]`."
+		},
+		"restrictions": {
+			"es": ["Si la lista esta vacia, devuelve `[]`."],
+			"en": ["If list is empty, return `[]`."]
+		},
+		"hints": {
+			"es": ["Acumula suma y divide por cantidad actual.", "No necesitas recalcular sumas completas."],
+			"en": ["Accumulate sum and divide by current count.", "No need to recompute full sums."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[2, 4, 6]], "expected": [2, 3, 4] },
+			{ "input": [[5]], "expected": [5] },
+			{ "input": [[1, 2, 2, 3]], "expected": [1, 1.5, 1.6666666666666667, 2] }
+		]
+	},
+	{
+		"id": "matrix_row_sums",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Suma por filas",
+			"en": "Matrix row sums"
+		},
+		"description": {
+			"es": "Completa `solve(matrix)` para devolver una lista con la suma de cada fila.",
+			"en": "Complete `solve(matrix)` to return a list with each row sum."
+		},
+		"instructions": {
+			"es": "Si la matriz esta vacia, devuelve `[]`.",
+			"en": "If matrix is empty, return `[]`."
+		},
+		"restrictions": {
+			"es": ["Devuelve una lista de enteros."],
+			"en": ["Return a list of integers."]
+		},
+		"hints": {
+			"es": ["Puedes aplicar `sum` a cada fila.", "Recorre cada sublista de la matriz."],
+			"en": ["You can apply `sum` to each row.", "Iterate each sublist in the matrix."]
+		},
+		"starterCode": "def solve(matrix):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 2], [3, 4], [5, 6]]], "expected": [3, 7, 11] },
+			{ "input": [[[0, 0], [1, -1]]], "expected": [0, 0] },
+			{ "input": [[[]]], "expected": [0] }
+		]
+	},
+	{
+		"id": "matrix_col_sums",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Suma por columnas",
+			"en": "Matrix column sums"
+		},
+		"description": {
+			"es": "Completa `solve(matrix)` para devolver una lista con la suma de cada columna.",
+			"en": "Complete `solve(matrix)` to return a list with each column sum."
+		},
+		"instructions": {
+			"es": "La matriz tendra filas del mismo tamano.",
+			"en": "Matrix rows will have equal length."
+		},
+		"restrictions": {
+			"es": ["Si la matriz esta vacia, devuelve `[]`."],
+			"en": ["If matrix is empty, return `[]`."]
+		},
+		"hints": {
+			"es": ["Puedes recorrer por indice de columna.", "`zip(*matrix)` tambien puede ayudar."],
+			"en": ["You can iterate by column index.", "`zip(*matrix)` can also help."]
+		},
+		"starterCode": "def solve(matrix):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[[1, 2, 3], [4, 5, 6]]], "expected": [5, 7, 9] },
+			{ "input": [[[1], [2], [3]]], "expected": [6] },
+			{ "input": [[]], "expected": [] }
+		]
+	},
+	{
+		"id": "pascal_row_n",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Fila n de Pascal",
+			"en": "Pascal row n"
+		},
+		"description": {
+			"es": "Completa `solve(n)` para devolver la fila `n` del triangulo de Pascal (empezando en 0).",
+			"en": "Complete `solve(n)` to return row `n` of Pascal's triangle (0-indexed)."
+		},
+		"instructions": {
+			"es": "Por ejemplo, `n = 0` devuelve `[1]`.",
+			"en": "For example, `n = 0` returns `[1]`."
+		},
+		"restrictions": {
+			"es": ["Devuelve una lista de enteros."],
+			"en": ["Return a list of integers."]
+		},
+		"hints": {
+			"es": ["Cada fila inicia y termina con 1.", "Los valores internos son suma de vecinos de la fila anterior."],
+			"en": ["Each row starts and ends with 1.", "Inner values are sums of neighbors from previous row."]
+		},
+		"starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [0], "expected": [1] },
+			{ "input": [3], "expected": [1, 3, 3, 1] },
+			{ "input": [5], "expected": [1, 5, 10, 10, 5, 1] }
+		]
+	},
+	{
+		"id": "climb_stairs",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Subir escaleras",
+			"en": "Climb stairs"
+		},
+		"description": {
+			"es": "Completa `solve(n)` para devolver cuantas formas distintas hay de subir `n` escalones avanzando 1 o 2 cada vez.",
+			"en": "Complete `solve(n)` to return how many distinct ways to climb `n` stairs taking 1 or 2 steps."
+		},
+		"instructions": {
+			"es": "`n` sera un entero positivo.",
+			"en": "`n` will be a positive integer."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["Es una recurrencia tipo Fibonacci.", "Puedes resolverlo con DP iterativa."],
+			"en": ["It is a Fibonacci-like recurrence.", "You can solve it with iterative DP."]
+		},
+		"starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [2], "expected": 2 },
+			{ "input": [3], "expected": 3 },
+			{ "input": [5], "expected": 8 }
+		]
+	},
+	{
+		"id": "max_profit_one_transaction",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Maxima ganancia una transaccion",
+			"en": "Max profit one transaction"
+		},
+		"description": {
+			"es": "Completa `solve(prices)` para devolver la maxima ganancia posible comprando y vendiendo una vez.",
+			"en": "Complete `solve(prices)` to return maximum profit with one buy and one sell."
+		},
+		"instructions": {
+			"es": "Debes comprar antes de vender.",
+			"en": "You must buy before you sell."
+		},
+		"restrictions": {
+			"es": ["Si no hay ganancia posible, devuelve 0."],
+			"en": ["If no profit is possible, return 0."]
+		},
+		"hints": {
+			"es": ["Lleva el minimo precio visto hasta cada punto.", "Actualiza la mejor ganancia al recorrer."],
+			"en": ["Track minimum price seen so far.", "Update best profit while scanning."]
+		},
+		"starterCode": "def solve(prices):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[7, 1, 5, 3, 6, 4]], "expected": 5 },
+			{ "input": [[7, 6, 4, 3, 1]], "expected": 0 },
+			{ "input": [[2, 4, 1]], "expected": 2 }
+		]
+	},
+	{
+		"id": "missing_number_zero_to_n",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Numero faltante",
+			"en": "Missing number"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver el numero faltante en el rango `0..n`.",
+			"en": "Complete `solve(numbers)` to return the missing number from range `0..n`."
+		},
+		"instructions": {
+			"es": "La lista tiene `n` elementos distintos de ese rango.",
+			"en": "The list has `n` distinct elements from that range."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["Puedes usar la suma esperada `n*(n+1)/2`.", "Tambien sirve XOR."],
+			"en": ["You can use expected sum `n*(n+1)/2`.", "XOR also works."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[3, 0, 1]], "expected": 2 },
+			{ "input": [[0, 1]], "expected": 2 },
+			{ "input": [[9, 6, 4, 2, 3, 5, 7, 0, 1]], "expected": 8 }
+		]
+	},
+	{
+		"id": "intersection_unique",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Interseccion unica",
+			"en": "Unique intersection"
+		},
+		"description": {
+			"es": "Completa `solve(a, b)` para devolver los valores presentes en ambas listas sin repetir, ordenados ascendentemente.",
+			"en": "Complete `solve(a, b)` to return values present in both lists without duplicates, sorted ascending."
+		},
+		"instructions": {
+			"es": "La salida debe ser una lista.",
+			"en": "Output must be a list."
+		},
+		"restrictions": {
+			"es": ["No repitas elementos en la respuesta."],
+			"en": ["Do not repeat elements in the answer."]
+		},
+		"hints": {
+			"es": ["Convierte a conjuntos para interseccion.", "Ordena el resultado antes de devolver."],
+			"en": ["Convert to sets for intersection.", "Sort result before returning."]
+		},
+		"starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 2, 2, 1], [2, 2]], "expected": [2] },
+			{ "input": [[4, 9, 5], [9, 4, 9, 8, 4]], "expected": [4, 9] },
+			{ "input": [[1, 3], [2, 4]], "expected": [] }
+		]
+	},
+	{
+		"id": "symmetric_difference_sorted",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Diferencia simetrica ordenada",
+			"en": "Sorted symmetric difference"
+		},
+		"description": {
+			"es": "Completa `solve(a, b)` para devolver los elementos que estan en una lista pero no en ambas, sin repetir y ordenados.",
+			"en": "Complete `solve(a, b)` to return elements in one list but not both, unique and sorted."
+		},
+		"instructions": {
+			"es": "Trabaja por valor, no por posicion.",
+			"en": "Work by value, not by index."
+		},
+		"restrictions": {
+			"es": ["Devuelve una lista ordenada."],
+			"en": ["Return a sorted list."]
+		},
+		"hints": {
+			"es": ["La operacion de conjuntos `^` puede servir.", "Ordena al final."],
+			"en": ["Set operation `^` can help.", "Sort at the end."]
+		},
+		"starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 2, 3], [3, 4, 5]], "expected": [1, 2, 4, 5] },
+			{ "input": [[1, 1, 2], [2, 3, 3]], "expected": [1, 3] },
+			{ "input": [[7], [7]], "expected": [] }
+		]
+	},
+	{
+		"id": "valid_mountain_array",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Arreglo montana valido",
+			"en": "Valid mountain array"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver `True` si la lista sube estrictamente y luego baja estrictamente.",
+			"en": "Complete `solve(numbers)` to return `True` if list strictly increases and then strictly decreases."
+		},
+		"instructions": {
+			"es": "Debe haber al menos una subida y una bajada.",
+			"en": "There must be at least one ascent and one descent."
+		},
+		"restrictions": {
+			"es": ["Longitud minima valida: 3."],
+			"en": ["Minimum valid length: 3."]
+		},
+		"hints": {
+			"es": ["Encuentra el pico y valida ambos lados.", "No se permiten mesetas (valores iguales consecutivos)."],
+			"en": ["Find the peak and validate both sides.", "Plateaus are not allowed (equal consecutive values)."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[0, 3, 2, 1]], "expected": true },
+			{ "input": [[3, 5, 5]], "expected": false },
+			{ "input": [[0, 1, 2, 3, 2, 1]], "expected": true }
+		]
+	},
+	{
+		"id": "rotate_string_right",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Rotar texto a la derecha",
+			"en": "Rotate string right"
+		},
+		"description": {
+			"es": "Completa `solve(text, k)` para rotar el texto `k` posiciones a la derecha.",
+			"en": "Complete `solve(text, k)` to rotate text `k` positions to the right."
+		},
+		"instructions": {
+			"es": "Si el texto esta vacio, devuelve `\"\"`.",
+			"en": "If text is empty, return `\"\"`."
+		},
+		"restrictions": {
+			"es": ["Usa `k % len(text)` para normalizar."],
+			"en": ["Use `k % len(text)` to normalize."]
+		},
+		"hints": {
+			"es": ["Separa el sufijo final y ponlo delante.", "El slicing hace la rotacion muy directa."],
+			"en": ["Take trailing suffix and put it in front.", "Slicing makes rotation straightforward."]
+		},
+		"starterCode": "def solve(text, k):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": ["abcdef", 2], "expected": "efabcd" },
+			{ "input": ["a", 10], "expected": "a" },
+			{ "input": ["", 3], "expected": "" }
+		]
+	},
+	{
+		"id": "remove_duplicates_sorted",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Quitar duplicados ordenados",
+			"en": "Remove duplicates sorted"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver una nueva lista ordenada sin duplicados.",
+			"en": "Complete `solve(numbers)` to return a new sorted list without duplicates."
+		},
+		"instructions": {
+			"es": "La entrada ya viene ordenada.",
+			"en": "Input is already sorted."
+		},
+		"restrictions": {
+			"es": ["Conserva el orden de aparicion."],
+			"en": ["Preserve order of appearance."]
+		},
+		"hints": {
+			"es": ["Compara cada elemento con el ultimo agregado.", "Puedes usar una lista resultado incremental."],
+			"en": ["Compare each item with last appended.", "You can use incremental result list."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 1, 2]], "expected": [1, 2] },
+			{ "input": [[0, 0, 0, 0]], "expected": [0] },
+			{ "input": [[1, 2, 3]], "expected": [1, 2, 3] }
+		]
+	},
+	{
+		"id": "max_consecutive_ones",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Maximo de unos consecutivos",
+			"en": "Max consecutive ones"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver la longitud maxima de una racha consecutiva de `1`.",
+			"en": "Complete `solve(numbers)` to return max length of consecutive `1` streak."
+		},
+		"instructions": {
+			"es": "La lista contiene solo 0 y 1.",
+			"en": "List contains only 0 and 1."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero."],
+			"en": ["Return an integer."]
+		},
+		"hints": {
+			"es": ["Cuenta la racha actual y el maximo global.", "Reinicia contador al encontrar 0."],
+			"en": ["Track current streak and global max.", "Reset counter when seeing 0."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[1, 1, 0, 1, 1, 1]], "expected": 3 },
+			{ "input": [[1, 0, 1, 1, 0, 1]], "expected": 2 },
+			{ "input": [[0, 0, 0]], "expected": 0 }
+		]
+	},
+	{
+		"id": "first_unique_number",
+		"language": "python",
+		"difficulty": "pro",
+		"functionName": "solve",
+		"title": {
+			"es": "Primer numero unico",
+			"en": "First unique number"
+		},
+		"description": {
+			"es": "Completa `solve(numbers)` para devolver el primer numero que aparece una sola vez.",
+			"en": "Complete `solve(numbers)` to return the first number that appears once."
+		},
+		"instructions": {
+			"es": "Si no existe, devuelve `None`.",
+			"en": "If none exists, return `None`."
+		},
+		"restrictions": {
+			"es": ["Devuelve un entero o `None`."],
+			"en": ["Return an integer or `None`."]
+		},
+		"hints": {
+			"es": ["Cuenta frecuencias primero.", "Luego recorre en orden original."],
+			"en": ["Count frequencies first.", "Then iterate in original order."]
+		},
+		"starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
+		"solutionShape": {
+			"requiredTokens": ["def", "return"],
+			"forbiddenTokens": ["print("]
+		},
+		"tests": [
+			{ "input": [[2, 3, 4, 2, 3]], "expected": 4 },
+			{ "input": [[1, 1, 2, 2]], "expected": null },
+			{ "input": [[7]], "expected": 7 }
+		]
 	}
 ]

@@ -462,48 +462,6 @@
     ]
   },
   {
-    "id": "remove_spaces",
-    "language": "python",
-    "difficulty": "intermedio",
-    "functionName": "solve",
-    "title": {
-      "es": "Quitar espacios",
-      "en": "Remove spaces"
-    },
-    "description": {
-      "es": "Completa la función `solve(text)` para devolver el texto sin espacios.",
-      "en": "Complete the `solve(text)` function to return the text without spaces."
-    },
-    "instructions": {
-      "es": "Puedes usar `.replace()`.",
-      "en": "You can use `.replace()`."
-    },
-    "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
-    },
-    "hints": {
-      "es": [
-        "Piensa en reemplazar los espacios por una cadena vacía.",
-        "Prueba con `.replace(\" \", \"\")`."
-      ],
-      "en": [
-        "Think about replacing spaces with an empty string.",
-        "Try `.replace(\" \", \"\")`."
-      ]
-    },
-    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
-    "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
-    },
-    "tests": [
-      { "input": ["hola mundo"], "expected": "holamundo" },
-      { "input": [" sin espacios "], "expected": "sinespacios" },
-      { "input": ["abc"], "expected": "abc" }
-    ]
-  },
-  {
     "id": "repeat_text",
     "language": "python",
     "difficulty": "intermedio",
@@ -1215,48 +1173,6 @@
       { "input": ["hola"], "expected": "aolh" },
       { "input": ["a"], "expected": "a" },
       { "input": ["ab"], "expected": "ba" }
-    ]
-  },
-  {
-    "id": "count_words_simple",
-    "language": "python",
-    "difficulty": "intermedio",
-    "functionName": "solve",
-    "title": {
-      "es": "Contar palabras",
-      "en": "Count words"
-    },
-    "description": {
-      "es": "Completa la función `solve(text)` para devolver cuántas palabras hay en el texto.",
-      "en": "Complete the `solve(text)` function to return how many words are in the text."
-    },
-    "instructions": {
-      "es": "Las palabras estarán separadas por un único espacio.",
-      "en": "Words will be separated by a single space."
-    },
-    "restrictions": {
-      "es": ["Devuelve un entero."],
-      "en": ["Return an integer."]
-    },
-    "hints": {
-      "es": [
-        "Puedes usar `.split()`.",
-        "La longitud de la lista resultante es la respuesta."
-      ],
-      "en": [
-        "You can use `.split()`.",
-        "The length of the resulting list is the answer."
-      ]
-    },
-    "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
-    "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
-    },
-    "tests": [
-      { "input": ["hola mundo"], "expected": 2 },
-      { "input": ["uno dos tres"], "expected": 3 },
-      { "input": ["python"], "expected": 1 }
     ]
   },
   {
