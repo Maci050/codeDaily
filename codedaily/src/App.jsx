@@ -1,13 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import DailyPage from './pages/DailyPage';
 import ProfilePage from './pages/ProfilePage';
 import { useLanguage } from './context/LanguageContext';
+import HowToPlayModal from './components/HowToPlayModal';
+import { shouldShowTutorial, markTutorialSeen } from './services/uiService';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+
   const { language } = useLanguage();
 
   const appText = useMemo(() => {
@@ -20,6 +24,22 @@ function App() {
       },
     }[language];
   }, [language]);
+
+  //abrir automáticamente la primera vez
+  useEffect(() => {
+    if (shouldShowTutorial()) {
+      setIsTutorialOpen(true);
+    }
+  }, []);
+
+  function handleCloseTutorial() {
+    setIsTutorialOpen(false);
+    markTutorialSeen();
+  }
+
+  function handleOpenTutorial() {
+    setIsTutorialOpen(true);
+  }
 
   const renderPage = () => {
     switch (currentPage) {
@@ -39,6 +59,7 @@ function App() {
         appName={appText.appName}
         currentPage={currentPage}
         onNavigate={setCurrentPage}
+        onOpenTutorial={handleOpenTutorial} // 👈 importante
       />
 
       <main className="main-content">
@@ -46,6 +67,12 @@ function App() {
       </main>
 
       <Footer />
+
+      {/* MODAL */}
+      <HowToPlayModal
+        isOpen={isTutorialOpen}
+        onClose={handleCloseTutorial}
+      />
     </div>
   );
 }

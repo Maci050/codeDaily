@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
-function Header({ appName, currentPage, onNavigate }) {
+function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
   const { language, setLanguage } = useLanguage();
 
   const text = useMemo(() => {
@@ -45,6 +45,11 @@ function Header({ appName, currentPage, onNavigate }) {
               {item.label}
             </button>
           ))}
+
+          {/* BOTÓN DE AYUDA */}
+          <button className="nav-button" onClick={onOpenTutorial}>
+            ❓
+          </button>
         </nav>
 
         <div className="language-switcher">
