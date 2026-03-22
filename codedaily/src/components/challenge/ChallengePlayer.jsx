@@ -26,6 +26,7 @@ function ChallengePlayer({
   onDateChange = null,
   allowDateSelection = false,
   allowHackerMode = true,
+  minSelectableDate = null,
 }) {
   const { language } = useLanguage();
 
@@ -416,6 +417,7 @@ function ChallengePlayer({
                   id="archive-date-select"
                   type="date"
                   value={selectedDate}
+                  min={minSelectableDate || undefined}
                   max={getDaySeed(new Date())}
                   onChange={(event) => onDateChange?.(event.target.value)}
                 />
