@@ -5,6 +5,8 @@ function getInitialState() {
     dailyProgress: {},
     streak: 0,
     lastCompletedDate: null,
+    normalCompleted: 0,
+    hackerCompleted: 0,
   };
 }
 
@@ -25,35 +27,72 @@ function getDayKey(date = new Date()) {
   return date.toISOString().split('T')[0];
 }
 
-function getTodayProgress() {
-  const data = loadProgress();
-  const today = getDayKey();
+function buildProgressKey({ date = new Date(), challengeId = 'unknown', mode = 'normal' }) {
+  return `${getDayKey(date)}::${challengeId}::${mode}`;
+}
 
-  return data.dailyProgress[today] || {
+function getProgressEntry({ date = new Date(), challengeId = 'unknown', mode = 'normal' }) {
+  const data = loadProgress();
+  const key = buildProgressKey({ date, challengeId, mode });
+
+  return data.dailyProgress[key] || {
     completed: false,
     attempts: 0,
     code: '',
     revealedHints: 0,
+    locked: false,
   };
 }
 
-function updateTodayProgress(update) {
+function updateProgressEntry({
+  date = new Date(),
+  challengeId = 'unknown',
+  mode = 'normal',
+  update = {},
+}) {
   const data = loadProgress();
-  const today = getDayKey();
+  const key = buildProgressKey({ date, challengeId, mode });
 
-  data.dailyProgress[today] = {
-    ...getTodayProgress(),
+  data.dailyProgress[key] = {
+    ...getProgressEntry({ date, challengeId, mode }),
     ...update,
   };
 
   saveProgress(data);
 }
 
-function markTodayCompleted() {
+function markTodayCompleted({
+  date = new Date(),
+  challengeId = 'unknown',
+  mode = 'normal',
+}) {
   const data = loadProgress();
-  const today = getDayKey();
+  const today = getDayKey(date);
+  const key = buildProgressKey({ date, challengeId, mode });
 
-  const yesterday = new Date();
+  const previousEntry = data.dailyProgress[key] || {
+    completed: false,
+    attempts: 0,
+    code: '',
+    revealedHints: 0,
+    locked: false,
+  };
+
+  data.dailyProgress[key] = {
+    ...previousEntry,
+    completed: true,
+    locked: false,
+  };
+
+  if (!previousEntry.completed) {
+    if (mode === 'hacker') {
+      data.hackerCompleted += 1;
+    } else {
+      data.normalCompleted += 1;
+    }
+  }
+
+  const yesterday = new Date(date);
   yesterday.setDate(yesterday.getDate() - 1);
   const yesterdayKey = getDayKey(yesterday);
 
@@ -65,32 +104,42 @@ function markTodayCompleted() {
 
   data.lastCompletedDate = today;
 
-  if (!data.dailyProgress[today]) {
-    data.dailyProgress[today] = {};
-  }
-
-  data.dailyProgress[today].completed = true;
-
   saveProgress(data);
 }
 
 function getStats() {
   const data = loadProgress();
 
-  const completedDays = Object.values(data.dailyProgress).filter(
-    (day) => day.completed
-  ).length;
+  const completedDates = new Set();
+
+  Object.entries(data.dailyProgress).forEach(([key, entry]) => {
+    if (!entry.completed) {
+      return;
+    }
+
+    const datePart = key.split('::')[0];
+    completedDates.add(datePart);
+  });
 
   return {
     streak: data.streak,
-    completedDays,
+    completedDays: completedDates.size,
+    normalCompleted: data.normalCompleted || 0,
+    hackerCompleted: data.hackerCompleted || 0,
   };
+}
+
+function clearProgress() {
+  localStorage.removeItem(STORAGE_KEY);
 }
 
 export {
   loadProgress,
-  updateTodayProgress,
-  getTodayProgress,
+  saveProgress,
+  getDayKey,
+  getProgressEntry,
+  updateProgressEntry,
   markTodayCompleted,
   getStats,
+  clearProgress,
 };

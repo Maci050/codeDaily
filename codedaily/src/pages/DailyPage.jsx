@@ -8,23 +8,30 @@ import {
 } from '../services/challengeService';
 import { validateChallengeSolution } from '../services/solutionValidationService';
 import {
-  getTodayProgress,
-  updateTodayProgress,
+  getProgressEntry,
+  updateProgressEntry,
   markTodayCompleted,
 } from '../services/progressService';
 import { ensurePyodideLoaded } from '../services/pythonRunnerService';
 
 function DailyPage() {
   const { language } = useLanguage();
+
   const [difficulty, setDifficulty] = useState('all');
+  const [playMode, setPlayMode] = useState('normal');
   const [code, setCode] = useState('');
   const [validationResult, setValidationResult] = useState(null);
   const [attemptCount, setAttemptCount] = useState(0);
   const [revealedHints, setRevealedHints] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [locked, setLocked] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [isPythonLoading, setIsPythonLoading] = useState(true);
   const [pythonLoadError, setPythonLoadError] = useState(null);
+
+  const isHackerMode = playMode === 'hacker';
+  const effectiveDifficulty = isHackerMode ? 'pro' : difficulty;
+  const maxHackerAttempts = 3;
 
   const text = useMemo(() => {
     return {
@@ -32,6 +39,11 @@ function DailyPage() {
         title: 'Daily Challenge',
         subtitle:
           'Cada día se selecciona un reto de forma determinista según la fecha.',
+        modeLabel: 'Modo',
+        modeNormal: 'Normal',
+        modeHacker: 'Hacker',
+        hackerDescription:
+          'El modo Hacker usa retos Pro, no muestra pistas y solo permite 3 intentos al día.',
         difficultyLabel: 'Dificultad',
         difficultyAll: 'Todas',
         difficultyNovato: 'Novato',
@@ -57,6 +69,7 @@ function DailyPage() {
         checkingButton: 'Comprobando...',
         resetButton: 'Restablecer código',
         attempts: 'Intentos',
+        attemptsLeft: 'Intentos restantes',
         resultTitle: 'Resultado',
         passedTitle: '¡Reto superado!',
         passedText: 'Tu solución ha pasado las comprobaciones con Python real.',
@@ -65,8 +78,9 @@ function DailyPage() {
         errorsSection: 'Detalles',
         hintsSection: 'Pistas',
         noHintsYet: 'Todavía no has desbloqueado pistas.',
+        noHintsInHacker: 'El modo Hacker no ofrece pistas.',
         prototypeNote:
-          'Ahora la validación ejecuta Python real en el navegador con Pyodide.',
+          'La validación ejecuta Python real en el navegador con Pyodide.',
         difficultyNovatoShort: 'Novato',
         difficultyIntermedioShort: 'Intermedio',
         difficultyProShort: 'Pro',
@@ -79,11 +93,20 @@ function DailyPage() {
         pythonReady: 'Python listo',
         pythonLoadError: 'No se pudo cargar el entorno Python.',
         runtimeTitle: 'Error de Python',
+        hackerBadge: 'Modo Hacker',
+        hackerLockedTitle: 'Reto bloqueado por hoy',
+        hackerLockedText:
+          'Has agotado los 3 intentos disponibles del modo Hacker para hoy.',
       },
       en: {
         title: 'Daily Challenge',
         subtitle:
           'A challenge is selected every day in a deterministic way based on the date.',
+        modeLabel: 'Mode',
+        modeNormal: 'Normal',
+        modeHacker: 'Hacker',
+        hackerDescription:
+          'Hacker mode uses Pro challenges, shows no hints, and only allows 3 attempts per day.',
         difficultyLabel: 'Difficulty',
         difficultyAll: 'All',
         difficultyNovato: 'Beginner',
@@ -109,6 +132,7 @@ function DailyPage() {
         checkingButton: 'Checking...',
         resetButton: 'Reset code',
         attempts: 'Attempts',
+        attemptsLeft: 'Attempts left',
         resultTitle: 'Result',
         passedTitle: 'Challenge solved!',
         passedText: 'Your solution passed the checks with real Python execution.',
@@ -117,8 +141,9 @@ function DailyPage() {
         errorsSection: 'Details',
         hintsSection: 'Hints',
         noHintsYet: 'You have not unlocked hints yet.',
+        noHintsInHacker: 'Hacker mode does not provide hints.',
         prototypeNote:
-          'Validation now runs real Python in the browser with Pyodide.',
+          'Validation runs real Python in the browser with Pyodide.',
         difficultyNovatoShort: 'Beginner',
         difficultyIntermedioShort: 'Intermediate',
         difficultyProShort: 'Pro',
@@ -131,6 +156,10 @@ function DailyPage() {
         pythonReady: 'Python ready',
         pythonLoadError: 'Could not load the Python runtime.',
         runtimeTitle: 'Python error',
+        hackerBadge: 'Hacker mode',
+        hackerLockedTitle: 'Challenge locked for today',
+        hackerLockedText:
+          'You used all 3 available attempts for today’s Hacker mode.',
       },
     }[language];
   }, [language]);
@@ -171,9 +200,9 @@ function DailyPage() {
     return getDailyChallenge({
       date: new Date(),
       language: 'python',
-      difficulty,
+      difficulty: effectiveDifficulty,
     });
-  }, [difficulty]);
+  }, [effectiveDifficulty]);
 
   const dailyChallenge = useMemo(() => {
     return getChallengeText(baseChallenge, language);
@@ -214,29 +243,40 @@ function DailyPage() {
       setAttemptCount(0);
       setRevealedHints(0);
       setCompleted(false);
+      setLocked(false);
       return;
     }
 
-    const progress = getTodayProgress();
+    const progress = getProgressEntry({
+      challengeId: baseChallenge.id,
+      mode: playMode,
+    });
+
     setCode(progress.code || baseChallenge.starterCode);
     setValidationResult(null);
     setAttemptCount(progress.attempts || 0);
     setRevealedHints(progress.revealedHints || 0);
     setCompleted(progress.completed || false);
-  }, [baseChallenge?.id]);
+    setLocked(progress.locked || false);
+  }, [baseChallenge?.id, playMode]);
 
   useEffect(() => {
     if (!baseChallenge) {
       return;
     }
 
-    updateTodayProgress({
-      code,
-      attempts: attemptCount,
-      revealedHints,
-      completed,
+    updateProgressEntry({
+      challengeId: baseChallenge.id,
+      mode: playMode,
+      update: {
+        code,
+        attempts: attemptCount,
+        revealedHints,
+        completed,
+        locked,
+      },
     });
-  }, [code, attemptCount, revealedHints, completed, baseChallenge]);
+  }, [code, attemptCount, revealedHints, completed, locked, baseChallenge, playMode]);
 
   const difficulties = [
     { value: 'all', label: text.difficultyAll },
@@ -269,8 +309,10 @@ function DailyPage() {
     return errorMessages[codeValue] || codeValue;
   });
 
+  const hackerAttemptsLeft = Math.max(0, maxHackerAttempts - attemptCount);
+
   const handleValidate = async () => {
-    if (!baseChallenge || completed || isChecking || isPythonLoading) {
+    if (!baseChallenge || completed || locked || isChecking || isPythonLoading) {
       return;
     }
 
@@ -283,20 +325,31 @@ function DailyPage() {
     setAttemptCount(newAttempts);
 
     if (!result.success) {
-      setRevealedHints((previous) =>
-        Math.min(previous + 1, dailyChallenge.localizedHints.length)
-      );
+      if (!isHackerMode) {
+        setRevealedHints((previous) =>
+          Math.min(previous + 1, dailyChallenge.localizedHints.length)
+        );
+      }
+
+      if (isHackerMode && newAttempts >= maxHackerAttempts) {
+        setLocked(true);
+      }
+
       setIsChecking(false);
       return;
     }
 
     setCompleted(true);
-    markTodayCompleted();
+    setLocked(false);
+    markTodayCompleted({
+      challengeId: baseChallenge.id,
+      mode: playMode,
+    });
     setIsChecking(false);
   };
 
   const handleResetCode = () => {
-    if (!baseChallenge || completed || isChecking) {
+    if (!baseChallenge || completed || isChecking || isHackerMode) {
       return;
     }
 
@@ -313,21 +366,50 @@ function DailyPage() {
             <p>{text.subtitle}</p>
           </div>
 
-          <div className="filter-box">
-            <label htmlFor="daily-difficulty-select">{text.difficultyLabel}</label>
-            <select
-              id="daily-difficulty-select"
-              value={difficulty}
-              onChange={(event) => setDifficulty(event.target.value)}
-            >
-              {difficulties.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
+          <div className="filters-stack">
+            <div className="mode-switch">
+              <span className="mode-switch-label">{text.modeLabel}</span>
+              <div className="mode-switch-buttons">
+                <button
+                  className={`mode-button ${playMode === 'normal' ? 'active' : ''}`}
+                  onClick={() => setPlayMode('normal')}
+                >
+                  {text.modeNormal}
+                </button>
+                <button
+                  className={`mode-button hacker ${playMode === 'hacker' ? 'active' : ''}`}
+                  onClick={() => setPlayMode('hacker')}
+                >
+                  {text.modeHacker}
+                </button>
+              </div>
+            </div>
+
+            {!isHackerMode && (
+              <div className="filter-box">
+                <label htmlFor="daily-difficulty-select">{text.difficultyLabel}</label>
+                <select
+                  id="daily-difficulty-select"
+                  value={difficulty}
+                  onChange={(event) => setDifficulty(event.target.value)}
+                >
+                  {difficulties.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         </div>
+
+        {isHackerMode && (
+          <div className="status-box hacker-info-box">
+            <h2>{text.hackerBadge}</h2>
+            <p>{text.hackerDescription}</p>
+          </div>
+        )}
 
         {!dailyChallenge ? (
           <div className="status-box">
@@ -343,6 +425,10 @@ function DailyPage() {
                     <span className="difficulty-pill">
                       {difficultyLabelMap[dailyChallenge.difficulty] || dailyChallenge.difficulty}
                     </span>
+
+                    {isHackerMode && (
+                      <span className="hacker-pill">{text.hackerBadge}</span>
+                    )}
 
                     {completed && (
                       <span className="completed-pill">{text.completedBadge}</span>
@@ -378,7 +464,7 @@ function DailyPage() {
                 </div>
                 <div className="meta-item">
                   <span>{text.hintsPreview}</span>
-                  <strong>{dailyChallenge.localizedHints.length}</strong>
+                  <strong>{isHackerMode ? 0 : dailyChallenge.localizedHints.length}</strong>
                 </div>
                 <div className="meta-item">
                   <span>{text.testsCount}</span>
@@ -397,15 +483,27 @@ function DailyPage() {
                   {dailyChallenge.localizedRestrictions.map((restriction) => (
                     <li key={restriction}>{restriction}</li>
                   ))}
+                  {isHackerMode && (
+                    <>
+                      <li>{language === 'es' ? 'Sin pistas.' : 'No hints.'}</li>
+                      <li>
+                        {language === 'es'
+                          ? 'Máximo 3 intentos al día.'
+                          : 'Maximum 3 attempts per day.'}
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
 
-              <div className="challenge-section">
-                <h3>{text.starterCode}</h3>
-                <pre className="code-block">
-                  <code>{dailyChallenge.starterCode}</code>
-                </pre>
-              </div>
+              {!isHackerMode && (
+                <div className="challenge-section">
+                  <h3>{text.starterCode}</h3>
+                  <pre className="code-block">
+                    <code>{dailyChallenge.starterCode}</code>
+                  </pre>
+                </div>
+              )}
             </div>
 
             <div className="editor-card">
@@ -425,12 +523,27 @@ function DailyPage() {
                     <span>{text.attempts}</span>
                     <strong>{attemptCount}</strong>
                   </div>
-                  <div className="mini-stat">
-                    <span>{text.visibleHints}</span>
-                    <strong>{revealedHints}</strong>
-                  </div>
+
+                  {isHackerMode ? (
+                    <div className="mini-stat hacker-stat">
+                      <span>{text.attemptsLeft}</span>
+                      <strong>{hackerAttemptsLeft}</strong>
+                    </div>
+                  ) : (
+                    <div className="mini-stat">
+                      <span>{text.visibleHints}</span>
+                      <strong>{revealedHints}</strong>
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {locked && !completed && (
+                <div className="feedback-box error-box">
+                  <h4>{text.hackerLockedTitle}</h4>
+                  <p>{text.hackerLockedText}</p>
+                </div>
+              )}
 
               <textarea
                 className="code-editor"
@@ -438,14 +551,14 @@ function DailyPage() {
                 onChange={(event) => setCode(event.target.value)}
                 spellCheck={false}
                 placeholder={text.editorPlaceholder}
-                disabled={completed || isChecking || isPythonLoading}
+                disabled={completed || locked || isChecking || isPythonLoading}
               />
 
               <div className="editor-actions">
                 <button
                   className="primary-button"
                   onClick={handleValidate}
-                  disabled={completed || isChecking || isPythonLoading}
+                  disabled={completed || locked || isChecking || isPythonLoading}
                 >
                   {completed
                     ? text.completedBadge
@@ -454,13 +567,15 @@ function DailyPage() {
                     : text.checkButton}
                 </button>
 
-                <button
-                  className="secondary-button"
-                  onClick={handleResetCode}
-                  disabled={completed || isChecking}
-                >
-                  {text.resetButton}
-                </button>
+                {!isHackerMode && (
+                  <button
+                    className="secondary-button"
+                    onClick={handleResetCode}
+                    disabled={completed || isChecking}
+                  >
+                    {text.resetButton}
+                  </button>
+                )}
               </div>
 
               <div className="editor-grid">
@@ -537,7 +652,9 @@ function DailyPage() {
                 <div className="result-panel">
                   <h3>{text.hintsSection}</h3>
 
-                  {revealedHints === 0 ? (
+                  {isHackerMode ? (
+                    <p className="muted-text">{text.noHintsInHacker}</p>
+                  ) : revealedHints === 0 ? (
                     <p className="muted-text">{text.noHintsYet}</p>
                   ) : (
                     <ul className="challenge-list compact-list">

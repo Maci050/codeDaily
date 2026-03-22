@@ -778,6 +778,78 @@ select {
   color: var(--muted);
 }
 
+.filters-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 260px;
+}
+
+.mode-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-switch-label {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.mode-switch-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mode-button {
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.mode-button:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.mode-button.active {
+  background: var(--primary-soft);
+  box-shadow: inset 0 0 0 1px rgba(139, 168, 255, 0.22);
+}
+
+.mode-button.hacker.active {
+  background: rgba(255, 134, 151, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 134, 151, 0.28);
+}
+
+.hacker-pill {
+  display: inline-flex;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  background: rgba(255, 134, 151, 0.14);
+  color: #ffc4cf;
+}
+
+.hacker-stat {
+  background: rgba(255, 134, 151, 0.08);
+}
+
+.hacker-info-box {
+  border-color: rgba(255, 134, 151, 0.22);
+}
+
+@media (max-width: 980px) {
+  .filters-stack {
+    min-width: 100%;
+  }
+}
+
 @media (max-width: 980px) {
   .header-inner {
     flex-direction: column;
