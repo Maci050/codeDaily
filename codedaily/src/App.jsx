@@ -3,6 +3,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import DailyPage from './pages/DailyPage';
+import ArchivePage from './pages/ArchivePage';
 import ProfilePage from './pages/ProfilePage';
 import { useLanguage } from './context/LanguageContext';
 import HowToPlayModal from './components/HowToPlayModal';
@@ -25,7 +26,6 @@ function App() {
     }[language];
   }, [language]);
 
-  //abrir automáticamente la primera vez
   useEffect(() => {
     if (shouldShowTutorial()) {
       setIsTutorialOpen(true);
@@ -45,6 +45,8 @@ function App() {
     switch (currentPage) {
       case 'daily':
         return <DailyPage />;
+      case 'archive':
+        return <ArchivePage />;
       case 'profile':
         return <ProfilePage />;
       case 'home':
@@ -59,7 +61,7 @@ function App() {
         appName={appText.appName}
         currentPage={currentPage}
         onNavigate={setCurrentPage}
-        onOpenTutorial={handleOpenTutorial} // 👈 importante
+        onOpenTutorial={handleOpenTutorial}
       />
 
       <main className="main-content">
@@ -68,7 +70,6 @@ function App() {
 
       <Footer />
 
-      {/* MODAL */}
       <HowToPlayModal
         isOpen={isTutorialOpen}
         onClose={handleCloseTutorial}

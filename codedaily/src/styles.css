@@ -844,6 +844,18 @@ select {
   border-color: rgba(255, 134, 151, 0.22);
 }
 
+.filter-box input[type="date"] {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.filter-box input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
 @media (max-width: 980px) {
   .filters-stack {
     min-width: 100%;

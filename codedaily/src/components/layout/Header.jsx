@@ -9,12 +9,14 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
       es: {
         navHome: 'Inicio',
         navDaily: 'Daily Challenge',
+        navArchive: 'Archivo',
         navProfile: 'Progreso',
         language: 'Idioma',
       },
       en: {
         navHome: 'Home',
         navDaily: 'Daily Challenge',
+        navArchive: 'Archive',
         navProfile: 'Progress',
         language: 'Language',
       },
@@ -24,6 +26,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
   const navItems = [
     { id: 'home', label: text.navHome },
     { id: 'daily', label: text.navDaily },
+    { id: 'archive', label: text.navArchive },
     { id: 'profile', label: text.navProfile },
   ];
 
@@ -46,7 +49,6 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
             </button>
           ))}
 
-          {/* BOTÓN DE AYUDA */}
           <button className="nav-button" onClick={onOpenTutorial}>
             ❓
           </button>
