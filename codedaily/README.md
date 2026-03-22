@@ -1,16 +1,176 @@
-# React + Vite
+# 🚀 CodeDaily
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**CodeDaily** is a web-based daily coding challenge game focused on short, practical programming problems.
 
-Currently, two official plugins are available:
+Inspired by games like Wordle, the goal is simple:
+👉 **solve one programming challenge every day.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌐 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👉 https://codedaily-nu.vercel.app
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+* 🧩 **Daily Challenge**
+  A new challenge every day, same for everyone.
+
+* 📊 **Difficulty Levels**
+
+  * Beginner (Novato)
+  * Intermediate (Intermedio)
+  * Pro
+
+* 🧠 **Hacker Mode**
+
+  * Only Pro challenges
+  * No hints
+  * Max 3 attempts
+
+* 🧪 **Real Python Execution**
+
+  * Code is validated using **Pyodide (Python in the browser)**
+  * Automatic test cases
+
+* 💡 **Progressive Hints**
+
+  * Unlock hints when failing attempts
+
+* 🌍 **Multilingual Content**
+
+  * Challenges available in **Spanish 🇪🇸 / English 🇬🇧**
+  * Same solution regardless of language
+
+* 💾 **Local Progress Tracking**
+
+  * Saves attempts, completion, and hints in local storage
+
+* 📅 **Archive Mode**
+
+  * Play challenges from past days (from launch date)
+
+---
+
+## 🧱 Tech Stack
+
+* ⚛️ React (Vite)
+* 🎨 CSS (custom styling)
+* 🐍 Pyodide (Python execution in browser)
+* ☁️ Vercel (deployment)
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── layout/
+│   └── challenge/
+├── pages/
+├── services/
+├── data/
+│   └── challenges/
+├── context/
+└── styles.css
+```
+
+---
+
+## 🛠️ Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Maci050/codeDaily.git
+cd codedaily
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+---
+
+## 📦 Deployment
+
+The project is deployed using **Vercel**.
+
+To deploy:
+
+1. Push your repo to GitHub
+2. Import the project in Vercel
+3. Set:
+
+   * Build Command: `npm run build`
+   * Output Directory: `dist`
+
+---
+
+## 🧠 How It Works
+
+* Challenges are stored in JSON files
+* A daily challenge is selected deterministically using the date
+* User code is executed in-browser using Pyodide
+* Results are validated against predefined tests
+* Progress is stored locally
+
+---
+
+## 🔮 Roadmap
+
+* ☕ Java support (coming soon)
+* 🔐 User accounts
+* 🏆 Leaderboards
+* 🌍 More languages
+* 🧠 Smarter hints
+* 🎯 More challenge types
+
+---
+
+## 🤝 Contributing
+
+This is currently a personal project, but feedback is always welcome!
+
+Feel free to open issues or suggest improvements.
+
+---
+
+## 📣 Feedback
+
+If you try the project, I’d love to hear your thoughts 🙌
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 👨‍💻 Author
+
+Created by Yeray
+
+---
+
+## ⭐ If you like the project
+
+Give it a star on GitHub and share it 🚀
