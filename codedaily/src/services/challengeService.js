@@ -47,7 +47,7 @@ function getChallengesByDifficulty(difficulty, language = 'python') {
 function getDailyChallenge({
   date = new Date(),
   language = 'python',
-  difficulty = 'all',
+  difficulty = 'novato',
 } = {}) {
   const availableChallenges = getChallengesByDifficulty(difficulty, language);
 

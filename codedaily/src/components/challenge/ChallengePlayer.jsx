@@ -30,7 +30,7 @@ function ChallengePlayer({
 }) {
   const { language } = useLanguage();
 
-  const [difficulty, setDifficulty] = useState('all');
+  const [difficulty, setDifficulty] = useState('novato');
   const [playMode, setPlayMode] = useState('normal');
   const [code, setCode] = useState('');
   const [validationResult, setValidationResult] = useState(null);
@@ -58,7 +58,6 @@ function ChallengePlayer({
           'El modo Hacker usa retos Pro, no muestra pistas y solo permite 3 intentos al día.',
         dateLabel: 'Fecha',
         difficultyLabel: 'Dificultad',
-        difficultyAll: 'Todas',
         difficultyNovato: 'Novato',
         difficultyIntermedio: 'Intermedio',
         difficultyPro: 'Pro',
@@ -119,7 +118,6 @@ function ChallengePlayer({
           'Hacker mode uses Pro challenges, shows no hints, and only allows 3 attempts per day.',
         dateLabel: 'Date',
         difficultyLabel: 'Difficulty',
-        difficultyAll: 'All',
         difficultyNovato: 'Beginner',
         difficultyIntermedio: 'Intermediate',
         difficultyPro: 'Pro',
@@ -301,7 +299,6 @@ function ChallengePlayer({
   ]);
 
   const difficulties = [
-    { value: 'all', label: text.difficultyAll },
     { value: 'novato', label: text.difficultyNovato },
     { value: 'intermedio', label: text.difficultyIntermedio },
     { value: 'pro', label: text.difficultyPro },
