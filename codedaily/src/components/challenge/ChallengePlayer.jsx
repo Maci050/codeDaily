@@ -588,6 +588,24 @@ function ChallengePlayer({
                 className="code-editor"
                 value={code}
                 onChange={(event) => setCode(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Tab'){
+                    event.preventDefault();
+
+                    const textarea = event.target;
+                    const start = textarea.selectionStart;
+                    const end = textarea.selectionEnd;
+
+                    const tab = '    ';
+
+                    const newValue = code.substring(0, start) + tab + code.substring(end);
+
+                    setCode(newValue);
+                    setTimeout(() => {
+                      textarea.selectionStart = textarea.selectionEnd = start + tab.length;
+                    }, 0);
+                  }
+                }}
                 spellCheck={false}
                 placeholder={text.editorPlaceholder}
                 disabled={completed || locked || isChecking || isPythonLoading}
