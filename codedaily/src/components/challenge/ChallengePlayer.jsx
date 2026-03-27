@@ -13,6 +13,7 @@ import {
   markTodayCompleted,
 } from '../../services/progressService';
 import { ensurePyodideLoaded } from '../../services/pythonRunnerService';
+import { getPreferences, savePreferences } from '../../services/uiService';
 
 function parseYMDToUTCDate(ymd) {
   const [year, month, day] = ymd.split('-').map(Number);
@@ -30,8 +31,8 @@ function ChallengePlayer({
 }) {
   const { language } = useLanguage();
 
-  const [difficulty, setDifficulty] = useState('novato');
-  const [playMode, setPlayMode] = useState('normal');
+  const [difficulty, setDifficulty] = useState(() => getPreferences().difficulty);
+  const [playMode, setPlayMode] = useState(() => allowHackerMode ? getPreferences().playMode : 'normal');
   const [code, setCode] = useState('');
   const [validationResult, setValidationResult] = useState(null);
   const [attemptCount, setAttemptCount] = useState(0);
@@ -393,13 +394,13 @@ function ChallengePlayer({
                 <div className="mode-switch-buttons">
                   <button
                     className={`mode-button ${playMode === 'normal' ? 'active' : ''}`}
-                    onClick={() => setPlayMode('normal')}
+                    onClick={() => { setPlayMode('normal'); savePreferences({ playMode: 'normal' }); }}
                   >
                     {text.modeNormal}
                   </button>
                   <button
                     className={`mode-button hacker ${playMode === 'hacker' ? 'active' : ''}`}
-                    onClick={() => setPlayMode('hacker')}
+                    onClick={() => { setPlayMode('hacker'); savePreferences({ playMode: 'hacker' }); }}
                   >
                     {text.modeHacker}
                   </button>
@@ -427,7 +428,7 @@ function ChallengePlayer({
                 <select
                   id="daily-difficulty-select"
                   value={difficulty}
-                  onChange={(event) => setDifficulty(event.target.value)}
+                  onChange={(event) => { setDifficulty(event.target.value); savePreferences({ difficulty: event.target.value }); }}
                 >
                   {difficulties.map((item) => (
                     <option key={item.value} value={item.value}>
