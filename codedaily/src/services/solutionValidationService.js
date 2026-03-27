@@ -1,4 +1,5 @@
 import { runPythonChallengeTests } from './pythonRunnerService';
+import { runJavaChallengeTests } from './javaRunnerService';
 
 function normalizeCode(code = '') {
   return code.replace(/\r\n/g, '\n').trim();
@@ -12,6 +13,7 @@ function createResult({
   passedCount = 0,
   totalTests = 0,
   pythonError = null,
+  runtimeError = null,
 } = {}) {
   return {
     success,
@@ -21,32 +23,72 @@ function createResult({
     passedCount,
     totalTests,
     pythonError,
+    runtimeError,
   };
 }
 
-function validateCommonStructure(challenge, code) {
-  const normalized = normalizeCode(code);
+// ─── Validación estructural Python ───────────────────────────────────────────
+
+function validatePythonStructure(challenge, normalized) {
   const errorCodes = [];
 
-  if (!normalized) {
-    errorCodes.push('EMPTY_CODE');
-    return { valid: false, normalizedCode: normalized, errorCodes };
-  }
-
-  const functionRegex = /^def\s+([a-zA-Z_]\w*)\s*\(([^)]*)\)\s*:/m;
+  const functionRegex = /^def\s+([a-zA-Z_]\w*)\s*\([^)]*\)\s*:/m;
   const functionMatch = normalized.match(functionRegex);
 
   if (!functionMatch) {
     errorCodes.push('MISSING_FUNCTION_DEFINITION');
-    return { valid: false, normalizedCode: normalized, errorCodes };
+    return { valid: false, errorCodes };
   }
 
-  const functionName = functionMatch[1];
-
-  if (functionName !== challenge.functionName) {
+  if (functionMatch[1] !== challenge.functionName) {
     errorCodes.push('WRONG_FUNCTION_NAME');
   }
 
+  if (/\bpass\b/.test(normalized)) {
+    errorCodes.push('PASS_LEFT_IN_CODE');
+  }
+
+  if (!/\breturn\b/.test(normalized)) {
+    errorCodes.push('MISSING_RETURN');
+  }
+
+  return { valid: errorCodes.length === 0, errorCodes };
+}
+
+// ─── Validación estructural Java ─────────────────────────────────────────────
+
+function validateJavaStructure(challenge, normalized) {
+  const errorCodes = [];
+
+  // Debe tener una clase Solution
+  if (!/class\s+Solution/.test(normalized)) {
+    errorCodes.push('MISSING_CLASS_DEFINITION');
+    return { valid: false, errorCodes };
+  }
+
+  // Debe tener el método solve como public static
+  const methodRegex = /public\s+static\s+\w[\w<>\[\]]*\s+solve\s*\(/;
+  if (!methodRegex.test(normalized)) {
+    errorCodes.push('MISSING_METHOD_DEFINITION');
+    return { valid: false, errorCodes };
+  }
+
+  // No debe tener el cuerpo sin implementar (solo llaves vacías o TODO)
+  if (/\/\/\s*TODO/.test(normalized)) {
+    errorCodes.push('PASS_LEFT_IN_CODE');
+  }
+
+  if (!/\breturn\b/.test(normalized)) {
+    errorCodes.push('MISSING_RETURN');
+  }
+
+  return { valid: errorCodes.length === 0, errorCodes };
+}
+
+// ─── Validación de tokens (requiredTokens / forbiddenTokens) ─────────────────
+
+function validateTokens(challenge, normalized) {
+  const errorCodes = [];
   const requiredTokens = challenge.solutionShape?.requiredTokens || [];
   const forbiddenTokens = challenge.solutionShape?.forbiddenTokens || [];
 
@@ -62,13 +104,33 @@ function validateCommonStructure(challenge, code) {
     }
   });
 
-  if (/\bpass\b/.test(normalized)) {
-    errorCodes.push('PASS_LEFT_IN_CODE');
+  return errorCodes;
+}
+
+// ─── Validación estructural por lenguaje ─────────────────────────────────────
+
+function validateStructure(challenge, code) {
+  const normalized = normalizeCode(code);
+  const errorCodes = [];
+
+  if (!normalized) {
+    errorCodes.push('EMPTY_CODE');
+    return { valid: false, normalizedCode: normalized, errorCodes };
   }
 
-  if (!/\breturn\b/.test(normalized)) {
-    errorCodes.push('MISSING_RETURN');
+  const languageValidation =
+    challenge.language === 'java'
+      ? validateJavaStructure(challenge, normalized)
+      : validatePythonStructure(challenge, normalized);
+
+  errorCodes.push(...languageValidation.errorCodes);
+
+  if (!languageValidation.valid) {
+    return { valid: false, normalizedCode: normalized, errorCodes };
   }
+
+  const tokenErrors = validateTokens(challenge, normalized);
+  errorCodes.push(...tokenErrors);
 
   return {
     valid: errorCodes.length === 0,
@@ -77,8 +139,10 @@ function validateCommonStructure(challenge, code) {
   };
 }
 
+// ─── Punto de entrada principal ───────────────────────────────────────────────
+
 async function validateChallengeSolution(challenge, code) {
-  const structureValidation = validateCommonStructure(challenge, code);
+  const structureValidation = validateStructure(challenge, code);
 
   if (!structureValidation.valid) {
     return createResult({
@@ -90,6 +154,23 @@ async function validateChallengeSolution(challenge, code) {
   }
 
   try {
+    if (challenge.language === 'java') {
+      const javaResult = await runJavaChallengeTests(
+        challenge,
+        structureValidation.normalizedCode
+      );
+
+      return createResult({
+        success: javaResult.success,
+        errorCodes: javaResult.errorCodes || [],
+        testResults: javaResult.testResults || [],
+        passedCount: javaResult.passedCount || 0,
+        totalTests: javaResult.totalTests || challenge.tests.length,
+        runtimeError: javaResult.runtimeError || null,
+      });
+    }
+
+    // Python (default)
     const pythonResult = await runPythonChallengeTests(
       challenge,
       structureValidation.normalizedCode
@@ -104,12 +185,13 @@ async function validateChallengeSolution(challenge, code) {
       pythonError: pythonResult.pythonError || null,
     });
   } catch (error) {
+    const isJava = challenge.language === 'java';
     return createResult({
       success: false,
-      errorCodes: ['PYODIDE_LOAD_ERROR'],
+      errorCodes: [isJava ? 'JUDGE0_ERROR' : 'PYODIDE_LOAD_ERROR'],
       totalTests: challenge.tests.length,
       passedCount: 0,
-      pythonError: error?.message || 'Unknown Pyodide error',
+      runtimeError: error?.message || 'Unknown error',
     });
   }
 }
