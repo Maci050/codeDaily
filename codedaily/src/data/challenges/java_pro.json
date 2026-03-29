@@ -421,6 +421,103 @@
     ]
   },
   {
+    "id": "count_islands",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar islas",
+      "en": "Count islands"
+    },
+    "description": {
+      "es": "Completa `solve(String[][] grid)` para contar cuántas islas hay en una matriz de `\"0\"` y `\"1\"`.",
+      "en": "Complete `solve(String[][] grid)` to count islands in a matrix of `\"0\"` and `\"1\"`."
+    },
+    "instructions": {
+      "es": "Una isla conecta celdas de `\"1\"` vertical u horizontalmente (no diagonal).",
+      "en": "An island connects `\"1\"` cells vertically or horizontally (not diagonally)."
+    },
+    "restrictions": {
+      "es": [
+        "La matriz puede estar vacía."
+      ],
+      "en": [
+        "The matrix may be empty."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa DFS para marcar celdas visitadas.",
+        "Cada nuevo `\"1\"` no visitado inicia una isla nueva."
+      ],
+      "en": [
+        "Use DFS to mark visited cells.",
+        "Each new unvisited `\"1\"` starts a new island."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String[][] grid) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            [
+              "1",
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0",
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "0",
+              "1",
+              "1"
+            ]
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          [
+            []
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
     "id": "first_non_repeating_char",
     "language": "java",
     "difficulty": "pro",
@@ -1303,6 +1400,212 @@
     ]
   },
   {
+    "id": "chunk_list",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Dividir lista en bloques",
+      "en": "Chunk list"
+    },
+    "description": {
+      "es": "Completa `solve(int[] items, int size)` para dividir el array en bloques de tamaño `size`.",
+      "en": "Complete `solve(int[] items, int size)` to split the array into chunks of size `size`."
+    },
+    "instructions": {
+      "es": "El último bloque puede tener menos elementos.",
+      "en": "The last chunk may contain fewer elements."
+    },
+    "restrictions": {
+      "es": [
+        "Si `size <= 0`, devuelve un array vacío."
+      ],
+      "en": [
+        "If `size <= 0`, return an empty array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Avanza de `size` en `size` y copia con `Arrays.copyOfRange`."
+      ],
+      "en": [
+        "Advance by `size` and copy with `Arrays.copyOfRange`."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[] items, int size) {\n        // TODO: replace this with your solution\n        return new int[][]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          2
+        ],
+        "expected": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          3
+        ],
+        "expected": [
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          0
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "matrix_spiral_order",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Recorrido espiral",
+      "en": "Spiral matrix order"
+    },
+    "description": {
+      "es": "Completa `solve(int[][] matrix)` para devolver los elementos de la matriz en orden espiral.",
+      "en": "Complete `solve(int[][] matrix)` to return matrix elements in spiral order."
+    },
+    "instructions": {
+      "es": "Empieza arriba a la izquierda y recorre derecha, abajo, izquierda, arriba.",
+      "en": "Start at top-left and move right, down, left, up."
+    },
+    "restrictions": {
+      "es": [
+        "Si la matriz está vacía, devuelve `[]`."
+      ],
+      "en": [
+        "If the matrix is empty, return `[]`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Controla cuatro límites: arriba, abajo, izquierda, derecha.",
+        "Reduce límites después de cada borde recorrido."
+      ],
+      "en": [
+        "Track four boundaries: top, bottom, left, right.",
+        "Shrink boundaries after traversing each edge."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[][] matrix) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          6,
+          9,
+          8,
+          7,
+          4,
+          5
+        ]
+      },
+      {
+        "input": [
+          [
+            [
+              1,
+              2,
+              3,
+              4
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "input": [
+          [
+            []
+          ]
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
     "id": "roman_to_int",
     "language": "java",
     "difficulty": "pro",
@@ -1600,6 +1903,825 @@
     ]
   },
   {
+    "id": "word_frequency_map",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Mapa de frecuencia de palabras",
+      "en": "Word frequency map"
+    },
+    "description": {
+      "es": "Completa `solve(String text)` para devolver un Map con la frecuencia de cada palabra en minúsculas.",
+      "en": "Complete `solve(String text)` to return a Map with frequency of each lowercase word."
+    },
+    "instructions": {
+      "es": "Las palabras están separadas por espacios simples.",
+      "en": "Words are separated by single spaces."
+    },
+    "restrictions": {
+      "es": [
+        "Si `text` es vacío, devuelve un mapa vacío."
+      ],
+      "en": [
+        "If `text` is empty, return an empty map."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa un HashMap<String, Integer>.",
+        "Convierte todo a minúsculas antes de contar."
+      ],
+      "en": [
+        "Use a HashMap<String, Integer>.",
+        "Convert everything to lowercase before counting."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static Map<String, Integer> solve(String text) {\n        // TODO: replace this with your solution\n        return new HashMap<>();\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "to be or not to be"
+        ],
+        "expected": {
+          "to": 2,
+          "be": 2,
+          "or": 1,
+          "not": 1
+        }
+      },
+      {
+        "input": [
+          "Hello hello"
+        ],
+        "expected": {
+          "hello": 2
+        }
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": {}
+      }
+    ]
+  },
+  {
+    "id": "sort_by_multiple_keys",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Ordenar por claves múltiples",
+      "en": "Sort by multiple keys"
+    },
+    "description": {
+      "es": "Completa `solve(int[][] records)` para ordenar una lista de pares `[puntuacion, indice_nombre]` donde cada registro es `[score]` y los nombres se pasan por separado. Usa `String[][] records` donde cada fila es `[nombre, puntuacion]`.",
+      "en": "Complete `solve(String[][] records)` to sort records where each entry is `[name, score]` by descending score and ascending name."
+    },
+    "instructions": {
+      "es": "Devuelve una lista nueva ordenada.",
+      "en": "Return a newly sorted list."
+    },
+    "restrictions": {
+      "es": [
+        "No modifiques la entrada original."
+      ],
+      "en": [
+        "Do not mutate the original input."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `Arrays.sort` con un Comparator.",
+        "Ordena por score descendente y nombre ascendente."
+      ],
+      "en": [
+        "Use `Arrays.sort` with a Comparator.",
+        "Sort by descending score and ascending name."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static String[][] solve(String[][] records) {\n        // TODO: replace this with your solution\n        return new String[][]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            [
+              "ana",
+              "90"
+            ],
+            [
+              "zoe",
+              "90"
+            ],
+            [
+              "bob",
+              "95"
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "bob",
+            "95"
+          ],
+          [
+            "ana",
+            "90"
+          ],
+          [
+            "zoe",
+            "90"
+          ]
+        ]
+      },
+      {
+        "input": [
+          [
+            [
+              "x",
+              "1"
+            ],
+            [
+              "a",
+              "2"
+            ],
+            [
+              "b",
+              "2"
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            "2"
+          ],
+          [
+            "b",
+            "2"
+          ],
+          [
+            "x",
+            "1"
+          ]
+        ]
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "minimum_path_sum_grid",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Ruta mínima en grilla",
+      "en": "Minimum path sum"
+    },
+    "description": {
+      "es": "Completa `solve(int[][] grid)` para devolver la suma mínima desde la esquina superior izquierda hasta la inferior derecha moviéndote solo derecha o abajo.",
+      "en": "Complete `solve(int[][] grid)` to return the minimum sum from top-left to bottom-right moving only right or down."
+    },
+    "instructions": {
+      "es": "Cada celda contiene un entero no negativo.",
+      "en": "Each cell contains a non-negative integer."
+    },
+    "restrictions": {
+      "es": [
+        "Si la grilla está vacía, devuelve 0."
+      ],
+      "en": [
+        "If the grid is empty, return 0."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Programación dinámica funciona muy bien aquí.",
+        "`dp[i][j]` depende de arriba e izquierda."
+      ],
+      "en": [
+        "Dynamic programming works very well here.",
+        "`dp[i][j]` depends on top and left cells."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[][] grid) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            [
+              1,
+              3,
+              1
+            ],
+            [
+              1,
+              5,
+              1
+            ],
+            [
+              4,
+              2,
+              1
+            ]
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ]
+          ]
+        ],
+        "expected": 12
+      },
+      {
+        "input": [
+          [
+            []
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "coin_change_min_coins",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Cambio de monedas mínimo",
+      "en": "Coin change minimum"
+    },
+    "description": {
+      "es": "Completa `solve(int[] coins, int amount)` para devolver el mínimo número de monedas necesarias para formar `amount`.",
+      "en": "Complete `solve(int[] coins, int amount)` to return the minimum number of coins needed to make `amount`."
+    },
+    "instructions": {
+      "es": "Si no se puede formar el monto, devuelve `-1`.",
+      "en": "If the amount cannot be formed, return `-1`."
+    },
+    "restrictions": {
+      "es": [
+        "Puedes reutilizar una moneda tantas veces como quieras."
+      ],
+      "en": [
+        "You may reuse each coin unlimited times."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa DP: `dp[x]` como mínimo para formar `x`.",
+        "Inicializa con un valor grande salvo `dp[0] = 0`."
+      ],
+      "en": [
+        "Use DP: `dp[x]` as minimum coins for `x`.",
+        "Initialize with a large value except `dp[0] = 0`."
+      ]
+    },
+    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int solve(int[] coins, int amount) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            5
+          ],
+          11
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            2
+          ],
+          3
+        ],
+        "expected": -1
+      },
+      {
+        "input": [
+          [
+            1
+          ],
+          0
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "longest_increasing_subsequence_length",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Longitud LIS",
+      "en": "LIS length"
+    },
+    "description": {
+      "es": "Completa `solve(int[] numbers)` para devolver la longitud de la subsecuencia estrictamente creciente más larga.",
+      "en": "Complete `solve(int[] numbers)` to return the length of the longest strictly increasing subsequence."
+    },
+    "instructions": {
+      "es": "Una subsecuencia no tiene que ser contigua.",
+      "en": "A subsequence does not need to be contiguous."
+    },
+    "restrictions": {
+      "es": [
+        "Si el array está vacío, devuelve 0."
+      ],
+      "en": [
+        "If the array is empty, return 0."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Puedes usar DP O(n^2)."
+      ],
+      "en": [
+        "You can use O(n^2) DP."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            10,
+            9,
+            2,
+            5,
+            3,
+            7,
+            101,
+            18
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          [
+            0,
+            1,
+            0,
+            3,
+            2,
+            3
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          [
+            7,
+            7,
+            7,
+            7
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "merge_intervals",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Fusionar intervalos",
+      "en": "Merge intervals"
+    },
+    "description": {
+      "es": "Completa `solve(int[][] intervals)` para fusionar intervalos solapados.",
+      "en": "Complete `solve(int[][] intervals)` to merge overlapping intervals."
+    },
+    "instructions": {
+      "es": "Cada intervalo es `[inicio, fin]` con `inicio <= fin`.",
+      "en": "Each interval is `[start, end]` with `start <= end`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve los intervalos fusionados ordenados por inicio."
+      ],
+      "en": [
+        "Return merged intervals sorted by start."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Primero ordena por inicio.",
+        "Compara el actual con el último intervalo fusionado."
+      ],
+      "en": [
+        "Sort by start first.",
+        "Compare current interval with the last merged one."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[][] intervals) {\n        // TODO: replace this with your solution\n        return new int[][]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              15,
+              18
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            6
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            15,
+            18
+          ]
+        ]
+      },
+      {
+        "input": [
+          [
+            [
+              1,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      {
+        "input": [
+          [
+            []
+          ]
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "kth_largest_element",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "K-ésimo más grande",
+      "en": "Kth largest element"
+    },
+    "description": {
+      "es": "Completa `solve(int[] numbers, int k)` para devolver el k-ésimo elemento más grande (1-indexado).",
+      "en": "Complete `solve(int[] numbers, int k)` to return the kth largest element (1-indexed)."
+    },
+    "instructions": {
+      "es": "`k` siempre será válido.",
+      "en": "`k` will always be valid."
+    },
+    "restrictions": {
+      "es": [
+        "No elimines duplicados."
+      ],
+      "en": [
+        "Do not remove duplicates."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Puedes ordenar descendente con `Arrays.sort` y negación.",
+        "Con orden descendente, responde `numbers[k-1]`."
+      ],
+      "en": [
+        "You can sort descending with `Arrays.sort` and negation.",
+        "With descending order, answer `numbers[k-1]`."
+      ]
+    },
+    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int solve(int[] numbers, int k) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            3,
+            2,
+            1,
+            5,
+            6,
+            4
+          ],
+          2
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          [
+            3,
+            2,
+            3,
+            1,
+            2,
+            4,
+            5,
+            5,
+            6
+          ],
+          4
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          [
+            1
+          ],
+          1
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "search_insert_position",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Posición de inserción",
+      "en": "Search insert position"
+    },
+    "description": {
+      "es": "Completa `solve(int[] numbers, int target)` para devolver el índice donde está `target` o donde debería insertarse en orden.",
+      "en": "Complete `solve(int[] numbers, int target)` to return the index where `target` exists or should be inserted in order."
+    },
+    "instructions": {
+      "es": "El array viene ordenado ascendentemente.",
+      "en": "The array is sorted ascending."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "La búsqueda binaria encaja bien en este problema."
+      ],
+      "en": [
+        "Binary search fits this problem well."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers, int target) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            3,
+            5,
+            6
+          ],
+          5
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            1,
+            3,
+            5,
+            6
+          ],
+          2
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          [
+            1,
+            3,
+            5,
+            6
+          ],
+          7
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "majority_element",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Elemento mayoritario",
+      "en": "Majority element"
+    },
+    "description": {
+      "es": "Completa `solve(int[] numbers)` para devolver el elemento que aparece más de `n/2` veces.",
+      "en": "Complete `solve(int[] numbers)` to return the element that appears more than `n/2` times."
+    },
+    "instructions": {
+      "es": "Siempre existirá un elemento mayoritario.",
+      "en": "A majority element always exists."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un único valor."
+      ],
+      "en": [
+        "Return a single value."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Puedes usar el algoritmo de Boyer-Moore.",
+        "También puedes contar frecuencias con un HashMap."
+      ],
+      "en": [
+        "You can use the Boyer-Moore algorithm.",
+        "You can also count frequencies with a HashMap."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            3,
+            2,
+            3
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            2,
+            2,
+            1,
+            1,
+            1,
+            2,
+            2
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            1
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
     "id": "valid_anagram_exact",
     "language": "java",
     "difficulty": "pro",
@@ -1870,6 +2992,83 @@
         ],
         "expected": [
           5
+        ]
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "running_average",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Media acumulada",
+      "en": "Running average"
+    },
+    "description": {
+      "es": "Completa `solve(int[] numbers)` para devolver un array con la media acumulada en cada posición.",
+      "en": "Complete `solve(int[] numbers)` to return an array with running averages at each index."
+    },
+    "instructions": {
+      "es": "La posición i debe contener promedio de `numbers[0:i+1]`.",
+      "en": "Index i should contain average of `numbers[0:i+1]`."
+    },
+    "restrictions": {
+      "es": [
+        "Si el array está vacío, devuelve `[]`."
+      ],
+      "en": [
+        "If array is empty, return `[]`."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Acumula suma y divide por cantidad actual."
+      ],
+      "en": [
+        "Accumulate sum and divide by current count."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static double[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new double[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": [
+          2.0,
+          3.0,
+          4.0
+        ]
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          5.0
         ]
       },
       {
@@ -2385,1144 +3584,6 @@
     ]
   },
   {
-    "id": "kth_largest_element",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "K-ésimo más grande",
-      "en": "Kth largest element"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers, int k)` para devolver el k-ésimo elemento más grande (1-indexado).",
-      "en": "Complete `solve(int[] numbers, int k)` to return the kth largest element (1-indexed)."
-    },
-    "instructions": {
-      "es": "`k` siempre será válido.",
-      "en": "`k` will always be valid."
-    },
-    "restrictions": {
-      "es": [
-        "No elimines duplicados."
-      ],
-      "en": [
-        "Do not remove duplicates."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Puedes ordenar descendente con `Arrays.sort` y negación.",
-        "Con orden descendente, responde `numbers[k-1]`."
-      ],
-      "en": [
-        "You can sort descending with `Arrays.sort` and negation.",
-        "With descending order, answer `numbers[k-1]`."
-      ]
-    },
-    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int solve(int[] numbers, int k) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            3,
-            2,
-            1,
-            5,
-            6,
-            4
-          ],
-          2
-        ],
-        "expected": 5
-      },
-      {
-        "input": [
-          [
-            3,
-            2,
-            3,
-            1,
-            2,
-            4,
-            5,
-            5,
-            6
-          ],
-          4
-        ],
-        "expected": 4
-      },
-      {
-        "input": [
-          [
-            1
-          ],
-          1
-        ],
-        "expected": 1
-      }
-    ]
-  },
-  {
-    "id": "search_insert_position",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Posición de inserción",
-      "en": "Search insert position"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers, int target)` para devolver el índice donde está `target` o donde debería insertarse en orden.",
-      "en": "Complete `solve(int[] numbers, int target)` to return the index where `target` exists or should be inserted in order."
-    },
-    "instructions": {
-      "es": "El array viene ordenado ascendentemente.",
-      "en": "The array is sorted ascending."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un entero."
-      ],
-      "en": [
-        "Return an integer."
-      ]
-    },
-    "hints": {
-      "es": [
-        "La búsqueda binaria encaja bien en este problema."
-      ],
-      "en": [
-        "Binary search fits this problem well."
-      ]
-    },
-    "starterCode": "class Solution {\n    public static int solve(int[] numbers, int target) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
-            3,
-            5,
-            6
-          ],
-          5
-        ],
-        "expected": 2
-      },
-      {
-        "input": [
-          [
-            1,
-            3,
-            5,
-            6
-          ],
-          2
-        ],
-        "expected": 1
-      },
-      {
-        "input": [
-          [
-            1,
-            3,
-            5,
-            6
-          ],
-          7
-        ],
-        "expected": 4
-      }
-    ]
-  },
-  {
-    "id": "majority_element",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Elemento mayoritario",
-      "en": "Majority element"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers)` para devolver el elemento que aparece más de `n/2` veces.",
-      "en": "Complete `solve(int[] numbers)` to return the element that appears more than `n/2` times."
-    },
-    "instructions": {
-      "es": "Siempre existirá un elemento mayoritario.",
-      "en": "A majority element always exists."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un único valor."
-      ],
-      "en": [
-        "Return a single value."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Puedes usar el algoritmo de Boyer-Moore.",
-        "También puedes contar frecuencias con un HashMap."
-      ],
-      "en": [
-        "You can use the Boyer-Moore algorithm.",
-        "You can also count frequencies with a HashMap."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            3,
-            2,
-            3
-          ]
-        ],
-        "expected": 3
-      },
-      {
-        "input": [
-          [
-            2,
-            2,
-            1,
-            1,
-            1,
-            2,
-            2
-          ]
-        ],
-        "expected": 2
-      },
-      {
-        "input": [
-          [
-            1
-          ]
-        ],
-        "expected": 1
-      }
-    ]
-  },
-  {
-    "id": "max_consecutive_ones",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Máximo de unos consecutivos",
-      "en": "Max consecutive ones"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers)` para devolver la longitud máxima de una racha consecutiva de `1`.",
-      "en": "Complete `solve(int[] numbers)` to return max length of consecutive `1` streak."
-    },
-    "instructions": {
-      "es": "La lista contiene solo 0 y 1.",
-      "en": "List contains only 0 and 1."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un entero."
-      ],
-      "en": [
-        "Return an integer."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Cuenta la racha actual y el máximo global.",
-        "Reinicia contador al encontrar 0."
-      ],
-      "en": [
-        "Track current streak and global max.",
-        "Reset counter when seeing 0."
-      ]
-    },
-    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
-            1,
-            0,
-            1,
-            1,
-            1
-          ]
-        ],
-        "expected": 3
-      },
-      {
-        "input": [
-          [
-            1,
-            0,
-            1,
-            1,
-            0,
-            1
-          ]
-        ],
-        "expected": 2
-      },
-      {
-        "input": [
-          [
-            0,
-            0,
-            0
-          ]
-        ],
-        "expected": 0
-      }
-    ]
-  },
-  {
-    "id": "first_unique_number",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Primer número único",
-      "en": "First unique number"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers)` para devolver el primer número que aparece una sola vez.",
-      "en": "Complete `solve(int[] numbers)` to return the first number that appears once."
-    },
-    "instructions": {
-      "es": "Si no existe, devuelve `-1`.",
-      "en": "If none exists, return `-1`."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un entero o -1."
-      ],
-      "en": [
-        "Return an integer or -1."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Cuenta frecuencias primero con un LinkedHashMap.",
-        "Luego recorre en orden original."
-      ],
-      "en": [
-        "Count frequencies first with a LinkedHashMap.",
-        "Then iterate in original order."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            2,
-            3,
-            4,
-            2,
-            3
-          ]
-        ],
-        "expected": 4
-      },
-      {
-        "input": [
-          [
-            1,
-            1,
-            2,
-            2
-          ]
-        ],
-        "expected": -1
-      },
-      {
-        "input": [
-          [
-            7
-          ]
-        ],
-        "expected": 7
-      }
-    ]
-  },
-  {
-    "id": "remove_duplicates_sorted",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Quitar duplicados ordenados",
-      "en": "Remove duplicates sorted"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers)` para devolver un nuevo array ordenado sin duplicados.",
-      "en": "Complete `solve(int[] numbers)` to return a new sorted array without duplicates."
-    },
-    "instructions": {
-      "es": "La entrada ya viene ordenada.",
-      "en": "Input is already sorted."
-    },
-    "restrictions": {
-      "es": [
-        "Conserva el orden de aparición."
-      ],
-      "en": [
-        "Preserve order of appearance."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Compara cada elemento con el último agregado."
-      ],
-      "en": [
-        "Compare each item with last appended."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
-            1,
-            2
-          ]
-        ],
-        "expected": [
-          1,
-          2
-        ]
-      },
-      {
-        "input": [
-          [
-            0,
-            0,
-            0,
-            0
-          ]
-        ],
-        "expected": [
-          0
-        ]
-      },
-      {
-        "input": [
-          [
-            1,
-            2,
-            3
-          ]
-        ],
-        "expected": [
-          1,
-          2,
-          3
-        ]
-      }
-    ]
-  },
-  {
-    "id": "rotate_string_right",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Rotar texto a la derecha",
-      "en": "Rotate string right"
-    },
-    "description": {
-      "es": "Completa `solve(String text, int k)` para rotar el texto `k` posiciones a la derecha.",
-      "en": "Complete `solve(String text, int k)` to rotate text `k` positions to the right."
-    },
-    "instructions": {
-      "es": "Si el texto está vacío, devuelve `\"\"`.",
-      "en": "If text is empty, return `\"`."
-    },
-    "restrictions": {
-      "es": [
-        "Usa `k % len(text)` para normalizar."
-      ],
-      "en": [
-        "Use `k % text.length()` to normalize."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Separa el sufijo final y ponlo delante.",
-        "Usa `substring`."
-      ],
-      "en": [
-        "Take the trailing suffix and put it in front.",
-        "Use `substring`."
-      ]
-    },
-    "starterCode": "class Solution {\n    public static String solve(String text, int k) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          "abcdef",
-          2
-        ],
-        "expected": "efabcd"
-      },
-      {
-        "input": [
-          "a",
-          10
-        ],
-        "expected": "a"
-      },
-      {
-        "input": [
-          "",
-          3
-        ],
-        "expected": ""
-      }
-    ]
-  },
-  {
-    "id": "valid_mountain_array",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Arreglo montaña válido",
-      "en": "Valid mountain array"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers)` para devolver `true` si el array sube estrictamente y luego baja estrictamente.",
-      "en": "Complete `solve(int[] numbers)` to return `true` if the array strictly increases and then strictly decreases."
-    },
-    "instructions": {
-      "es": "Debe haber al menos una subida y una bajada. Longitud mínima válida: 3.",
-      "en": "There must be at least one ascent and one descent. Minimum valid length: 3."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un booleano."
-      ],
-      "en": [
-        "Return a boolean."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Encuentra el pico y valida ambos lados.",
-        "No se permiten mesetas."
-      ],
-      "en": [
-        "Find the peak and validate both sides.",
-        "Plateaus are not allowed."
-      ]
-    },
-    "starterCode": "class Solution {\n    public static boolean solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            0,
-            3,
-            2,
-            1
-          ]
-        ],
-        "expected": true
-      },
-      {
-        "input": [
-          [
-            3,
-            5,
-            5
-          ]
-        ],
-        "expected": false
-      },
-      {
-        "input": [
-          [
-            0,
-            1,
-            2,
-            3,
-            2,
-            1
-          ]
-        ],
-        "expected": true
-      }
-    ]
-  },
-  {
-    "id": "merge_intervals",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Fusionar intervalos",
-      "en": "Merge intervals"
-    },
-    "description": {
-      "es": "Completa `solve(int[][] intervals)` para fusionar intervalos solapados.",
-      "en": "Complete `solve(int[][] intervals)` to merge overlapping intervals."
-    },
-    "instructions": {
-      "es": "Cada intervalo es `[inicio, fin]` con `inicio <= fin`.",
-      "en": "Each interval is `[start, end]` with `start <= end`."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve los intervalos fusionados ordenados por inicio."
-      ],
-      "en": [
-        "Return merged intervals sorted by start."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Primero ordena por inicio.",
-        "Compara el actual con el último intervalo fusionado."
-      ],
-      "en": [
-        "Sort by start first.",
-        "Compare current interval with the last merged one."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[][] intervals) {\n        // TODO: replace this with your solution\n        return new int[][]{};\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            [
-              1,
-              3
-            ],
-            [
-              2,
-              6
-            ],
-            [
-              8,
-              10
-            ],
-            [
-              15,
-              18
-            ]
-          ]
-        ],
-        "expected": [
-          [
-            1,
-            6
-          ],
-          [
-            8,
-            10
-          ],
-          [
-            15,
-            18
-          ]
-        ]
-      },
-      {
-        "input": [
-          [
-            [
-              1,
-              4
-            ],
-            [
-              4,
-              5
-            ]
-          ]
-        ],
-        "expected": [
-          [
-            1,
-            5
-          ]
-        ]
-      },
-      {
-        "input": [
-          [
-            []
-          ]
-        ],
-        "expected": []
-      }
-    ]
-  },
-  {
-    "id": "longest_increasing_subsequence_length",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Longitud LIS",
-      "en": "LIS length"
-    },
-    "description": {
-      "es": "Completa `solve(int[] numbers)` para devolver la longitud de la subsecuencia estrictamente creciente más larga.",
-      "en": "Complete `solve(int[] numbers)` to return the length of the longest strictly increasing subsequence."
-    },
-    "instructions": {
-      "es": "Una subsecuencia no tiene que ser contigua.",
-      "en": "A subsequence does not need to be contiguous."
-    },
-    "restrictions": {
-      "es": [
-        "Si el array está vacío, devuelve 0."
-      ],
-      "en": [
-        "If the array is empty, return 0."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Puedes usar DP O(n^2)."
-      ],
-      "en": [
-        "You can use O(n^2) DP."
-      ]
-    },
-    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            10,
-            9,
-            2,
-            5,
-            3,
-            7,
-            101,
-            18
-          ]
-        ],
-        "expected": 4
-      },
-      {
-        "input": [
-          [
-            0,
-            1,
-            0,
-            3,
-            2,
-            3
-          ]
-        ],
-        "expected": 4
-      },
-      {
-        "input": [
-          [
-            7,
-            7,
-            7,
-            7
-          ]
-        ],
-        "expected": 1
-      }
-    ]
-  },
-  {
-    "id": "coin_change_min_coins",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Cambio de monedas mínimo",
-      "en": "Coin change minimum"
-    },
-    "description": {
-      "es": "Completa `solve(int[] coins, int amount)` para devolver el mínimo número de monedas necesarias para formar `amount`.",
-      "en": "Complete `solve(int[] coins, int amount)` to return the minimum number of coins needed to make `amount`."
-    },
-    "instructions": {
-      "es": "Si no se puede formar el monto, devuelve `-1`.",
-      "en": "If the amount cannot be formed, return `-1`."
-    },
-    "restrictions": {
-      "es": [
-        "Puedes reutilizar una moneda tantas veces como quieras."
-      ],
-      "en": [
-        "You may reuse each coin unlimited times."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Usa DP: `dp[x]` como mínimo para formar `x`.",
-        "Inicializa con un valor grande salvo `dp[0] = 0`."
-      ],
-      "en": [
-        "Use DP: `dp[x]` as minimum coins for `x`.",
-        "Initialize with a large value except `dp[0] = 0`."
-      ]
-    },
-    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int solve(int[] coins, int amount) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
-            2,
-            5
-          ],
-          11
-        ],
-        "expected": 3
-      },
-      {
-        "input": [
-          [
-            2
-          ],
-          3
-        ],
-        "expected": -1
-      },
-      {
-        "input": [
-          [
-            1
-          ],
-          0
-        ],
-        "expected": 0
-      }
-    ]
-  },
-  {
-    "id": "minimum_path_sum_grid",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Ruta mínima en grilla",
-      "en": "Minimum path sum"
-    },
-    "description": {
-      "es": "Completa `solve(int[][] grid)` para devolver la suma mínima desde la esquina superior izquierda hasta la inferior derecha moviéndote solo derecha o abajo.",
-      "en": "Complete `solve(int[][] grid)` to return the minimum sum from top-left to bottom-right moving only right or down."
-    },
-    "instructions": {
-      "es": "Cada celda contiene un entero no negativo.",
-      "en": "Each cell contains a non-negative integer."
-    },
-    "restrictions": {
-      "es": [
-        "Si la grilla está vacía, devuelve 0."
-      ],
-      "en": [
-        "If the grid is empty, return 0."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Programación dinámica funciona muy bien aquí.",
-        "`dp[i][j]` depende de arriba e izquierda."
-      ],
-      "en": [
-        "Dynamic programming works very well here.",
-        "`dp[i][j]` depends on top and left cells."
-      ]
-    },
-    "starterCode": "class Solution {\n    public static int solve(int[][] grid) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            [
-              1,
-              3,
-              1
-            ],
-            [
-              1,
-              5,
-              1
-            ],
-            [
-              4,
-              2,
-              1
-            ]
-          ]
-        ],
-        "expected": 7
-      },
-      {
-        "input": [
-          [
-            [
-              1,
-              2,
-              3
-            ],
-            [
-              4,
-              5,
-              6
-            ]
-          ]
-        ],
-        "expected": 12
-      },
-      {
-        "input": [
-          [
-            []
-          ]
-        ],
-        "expected": 0
-      }
-    ]
-  },
-  {
-    "id": "matrix_spiral_order",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Recorrido espiral",
-      "en": "Spiral matrix order"
-    },
-    "description": {
-      "es": "Completa `solve(int[][] matrix)` para devolver los elementos de la matriz en orden espiral.",
-      "en": "Complete `solve(int[][] matrix)` to return matrix elements in spiral order."
-    },
-    "instructions": {
-      "es": "Empieza arriba a la izquierda y recorre derecha, abajo, izquierda, arriba.",
-      "en": "Start at top-left and move right, down, left, up."
-    },
-    "restrictions": {
-      "es": [
-        "Si la matriz está vacía, devuelve `[]`."
-      ],
-      "en": [
-        "If the matrix is empty, return `[]`."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Controla cuatro límites: arriba, abajo, izquierda, derecha.",
-        "Reduce límites después de cada borde recorrido."
-      ],
-      "en": [
-        "Track four boundaries: top, bottom, left, right.",
-        "Shrink boundaries after traversing each edge."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[][] matrix) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            [
-              1,
-              2,
-              3
-            ],
-            [
-              4,
-              5,
-              6
-            ],
-            [
-              7,
-              8,
-              9
-            ]
-          ]
-        ],
-        "expected": [
-          1,
-          2,
-          3,
-          6,
-          9,
-          8,
-          7,
-          4,
-          5
-        ]
-      },
-      {
-        "input": [
-          [
-            [
-              1,
-              2,
-              3,
-              4
-            ]
-          ]
-        ],
-        "expected": [
-          1,
-          2,
-          3,
-          4
-        ]
-      },
-      {
-        "input": [
-          [
-            []
-          ]
-        ],
-        "expected": []
-      }
-    ]
-  },
-  {
     "id": "intersection_unique",
     "language": "java",
     "difficulty": "pro",
@@ -3720,41 +3781,41 @@
     ]
   },
   {
-    "id": "count_islands",
+    "id": "valid_mountain_array",
     "language": "java",
     "difficulty": "pro",
     "functionName": "solve",
     "title": {
-      "es": "Contar islas",
-      "en": "Count islands"
+      "es": "Arreglo montaña válido",
+      "en": "Valid mountain array"
     },
     "description": {
-      "es": "Completa `solve(String[][] grid)` para contar cuántas islas hay en una matriz de `\"0\"` y `\"1\"`.",
-      "en": "Complete `solve(String[][] grid)` to count islands in a matrix of `\"0\"` and `\"1\"`."
+      "es": "Completa `solve(int[] numbers)` para devolver `true` si el array sube estrictamente y luego baja estrictamente.",
+      "en": "Complete `solve(int[] numbers)` to return `true` if the array strictly increases and then strictly decreases."
     },
     "instructions": {
-      "es": "Una isla conecta celdas de `\"1\"` vertical u horizontalmente (no diagonal).",
-      "en": "An island connects `\"1\"` cells vertically or horizontally (not diagonally)."
+      "es": "Debe haber al menos una subida y una bajada. Longitud mínima válida: 3.",
+      "en": "There must be at least one ascent and one descent. Minimum valid length: 3."
     },
     "restrictions": {
       "es": [
-        "La matriz puede estar vacía."
+        "Devuelve un booleano."
       ],
       "en": [
-        "The matrix may be empty."
+        "Return a boolean."
       ]
     },
     "hints": {
       "es": [
-        "Usa DFS para marcar celdas visitadas.",
-        "Cada nuevo `\"1\"` no visitado inicia una isla nueva."
+        "Encuentra el pico y valida ambos lados.",
+        "No se permiten mesetas."
       ],
       "en": [
-        "Use DFS to mark visited cells.",
-        "Each new unvisited `\"1\"` starts a new island."
+        "Find the peak and validate both sides.",
+        "Plateaus are not allowed."
       ]
     },
-    "starterCode": "class Solution {\n    public static int solve(String[][] grid) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "starterCode": "class Solution {\n    public static boolean solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
     "solutionShape": {
       "requiredTokens": [
         "class Solution",
@@ -3769,24 +3830,265 @@
       {
         "input": [
           [
-            [
-              "1",
-              "1",
-              "0",
-              "0"
-            ],
-            [
-              "1",
-              "0",
-              "0",
-              "1"
-            ],
-            [
-              "0",
-              "0",
-              "1",
-              "1"
-            ]
+            0,
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            3,
+            5,
+            5
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "rotate_string_right",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Rotar texto a la derecha",
+      "en": "Rotate string right"
+    },
+    "description": {
+      "es": "Completa `solve(String text, int k)` para rotar el texto `k` posiciones a la derecha.",
+      "en": "Complete `solve(String text, int k)` to rotate text `k` positions to the right."
+    },
+    "instructions": {
+      "es": "Si el texto está vacío, devuelve `\"\"`.",
+      "en": "If text is empty, return `\"`."
+    },
+    "restrictions": {
+      "es": [
+        "Usa `k % len(text)` para normalizar."
+      ],
+      "en": [
+        "Use `k % text.length()` to normalize."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Separa el sufijo final y ponlo delante.",
+        "Usa `substring`."
+      ],
+      "en": [
+        "Take the trailing suffix and put it in front.",
+        "Use `substring`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text, int k) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "abcdef",
+          2
+        ],
+        "expected": "efabcd"
+      },
+      {
+        "input": [
+          "a",
+          10
+        ],
+        "expected": "a"
+      },
+      {
+        "input": [
+          "",
+          3
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "remove_duplicates_sorted",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Quitar duplicados ordenados",
+      "en": "Remove duplicates sorted"
+    },
+    "description": {
+      "es": "Completa `solve(int[] numbers)` para devolver un nuevo array ordenado sin duplicados.",
+      "en": "Complete `solve(int[] numbers)` to return a new sorted array without duplicates."
+    },
+    "instructions": {
+      "es": "La entrada ya viene ordenada.",
+      "en": "Input is already sorted."
+    },
+    "restrictions": {
+      "es": [
+        "Conserva el orden de aparición."
+      ],
+      "en": [
+        "Preserve order of appearance."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Compara cada elemento con el último agregado."
+      ],
+      "en": [
+        "Compare each item with last appended."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          1,
+          2
+        ]
+      },
+      {
+        "input": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "max_consecutive_ones",
+    "language": "java",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Máximo de unos consecutivos",
+      "en": "Max consecutive ones"
+    },
+    "description": {
+      "es": "Completa `solve(int[] numbers)` para devolver la longitud máxima de una racha consecutiva de `1`.",
+      "en": "Complete `solve(int[] numbers)` to return max length of consecutive `1` streak."
+    },
+    "instructions": {
+      "es": "La lista contiene solo 0 y 1.",
+      "en": "List contains only 0 and 1."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Cuenta la racha actual y el máximo global.",
+        "Reinicia contador al encontrar 0."
+      ],
+      "en": [
+        "Track current streak and global max.",
+        "Reset counter when seeing 0."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            1,
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            1,
+            0,
+            1,
+            1,
+            0,
+            1
           ]
         ],
         "expected": 2
@@ -3794,22 +4096,9 @@
       {
         "input": [
           [
-            [
-              "1",
-              "1"
-            ],
-            [
-              "1",
-              "1"
-            ]
-          ]
-        ],
-        "expected": 1
-      },
-      {
-        "input": [
-          [
-            []
+            0,
+            0,
+            0
           ]
         ],
         "expected": 0
@@ -3817,39 +4106,41 @@
     ]
   },
   {
-    "id": "running_average",
+    "id": "first_unique_number",
     "language": "java",
     "difficulty": "pro",
     "functionName": "solve",
     "title": {
-      "es": "Media acumulada",
-      "en": "Running average"
+      "es": "Primer número único",
+      "en": "First unique number"
     },
     "description": {
-      "es": "Completa `solve(int[] numbers)` para devolver un array con la media acumulada en cada posición.",
-      "en": "Complete `solve(int[] numbers)` to return an array with running averages at each index."
+      "es": "Completa `solve(int[] numbers)` para devolver el primer número que aparece una sola vez.",
+      "en": "Complete `solve(int[] numbers)` to return the first number that appears once."
     },
     "instructions": {
-      "es": "La posición i debe contener promedio de `numbers[0:i+1]`.",
-      "en": "Index i should contain average of `numbers[0:i+1]`."
+      "es": "Si no existe, devuelve `-1`.",
+      "en": "If none exists, return `-1`."
     },
     "restrictions": {
       "es": [
-        "Si el array está vacío, devuelve `[]`."
+        "Devuelve un entero o -1."
       ],
       "en": [
-        "If array is empty, return `[]`."
+        "Return an integer or -1."
       ]
     },
     "hints": {
       "es": [
-        "Acumula suma y divide por cantidad actual."
+        "Cuenta frecuencias primero con un LinkedHashMap.",
+        "Luego recorre en orden original."
       ],
       "en": [
-        "Accumulate sum and divide by current count."
+        "Count frequencies first with a LinkedHashMap.",
+        "Then iterate in original order."
       ]
     },
-    "starterCode": "class Solution {\n    public static double[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new double[]{};\n    }\n}",
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
     "solutionShape": {
       "requiredTokens": [
         "class Solution",
@@ -3864,324 +4155,33 @@
       {
         "input": [
           [
-            2,
-            4,
-            6
-          ]
-        ],
-        "expected": [
-          2.0,
-          3.0,
-          4.0
-        ]
-      },
-      {
-        "input": [
-          [
-            5
-          ]
-        ],
-        "expected": [
-          5.0
-        ]
-      },
-      {
-        "input": [
-          []
-        ],
-        "expected": []
-      }
-    ]
-  },
-  {
-    "id": "word_frequency_map",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Mapa de frecuencia de palabras",
-      "en": "Word frequency map"
-    },
-    "description": {
-      "es": "Completa `solve(String text)` para devolver un Map con la frecuencia de cada palabra en minúsculas.",
-      "en": "Complete `solve(String text)` to return a Map with frequency of each lowercase word."
-    },
-    "instructions": {
-      "es": "Las palabras están separadas por espacios simples.",
-      "en": "Words are separated by single spaces."
-    },
-    "restrictions": {
-      "es": [
-        "Si `text` es vacío, devuelve un mapa vacío."
-      ],
-      "en": [
-        "If `text` is empty, return an empty map."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Usa un HashMap<String, Integer>.",
-        "Convierte todo a minúsculas antes de contar."
-      ],
-      "en": [
-        "Use a HashMap<String, Integer>.",
-        "Convert everything to lowercase before counting."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static Map<String, Integer> solve(String text) {\n        // TODO: replace this with your solution\n        return new HashMap<>();\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          "to be or not to be"
-        ],
-        "expected": {
-          "to": 2,
-          "be": 2,
-          "or": 1,
-          "not": 1
-        }
-      },
-      {
-        "input": [
-          "Hello hello"
-        ],
-        "expected": {
-          "hello": 2
-        }
-      },
-      {
-        "input": [
-          ""
-        ],
-        "expected": {}
-      }
-    ]
-  },
-  {
-    "id": "sort_by_multiple_keys",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Ordenar por claves múltiples",
-      "en": "Sort by multiple keys"
-    },
-    "description": {
-      "es": "Completa `solve(int[][] records)` para ordenar una lista de pares `[puntuacion, indice_nombre]` donde cada registro es `[score]` y los nombres se pasan por separado. Usa `String[][] records` donde cada fila es `[nombre, puntuacion]`.",
-      "en": "Complete `solve(String[][] records)` to sort records where each entry is `[name, score]` by descending score and ascending name."
-    },
-    "instructions": {
-      "es": "Devuelve una lista nueva ordenada.",
-      "en": "Return a newly sorted list."
-    },
-    "restrictions": {
-      "es": [
-        "No modifiques la entrada original."
-      ],
-      "en": [
-        "Do not mutate the original input."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Usa `Arrays.sort` con un Comparator.",
-        "Ordena por score descendente y nombre ascendente."
-      ],
-      "en": [
-        "Use `Arrays.sort` with a Comparator.",
-        "Sort by descending score and ascending name."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static String[][] solve(String[][] records) {\n        // TODO: replace this with your solution\n        return new String[][]{};\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            [
-              "ana",
-              "90"
-            ],
-            [
-              "zoe",
-              "90"
-            ],
-            [
-              "bob",
-              "95"
-            ]
-          ]
-        ],
-        "expected": [
-          [
-            "bob",
-            "95"
-          ],
-          [
-            "ana",
-            "90"
-          ],
-          [
-            "zoe",
-            "90"
-          ]
-        ]
-      },
-      {
-        "input": [
-          [
-            [
-              "x",
-              "1"
-            ],
-            [
-              "a",
-              "2"
-            ],
-            [
-              "b",
-              "2"
-            ]
-          ]
-        ],
-        "expected": [
-          [
-            "a",
-            "2"
-          ],
-          [
-            "b",
-            "2"
-          ],
-          [
-            "x",
-            "1"
-          ]
-        ]
-      },
-      {
-        "input": [
-          []
-        ],
-        "expected": []
-      }
-    ]
-  },
-  {
-    "id": "chunk_list",
-    "language": "java",
-    "difficulty": "pro",
-    "functionName": "solve",
-    "title": {
-      "es": "Dividir lista en bloques",
-      "en": "Chunk list"
-    },
-    "description": {
-      "es": "Completa `solve(int[] items, int size)` para dividir el array en bloques de tamaño `size`.",
-      "en": "Complete `solve(int[] items, int size)` to split the array into chunks of size `size`."
-    },
-    "instructions": {
-      "es": "El último bloque puede tener menos elementos.",
-      "en": "The last chunk may contain fewer elements."
-    },
-    "restrictions": {
-      "es": [
-        "Si `size <= 0`, devuelve un array vacío."
-      ],
-      "en": [
-        "If `size <= 0`, return an empty array."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Avanza de `size` en `size` y copia con `Arrays.copyOfRange`."
-      ],
-      "en": [
-        "Advance by `size` and copy with `Arrays.copyOfRange`."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[] items, int size) {\n        // TODO: replace this with your solution\n        return new int[][]{};\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
             2,
             3,
             4,
-            5
-          ],
-          2
-        ],
-        "expected": [
-          [
-            1,
-            2
-          ],
-          [
-            3,
-            4
-          ],
-          [
-            5
+            2,
+            3
           ]
-        ]
+        ],
+        "expected": 4
       },
       {
         "input": [
           [
             1,
-            2,
-            3
-          ],
-          3
-        ],
-        "expected": [
-          [
             1,
             2,
-            3
+            2
           ]
-        ]
+        ],
+        "expected": -1
       },
       {
         "input": [
           [
-            1,
-            2
-          ],
-          0
+            7
+          ]
         ],
-        "expected": []
+        "expected": 7
       }
     ]
   }

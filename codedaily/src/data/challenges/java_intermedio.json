@@ -1716,6 +1716,83 @@
     ]
   },
   {
+    "id": "has_duplicates",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Tiene duplicados?",
+      "en": "Has duplicates?"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] items)` para devolver `true` si el array tiene al menos un valor repetido.",
+      "en": "Complete the `solve(int[] items)` method to return `true` if the array has at least one repeated value."
+    },
+    "instructions": {
+      "es": "Si todos los elementos son distintos, devuelve `false`.",
+      "en": "If all items are different, return `false`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa un `HashSet<Integer>` para detectar duplicados."
+      ],
+      "en": [
+        "Use a `HashSet<Integer>` to detect duplicates."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static boolean solve(int[] items) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            1
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            4,
+            4,
+            4
+          ]
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
     "id": "remove_first_char",
     "language": "java",
     "difficulty": "intermedio",
@@ -3497,83 +3574,6 @@
           "ABC123"
         ],
         "expected": 3
-      }
-    ]
-  },
-  {
-    "id": "has_duplicates",
-    "language": "java",
-    "difficulty": "intermedio",
-    "functionName": "solve",
-    "title": {
-      "es": "¿Tiene duplicados?",
-      "en": "Has duplicates?"
-    },
-    "description": {
-      "es": "Completa el método `solve(int[] items)` para devolver `true` si el array tiene al menos un valor repetido.",
-      "en": "Complete the `solve(int[] items)` method to return `true` if the array has at least one repeated value."
-    },
-    "instructions": {
-      "es": "Si todos los elementos son distintos, devuelve `false`.",
-      "en": "If all items are different, return `false`."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un booleano."
-      ],
-      "en": [
-        "Return a boolean."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Usa un `HashSet<Integer>` para detectar duplicados."
-      ],
-      "en": [
-        "Use a `HashSet<Integer>` to detect duplicates."
-      ]
-    },
-    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static boolean solve(int[] items) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
-            2,
-            3
-          ]
-        ],
-        "expected": false
-      },
-      {
-        "input": [
-          [
-            1,
-            2,
-            1
-          ]
-        ],
-        "expected": true
-      },
-      {
-        "input": [
-          [
-            4,
-            4,
-            4
-          ]
-        ],
-        "expected": true
       }
     ]
   }

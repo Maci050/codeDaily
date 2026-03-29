@@ -2472,6 +2472,168 @@
     ]
   },
   {
+    "id": "remove_first_list_item",
+    "language": "java",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Quitar primer elemento de lista",
+      "en": "Remove first list item"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] items)` para devolver el array sin su primer elemento.",
+      "en": "Complete the `solve(int[] items)` method to return the array without its first element."
+    },
+    "instructions": {
+      "es": "El array siempre tendrá al menos un elemento.",
+      "en": "The array will always have at least one element."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un array nuevo."
+      ],
+      "en": [
+        "Return a new array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `Arrays.copyOfRange(items, 1, items.length)`.",
+        "Importa `java.util.Arrays`."
+      ],
+      "en": [
+        "Use `Arrays.copyOfRange(items, 1, items.length)`.",
+        "Import `java.util.Arrays`."
+      ]
+    },
+    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int[] solve(int[] items) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          2,
+          3
+        ]
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "input": [
+          [
+            -1,
+            0
+          ]
+        ],
+        "expected": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "remove_last_list_item",
+    "language": "java",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Quitar último elemento de lista",
+      "en": "Remove last list item"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] items)` para devolver el array sin su último elemento.",
+      "en": "Complete the `solve(int[] items)` method to return the array without its last element."
+    },
+    "instructions": {
+      "es": "El array siempre tendrá al menos un elemento.",
+      "en": "The array will always have at least one element."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un array nuevo."
+      ],
+      "en": [
+        "Return a new array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `Arrays.copyOfRange(items, 0, items.length - 1)`.",
+        "Importa `java.util.Arrays`."
+      ],
+      "en": [
+        "Use `Arrays.copyOfRange(items, 0, items.length - 1)`.",
+        "Import `java.util.Arrays`."
+      ]
+    },
+    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int[] solve(int[] items) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          2
+        ]
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "input": [
+          [
+            -1,
+            0
+          ]
+        ],
+        "expected": [
+          -1
+        ]
+      }
+    ]
+  },
+  {
     "id": "sum_first_last",
     "language": "java",
     "difficulty": "novato",
@@ -3287,168 +3449,6 @@
           3
         ],
         "expected": -3.0
-      }
-    ]
-  },
-  {
-    "id": "remove_first_list_item",
-    "language": "java",
-    "difficulty": "novato",
-    "functionName": "solve",
-    "title": {
-      "es": "Quitar primer elemento de lista",
-      "en": "Remove first list item"
-    },
-    "description": {
-      "es": "Completa el método `solve(int[] items)` para devolver el array sin su primer elemento.",
-      "en": "Complete the `solve(int[] items)` method to return the array without its first element."
-    },
-    "instructions": {
-      "es": "El array siempre tendrá al menos un elemento.",
-      "en": "The array will always have at least one element."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un array nuevo."
-      ],
-      "en": [
-        "Return a new array."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Usa `Arrays.copyOfRange(items, 1, items.length)`.",
-        "Importa `java.util.Arrays`."
-      ],
-      "en": [
-        "Use `Arrays.copyOfRange(items, 1, items.length)`.",
-        "Import `java.util.Arrays`."
-      ]
-    },
-    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int[] solve(int[] items) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
-            2,
-            3
-          ]
-        ],
-        "expected": [
-          2,
-          3
-        ]
-      },
-      {
-        "input": [
-          [
-            5
-          ]
-        ],
-        "expected": []
-      },
-      {
-        "input": [
-          [
-            -1,
-            0
-          ]
-        ],
-        "expected": [
-          0
-        ]
-      }
-    ]
-  },
-  {
-    "id": "remove_last_list_item",
-    "language": "java",
-    "difficulty": "novato",
-    "functionName": "solve",
-    "title": {
-      "es": "Quitar último elemento de lista",
-      "en": "Remove last list item"
-    },
-    "description": {
-      "es": "Completa el método `solve(int[] items)` para devolver el array sin su último elemento.",
-      "en": "Complete the `solve(int[] items)` method to return the array without its last element."
-    },
-    "instructions": {
-      "es": "El array siempre tendrá al menos un elemento.",
-      "en": "The array will always have at least one element."
-    },
-    "restrictions": {
-      "es": [
-        "Devuelve un array nuevo."
-      ],
-      "en": [
-        "Return a new array."
-      ]
-    },
-    "hints": {
-      "es": [
-        "Usa `Arrays.copyOfRange(items, 0, items.length - 1)`.",
-        "Importa `java.util.Arrays`."
-      ],
-      "en": [
-        "Use `Arrays.copyOfRange(items, 0, items.length - 1)`.",
-        "Import `java.util.Arrays`."
-      ]
-    },
-    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int[] solve(int[] items) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
-    "solutionShape": {
-      "requiredTokens": [
-        "class Solution",
-        "public static",
-        "return"
-      ],
-      "forbiddenTokens": [
-        "System.out.println("
-      ]
-    },
-    "tests": [
-      {
-        "input": [
-          [
-            1,
-            2,
-            3
-          ]
-        ],
-        "expected": [
-          1,
-          2
-        ]
-      },
-      {
-        "input": [
-          [
-            5
-          ]
-        ],
-        "expected": []
-      },
-      {
-        "input": [
-          [
-            -1,
-            0
-          ]
-        ],
-        "expected": [
-          -1
-        ]
       }
     ]
   }
