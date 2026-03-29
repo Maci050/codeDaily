@@ -52,7 +52,7 @@ function getDailyChallenge({
   const availableChallenges = getChallengesByDifficulty(difficulty, language);
   if (availableChallenges.length === 0) return null;
   const seed = getDaySeed(date);
-  const index = hashStringToNumber(`${seed}-${language}-${difficulty}`) % availableChallenges.length;
+  const index = hashStringToNumber(`${seed}-${difficulty}`) % availableChallenges.length;
   return availableChallenges[index];
 }
 
