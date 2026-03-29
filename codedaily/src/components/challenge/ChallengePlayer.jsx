@@ -33,6 +33,7 @@ function ChallengePlayer({
 
   const [difficulty, setDifficulty] = useState(() => getPreferences().difficulty);
   const [playMode, setPlayMode] = useState(() => allowHackerMode ? getPreferences().playMode : 'normal');
+  const [programmingLanguage, setProgrammingLanguage] = useState(() => getPreferences().programmingLanguage);
   const [code, setCode] = useState('');
   const [validationResult, setValidationResult] = useState(null);
   const [attemptCount, setAttemptCount] = useState(0);
@@ -46,6 +47,7 @@ function ChallengePlayer({
   const effectivePlayMode = allowHackerMode ? playMode : 'normal';
   const isHackerMode = effectivePlayMode === 'hacker';
   const effectiveDifficulty = isHackerMode ? 'pro' : difficulty;
+  const isPython = programmingLanguage === 'python';
   const maxHackerAttempts = 3;
   const challengeDate = useMemo(() => parseYMDToUTCDate(selectedDate), [selectedDate]);
 
@@ -58,6 +60,9 @@ function ChallengePlayer({
         hackerDescription:
           'El modo Hacker usa retos Pro, no muestra pistas y solo permite 3 intentos al día.',
         dateLabel: 'Fecha',
+        progLangLabel: 'Lenguaje',
+        progLangPython: 'Python',
+        progLangJava: 'Java',
         difficultyLabel: 'Dificultad',
         difficultyNovato: 'Novato',
         difficultyIntermedio: 'Intermedio',
@@ -77,7 +82,7 @@ function ChallengePlayer({
         total: 'Total',
         starterCode: 'Código base',
         editorTitle: 'Tu solución',
-        editorPlaceholder: 'Escribe aquí tu solución en Python...',
+        editorPlaceholder: isPython ? 'Escribe aquí tu solución en Python...' : 'Escribe aquí tu solución en Java...',
         checkButton: 'Comprobar solución',
         checkingButton: 'Comprobando...',
         resetButton: 'Restablecer código',
@@ -85,15 +90,18 @@ function ChallengePlayer({
         attemptsLeft: 'Intentos restantes',
         resultTitle: 'Resultado',
         passedTitle: '¡Reto superado!',
-        passedText: 'Tu solución ha pasado las comprobaciones con Python real.',
+        passedText: isPython
+          ? 'Tu solución ha pasado las comprobaciones con Python real.'
+          : 'Tu solución ha pasado las comprobaciones con Java real.',
         failedTitle: 'La solución todavía no es válida',
         testsSection: 'Tests',
         errorsSection: 'Detalles',
         hintsSection: 'Pistas',
         noHintsYet: 'Todavía no has desbloqueado pistas.',
         noHintsInHacker: 'El modo Hacker no ofrece pistas.',
-        prototypeNote:
-          'La validación ejecuta Python real en el navegador con Pyodide.',
+        prototypeNote: isPython
+          ? 'La validación ejecuta Python real en el navegador con Pyodide.'
+          : 'La validación ejecuta Java real vía Judge0.',
         difficultyNovatoShort: 'Novato',
         difficultyIntermedioShort: 'Intermedio',
         difficultyProShort: 'Pro',
@@ -102,10 +110,10 @@ function ChallengePlayer({
         completedBadge: 'Completado',
         testsPassedText: 'tests superados',
         waitingResult: 'Todavía no has comprobado tu solución.',
-        pythonLoading: 'Cargando entorno Python...',
-        pythonReady: 'Python listo',
+        pythonLoading: isPython ? 'Cargando entorno Python...' : 'Listo',
+        pythonReady: isPython ? 'Python listo' : 'Java (Judge0)',
         pythonLoadError: 'No se pudo cargar el entorno Python.',
-        runtimeTitle: 'Error de Python',
+        runtimeTitle: isPython ? 'Error de Python' : 'Error de Java',
         hackerBadge: 'Modo Hacker',
         hackerLockedTitle: 'Reto bloqueado',
         hackerLockedText:
@@ -118,6 +126,9 @@ function ChallengePlayer({
         hackerDescription:
           'Hacker mode uses Pro challenges, shows no hints, and only allows 3 attempts per day.',
         dateLabel: 'Date',
+        progLangLabel: 'Language',
+        progLangPython: 'Python',
+        progLangJava: 'Java',
         difficultyLabel: 'Difficulty',
         difficultyNovato: 'Beginner',
         difficultyIntermedio: 'Intermediate',
@@ -137,7 +148,7 @@ function ChallengePlayer({
         total: 'Total',
         starterCode: 'Starter code',
         editorTitle: 'Your solution',
-        editorPlaceholder: 'Write your Python solution here...',
+        editorPlaceholder: isPython ? 'Write your Python solution here...' : 'Write your Java solution here...',
         checkButton: 'Check solution',
         checkingButton: 'Checking...',
         resetButton: 'Reset code',
@@ -145,15 +156,18 @@ function ChallengePlayer({
         attemptsLeft: 'Attempts left',
         resultTitle: 'Result',
         passedTitle: 'Challenge solved!',
-        passedText: 'Your solution passed the checks with real Python execution.',
+        passedText: isPython
+          ? 'Your solution passed the checks with real Python execution.'
+          : 'Your solution passed the checks with real Java execution.',
         failedTitle: 'The solution is not valid yet',
         testsSection: 'Tests',
         errorsSection: 'Details',
         hintsSection: 'Hints',
         noHintsYet: 'You have not unlocked hints yet.',
         noHintsInHacker: 'Hacker mode does not provide hints.',
-        prototypeNote:
-          'Validation runs real Python in the browser with Pyodide.',
+        prototypeNote: isPython
+          ? 'Validation runs real Python in the browser with Pyodide.'
+          : 'Validation runs real Java via Judge0.',
         difficultyNovatoShort: 'Beginner',
         difficultyIntermedioShort: 'Intermediate',
         difficultyProShort: 'Pro',
@@ -162,17 +176,17 @@ function ChallengePlayer({
         completedBadge: 'Completed',
         testsPassedText: 'tests passed',
         waitingResult: 'You have not checked your solution yet.',
-        pythonLoading: 'Loading Python runtime...',
-        pythonReady: 'Python ready',
+        pythonLoading: isPython ? 'Loading Python runtime...' : 'Ready',
+        pythonReady: isPython ? 'Python ready' : 'Java (Judge0)',
         pythonLoadError: 'Could not load the Python runtime.',
-        runtimeTitle: 'Python error',
+        runtimeTitle: isPython ? 'Python error' : 'Java error',
         hackerBadge: 'Hacker mode',
         hackerLockedTitle: 'Challenge locked',
         hackerLockedText:
           'You used all 3 available attempts for this Hacker challenge date.',
       },
     }[language];
-  }, [language]);
+  }, [language, isPython]);
 
   const errorMessages = useMemo(() => {
     return {
@@ -205,20 +219,26 @@ function ChallengePlayer({
     }[language];
   }, [language]);
 
-  const stats = useMemo(() => getChallengeStats('python'), []);
+  const stats = useMemo(() => getChallengeStats(programmingLanguage), [programmingLanguage]);
   const baseChallenge = useMemo(() => {
     return getDailyChallenge({
       date: challengeDate,
-      language: 'python',
+      language: programmingLanguage,
       difficulty: effectiveDifficulty,
     });
-  }, [challengeDate, effectiveDifficulty]);
+  }, [challengeDate, effectiveDifficulty, programmingLanguage]);
 
   const dailyChallenge = useMemo(() => {
     return getChallengeText(baseChallenge, language);
   }, [baseChallenge, language]);
 
   useEffect(() => {
+    if (!isPython) {
+      setIsPythonLoading(false);
+      setPythonLoadError(null);
+      return;
+    }
+
     let isMounted = true;
 
     async function loadPython() {
@@ -227,10 +247,7 @@ function ChallengePlayer({
 
       try {
         await ensurePyodideLoaded();
-
-        if (isMounted) {
-          setIsPythonLoading(false);
-        }
+        if (isMounted) setIsPythonLoading(false);
       } catch (error) {
         if (isMounted) {
           setIsPythonLoading(false);
@@ -244,7 +261,7 @@ function ChallengePlayer({
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [isPython]);
 
   useEffect(() => {
     if (!baseChallenge) {
@@ -438,6 +455,21 @@ function ChallengePlayer({
                 </select>
               </div>
             )}
+
+            <div className="filter-box">
+              <label htmlFor="prog-lang-select">{text.progLangLabel}</label>
+              <select
+                id="prog-lang-select"
+                value={programmingLanguage}
+                onChange={(event) => {
+                  setProgrammingLanguage(event.target.value);
+                  savePreferences({ programmingLanguage: event.target.value });
+                }}
+              >
+                <option value="python">{text.progLangPython}</option>
+                <option value="java">{text.progLangJava}</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -713,11 +745,11 @@ function ChallengePlayer({
                     </div>
                   )}
 
-                  {validationResult?.pythonError && (
+                  {(validationResult?.pythonError || validationResult?.runtimeError) && (
                     <div className="result-subsection">
                       <h4>{text.runtimeTitle}</h4>
                       <pre className="code-block">
-                        <code>{validationResult.pythonError}</code>
+                        <code>{validationResult.pythonError || validationResult.runtimeError}</code>
                       </pre>
                     </div>
                   )}

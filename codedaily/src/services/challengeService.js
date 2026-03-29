@@ -1,11 +1,17 @@
 import novatoChallenges from '../data/challenges/python_novato.json';
 import intermedioChallenges from '../data/challenges/python_intermedio.json';
 import proChallenges from '../data/challenges/python_pro.json';
+import javaNovato from '../data/challenges/java_novato.json';
+import javaIntermedio from '../data/challenges/java_intermedio.json';
+import javaPro from '../data/challenges/java_pro.json';
 
 const ALL_CHALLENGES = [
   ...novatoChallenges,
   ...intermedioChallenges,
   ...proChallenges,
+  ...javaNovato,
+  ...javaIntermedio,
+  ...javaPro,
 ];
 
 function normalizeDateToUTC(date = new Date()) {
@@ -22,11 +28,9 @@ function getDaySeed(date = new Date()) {
 
 function hashStringToNumber(value) {
   let hash = 0;
-
   for (let i = 0; i < value.length; i += 1) {
     hash = (hash * 31 + value.charCodeAt(i)) % 2147483647;
   }
-
   return hash;
 }
 
@@ -36,11 +40,7 @@ function getChallengesByLanguage(language = 'python') {
 
 function getChallengesByDifficulty(difficulty, language = 'python') {
   const base = getChallengesByLanguage(language);
-
-  if (!difficulty || difficulty === 'all') {
-    return base;
-  }
-
+  if (!difficulty || difficulty === 'all') return base;
   return base.filter((challenge) => challenge.difficulty === difficulty);
 }
 
@@ -50,43 +50,31 @@ function getDailyChallenge({
   difficulty = 'novato',
 } = {}) {
   const availableChallenges = getChallengesByDifficulty(difficulty, language);
-
-  if (availableChallenges.length === 0) {
-    return null;
-  }
-
+  if (availableChallenges.length === 0) return null;
   const seed = getDaySeed(date);
   const index = hashStringToNumber(`${seed}-${language}-${difficulty}`) % availableChallenges.length;
-
   return availableChallenges[index];
 }
 
 function getChallengeText(challenge, contentLanguage = 'es') {
-  if (!challenge) {
-    return null;
-  }
-
+  if (!challenge) return null;
   return {
     ...challenge,
     localizedTitle: challenge.title?.[contentLanguage] || challenge.title?.es || '',
-    localizedDescription:
-      challenge.description?.[contentLanguage] || challenge.description?.es || '',
-    localizedInstructions:
-      challenge.instructions?.[contentLanguage] || challenge.instructions?.es || '',
-    localizedRestrictions:
-      challenge.restrictions?.[contentLanguage] || challenge.restrictions?.es || [],
+    localizedDescription: challenge.description?.[contentLanguage] || challenge.description?.es || '',
+    localizedInstructions: challenge.instructions?.[contentLanguage] || challenge.instructions?.es || '',
+    localizedRestrictions: challenge.restrictions?.[contentLanguage] || challenge.restrictions?.es || [],
     localizedHints: challenge.hints?.[contentLanguage] || challenge.hints?.es || [],
   };
 }
 
 function getChallengeStats(language = 'python') {
   const challenges = getChallengesByLanguage(language);
-
   return {
     total: challenges.length,
-    novato: challenges.filter((challenge) => challenge.difficulty === 'novato').length,
-    intermedio: challenges.filter((challenge) => challenge.difficulty === 'intermedio').length,
-    pro: challenges.filter((challenge) => challenge.difficulty === 'pro').length,
+    novato: challenges.filter((c) => c.difficulty === 'novato').length,
+    intermedio: challenges.filter((c) => c.difficulty === 'intermedio').length,
+    pro: challenges.filter((c) => c.difficulty === 'pro').length,
   };
 }
 

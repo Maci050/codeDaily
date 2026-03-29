@@ -28,13 +28,15 @@ function getPreferences() {
   return {
     difficulty: state.difficulty || 'novato',
     playMode: state.playMode || 'normal',
+    programmingLanguage: state.programmingLanguage || 'python',
   };
 }
 
-function savePreferences({ difficulty, playMode }) {
+function savePreferences({ difficulty, playMode, programmingLanguage }) {
   const state = getUIState();
   if (difficulty !== undefined) state.difficulty = difficulty;
   if (playMode !== undefined) state.playMode = playMode;
+  if (programmingLanguage !== undefined) state.programmingLanguage = programmingLanguage;
   setUIState(state);
 }
 
