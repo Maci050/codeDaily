@@ -1,0 +1,3580 @@
+[
+  {
+    "id": "max_of_three",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Mayor de tres",
+      "en": "Maximum of three"
+    },
+    "description": {
+      "es": "Completa el método `solve(int a, int b, int c)` para devolver el valor mayor entre los tres números.",
+      "en": "Complete the `solve(int a, int b, int c)` method to return the largest value among the three numbers."
+    },
+    "instructions": {
+      "es": "Puedes usar `Math.max()` o comparaciones manuales.",
+      "en": "You can use `Math.max()` or manual comparisons."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un único número."
+      ],
+      "en": [
+        "Return a single number."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Java tiene `Math.max(a, b)`.",
+        "Puedes anidar dos llamadas."
+      ],
+      "en": [
+        "Java has `Math.max(a, b)`.",
+        "You can nest two calls."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int a, int b, int c) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          1,
+          9,
+          3
+        ],
+        "expected": 9
+      },
+      {
+        "input": [
+          7,
+          7,
+          2
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          -5,
+          -2,
+          -8
+        ],
+        "expected": -2
+      }
+    ]
+  },
+  {
+    "id": "min_of_three",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Menor de tres",
+      "en": "Minimum of three"
+    },
+    "description": {
+      "es": "Completa el método `solve(int a, int b, int c)` para devolver el valor menor entre los tres números.",
+      "en": "Complete the `solve(int a, int b, int c)` method to return the smallest value among the three numbers."
+    },
+    "instructions": {
+      "es": "Puedes usar `Math.min()` o comparaciones.",
+      "en": "You can use `Math.min()` or comparisons."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un único número."
+      ],
+      "en": [
+        "Return a single number."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Java tiene `Math.min(a, b)`."
+      ],
+      "en": [
+        "Java has `Math.min(a, b)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int a, int b, int c) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          1,
+          9,
+          3
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          7,
+          7,
+          2
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          -5,
+          -2,
+          -8
+        ],
+        "expected": -8
+      }
+    ]
+  },
+  {
+    "id": "count_vowels_basic",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar vocales",
+      "en": "Count vowels"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver cuántas vocales hay en el texto.",
+      "en": "Complete the `solve(String text)` method to return how many vowels are in the text."
+    },
+    "instructions": {
+      "es": "Cuenta `a`, `e`, `i`, `o`, `u` en mayúsculas y minúsculas.",
+      "en": "Count `a`, `e`, `i`, `o`, `u` in uppercase and lowercase."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Convierte a minúsculas y recorre carácter a carácter.",
+        "Comprueba si el carácter está en `aeiou`."
+      ],
+      "en": [
+        "Convert to lowercase and iterate character by character.",
+        "Check if the character is in `aeiou`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          "PYTHON"
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          "bcdfg"
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "count_consonants",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar consonantes",
+      "en": "Count consonants"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver cuántas consonantes hay en el texto.",
+      "en": "Complete the `solve(String text)` method to return how many consonants are in the text."
+    },
+    "instructions": {
+      "es": "Ignora espacios y cuenta solo letras que no sean vocales.",
+      "en": "Ignore spaces and count only letters that are not vowels."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Comprueba si el carácter es alfabético y no vocal.",
+        "Usa `Character.isLetter(ch)`."
+      ],
+      "en": [
+        "Check that the character is alphabetic and not a vowel.",
+        "Use `Character.isLetter(ch)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          "abc"
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          "aeiou"
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "sum_list",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma de lista",
+      "en": "Sum a list"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver la suma de todos los números del array.",
+      "en": "Complete the `solve(int[] numbers)` method to return the sum of all numbers in the array."
+    },
+    "instructions": {
+      "es": "El array puede estar vacío.",
+      "en": "The array may be empty."
+    },
+    "restrictions": {
+      "es": [
+        "Si el array está vacío, devuelve 0."
+      ],
+      "en": [
+        "If the array is empty, return 0."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre el array acumulando el valor."
+      ],
+      "en": [
+        "Iterate the array accumulating the value."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "product_list",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Producto de lista",
+      "en": "Product of a list"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver el producto de todos los números del array.",
+      "en": "Complete the `solve(int[] numbers)` method to return the product of all numbers in the array."
+    },
+    "instructions": {
+      "es": "Si el array está vacío, devuelve 1.",
+      "en": "If the array is empty, return 1."
+    },
+    "restrictions": {
+      "es": [
+        "Recorre el array."
+      ],
+      "en": [
+        "Iterate through the array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Empieza con acumulador en 1.",
+        "Multiplica cada elemento."
+      ],
+      "en": [
+        "Start with an accumulator of 1.",
+        "Multiply each item."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 1;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 24
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "count_evens_in_list",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar pares en lista",
+      "en": "Count evens in a list"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver cuántos números pares hay en el array.",
+      "en": "Complete the `solve(int[] numbers)` method to return how many even numbers are in the array."
+    },
+    "instructions": {
+      "es": "Usa `% 2 == 0` para detectar pares.",
+      "en": "Use `% 2 == 0` to detect even numbers."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre el array y suma 1 por cada par."
+      ],
+      "en": [
+        "Iterate and add 1 for each even number."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            1,
+            3,
+            5
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            2,
+            2,
+            2
+          ]
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "count_odds_in_list",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar impares en lista",
+      "en": "Count odds in a list"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver cuántos números impares hay en el array.",
+      "en": "Complete the `solve(int[] numbers)` method to return how many odd numbers are in the array."
+    },
+    "instructions": {
+      "es": "Un número es impar si `n % 2 != 0`.",
+      "en": "A number is odd if `n % 2 != 0`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre el array y cuenta los impares."
+      ],
+      "en": [
+        "Iterate and count only the odd numbers."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "contains_number",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Contiene número?",
+      "en": "Contains number?"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers, int target)` para devolver `true` si `target` está en el array.",
+      "en": "Complete the `solve(int[] numbers, int target)` method to return `true` if `target` is in the array."
+    },
+    "instructions": {
+      "es": "Recorre el array buscando el valor.",
+      "en": "Iterate the array looking for the value."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre y compara con `==`."
+      ],
+      "en": [
+        "Iterate and compare with `==`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(int[] numbers, int target) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          2
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          5
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          [],
+          1
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "count_occurrences",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar apariciones",
+      "en": "Count occurrences"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] items, int target)` para devolver cuántas veces aparece `target` en el array.",
+      "en": "Complete the `solve(int[] items, int target)` method to return how many times `target` appears in the array."
+    },
+    "instructions": {
+      "es": "Recorre el array contando coincidencias.",
+      "en": "Iterate counting matches."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Incrementa un contador cuando encuentres `target`."
+      ],
+      "en": [
+        "Increment a counter when you find `target`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] items, int target) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            1,
+            1
+          ],
+          1
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          5
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            4,
+            4,
+            4
+          ],
+          4
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "is_palindrome",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Es palíndromo?",
+      "en": "Is it a palindrome?"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver `true` si el texto se lee igual al revés.",
+      "en": "Complete the `solve(String text)` method to return `true` if the text reads the same backwards."
+    },
+    "instructions": {
+      "es": "No habrá espacios ni mayúsculas problemáticas.",
+      "en": "There will be no spaces or tricky uppercase cases."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `new StringBuilder(text).reverse().toString()`."
+      ],
+      "en": [
+        "Use `new StringBuilder(text).reverse().toString()`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "ana"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "radar"
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "repeat_text",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Repetir texto",
+      "en": "Repeat text"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text, int n)` para devolver el texto repetido `n` veces.",
+      "en": "Complete the `solve(String text, int n)` method to return the text repeated `n` times."
+    },
+    "instructions": {
+      "es": "Por ejemplo, `('ha', 3)` devuelve `hahaha`.",
+      "en": "For example, `('ha', 3)` returns `hahaha`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "En Java 11+ puedes usar `text.repeat(n)`."
+      ],
+      "en": [
+        "In Java 11+ you can use `text.repeat(n)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text, int n) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "ha",
+          3
+        ],
+        "expected": "hahaha"
+      },
+      {
+        "input": [
+          "a",
+          1
+        ],
+        "expected": "a"
+      },
+      {
+        "input": [
+          "x",
+          0
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "sum_digits_two_digit",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma de cifras (2 dígitos)",
+      "en": "Sum digits (2 digits)"
+    },
+    "description": {
+      "es": "Completa el método `solve(int n)` para devolver la suma de las dos cifras de un número entre 10 y 99.",
+      "en": "Complete the `solve(int n)` method to return the sum of the two digits of a number between 10 and 99."
+    },
+    "instructions": {
+      "es": "Por ejemplo, `42` devuelve `6`.",
+      "en": "For example, `42` returns `6`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `n / 10` para las decenas y `n % 10` para las unidades."
+      ],
+      "en": [
+        "Use `n / 10` for tens and `n % 10` for units."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          42
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          10
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          99
+        ],
+        "expected": 18
+      }
+    ]
+  },
+  {
+    "id": "middle_character_odd",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Carácter central",
+      "en": "Middle character"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver el carácter central del texto.",
+      "en": "Complete the `solve(String text)` method to return the middle character of the text."
+    },
+    "instructions": {
+      "es": "La longitud del texto siempre será impar.",
+      "en": "The text length will always be odd."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String de longitud 1."
+      ],
+      "en": [
+        "Return a String of length 1."
+      ]
+    },
+    "hints": {
+      "es": [
+        "La posición central es `text.length() / 2`.",
+        "Usa `String.valueOf(text.charAt(mid))`."
+      ],
+      "en": [
+        "The middle position is `text.length() / 2`.",
+        "Use `String.valueOf(text.charAt(mid))`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "abc"
+        ],
+        "expected": "b"
+      },
+      {
+        "input": [
+          "radar"
+        ],
+        "expected": "d"
+      },
+      {
+        "input": [
+          "x"
+        ],
+        "expected": "x"
+      }
+    ]
+  },
+  {
+    "id": "first_half_text",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Primera mitad del texto",
+      "en": "First half of text"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver la primera mitad del texto.",
+      "en": "Complete the `solve(String text)` method to return the first half of the text."
+    },
+    "instructions": {
+      "es": "La longitud del texto siempre será par.",
+      "en": "The text length will always be even."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `text.substring(0, text.length() / 2)`."
+      ],
+      "en": [
+        "Use `text.substring(0, text.length() / 2)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "abcd"
+        ],
+        "expected": "ab"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "pyt"
+      },
+      {
+        "input": [
+          "aa"
+        ],
+        "expected": "a"
+      }
+    ]
+  },
+  {
+    "id": "second_half_text",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Segunda mitad del texto",
+      "en": "Second half of text"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver la segunda mitad del texto.",
+      "en": "Complete the `solve(String text)` method to return the second half of the text."
+    },
+    "instructions": {
+      "es": "La longitud del texto siempre será par.",
+      "en": "The text length will always be even."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `text.substring(text.length() / 2)`."
+      ],
+      "en": [
+        "Use `text.substring(text.length() / 2)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "abcd"
+        ],
+        "expected": "cd"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "hon"
+      },
+      {
+        "input": [
+          "aa"
+        ],
+        "expected": "a"
+      }
+    ]
+  },
+  {
+    "id": "contains_vowel",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Contiene vocal?",
+      "en": "Contains vowel?"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver `true` si el texto contiene al menos una vocal.",
+      "en": "Complete the `solve(String text)` method to return `true` if the text contains at least one vowel."
+    },
+    "instructions": {
+      "es": "Ten en cuenta mayúsculas y minúsculas.",
+      "en": "Consider uppercase and lowercase."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Convierte a minúsculas y busca en `aeiou`."
+      ],
+      "en": [
+        "Convert to lowercase and look for `aeiou`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "sky"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "BCDF"
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "all_positive",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Todos positivos",
+      "en": "All positive"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver `true` si todos los números son mayores que 0.",
+      "en": "Complete the `solve(int[] numbers)` method to return `true` if all numbers are greater than 0."
+    },
+    "instructions": {
+      "es": "Si el array está vacío, devuelve `true`.",
+      "en": "If the array is empty, return `true`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Si encuentras uno <= 0, devuelve false."
+      ],
+      "en": [
+        "If you find one <= 0, return false."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return true;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            1,
+            0,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "any_negative",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Alguno negativo",
+      "en": "Any negative"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver `true` si hay al menos un número negativo.",
+      "en": "Complete the `solve(int[] numbers)` method to return `true` if there is at least one negative number."
+    },
+    "instructions": {
+      "es": "Si no hay ninguno, devuelve `false`.",
+      "en": "If there is none, return `false`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Si encuentras `n < 0`, devuelve true."
+      ],
+      "en": [
+        "If you find `n < 0`, return true."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          [
+            1,
+            -2,
+            3
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "largest_word_length",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Longitud de la palabra más larga",
+      "en": "Length of the longest word"
+    },
+    "description": {
+      "es": "Completa el método `solve(String[] words)` para devolver la longitud de la palabra más larga.",
+      "en": "Complete the `solve(String[] words)` method to return the length of the longest word in the array."
+    },
+    "instructions": {
+      "es": "El array siempre tendrá al menos una palabra.",
+      "en": "The array will always contain at least one word."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Guarda el máximo de `word.length()` encontrado."
+      ],
+      "en": [
+        "Track the maximum `word.length()` found."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String[] words) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            "sol",
+            "montaña",
+            "mar"
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          [
+            "a",
+            "bb"
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            "python"
+          ]
+        ],
+        "expected": 6
+      }
+    ]
+  },
+  {
+    "id": "shortest_word_length",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Longitud de la palabra más corta",
+      "en": "Length of the shortest word"
+    },
+    "description": {
+      "es": "Completa el método `solve(String[] words)` para devolver la longitud de la palabra más corta.",
+      "en": "Complete the `solve(String[] words)` method to return the length of the shortest word in the array."
+    },
+    "instructions": {
+      "es": "El array siempre tendrá al menos una palabra.",
+      "en": "The array will always contain at least one word."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Guarda el mínimo de `word.length()` encontrado."
+      ],
+      "en": [
+        "Track the minimum `word.length()` found."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String[] words) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            "sol",
+            "montaña",
+            "mar"
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            "a",
+            "bb"
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          [
+            "python"
+          ]
+        ],
+        "expected": 6
+      }
+    ]
+  },
+  {
+    "id": "greater_than_average",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Mayores que la media",
+      "en": "Greater than average"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver cuántos números son mayores que la media.",
+      "en": "Complete the `solve(int[] numbers)` method to return how many numbers are greater than the average."
+    },
+    "instructions": {
+      "es": "El array siempre tendrá al menos un número.",
+      "en": "The array will always have at least one number."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Primero calcula la media, después cuenta los mayores."
+      ],
+      "en": [
+        "First compute the average, then count those greater."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            5,
+            5,
+            5
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            1,
+            10
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "sum_positive_numbers",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma solo positivos",
+      "en": "Sum only positives"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver la suma de los números positivos.",
+      "en": "Complete the `solve(int[] numbers)` method to return the sum of the positive numbers."
+    },
+    "instructions": {
+      "es": "Ignora el 0 y los negativos.",
+      "en": "Ignore 0 and negative numbers."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Suma solo los `n > 0`."
+      ],
+      "en": [
+        "Sum only those where `n > 0`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            -2,
+            3,
+            0
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          [
+            -1,
+            -2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": 5
+      }
+    ]
+  },
+  {
+    "id": "sum_negative_numbers",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma solo negativos",
+      "en": "Sum only negatives"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver la suma de los números negativos.",
+      "en": "Complete the `solve(int[] numbers)` method to return the sum of the negative numbers."
+    },
+    "instructions": {
+      "es": "Ignora el 0 y los positivos.",
+      "en": "Ignore 0 and positive numbers."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Suma solo los `n < 0`."
+      ],
+      "en": [
+        "Sum only those where `n < 0`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            -2,
+            3,
+            -4
+          ]
+        ],
+        "expected": -6
+      },
+      {
+        "input": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            -5
+          ]
+        ],
+        "expected": -5
+      }
+    ]
+  },
+  {
+    "id": "remove_first_char",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Quitar primer carácter",
+      "en": "Remove first character"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver el texto sin el primer carácter.",
+      "en": "Complete the `solve(String text)` method to return the text without the first character."
+    },
+    "instructions": {
+      "es": "El texto siempre tendrá al menos un carácter.",
+      "en": "The text will always have at least one character."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `text.substring(1)`."
+      ],
+      "en": [
+        "Use `text.substring(1)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "ola"
+      },
+      {
+        "input": [
+          "a"
+        ],
+        "expected": ""
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "ython"
+      }
+    ]
+  },
+  {
+    "id": "remove_last_char",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Quitar último carácter",
+      "en": "Remove last character"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver el texto sin el último carácter.",
+      "en": "Complete the `solve(String text)` method to return the text without the last character."
+    },
+    "instructions": {
+      "es": "El texto siempre tendrá al menos un carácter.",
+      "en": "The text will always have at least one character."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `text.substring(0, text.length() - 1)`."
+      ],
+      "en": [
+        "Use `text.substring(0, text.length() - 1)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "hol"
+      },
+      {
+        "input": [
+          "a"
+        ],
+        "expected": ""
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "pytho"
+      }
+    ]
+  },
+  {
+    "id": "swap_first_last",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Intercambiar primero y último",
+      "en": "Swap first and last"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver el texto con el primer y último carácter intercambiados.",
+      "en": "Complete the `solve(String text)` method to return the text with the first and last character swapped."
+    },
+    "instructions": {
+      "es": "Si el texto tiene un solo carácter, devuélvelo igual.",
+      "en": "If the text has one character, return it unchanged."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Construye el resultado con `charAt` y `substring`."
+      ],
+      "en": [
+        "Build the result with `charAt` and `substring`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "aolh"
+      },
+      {
+        "input": [
+          "a"
+        ],
+        "expected": "a"
+      },
+      {
+        "input": [
+          "ab"
+        ],
+        "expected": "ba"
+      }
+    ]
+  },
+  {
+    "id": "join_with_dash",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Unir con guion",
+      "en": "Join with dash"
+    },
+    "description": {
+      "es": "Completa el método `solve(String[] words)` para devolver las palabras unidas por `-`.",
+      "en": "Complete the `solve(String[] words)` method to return the words joined by `-`."
+    },
+    "instructions": {
+      "es": "Por ejemplo, `['a', 'b', 'c']` devuelve `a-b-c`.",
+      "en": "For example, `['a', 'b', 'c']` returns `a-b-c`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `String.join(\"-\", words)`."
+      ],
+      "en": [
+        "Use `String.join(\"-\", words)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String[] words) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "expected": "a-b-c"
+      },
+      {
+        "input": [
+          [
+            "python"
+          ]
+        ],
+        "expected": "python"
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "reverse_list",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Invertir lista",
+      "en": "Reverse list"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] items)` para devolver el array en orden inverso.",
+      "en": "Complete the `solve(int[] items)` method to return the array in reverse order."
+    },
+    "instructions": {
+      "es": "Devuelve un nuevo array.",
+      "en": "Return a new array."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un array nuevo."
+      ],
+      "en": [
+        "Return a new array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre desde el final hacia el inicio."
+      ],
+      "en": [
+        "Iterate from the end to the beginning."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int[] solve(int[] items) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          3,
+          2,
+          1
+        ]
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "input": [
+          [
+            5,
+            10
+          ]
+        ],
+        "expected": [
+          10,
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "first_even_number",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Primer número par",
+      "en": "First even number"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver el primer número par del array.",
+      "en": "Complete the `solve(int[] numbers)` method to return the first even number in the array."
+    },
+    "instructions": {
+      "es": "Si no hay ninguno, devuelve `-1`.",
+      "en": "If there is none, return `-1`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero o -1."
+      ],
+      "en": [
+        "Return an integer or -1."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Busca el primer `n % 2 == 0`."
+      ],
+      "en": [
+        "Look for the first `n % 2 == 0`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            3,
+            4,
+            6
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          [
+            2,
+            5
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            1,
+            3,
+            5
+          ]
+        ],
+        "expected": -1
+      }
+    ]
+  },
+  {
+    "id": "last_odd_number",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Último número impar",
+      "en": "Last odd number"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver el último número impar del array.",
+      "en": "Complete the `solve(int[] numbers)` method to return the last odd number in the array."
+    },
+    "instructions": {
+      "es": "Si no hay ninguno, devuelve `-1`.",
+      "en": "If there is none, return `-1`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero o -1."
+      ],
+      "en": [
+        "Return an integer or -1."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre al revés y busca el primer impar."
+      ],
+      "en": [
+        "Iterate backwards and look for the first odd."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            2,
+            4,
+            5,
+            7
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            4
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": -1
+      }
+    ]
+  },
+  {
+    "id": "first_negative_number",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Primer número negativo",
+      "en": "First negative number"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver el primer número negativo del array.",
+      "en": "Complete the `solve(int[] numbers)` method to return the first negative number in the array."
+    },
+    "instructions": {
+      "es": "Si no hay ninguno, devuelve `-999` como señal.",
+      "en": "If there is none, return `-999` as a signal."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Busca el primer valor menor que 0."
+      ],
+      "en": [
+        "Look for the first value smaller than 0."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return -999;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            3,
+            2,
+            -1,
+            -5
+          ]
+        ],
+        "expected": -1
+      },
+      {
+        "input": [
+          [
+            -7,
+            1,
+            2
+          ]
+        ],
+        "expected": -7
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": -999
+      }
+    ]
+  },
+  {
+    "id": "count_numbers_greater_than",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar mayores que X",
+      "en": "Count numbers greater than X"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers, int x)` para devolver cuántos elementos son mayores que `x`.",
+      "en": "Complete the `solve(int[] numbers, int x)` method to return how many elements are greater than `x`."
+    },
+    "instructions": {
+      "es": "Devuelve un entero.",
+      "en": "Return an integer."
+    },
+    "restrictions": {
+      "es": [
+        "No modifiques el array original."
+      ],
+      "en": [
+        "Do not modify the original array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre y cuenta cuando el elemento sea mayor que `x`."
+      ],
+      "en": [
+        "Iterate and count when element is greater than `x`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers, int x) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            5,
+            8,
+            2
+          ],
+          4
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            10,
+            10,
+            10
+          ],
+          9
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          5
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "sum_even_numbers",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma de pares",
+      "en": "Sum of even numbers"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver la suma de todos los números pares.",
+      "en": "Complete the `solve(int[] numbers)` method to return the sum of all even numbers."
+    },
+    "instructions": {
+      "es": "Si no hay pares, devuelve `0`.",
+      "en": "If there are no even numbers, return `0`."
+    },
+    "restrictions": {
+      "es": [
+        "Solo suma los pares."
+      ],
+      "en": [
+        "Only sum even numbers."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `% 2 == 0` para comprobar pares."
+      ],
+      "en": [
+        "Use `% 2 == 0` to check for even."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          [
+            2,
+            2,
+            2
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          [
+            1,
+            3,
+            5
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "index_of_first_vowel",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Índice de la primera vocal",
+      "en": "Index of the first vowel"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver el índice de la primera vocal.",
+      "en": "Complete the `solve(String text)` method to return the index of the first vowel."
+    },
+    "instructions": {
+      "es": "Si no hay vocales, devuelve `-1`.",
+      "en": "If there are no vowels, return `-1`."
+    },
+    "restrictions": {
+      "es": [
+        "Cuenta desde índice 0."
+      ],
+      "en": [
+        "Count from index 0."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre con índice y comprueba si el carácter es vocal."
+      ],
+      "en": [
+        "Iterate with index and check if the character is a vowel."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "sky"
+        ],
+        "expected": -1
+      },
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          "Python"
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "remove_spaces",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Quitar espacios",
+      "en": "Remove spaces"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver el texto sin espacios.",
+      "en": "Complete the `solve(String text)` method to return the text without spaces."
+    },
+    "instructions": {
+      "es": "Elimina solo el carácter espacio normal.",
+      "en": "Remove only the normal space character."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String nuevo."
+      ],
+      "en": [
+        "Return a new String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `text.replace(\" \", \"\")`."
+      ],
+      "en": [
+        "Use `text.replace(\" \", \"\")`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "ho la"
+        ],
+        "expected": "hola"
+      },
+      {
+        "input": [
+          " a b c "
+        ],
+        "expected": "abc"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "python"
+      }
+    ]
+  },
+  {
+    "id": "count_words",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar palabras",
+      "en": "Count words"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver cuántas palabras hay en el texto.",
+      "en": "Complete the `solve(String text)` method to return how many words are in the text."
+    },
+    "instructions": {
+      "es": "Las palabras estarán separadas por espacios simples.",
+      "en": "Words will be separated by single spaces."
+    },
+    "restrictions": {
+      "es": [
+        "Si el texto está vacío, devuelve 0."
+      ],
+      "en": [
+        "If the text is empty, return 0."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `text.split(\" \")` pero comprueba primero si está vacío."
+      ],
+      "en": [
+        "Use `text.split(\" \")` but first check if empty."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola mundo"
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          "uno dos tres cuatro"
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "middle_character",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Carácter del medio",
+      "en": "Middle character"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver el carácter central.",
+      "en": "Complete the `solve(String text)` method to return the middle character."
+    },
+    "instructions": {
+      "es": "El texto siempre tendrá longitud impar.",
+      "en": "The text will always have odd length."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String de longitud 1."
+      ],
+      "en": [
+        "Return a String of length 1."
+      ]
+    },
+    "hints": {
+      "es": [
+        "El índice central es `text.length() / 2`."
+      ],
+      "en": [
+        "The middle index is `text.length() / 2`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "abc"
+        ],
+        "expected": "b"
+      },
+      {
+        "input": [
+          "radar"
+        ],
+        "expected": "d"
+      },
+      {
+        "input": [
+          "x"
+        ],
+        "expected": "x"
+      }
+    ]
+  },
+  {
+    "id": "starts_with_vowel",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Empieza por vocal",
+      "en": "Starts with vowel"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver `true` si el texto empieza por vocal.",
+      "en": "Complete the `solve(String text)` method to return `true` if the text starts with a vowel."
+    },
+    "instructions": {
+      "es": "Si el texto está vacío, devuelve `false`.",
+      "en": "If the text is empty, return `false`."
+    },
+    "restrictions": {
+      "es": [
+        "Considera mayúsculas y minúsculas."
+      ],
+      "en": [
+        "Consider both uppercase and lowercase."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Comprueba si el primer carácter en minúscula está en `aeiou`."
+      ],
+      "en": [
+        "Check if the first lowercase character is in `aeiou`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "Apple"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "largest_string_length",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Longitud máxima",
+      "en": "Largest string length"
+    },
+    "description": {
+      "es": "Completa el método `solve(String[] words)` para devolver la longitud de la palabra más larga.",
+      "en": "Complete the `solve(String[] words)` method to return the length of the longest word."
+    },
+    "instructions": {
+      "es": "Si el array está vacío, devuelve 0.",
+      "en": "If the array is empty, return 0."
+    },
+    "restrictions": {
+      "es": [
+        "No devuelvas la palabra, solo su longitud."
+      ],
+      "en": [
+        "Do not return the word, only its length."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Guarda el máximo de longitudes encontrado."
+      ],
+      "en": [
+        "Track the maximum length found."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String[] words) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            "sol",
+            "luna",
+            "estrella"
+          ]
+        ],
+        "expected": 8
+      },
+      {
+        "input": [
+          [
+            "a",
+            "ab",
+            "abc"
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "double_each_number",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Duplicar cada número",
+      "en": "Double each number"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver un nuevo array con cada número multiplicado por 2.",
+      "en": "Complete the `solve(int[] numbers)` method to return a new array with each number multiplied by 2."
+    },
+    "instructions": {
+      "es": "Devuelve un array nuevo.",
+      "en": "Return a new array."
+    },
+    "restrictions": {
+      "es": [
+        "No modifiques el array original."
+      ],
+      "en": [
+        "Do not modify the original array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Crea un nuevo array y multiplica cada elemento por 2."
+      ],
+      "en": [
+        "Create a new array and multiply each element by 2."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          2,
+          4,
+          6
+        ]
+      },
+      {
+        "input": [
+          [
+            0,
+            -1
+          ]
+        ],
+        "expected": [
+          0,
+          -2
+        ]
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "count_letter_occurrences",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar apariciones de una letra",
+      "en": "Count letter occurrences"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text, String letter)` para devolver cuántas veces aparece `letter` en `text`.",
+      "en": "Complete the `solve(String text, String letter)` method to return how many times `letter` appears in `text`."
+    },
+    "instructions": {
+      "es": "Distingue mayúsculas y minúsculas.",
+      "en": "Case matters."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Recorre el texto y cuenta coincidencias con `letter.charAt(0)`."
+      ],
+      "en": [
+        "Iterate the text and count matches with `letter.charAt(0)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String text, String letter) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "banana",
+          "a"
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          "Hello",
+          "l"
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          "Hello",
+          "L"
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "remove_negative_numbers",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Quitar negativos",
+      "en": "Remove negative numbers"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver un array con solo los números no negativos.",
+      "en": "Complete the `solve(int[] numbers)` method to return an array with only non-negative numbers."
+    },
+    "instructions": {
+      "es": "Mantén el orden original. El 0 se conserva.",
+      "en": "Keep the original order. 0 must be kept."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un array nuevo."
+      ],
+      "en": [
+        "Return a new array."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Primero cuenta cuántos son >= 0, luego cópialo.",
+        "Puedes usar ArrayList<Integer>."
+      ],
+      "en": [
+        "First count how many are >= 0, then copy them.",
+        "You can use ArrayList<Integer>."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            -1,
+            2,
+            -3,
+            4
+          ]
+        ],
+        "expected": [
+          2,
+          4
+        ]
+      },
+      {
+        "input": [
+          [
+            0,
+            -2,
+            5
+          ]
+        ],
+        "expected": [
+          0,
+          5
+        ]
+      },
+      {
+        "input": [
+          [
+            -5,
+            -1
+          ]
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "is_sorted_ascending",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Está ordenada ascendente",
+      "en": "Is sorted ascending"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver `true` si el array está ordenado de menor a mayor.",
+      "en": "Complete the `solve(int[] numbers)` method to return `true` if the array is sorted from smallest to largest."
+    },
+    "instructions": {
+      "es": "Se permiten valores iguales consecutivos. Un array vacío cuenta como ordenado.",
+      "en": "Equal consecutive values are allowed. An empty array counts as sorted."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Compara cada elemento con el siguiente."
+      ],
+      "en": [
+        "Compare each element with the next one."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return true;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            2,
+            5
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "common_first_letter",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Misma primera letra",
+      "en": "Same first letter"
+    },
+    "description": {
+      "es": "Completa el método `solve(String word1, String word2)` para devolver `true` si ambas palabras empiezan por la misma letra.",
+      "en": "Complete the `solve(String word1, String word2)` method to return `true` if both words start with the same letter."
+    },
+    "instructions": {
+      "es": "Ignora mayúsculas y minúsculas. Si una está vacía, devuelve `false`.",
+      "en": "Ignore case. If one word is empty, return `false`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Compara los primeros caracteres en minúscula."
+      ],
+      "en": [
+        "Compare the first characters in lowercase."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static boolean solve(String word1, String word2) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "Casa",
+          "coche"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "sol",
+          "luna"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "",
+          "hola"
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "sum_digits_of_number",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Suma de cifras",
+      "en": "Sum of digits"
+    },
+    "description": {
+      "es": "Completa el método `solve(int n)` para devolver la suma de las cifras de `n`.",
+      "en": "Complete the `solve(int n)` method to return the sum of the digits of `n`."
+    },
+    "instructions": {
+      "es": "El número será no negativo.",
+      "en": "The number will be non-negative."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Convierte a String y suma cada dígito.",
+        "Usa `Character.getNumericValue(ch)`."
+      ],
+      "en": [
+        "Convert to String and sum each digit.",
+        "Use `Character.getNumericValue(ch)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          123
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          9001
+        ],
+        "expected": 10
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "repeat_text_n_times",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Repetir texto N veces",
+      "en": "Repeat text N times"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text, int n)` para devolver el texto repetido `n` veces.",
+      "en": "Complete the `solve(String text, int n)` method to return the text repeated `n` times."
+    },
+    "instructions": {
+      "es": "Si `n` es 0, devuelve una cadena vacía.",
+      "en": "If `n` is 0, return an empty string."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un String."
+      ],
+      "en": [
+        "Return a String."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `text.repeat(n)` (Java 11+)."
+      ],
+      "en": [
+        "Use `text.repeat(n)` (Java 11+)."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static String solve(String text, int n) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "ha",
+          3
+        ],
+        "expected": "hahaha"
+      },
+      {
+        "input": [
+          "x",
+          1
+        ],
+        "expected": "x"
+      },
+      {
+        "input": [
+          "abc",
+          0
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "second_largest_number",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Segundo mayor número",
+      "en": "Second largest number"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] numbers)` para devolver el segundo número más grande.",
+      "en": "Complete the `solve(int[] numbers)` method to return the second largest number in the array."
+    },
+    "instructions": {
+      "es": "El array tendrá al menos 2 elementos distintos.",
+      "en": "The array will contain at least 2 distinct elements."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un solo número."
+      ],
+      "en": [
+        "Return a single number."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Puedes ordenar el array de forma descendente.",
+        "O buscar el máximo y luego el segundo máximo."
+      ],
+      "en": [
+        "You can sort the array descending.",
+        "Or find max then second max."
+      ]
+    },
+    "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            5,
+            3,
+            9
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          [
+            10,
+            8
+          ]
+        ],
+        "expected": 8
+      },
+      {
+        "input": [
+          [
+            7,
+            2,
+            7,
+            5
+          ]
+        ],
+        "expected": 5
+      }
+    ]
+  },
+  {
+    "id": "count_uppercase_letters",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Contar mayúsculas",
+      "en": "Count uppercase letters"
+    },
+    "description": {
+      "es": "Completa el método `solve(String text)` para devolver cuántas letras mayúsculas hay en el texto.",
+      "en": "Complete the `solve(String text)` method to return how many uppercase letters are in the text."
+    },
+    "instructions": {
+      "es": "Solo cuentan letras, no números ni símbolos.",
+      "en": "Only letters count, not numbers or symbols."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa `Character.isUpperCase(ch)`."
+      ],
+      "en": [
+        "Use `Character.isUpperCase(ch)`."
+      ]
+    },
+    "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "HolaMUNDO"
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          "ABC123"
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "has_duplicates",
+    "language": "java",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "¿Tiene duplicados?",
+      "en": "Has duplicates?"
+    },
+    "description": {
+      "es": "Completa el método `solve(int[] items)` para devolver `true` si el array tiene al menos un valor repetido.",
+      "en": "Complete the `solve(int[] items)` method to return `true` if the array has at least one repeated value."
+    },
+    "instructions": {
+      "es": "Si todos los elementos son distintos, devuelve `false`.",
+      "en": "If all items are different, return `false`."
+    },
+    "restrictions": {
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
+    },
+    "hints": {
+      "es": [
+        "Usa un `HashSet<Integer>` para detectar duplicados."
+      ],
+      "en": [
+        "Use a `HashSet<Integer>` to detect duplicates."
+      ]
+    },
+    "starterCode": "import java.util.*;\n\nclass Solution {\n    public static boolean solve(int[] items) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
+    "solutionShape": {
+      "requiredTokens": [
+        "class Solution",
+        "public static",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "System.out.println("
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            1
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            4,
+            4,
+            4
+          ]
+        ],
+        "expected": true
+      }
+    ]
+  }
+]
