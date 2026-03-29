@@ -10,47 +10,39 @@ function HomePage({ onNavigate }) {
         badge: 'Retos diarios de programación',
         title: 'Mejora programando un reto corto cada día',
         description:
-          'CodeDaily es un juego web de desafíos de programación centrado en funciones cortas, validación automática y progreso local. En esta primera versión empezaremos solo con Python y solo con un reto diario.',
+          'CodeDaily es un juego web de desafíos de programación centrado en funciones cortas, validación automática y progreso local. Resuelve el reto diario en Python o Java.',
         primaryButton: 'Jugar Daily Challenge',
         card1Title: 'Un reto al día',
         card1Text:
           'Cada día habrá un único reto elegido de forma determinista según la fecha, igual para todo el mundo.',
         card2Title: 'Dificultades',
         card2Text:
-          'Novato, Intermedio y Pro, con base preparada para crecer más adelante.',
+          'Novato, Intermedio y Pro. El mismo reto disponible en Python y Java.',
         card3Title: 'Validación',
         card3Text:
-          'Las soluciones se comprueban con Python real y tests automáticos.',
+          'Las soluciones se comprueban con ejecución real: Python en el navegador con Pyodide, Java vía Judge0.',
         card4Title: 'Idiomas',
         card4Text:
           'El contenido del reto puede mostrarse en español o en inglés, manteniendo la misma solución.',
-        upcomingLabel: 'Próximamente disponible',
-        upcomingTitle: 'Java',
-        upcomingText:
-          'La arquitectura del proyecto ya está preparada para incorporar retos en Java en una próxima versión.',
       },
       en: {
         badge: 'Daily programming challenges',
         title: 'Improve by solving one short coding challenge every day',
         description:
-          'CodeDaily is a web game built around short programming challenges, automatic validation, and local progress tracking. In this first version we focus on Python and one daily challenge.',
+          'CodeDaily is a web game built around short programming challenges, automatic validation, and local progress tracking. Solve the daily challenge in Python or Java.',
         primaryButton: 'Play Daily Challenge',
         card1Title: 'One challenge a day',
         card1Text:
           'Each day there is a single challenge chosen deterministically from the date, the same for everyone.',
         card2Title: 'Difficulties',
         card2Text:
-          'Beginner, Intermediate, and Pro, with a base ready to grow later.',
+          'Beginner, Intermediate, and Pro. The same challenge available in Python and Java.',
         card3Title: 'Validation',
         card3Text:
-          'Solutions are checked with real Python execution and automatic tests.',
+          'Solutions are checked with real execution: Python in the browser via Pyodide, Java via Judge0.',
         card4Title: 'Languages',
         card4Text:
           'Challenge content can be shown in Spanish or English while keeping the same solution.',
-        upcomingLabel: 'Coming soon',
-        upcomingTitle: 'Java',
-        upcomingText:
-          'The project architecture is already prepared to support Java challenges in a future version.',
       },
     }[language];
   }, [language]);
@@ -66,14 +58,6 @@ function HomePage({ onNavigate }) {
           <button className="primary-button" onClick={() => onNavigate('daily')}>
             {text.primaryButton}
           </button>
-        </div>
-
-        <div className="upcoming-banner">
-          <span className="upcoming-label">{text.upcomingLabel}</span>
-          <div className="upcoming-content">
-            <h2>{text.upcomingTitle}</h2>
-            <p>{text.upcomingText}</p>
-          </div>
         </div>
       </div>
 
