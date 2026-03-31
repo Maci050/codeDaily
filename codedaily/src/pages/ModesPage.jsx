@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import GuessOutputPlayer from '../components/challenge/GuessOutputPlayer';
 import FindBugPlayer from '../components/challenge/FindBugPlayer';
+import GuessComplexityPlayer from '../components/challenge/GuessComplexityPlayer';
 import { getDaySeed } from '../services/challengeService';
 
 const ARCHIVE_START_DATE = '2026-03-22';
@@ -82,31 +83,31 @@ function ModesPage() {
             <div style={{ color: 'var(--muted)', fontSize: '0.82rem', marginTop: '4px' }}>{text.findBugDesc}</div>
           </button>
 
-          {/* Modo 3 — coming soon */}
-          <div
+          {/* Modo 3 — activo */}
+          <button
+            onClick={() => setActiveMode('guess_complexity')}
             style={{
-              background: 'var(--bg)',
-              border: '1px solid var(--border)',
+              background: activeMode === 'guess_complexity' ? 'var(--blue-soft)' : 'var(--bg)',
+              border: '1px solid ' + (activeMode === 'guess_complexity' ? 'rgba(88,166,255,0.3)' : 'var(--border)'),
               borderRadius: 'var(--radius-lg)',
               padding: '20px',
-              opacity: 0.5,
-              position: 'relative',
+              cursor: 'pointer',
+              textAlign: 'left',
+              transition: '0.15s ease',
             }}
           >
             <div style={{ fontFamily: 'var(--mono)', fontSize: '1.1rem', color: 'var(--text)', marginBottom: '6px' }}>⏱</div>
             <div style={{ fontFamily: 'var(--mono)', fontWeight: 600, color: 'var(--text)', fontSize: '0.9rem' }}>{text.guessComplexity}</div>
             <div style={{ color: 'var(--muted)', fontSize: '0.82rem', marginTop: '4px' }}>{text.guessComplexityDesc}</div>
-            <span style={{
-              position: 'absolute', top: '10px', right: '10px',
-              background: 'var(--yellow-soft)', color: 'var(--yellow)',
-              fontFamily: 'var(--mono)', fontSize: '0.7rem', padding: '2px 8px',
-              borderRadius: 'var(--radius-sm)', border: '1px solid rgba(227,179,65,0.2)',
-            }}>{text.comingSoon}</span>
-          </div>
+          </button>
         </div>
       </div>
 
       {/* Contenido del modo activo */}
+      {activeMode === 'guess_complexity' && (
+        <GuessComplexityPlayer selectedDate={selectedDate} />
+      )}
+
       {activeMode === 'find_bug' && (
         <FindBugPlayer
           selectedDate={selectedDate}
