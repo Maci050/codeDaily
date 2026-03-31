@@ -11,6 +11,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
         navDaily: 'Daily Challenge',
         navArchive: 'Archivo',
         navProfile: 'Progreso',
+        navModes: 'Modos',
         language: 'Idioma',
       },
       en: {
@@ -18,6 +19,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
         navDaily: 'Daily Challenge',
         navArchive: 'Archive',
         navProfile: 'Progress',
+        navModes: 'Modes',
         language: 'Language',
       },
     }[language];
@@ -28,6 +30,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
     { id: 'daily', label: text.navDaily },
     { id: 'archive', label: text.navArchive },
     { id: 'profile', label: text.navProfile },
+    { id: 'modes', label: text.navModes },
   ];
 
   return (

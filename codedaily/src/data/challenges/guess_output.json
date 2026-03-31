@@ -1,0 +1,302 @@
+[
+  {
+    "id": "go_double_plus_one",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(n):\n    return n * 2 + 1",
+    "input": [5],
+    "expected": "11",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "La función multiplica `n` por 2 y suma 1. Con `n=5`: `5*2+1 = 11`.", "en": "The function multiplies `n` by 2 and adds 1. With `n=5`: `5*2+1 = 11`." }
+  },
+  {
+    "id": "go_string_slice",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(text):\n    return text[1:-1]",
+    "input": ["hello"],
+    "expected": "ell",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`text[1:-1]` elimina el primer y último carácter. `'hello'` → `'ell'`.", "en": "`text[1:-1]` removes the first and last character. `'hello'` → `'ell'`." }
+  },
+  {
+    "id": "go_modulo_check",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(n):\n    return n % 3 == 0",
+    "input": [9],
+    "expected": "True",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`9 % 3 == 0` es `True` porque 9 es divisible entre 3.", "en": "`9 % 3 == 0` is `True` because 9 is divisible by 3." }
+  },
+  {
+    "id": "go_list_sum",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(nums):\n    return sum(nums) / len(nums)",
+    "input": [[2, 4, 6]],
+    "expected": "4.0",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Suma 2+4+6=12, divide entre 3 elementos → `4.0`.", "en": "Sum 2+4+6=12, divide by 3 elements → `4.0`." }
+  },
+  {
+    "id": "go_reverse_string",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(s):\n    return s[::-1]",
+    "input": ["abc"],
+    "expected": "cba",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`s[::-1]` invierte el string. `'abc'` → `'cba'`.", "en": "`s[::-1]` reverses the string. `'abc'` → `'cba'`." }
+  },
+  {
+    "id": "go_nested_list",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(nums):\n    return nums[-1]",
+    "input": [[10, 20, 30]],
+    "expected": "30",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`nums[-1]` accede al último elemento de la lista → `30`.", "en": "`nums[-1]` accesses the last element of the list → `30`." }
+  },
+  {
+    "id": "go_string_upper",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(s):\n    return s.upper() + '!'",
+    "input": ["hola"],
+    "expected": "HOLA!",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`.upper()` convierte a mayúsculas y se concatena `'!'`. `'hola'` → `'HOLA!'`.", "en": "`.upper()` converts to uppercase and `'!'` is concatenated. `'hola'` → `'HOLA!'`." }
+  },
+  {
+    "id": "go_boolean_and",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(a, b):\n    return a > 0 and b > 0",
+    "input": [3, -1],
+    "expected": "False",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`3 > 0` es `True` pero `-1 > 0` es `False`. `True and False` → `False`.", "en": "`3 > 0` is `True` but `-1 > 0` is `False`. `True and False` → `False`." }
+  },
+  {
+    "id": "go_len_check",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(s):\n    return len(s) > 5",
+    "input": ["python"],
+    "expected": "True",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`len('python')` es 6. `6 > 5` → `True`.", "en": "`len('python')` is 6. `6 > 5` → `True`." }
+  },
+  {
+    "id": "go_floor_div",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(n):\n    return n // 3",
+    "input": [10],
+    "expected": "3",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`//` es división entera. `10 // 3 = 3` (descarta el resto).", "en": "`//` is floor division. `10 // 3 = 3` (discards the remainder)." }
+  },
+  {
+    "id": "go_count_vowels",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(s):\n    return sum(1 for c in s if c in 'aeiou')",
+    "input": ["banana"],
+    "expected": "3",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Cuenta vocales en `'banana'`: a, a, a → `3`.", "en": "Counts vowels in `'banana'`: a, a, a → `3`." }
+  },
+  {
+    "id": "go_list_comprehension",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    return [x * x for x in nums if x % 2 == 0]",
+    "input": [[1, 2, 3, 4, 5]],
+    "expected": "[4, 16]",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Filtra pares (2, 4) y los eleva al cuadrado → `[4, 16]`.", "en": "Filters even numbers (2, 4) and squares them → `[4, 16]`." }
+  },
+  {
+    "id": "go_dict_access",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(d):\n    return sorted(d.keys())",
+    "input": [{"b": 2, "a": 1, "c": 3}],
+    "expected": "['a', 'b', 'c']",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`sorted()` ordena las claves alfabéticamente → `['a', 'b', 'c']`.", "en": "`sorted()` sorts keys alphabetically → `['a', 'b', 'c']`." }
+  },
+  {
+    "id": "go_string_split",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(s):\n    words = s.split()\n    return len(words)",
+    "input": ["hola mundo cruel"],
+    "expected": "3",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`.split()` divide por espacios → 3 palabras → `3`.", "en": "`.split()` splits by spaces → 3 words → `3`." }
+  },
+  {
+    "id": "go_nested_condition",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(n):\n    if n > 0:\n        return 'pos'\n    elif n < 0:\n        return 'neg'\n    else:\n        return 'zero'",
+    "input": [0],
+    "expected": "zero",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`n=0` no es positivo ni negativo → entra en `else` → `'zero'`.", "en": "`n=0` is neither positive nor negative → enters `else` → `'zero'`." }
+  },
+  {
+    "id": "go_zip_sum",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(a, b):\n    return [x + y for x, y in zip(a, b)]",
+    "input": [[1, 2, 3], [10, 20, 30]],
+    "expected": "[11, 22, 33]",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`zip` empareja elementos y los suma → `[11, 22, 33]`.", "en": "`zip` pairs elements and sums them → `[11, 22, 33]`." }
+  },
+  {
+    "id": "go_set_ops",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(a, b):\n    return len(set(a) & set(b))",
+    "input": [[1, 2, 3, 4], [3, 4, 5, 6]],
+    "expected": "2",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Intersección de `{1,2,3,4}` y `{3,4,5,6}` es `{3,4}` → longitud `2`.", "en": "Intersection of `{1,2,3,4}` and `{3,4,5,6}` is `{3,4}` → length `2`." }
+  },
+  {
+    "id": "go_reduce_like",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    result = 1\n    for n in nums:\n        result *= n\n    return result",
+    "input": [[2, 3, 4]],
+    "expected": "24",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Multiplica todos: `1*2*3*4 = 24`.", "en": "Multiplies all: `1*2*3*4 = 24`." }
+  },
+  {
+    "id": "go_string_replace",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(s):\n    return s.replace('a', '@').replace('e', '3')",
+    "input": ["banana"],
+    "expected": "b@n@n@",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Reemplaza `'a'` por `'@'` en `'banana'` → `'b@n@n@'`. No hay `'e'` así que el segundo replace no cambia nada.", "en": "Replaces `'a'` with `'@'` in `'banana'` → `'b@n@n@'`. No `'e'` present so second replace changes nothing." }
+  },
+  {
+    "id": "go_enumerate",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(items):\n    return [(i, v) for i, v in enumerate(items)]",
+    "input": [["a", "b", "c"]],
+    "expected": "[(0, 'a'), (1, 'b'), (2, 'c')]",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`enumerate` añade índice a cada elemento → lista de tuplas `(índice, valor)`.", "en": "`enumerate` adds index to each element → list of `(index, value)` tuples." }
+  },
+  {
+    "id": "go_recursive_fact",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(n):\n    if n <= 1:\n        return 1\n    return n * solve(n - 1)",
+    "input": [5],
+    "expected": "120",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Función factorial recursiva. `5! = 5*4*3*2*1 = 120`.", "en": "Recursive factorial. `5! = 5*4*3*2*1 = 120`." }
+  },
+  {
+    "id": "go_closure",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(n):\n    def inner(x):\n        return x + n\n    return inner(10)",
+    "input": [5],
+    "expected": "15",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`inner` captura `n=5` del scope externo. `inner(10)` devuelve `10+5=15`.", "en": "`inner` captures `n=5` from the outer scope. `inner(10)` returns `10+5=15`." }
+  },
+  {
+    "id": "go_dict_comprehension",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(words):\n    return {w: len(w) for w in words}",
+    "input": [["hi", "hello", "hey"]],
+    "expected": "{'hi': 2, 'hello': 5, 'hey': 3}",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Diccionario con cada palabra como clave y su longitud como valor.", "en": "Dictionary with each word as key and its length as value." }
+  },
+  {
+    "id": "go_short_circuit",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(lst):\n    return lst and lst[0]",
+    "input": [[]],
+    "expected": "[]",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Con `lst=[]` (falsy), `and` hace cortocircuito y devuelve el operando izquierdo → `[]`.", "en": "With `lst=[]` (falsy), `and` short-circuits and returns the left operand → `[]`." }
+  },
+  {
+    "id": "go_generator_sum",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(n):\n    return sum(i * i for i in range(n))",
+    "input": [4],
+    "expected": "14",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Suma `0²+1²+2²+3² = 0+1+4+9 = 14`.", "en": "Sums `0²+1²+2²+3² = 0+1+4+9 = 14`." }
+  },
+  {
+    "id": "go_max_key",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(d):\n    return max(d, key=d.get)",
+    "input": [{"a": 3, "b": 7, "c": 1}],
+    "expected": "b",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`max` con `key=d.get` busca la clave cuyo valor es mayor. `'b'` tiene valor `7` → devuelve `'b'`.", "en": "`max` with `key=d.get` finds the key with the highest value. `'b'` has value `7` → returns `'b'`." }
+  },
+  {
+    "id": "go_walrus",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(nums):\n    if (n := len(nums)) > 3:\n        return n\n    return 0",
+    "input": [[1, 2, 3, 4, 5]],
+    "expected": "5",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`:=` asigna `len(nums)=5` a `n` y evalúa la condición. `5 > 3` → devuelve `n=5`.", "en": "`:=` assigns `len(nums)=5` to `n` and evaluates the condition. `5 > 3` → returns `n=5`." }
+  },
+  {
+    "id": "go_chained_compare",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(n):\n    return 1 < n < 10",
+    "input": [5],
+    "expected": "True",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Python permite comparaciones encadenadas. `1 < 5 < 10` → `True`.", "en": "Python allows chained comparisons. `1 < 5 < 10` → `True`." }
+  },
+  {
+    "id": "go_star_unpack",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(lst):\n    first, *rest = lst\n    return len(rest)",
+    "input": [[10, 20, 30, 40]],
+    "expected": "3",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`first=10`, `rest=[20,30,40]`. `len(rest) = 3`.", "en": "`first=10`, `rest=[20,30,40]`. `len(rest) = 3`." }
+  },
+  {
+    "id": "go_any_all",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(nums):\n    return any(n < 0 for n in nums) and all(n != 0 for n in nums)",
+    "input": [[1, -2, 3]],
+    "expected": "True",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`any(n<0)` es `True` (-2 existe). `all(n!=0)` es `True` (ninguno es 0). `True and True` → `True`.", "en": "`any(n<0)` is `True` (-2 exists). `all(n!=0)` is `True` (none is 0). `True and True` → `True`." }
+  }
+]

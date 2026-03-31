@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import DailyPage from './pages/DailyPage';
 import ArchivePage from './pages/ArchivePage';
 import ProfilePage from './pages/ProfilePage';
+import ModesPage from './pages/ModesPage';
 import { useLanguage } from './context/LanguageContext';
 import HowToPlayModal from './components/HowToPlayModal';
 import { shouldShowTutorial, markTutorialSeen } from './services/uiService';
@@ -49,6 +50,8 @@ function App() {
         return <ArchivePage />;
       case 'profile':
         return <ProfilePage />;
+      case 'modes':
+        return <ModesPage />;
       case 'home':
       default:
         return <HomePage onNavigate={setCurrentPage} />;
