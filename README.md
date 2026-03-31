@@ -3,7 +3,7 @@
 **CodeDaily** is a web-based daily coding challenge game focused on short, practical programming problems.
 
 Inspired by games like Wordle, the goal is simple:
-👉 **solve one programming challenge every day.**
+👉 **solve one programming challenge every day.**s
 
 ---
 
@@ -49,6 +49,13 @@ Inspired by games like Wordle, the goal is simple:
 * 📅 **Archive Mode**
   Play challenges from past days (from launch date: 2026-03-22)
 
+* 🎮 **Extra Game Modes**
+  Three additional modes available under the **Modes** section:
+
+  * **What does it return?** — Read code and predict the output. 3 attempts, solution revealed only after all attempts are used.
+  * **Find the bug** — Fix broken code so all tests pass. Uses real Python execution via Pyodide.
+  * **What's the complexity?** — Multiple choice: pick the correct Big O time complexity. 2 attempts, wrong options are disabled progressively.
+
 ---
 
 ## 🧱 Tech Stack
@@ -66,16 +73,25 @@ Inspired by games like Wordle, the goal is simple:
 ```
 src/
 ├── components/
-│   ├── layout/         # Header, Footer
-│   └── challenge/      # ChallengePlayer (core game component)
-├── pages/              # HomePage, DailyPage, ArchivePage, ProfilePage
+│   ├── layout/                     # Header, Footer
+│   └── challenge/
+│       ├── ChallengePlayer.jsx     # Daily challenge (Python & Java)
+│       ├── GuessOutputPlayer.jsx   # "What does it return?" mode
+│       ├── FindBugPlayer.jsx       # "Find the bug" mode
+│       └── GuessComplexityPlayer.jsx # "What's the complexity?" mode
+├── pages/
+│   ├── HomePage.jsx
+│   ├── DailyPage.jsx
+│   ├── ArchivePage.jsx
+│   ├── ProfilePage.jsx
+│   └── ModesPage.jsx
 ├── services/
-│   ├── challengeService.js         # Challenge selection logic
-│   ├── progressService.js          # localStorage progress tracking
-│   ├── pythonRunnerService.js      # Pyodide integration
-│   ├── javaRunnerService.js        # Judge0 integration
-│   ├── solutionValidationService.js # Language-agnostic validator
-│   └── uiService.js                # UI preferences persistence
+│   ├── challengeService.js           # Challenge selection logic
+│   ├── progressService.js            # localStorage progress tracking
+│   ├── pythonRunnerService.js        # Pyodide integration
+│   ├── javaRunnerService.js          # Judge0 integration
+│   ├── solutionValidationService.js  # Language-agnostic validator
+│   └── uiService.js                  # UI preferences persistence
 ├── data/
 │   └── challenges/
 │       ├── python_novato.json
@@ -83,7 +99,10 @@ src/
 │       ├── python_pro.json
 │       ├── java_novato.json
 │       ├── java_intermedio.json
-│       └── java_pro.json
+│       ├── java_pro.json
+│       ├── guess_output.json         # "What does it return?" challenges
+│       ├── find_bug.json             # "Find the bug" challenges
+│       └── guess_complexity.json     # "What's the complexity?" challenges
 ├── context/
 │   └── LanguageContext.jsx
 └── styles.css
@@ -138,10 +157,11 @@ No backend or environment variables required — Python runs in the browser via 
 
 ## 🧠 How It Works
 
-* Challenges are stored in JSON files (150 Python + 150 Java)
+* Challenges are stored in JSON files (150 Python + 150 Java for the daily mode, plus 64 challenges across the three extra modes)
 * A daily challenge is selected deterministically using the date and difficulty — same index for both languages so switching between Python and Java always shows the same problem
 * Python code is executed entirely in the browser using Pyodide (WebAssembly)
 * Java code is sent to the Judge0 public API and results are polled
+* Extra modes use their own challenge banks and share the same progress system (localStorage)
 * Progress is stored locally in localStorage (no account needed)
 
 ---
@@ -149,8 +169,8 @@ No backend or environment variables required — Python runs in the browser via 
 ## 🔮 Roadmap
 
 * 🌍 More programming languages
-* 🧠 Smarter hints
-* 🎯 More challenge types (debug, refactor, reorder)
+* 🎯 More challenge types
+* 📤 Share your result (Wordle-style)
 
 ---
 
