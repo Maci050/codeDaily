@@ -223,11 +223,11 @@
     "id": "go_dict_comprehension",
     "type": "guess_output",
     "difficulty": "pro",
-    "code": "def solve(words):\n    return {w: len(w) for w in words}",
-    "input": [["hi", "hello", "hey"]],
-    "expected": "{'hi': 2, 'hello': 5, 'hey': 3}",
+    "code": "def solve(words):\n    return {w: (i, len(w)) for i, w in enumerate(words) if len(set(w)) > 2}",
+    "input": [["hi", "loop", "sky", "aaaa"]],
+    "expected": "{'loop': (1, 4), 'sky': (2, 3)}",
     "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
-    "explanation": { "es": "Diccionario con cada palabra como clave y su longitud como valor.", "en": "Dictionary with each word as key and its length as value." }
+    "explanation": { "es": "Usa comprensión de diccionario con `enumerate`, guarda `(índice, longitud)` y filtra palabras con más de 2 caracteres distintos (`len(set(w)) > 2`). Resultado: `{'loop': (1, 4), 'sky': (2, 3)}`.", "en": "It uses a dictionary comprehension with `enumerate`, stores `(index, length)`, and filters words with more than 2 distinct characters (`len(set(w)) > 2`). Result: `{'loop': (1, 4), 'sky': (2, 3)}`." }
   },
   {
     "id": "go_short_circuit",
@@ -273,21 +273,21 @@
     "id": "go_chained_compare",
     "type": "guess_output",
     "difficulty": "pro",
-    "code": "def solve(n):\n    return 1 < n < 10",
-    "input": [5],
-    "expected": "True",
+    "code": "def solve(n):\n    n = abs(n)\n    return n != 0 and (n & (n - 1)) == 0",
+    "input": [18],
+    "expected": "False",
     "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
-    "explanation": { "es": "Python permite comparaciones encadenadas. `1 < 5 < 10` → `True`.", "en": "Python allows chained comparisons. `1 < 5 < 10` → `True`." }
+    "explanation": { "es": "Primero convierte a valor absoluto. Luego comprueba con operación bit a bit si `n` es potencia de 2 usando `(n & (n - 1)) == 0`, excluyendo `0`. Con `n=18`, el resultado es `False`.", "en": "It first converts to absolute value. Then it checks with a bitwise operation whether `n` is a power of 2 using `(n & (n - 1)) == 0`, excluding `0`. With `n=18`, the result is `False`." }
   },
   {
     "id": "go_star_unpack",
     "type": "guess_output",
     "difficulty": "pro",
-    "code": "def solve(lst):\n    first, *rest = lst\n    return len(rest)",
-    "input": [[10, 20, 30, 40]],
-    "expected": "3",
+    "code": "def solve(lst):\n    first, *middle, last = lst\n    return sum(middle) - first * last",
+    "input": [[2, 5, 7, 3]],
+    "expected": "6",
     "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
-    "explanation": { "es": "`first=10`, `rest=[20,30,40]`. `len(rest) = 3`.", "en": "`first=10`, `rest=[20,30,40]`. `len(rest) = 3`." }
+    "explanation": { "es": "Desempaqueta con `*` en medio: `first=2`, `middle=[5,7]`, `last=3`. Luego calcula `sum(middle) - first*last = 12 - 6 = 6`.", "en": "It unpacks with `*` in the middle: `first=2`, `middle=[5,7]`, `last=3`. Then computes `sum(middle) - first*last = 12 - 6 = 6`." }
   },
   {
     "id": "go_any_all",
