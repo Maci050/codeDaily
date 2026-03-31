@@ -4,6 +4,8 @@ import { getDaySeed } from '../../services/challengeService';
 import { getProgressEntry, updateProgressEntry, markTodayCompleted } from '../../services/progressService';
 import challenges from '../../data/challenges/guess_output.json';
 
+const MAX_ATTEMPTS = 3;
+
 function parseYMDToUTCDate(ymd) {
   const [year, month, day] = ymd.split('-').map(Number);
   return new Date(Date.UTC(year, month - 1, day));
@@ -25,6 +27,25 @@ function getDailyGuessChallenge(date, difficulty) {
   return pool[index];
 }
 
+/**
+ * Normaliza una respuesta para comparación flexible:
+ * - Elimina espacios dentro de listas/tuplas: [4, 16] → [4,16]
+ * - Normaliza booleanos: true/false → True/False
+ * - Trim de espacios exteriores
+ */
+function normalize(value) {
+  return value
+    .trim()
+    .replace(/,\s+/g, ',')        // [4, 16] → [4,16]
+    .replace(/\[\s+/g, '[')       // [ 4 → [4
+    .replace(/\s+\]/g, ']')       // 4 ] → 4]
+    .replace(/\(\s+/g, '(')
+    .replace(/\s+\)/g, ')')
+    .replace(/^true$/i, 'True')   // true → True
+    .replace(/^false$/i, 'False') // false → False
+    .replace(/^none$/i, 'None');  // none → None
+}
+
 function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateChange = null, minSelectableDate = null }) {
   const { language } = useLanguage();
   const [difficulty, setDifficulty] = useState('novato');
@@ -33,9 +54,13 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
   const [correct, setCorrect] = useState(false);
   const [attemptCount, setAttemptCount] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [locked, setLocked] = useState(false); // agotó intentos sin acertar
 
   const challengeDate = useMemo(() => parseYMDToUTCDate(selectedDate), [selectedDate]);
   const challenge = useMemo(() => getDailyGuessChallenge(challengeDate, difficulty), [challengeDate, difficulty]);
+
+  const attemptsLeft = MAX_ATTEMPTS - attemptCount;
+  const isOver = completed || locked;
 
   const text = useMemo(() => ({
     es: {
@@ -47,17 +72,20 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
       difficultyPro: 'Pro',
       inputLabel: 'Entrada',
       outputLabel: 'Tu respuesta',
-      placeholder: 'Escribe el valor de retorno exacto...',
+      placeholder: 'Escribe el valor de retorno...',
       submitButton: 'Comprobar',
       correctTitle: '¡Correcto!',
       wrongTitle: 'Incorrecto',
+      lockedTitle: 'Sin más intentos',
+      lockedText: 'Has agotado los 3 intentos.',
       explanation: 'Explicación',
       expectedLabel: 'Respuesta correcta',
       attempts: 'Intentos',
+      attemptsLeft: 'Intentos restantes',
       completedBadge: 'Completado',
       dateLabel: 'Fecha',
       tryAgain: 'Intentar de nuevo',
-      hint: 'Pista: escribe el valor exacto tal como lo imprimiría Python (True/False en mayúscula, listas con corchetes...)',
+      hint: 'Python imprime True/False (mayúscula), listas con corchetes y comas sin espacios.',
     },
     en: {
       title: 'What does it return?',
@@ -68,27 +96,36 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
       difficultyPro: 'Pro',
       inputLabel: 'Input',
       outputLabel: 'Your answer',
-      placeholder: 'Write the exact return value...',
+      placeholder: 'Write the return value...',
       submitButton: 'Check',
       correctTitle: 'Correct!',
       wrongTitle: 'Incorrect',
+      lockedTitle: 'No more attempts',
+      lockedText: 'You have used all 3 attempts.',
       explanation: 'Explanation',
       expectedLabel: 'Correct answer',
       attempts: 'Attempts',
+      attemptsLeft: 'Attempts left',
       completedBadge: 'Completed',
       dateLabel: 'Date',
       tryAgain: 'Try again',
-      hint: 'Hint: write the exact value as Python would print it (True/False capitalized, lists with brackets...)',
+      hint: 'Python prints True/False (capitalized), lists with brackets and no spaces after commas.',
     },
   }[language]), [language]);
 
   // Cargar progreso al cambiar reto
   useEffect(() => {
     if (!challenge) return;
-    const progress = getProgressEntry({ date: challengeDate, challengeId: `go_${challenge.id}_${difficulty}`, mode: 'normal' });
-    setAttemptCount(progress.attempts || 0);
+    const progress = getProgressEntry({
+      date: challengeDate,
+      challengeId: `go_${challenge.id}_${difficulty}`,
+      mode: 'normal',
+    });
+    const attempts = progress.attempts || 0;
+    setAttemptCount(attempts);
     setCompleted(progress.completed || false);
-    setSubmitted(progress.completed || false);
+    setLocked(progress.locked || false);
+    setSubmitted(progress.completed || progress.locked || false);
     setCorrect(progress.completed || false);
     setAnswer('');
   }, [challenge?.id, difficulty, challengeDate]);
@@ -100,21 +137,27 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
       date: challengeDate,
       challengeId: `go_${challenge.id}_${difficulty}`,
       mode: 'normal',
-      update: { attempts: attemptCount, completed, code: answer },
+      update: { attempts: attemptCount, completed, locked },
     });
-  }, [attemptCount, completed, challenge, difficulty, challengeDate]);
+  }, [attemptCount, completed, locked, challenge, difficulty, challengeDate]);
 
   function handleSubmit() {
-    if (!challenge || completed) return;
-    const trimmed = answer.trim();
-    const isCorrect = trimmed === challenge.expected;
+    if (!challenge || isOver) return;
+    const isCorrect = normalize(answer) === normalize(challenge.expected);
     const newAttempts = attemptCount + 1;
     setAttemptCount(newAttempts);
     setSubmitted(true);
     setCorrect(isCorrect);
+
     if (isCorrect) {
       setCompleted(true);
-      markTodayCompleted({ date: challengeDate, challengeId: `go_${challenge.id}_${difficulty}`, mode: 'normal' });
+      markTodayCompleted({
+        date: challengeDate,
+        challengeId: `go_${challenge.id}_${difficulty}`,
+        mode: 'normal',
+      });
+    } else if (newAttempts >= MAX_ATTEMPTS) {
+      setLocked(true);
     }
   }
 
@@ -151,7 +194,11 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
             )}
             <div className="filter-box">
               <label htmlFor="go-difficulty">{text.difficultyLabel}</label>
-              <select id="go-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+              <select
+                id="go-difficulty"
+                value={difficulty}
+                onChange={(e) => setDifficulty(e.target.value)}
+              >
                 <option value="novato">{text.difficultyNovato}</option>
                 <option value="intermedio">{text.difficultyIntermedio}</option>
                 <option value="pro">{text.difficultyPro}</option>
@@ -164,7 +211,7 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
         <div className="badge-row" style={{ marginBottom: '20px' }}>
           <span className="difficulty-pill">{difficulty}</span>
           {completed && <span className="completed-pill">{text.completedBadge}</span>}
-          <span className="difficulty-pill">{text.attempts}: {attemptCount}</span>
+          <span className="difficulty-pill">{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
         </div>
 
         {/* Código */}
@@ -186,7 +233,7 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
           <p className="muted-text" style={{ marginTop: '12px', fontSize: '0.82rem' }}>{text.hint}</p>
         </div>
 
-        {/* Editor de respuesta */}
+        {/* Input de respuesta */}
         <div className="editor-card">
           <div className="challenge-section" style={{ marginTop: 0 }}>
             <h3>{text.outputLabel}</h3>
@@ -194,9 +241,11 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
               type="text"
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && !submitted && handleSubmit()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !submitted && !isOver) handleSubmit();
+              }}
               placeholder={text.placeholder}
-              disabled={completed}
+              disabled={isOver}
               style={{
                 width: '100%',
                 padding: '14px 16px',
@@ -212,25 +261,52 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
           </div>
 
           <div className="editor-actions">
-            {!submitted && (
-              <button className="primary-button" onClick={handleSubmit} disabled={!answer.trim() || completed}>
+            {!submitted && !isOver && (
+              <button
+                className="primary-button"
+                onClick={handleSubmit}
+                disabled={!answer.trim()}
+              >
                 {text.submitButton}
               </button>
             )}
-            {submitted && !correct && (
+            {submitted && !correct && !locked && (
               <button className="secondary-button" onClick={handleTryAgain}>
                 {text.tryAgain}
               </button>
             )}
           </div>
 
-          {/* Resultado */}
-          {submitted && (
-            <div className={`feedback-box ${correct ? 'success-box' : 'error-box'}`} style={{ marginTop: '20px' }}>
-              <h4>{correct ? text.correctTitle : text.wrongTitle}</h4>
-              {!correct && (
-                <p>{text.expectedLabel}: <code style={{ fontFamily: 'var(--mono)', color: 'var(--green)' }}>{challenge.expected}</code></p>
-              )}
+          {/* Resultado tras cada intento fallido (sin mostrar solución) */}
+          {submitted && !correct && !locked && (
+            <div className="feedback-box error-box" style={{ marginTop: '20px' }}>
+              <h4>{text.wrongTitle}</h4>
+              <p>{text.attemptsLeft}: {attemptsLeft}</p>
+            </div>
+          )}
+
+          {/* Bloqueado — agotó intentos, ahora sí se muestra la solución */}
+          {locked && (
+            <div className="feedback-box error-box" style={{ marginTop: '20px' }}>
+              <h4>{text.lockedTitle}</h4>
+              <p>{text.lockedText}</p>
+              <p style={{ marginTop: '8px' }}>
+                {text.expectedLabel}:{' '}
+                <code style={{ fontFamily: 'var(--mono)', color: 'var(--green)' }}>
+                  {challenge.expected}
+                </code>
+              </p>
+              <div style={{ marginTop: '10px' }}>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{text.explanation}</strong>
+                <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Correcto */}
+          {correct && (
+            <div className="feedback-box success-box" style={{ marginTop: '20px' }}>
+              <h4>{text.correctTitle}</h4>
               <div style={{ marginTop: '10px' }}>
                 <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{text.explanation}</strong>
                 <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
