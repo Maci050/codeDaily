@@ -3,7 +3,7 @@
 **CodeDaily** is a web-based daily coding challenge game focused on short, practical programming problems.
 
 Inspired by games like Wordle, the goal is simple:
-👉 **solve one programming challenge every day.**s
+👉 **solve one programming challenge every day.**
 
 ---
 
