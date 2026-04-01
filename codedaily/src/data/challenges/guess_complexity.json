@@ -219,5 +219,122 @@
       "es": "Exponenciación rápida: cuando el exponente es par, se divide entre 2 en cada llamada → profundidad de recursión O(log n) → **O(log n)**.",
       "en": "Fast exponentiation: when exponent is even, it halves each call → recursion depth O(log n) → **O(log n)**."
     }
+  },
+  {
+    "id": "gc_novato_len",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(s):\n    return len(s)",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "expected": "O(1)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "`len(s)` en strings de Python se obtiene en tiempo constante porque la longitud se guarda internamente → **O(1)**.",
+      "en": "`len(s)` on Python strings is constant time because the length is stored internally → **O(1)**."
+    }
+  },
+  {
+    "id": "gc_novato_find_max",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(nums):\n    m = nums[0]\n    for n in nums:\n        if n > m:\n            m = n\n    return m",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "expected": "O(n)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "Recorre todos los elementos una vez para encontrar el máximo. Una sola pasada de `n` elementos → **O(n)**.",
+      "en": "It scans all elements once to find the maximum. One pass over `n` elements → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_novato_double_nested",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(nums):\n    count = 0\n    for i in nums:\n        for j in nums:\n            if i != j:\n                count += 1\n    return count",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "expected": "O(n²)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "Hay dos bucles anidados que iteran sobre la misma lista. El total de iteraciones crece como `n * n` → **O(n²)**.",
+      "en": "There are two nested loops over the same list. Total iterations grow as `n * n` → **O(n²)**."
+    }
+  },
+  {
+    "id": "gc_intermedio_two_pointer",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        s = nums[left] + nums[right]\n        if s == target:\n            return [left, right]\n        if s < target:\n            left += 1\n        else:\n            right -= 1\n    return []",
+    "options": ["O(log n)", "O(n)", "O(n log n)", "O(n²)"],
+    "expected": "O(n)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "Con dos punteros en arreglo ordenado, cada iteración mueve `left` o `right`. Cada índice se mueve como máximo `n` veces en total → **O(n)**.",
+      "en": "With two pointers on a sorted array, each iteration moves `left` or `right`. Each index moves at most `n` times total → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_intermedio_merge_like",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(a, b):\n    i = j = 0\n    out = []\n    while i < len(a) and j < len(b):\n        if a[i] < b[j]:\n            out.append(a[i])\n            i += 1\n        else:\n            out.append(b[j])\n            j += 1\n    out.extend(a[i:])\n    out.extend(b[j:])\n    return out",
+    "options": ["O(log n)", "O(n)", "O(n + m)", "O(n × m)"],
+    "expected": "O(n + m)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "Es el paso de mezcla de merge sort: cada elemento de `a` y `b` se procesa una sola vez. Total proporcional a `n + m` → **O(n + m)**.",
+      "en": "This is merge sort's merge step: each element of `a` and `b` is processed once. Total work proportional to `n + m` → **O(n + m)**."
+    }
+  },
+  {
+    "id": "gc_intermedio_membership_loop",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(a, b):\n    count = 0\n    for x in a:\n        if x in b:\n            count += 1\n    return count",
+    "options": ["O(n)", "O(n log n)", "O(n + m)", "O(n × m)"],
+    "expected": "O(n × m)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "Para cada elemento de `a` (`n`), la operación `x in b` sobre lista cuesta O(m). Producto de costos: **O(n × m)**.",
+      "en": "For each element in `a` (`n`), `x in b` on a list costs O(m). Product of costs: **O(n × m)**."
+    }
+  },
+  {
+    "id": "gc_pro_divide_conquer_sum",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(nums):\n    if len(nums) <= 1:\n        return sum(nums)\n    mid = len(nums) // 2\n    return solve(nums[:mid]) + solve(nums[mid:])",
+    "options": ["O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+    "expected": "O(n log n)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "La recursión divide en dos mitades (profundidad log n), pero cada nivel copia sublistas con slicing por un total O(n). Entonces: O(n) por nivel × log n niveles = **O(n log n)**.",
+      "en": "Recursion splits into halves (depth log n), but each level copies sublists via slicing for total O(n). So: O(n) per level × log n levels = **O(n log n)**."
+    }
+  },
+  {
+    "id": "gc_pro_backtracking_subsets",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(nums):\n    out = []\n    def bt(i, path):\n        if i == len(nums):\n            out.append(path[:])\n            return\n        bt(i + 1, path)\n        path.append(nums[i])\n        bt(i + 1, path)\n        path.pop()\n    bt(0, [])\n    return out",
+    "options": ["O(n)", "O(n log n)", "O(2ⁿ)", "O(n²)"],
+    "expected": "O(2ⁿ)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "Genera todos los subconjuntos: por cada elemento hay 2 decisiones (tomar/no tomar). El árbol tiene alrededor de 2ⁿ hojas → tiempo exponencial **O(2ⁿ)**.",
+      "en": "It generates all subsets: each element has 2 choices (take/skip). The recursion tree has about 2ⁿ leaves → exponential time **O(2ⁿ)**."
+    }
+  },
+  {
+    "id": "gc_pro_recursive_binary_search",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(nums, target, lo=0, hi=None):\n    if hi is None:\n        hi = len(nums) - 1\n    if lo > hi:\n        return -1\n    mid = (lo + hi) // 2\n    if nums[mid] == target:\n        return mid\n    if nums[mid] < target:\n        return solve(nums, target, mid + 1, hi)\n    return solve(nums, target, lo, mid - 1)",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    "expected": "O(log n)",
+    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "explanation": {
+      "es": "Es búsqueda binaria recursiva: en cada llamada se reduce el rango a la mitad. Número de niveles de recursión: **O(log n)**.",
+      "en": "This is recursive binary search: each call halves the search range. Number of recursion levels: **O(log n)**."
+    }
   }
 ]

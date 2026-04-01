@@ -372,5 +372,203 @@
       { "input": [[3, 2, 4], 6], "expected": [1, 2] },
       { "input": [[3, 3], 6], "expected": [0, 1] }
     ]
+  },
+  {
+    "id": "fb_novato_case_sensitive_vowel",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función debería detectar si una letra es vocal, pero falla con mayúsculas.",
+      "en": "This function should detect whether a letter is a vowel, but it fails with uppercase letters."
+    },
+    "buggyCode": "def solve(ch):\n    return ch in 'aeiou'",
+    "starterCode": "def solve(ch):\n    return ch in 'aeiou'",
+    "hints": {
+      "es": ["`'A'` no está en `'aeiou'`.", "Normaliza con `lower()` antes de comparar."],
+      "en": ["`'A'` is not in `'aeiou'`.", "Normalize with `lower()` before comparing."]
+    },
+    "tests": [
+      { "input": ["a"], "expected": true },
+      { "input": ["E"], "expected": true },
+      { "input": ["z"], "expected": false }
+    ]
+  },
+  {
+    "id": "fb_novato_average_divisor",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función debería calcular el promedio de una lista, pero divide por un valor incorrecto.",
+      "en": "This function should compute the average of a list, but it divides by the wrong value."
+    },
+    "buggyCode": "def solve(nums):\n    return sum(nums) / (len(nums) - 1)",
+    "starterCode": "def solve(nums):\n    return sum(nums) / (len(nums) - 1)",
+    "hints": {
+      "es": ["El promedio es suma entre cantidad de elementos.", "Revisa el denominador de la división."],
+      "en": ["Average is sum divided by number of elements.", "Check the division denominator."]
+    },
+    "tests": [
+      { "input": [[2, 4, 6]], "expected": 4.0 },
+      { "input": [[10, 20]], "expected": 15.0 },
+      { "input": [[5]], "expected": 5.0 }
+    ]
+  },
+  {
+    "id": "fb_novato_reverse_slice",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función debería devolver el string invertido, pero el slicing está mal.",
+      "en": "This function should return the reversed string, but the slice is wrong."
+    },
+    "buggyCode": "def solve(text):\n    return text[::-2]",
+    "starterCode": "def solve(text):\n    return text[::-2]",
+    "hints": {
+      "es": ["`[::-2]` salta caracteres.", "Para invertir completo usa paso `-1`."],
+      "en": ["`[::-2]` skips characters.", "To reverse fully, use step `-1`."]
+    },
+    "tests": [
+      { "input": ["abcd"], "expected": "dcba" },
+      { "input": ["python"], "expected": "nohtyp" },
+      { "input": ["a"], "expected": "a" }
+    ]
+  },
+  {
+    "id": "fb_intermedio_floor_division",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función debería calcular la mitad exacta, pero trunca el resultado en impares.",
+      "en": "This function should compute the exact half, but it truncates odd values."
+    },
+    "buggyCode": "def solve(n):\n    return n // 2",
+    "starterCode": "def solve(n):\n    return n // 2",
+    "hints": {
+      "es": ["`//` hace división entera.", "Para mitad exacta usa `/`."],
+      "en": ["`//` is floor division.", "Use `/` for exact half."]
+    },
+    "tests": [
+      { "input": [9], "expected": 4.5 },
+      { "input": [10], "expected": 5.0 },
+      { "input": [1], "expected": 0.5 }
+    ]
+  },
+  {
+    "id": "fb_intermedio_sort_mutates",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función debería devolver una lista ordenada sin modificar la original, pero la muta.",
+      "en": "This function should return a sorted list without modifying the original, but it mutates it."
+    },
+    "buggyCode": "def solve(nums):\n    nums.sort()\n    return nums",
+    "starterCode": "def solve(nums):\n    nums.sort()\n    return nums",
+    "hints": {
+      "es": ["`.sort()` modifica la lista en sitio.", "Usa `sorted(nums)` o una copia antes de ordenar."],
+      "en": ["`.sort()` mutates the list in place.", "Use `sorted(nums)` or copy before sorting."]
+    },
+    "tests": [
+      { "input": [[3, 1, 2]], "expected": [1, 2, 3] },
+      { "input": [[5, 5, 1]], "expected": [1, 5, 5] },
+      { "input": [[9]], "expected": [9] }
+    ]
+  },
+  {
+    "id": "fb_intermedio_index_zero",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función debería devolver `True` si encuentra el target, pero falla cuando está en la posición 0.",
+      "en": "This function should return `True` if target is found, but it fails when target is at index 0."
+    },
+    "buggyCode": "def solve(items, target):\n    return bool(items.index(target))",
+    "starterCode": "def solve(items, target):\n    return bool(items.index(target))",
+    "hints": {
+      "es": ["`bool(0)` es `False`.", "No conviertas el índice directamente a booleano para esta verificación."],
+      "en": ["`bool(0)` is `False`.", "Do not convert index directly to bool for this check."]
+    },
+    "tests": [
+      { "input": [[4, 2, 9], 4], "expected": true },
+      { "input": [[4, 2, 9], 9], "expected": true },
+      { "input": [[1, 3, 5], 2], "expected": false }
+    ]
+  },
+  {
+    "id": "fb_pro_recursive_factorial_base",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función recursiva debería calcular factorial, pero su caso base rompe el resultado.",
+      "en": "This recursive function should compute factorial, but its base case breaks the result."
+    },
+    "buggyCode": "def solve(n):\n    if n == 0:\n        return 0\n    return n * solve(n - 1)",
+    "starterCode": "def solve(n):\n    if n == 0:\n        return 0\n    return n * solve(n - 1)",
+    "hints": {
+      "es": ["`0!` vale 1, no 0.", "El caso base debe preservar el producto."],
+      "en": ["`0!` equals 1, not 0.", "The base case must preserve multiplication."]
+    },
+    "tests": [
+      { "input": [5], "expected": 120 },
+      { "input": [1], "expected": 1 },
+      { "input": [0], "expected": 1 }
+    ]
+  },
+  {
+    "id": "fb_pro_default_mutable_arg",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función debería devolver una nueva lista con el valor agregado en cada llamada, pero comparte estado entre llamadas.",
+      "en": "This function should return a fresh list with the value appended on each call, but it shares state across calls."
+    },
+    "buggyCode": "def solve(value, acc=[]):\n    acc.append(value)\n    return acc",
+    "starterCode": "def solve(value, acc=[]):\n    acc.append(value)\n    return acc",
+    "hints": {
+      "es": ["Los argumentos por defecto mutables se crean una sola vez.", "Usa `None` y crea la lista dentro de la función."],
+      "en": ["Mutable default arguments are created only once.", "Use `None` and create the list inside the function."]
+    },
+    "tests": [
+      { "input": [1], "expected": [1] },
+      { "input": [2], "expected": [2] },
+      { "input": [3], "expected": [3] }
+    ]
+  },
+  {
+    "id": "fb_pro_recursive_step",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "description": {
+      "es": "Esta función recursiva debería contar cuántos caracteres hay en un string, pero no reduce correctamente el problema.",
+      "en": "This recursive function should count characters in a string, but it does not shrink the problem correctly."
+    },
+    "buggyCode": "def solve(text):\n    if text == '':\n        return 0\n    return 1 + solve(text[:-0])",
+    "starterCode": "def solve(text):\n    if text == '':\n        return 0\n    return 1 + solve(text[:-0])",
+    "hints": {
+      "es": ["`text[:-0]` devuelve string vacío por la regla de slicing con -0, rompiendo la lógica esperada.", "El paso recursivo debe quitar exactamente un carácter por llamada."],
+      "en": ["`text[:-0]` returns an empty string due to slicing behavior with -0, breaking intended logic.", "The recursive step should remove exactly one character per call."]
+    },
+    "tests": [
+      { "input": ["hola"], "expected": 4 },
+      { "input": [""], "expected": 0 },
+      { "input": ["ab"], "expected": 2 }
+    ]
   }
 ]

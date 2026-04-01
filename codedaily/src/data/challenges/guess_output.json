@@ -298,5 +298,95 @@
     "expected": "True",
     "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
     "explanation": { "es": "`any(n<0)` es `True` (-2 existe). `all(n!=0)` es `True` (ninguno es 0). `True and True` → `True`.", "en": "`any(n<0)` is `True` (-2 exists). `all(n!=0)` is `True` (none is 0). `True and True` → `True`." }
+  },
+  {
+    "id": "go_beginner_concat",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(name):\n    return 'Hola, ' + name",
+    "input": ["Ana"],
+    "expected": "Hola, Ana",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Concatena `'Hola, '` con `name`. Con `'Ana'` devuelve `'Hola, Ana'`.", "en": "It concatenates `'Hola, '` with `name`. With `'Ana'` it returns `'Hola, Ana'`." }
+  },
+  {
+    "id": "go_beginner_last_two",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(s):\n    return s[-2:]",
+    "input": ["python"],
+    "expected": "on",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`s[-2:]` toma los dos ultimos caracteres. `'python'` → `'on'`.", "en": "`s[-2:]` takes the last two characters. `'python'` → `'on'`." }
+  },
+  {
+    "id": "go_beginner_min_list",
+    "type": "guess_output",
+    "difficulty": "novato",
+    "code": "def solve(nums):\n    return min(nums)",
+    "input": [[8, 3, 5]],
+    "expected": "3",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`min(nums)` devuelve el menor elemento de la lista. En `[8,3,5]` es `3`.", "en": "`min(nums)` returns the smallest element in the list. In `[8,3,5]` it is `3`." }
+  },
+  {
+    "id": "go_intermediate_filter_words",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(words):\n    return [w for w in words if len(w) > 3]",
+    "input": [["sol", "luna", "mar", "cielo"]],
+    "expected": "['luna', 'cielo']",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "La comprension filtra palabras con longitud mayor a 3. Quedan `'luna'` y `'cielo'`.", "en": "The comprehension filters words with length greater than 3. The result is `'luna'` and `'cielo'`." }
+  },
+  {
+    "id": "go_intermediate_prefix_count",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(words):\n    return sum(1 for w in words if w.startswith('re'))",
+    "input": [["redo", "play", "reset", "run", "react"]],
+    "expected": "3",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Cuenta palabras que empiezan por `'re'`: `redo`, `reset`, `react` → `3`.", "en": "It counts words starting with `'re'`: `redo`, `reset`, `react` → `3`." }
+  },
+  {
+    "id": "go_intermediate_sorted_by_len",
+    "type": "guess_output",
+    "difficulty": "intermedio",
+    "code": "def solve(words):\n    return sorted(words, key=len)",
+    "input": [["code", "ia", "python", "dev"]],
+    "expected": "['ia', 'dev', 'code', 'python']",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "`sorted(..., key=len)` ordena por longitud ascendente: 2, 3, 4, 6.", "en": "`sorted(..., key=len)` sorts by ascending length: 2, 3, 4, 6." }
+  },
+  {
+    "id": "go_pro_recursive_sum_digits",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(n):\n    n = abs(n)\n    if n < 10:\n        return n\n    return n % 10 + solve(n // 10)",
+    "input": [482],
+    "expected": "14",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Suma digitos de forma recursiva: `482 -> 2 + solve(48) -> 2 + 8 + solve(4) -> 14`.", "en": "It recursively sums digits: `482 -> 2 + solve(48) -> 2 + 8 + solve(4) -> 14`." }
+  },
+  {
+    "id": "go_pro_recursive_palindrome",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(s):\n    if len(s) <= 1:\n        return True\n    if s[0] != s[-1]:\n        return False\n    return solve(s[1:-1])",
+    "input": ["radar"],
+    "expected": "True",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Comprueba palindromo recursivamente comparando extremos y reduciendo el string. `'radar'` cumple.", "en": "It checks palindrome recursively by comparing ends and shrinking the string. `'radar'` passes." }
+  },
+  {
+    "id": "go_pro_recursive_reverse",
+    "type": "guess_output",
+    "difficulty": "pro",
+    "code": "def solve(s):\n    if s == '':\n        return ''\n    return solve(s[1:]) + s[0]",
+    "input": ["code"],
+    "expected": "edoc",
+    "title": { "es": "¿Qué devuelve?", "en": "What does it return?" },
+    "explanation": { "es": "Invierte la cadena de forma recursiva: llama con el resto y agrega el primer caracter al final.", "en": "It reverses the string recursively: calls with the tail and appends the first character at the end." }
   }
 ]
