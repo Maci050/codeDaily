@@ -118,6 +118,8 @@ function ChallengePlayer({
         hackerLockedTitle: 'Reto bloqueado',
         hackerLockedText:
           'Has agotado los 3 intentos disponibles del modo Hacker para esta fecha.',
+        shareButton: 'Compartir resultado',
+        shareCopied: '¡Copiado!',
       },
       en: {
         modeLabel: 'Mode',
@@ -184,6 +186,8 @@ function ChallengePlayer({
         hackerLockedTitle: 'Challenge locked',
         hackerLockedText:
           'You used all 3 available attempts for this Hacker challenge date.',
+        shareButton: 'Share result',
+        shareCopied: 'Copied!',
       },
     }[language];
   }, [language, isPython]);
@@ -393,6 +397,40 @@ function ChallengePlayer({
 
     setCode(baseChallenge.starterCode);
     setValidationResult(null);
+  };
+
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = () => {
+    if (!baseChallenge) return;
+
+    const date = getDaySeed(challengeDate);
+    const [year, month, day] = date.split('-');
+    const formattedDate = `${day}/${month}/${year}`;
+
+    const diffLabel = {
+      novato: language === 'es' ? 'Novato' : 'Beginner',
+      intermedio: language === 'es' ? 'Intermedio' : 'Intermediate',
+      pro: 'Pro',
+    }[effectiveDifficulty] || effectiveDifficulty;
+
+    const langLabel = programmingLanguage === 'java' ? 'Java' : 'Python';
+    const modeLabel = isHackerMode ? ' · Hacker' : '';
+
+    const attemptsLabel = language === 'es'
+      ? `${attemptCount} ${attemptCount === 1 ? 'intento' : 'intentos'}`
+      : `${attemptCount} ${attemptCount === 1 ? 'attempt' : 'attempts'}`;
+
+    const text = [
+      `CodeDaily ${formattedDate} ✅`,
+      `${diffLabel} · ${langLabel}${modeLabel} · ${attemptsLabel}`,
+      'https://codedaily-nu.vercel.app',
+    ].join('\n');
+
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   return (
@@ -716,6 +754,19 @@ function ChallengePlayer({
                     disabled={completed || isChecking}
                   >
                     {text.resetButton}
+                  </button>
+                )}
+
+                {completed && (
+                  <button
+                    className="secondary-button"
+                    onClick={handleShare}
+                    style={{
+                      borderColor: copied ? 'rgba(63,185,80,0.4)' : undefined,
+                      color: copied ? 'var(--green)' : undefined,
+                    }}
+                  >
+                    {copied ? text.shareCopied : `↑ ${text.shareButton}`}
                   </button>
                 )}
               </div>
