@@ -51,10 +51,6 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
               {item.label}
             </button>
           ))}
-
-          <button className="nav-button" onClick={onOpenTutorial}>
-            ❓
-          </button>
         </nav>
 
         <div className="language-switcher">
@@ -74,6 +70,15 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
               EN
             </button>
           </div>
+
+          <button
+            className="lang-button"
+            onClick={onOpenTutorial}
+            title={language === 'es' ? 'Cómo jugar' : 'How to play'}
+            style={{ minWidth: '36px' }}
+          >
+            ?
+          </button>
         </div>
       </div>
     </header>
