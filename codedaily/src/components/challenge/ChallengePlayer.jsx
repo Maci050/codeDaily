@@ -280,7 +280,7 @@ function ChallengePlayer({
 
     const progress = getProgressEntry({
       date: challengeDate,
-      challengeId: baseChallenge.id,
+      challengeId: `${programmingLanguage}_${baseChallenge.id}`,
       mode: effectivePlayMode,
     });
 
@@ -290,7 +290,7 @@ function ChallengePlayer({
     setRevealedHints(progress.revealedHints || 0);
     setCompleted(progress.completed || false);
     setLocked(progress.locked || false);
-  }, [baseChallenge?.id, effectivePlayMode, challengeDate]);
+  }, [baseChallenge?.id, baseChallenge?.language, effectivePlayMode, challengeDate, programmingLanguage]);
 
   useEffect(() => {
     if (!baseChallenge) {
@@ -299,7 +299,7 @@ function ChallengePlayer({
 
     updateProgressEntry({
       date: challengeDate,
-      challengeId: baseChallenge.id,
+      challengeId: `${programmingLanguage}_${baseChallenge.id}`,
       mode: effectivePlayMode,
       update: {
         code,
@@ -384,7 +384,7 @@ function ChallengePlayer({
     setLocked(false);
     markTodayCompleted({
       date: challengeDate,
-      challengeId: baseChallenge.id,
+      challengeId: `${programmingLanguage}_${baseChallenge.id}`,
       mode: effectivePlayMode,
     });
     setIsChecking(false);
