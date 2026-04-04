@@ -24,7 +24,7 @@ function Footer() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>{text.support}</span>
           <a
-            href="https://ko-fi.com/yeraymaciascopa"
+            href="https://ko-fi.com/codedaily"
             target="_blank"
             rel="noopener noreferrer"
             style={{
