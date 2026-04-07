@@ -560,6 +560,8 @@ select { color-scheme: dark; }
   font-size: 0.85rem;
   line-height: 1.7;
   background-image: linear-gradient(90deg, var(--bg-canvas) 40px, var(--border-muted) 40px, var(--border-muted) 41px, transparent 41px);
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
 }
 
 /* ──────────────────────────────────────────────
@@ -613,6 +615,8 @@ select { color-scheme: dark; }
   border: 1px solid var(--border);
   caret-color: var(--green);
   transition: border-color 0.15s, box-shadow 0.15s;
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
 }
 
 .code-editor:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); outline: none; }
