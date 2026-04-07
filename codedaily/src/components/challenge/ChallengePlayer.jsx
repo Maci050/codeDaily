@@ -43,6 +43,8 @@ function ChallengePlayer({
   const [isChecking, setIsChecking] = useState(false);
   const [isPythonLoading, setIsPythonLoading] = useState(true);
   const [pythonLoadError, setPythonLoadError] = useState(null);
+  const [givenUp, setGivenUp] = useState(false);
+  const [showGiveUpConfirm, setShowGiveUpConfirm] = useState(false);
 
   const effectivePlayMode = allowHackerMode ? playMode : 'normal';
   const isHackerMode = effectivePlayMode === 'hacker';
@@ -120,6 +122,13 @@ function ChallengePlayer({
           'Has agotado los 3 intentos disponibles del modo Hacker para esta fecha.',
         shareButton: 'Compartir resultado',
         shareCopied: '¡Copiado!',
+        giveUpButton: 'Rendirse',
+        giveUpConfirmTitle: '¿Seguro que quieres rendirte?',
+        giveUpConfirmText: 'Si te rindes no podrás volver a intentar este desafío. Se mostrarán las pistas disponibles y la solución.',
+        giveUpConfirm: 'Sí, rendirse',
+        giveUpCancel: 'Cancelar',
+        giveUpBadge: 'Rendido',
+        solutionLabel: 'Solución',
       },
       en: {
         modeLabel: 'Mode',
@@ -188,6 +197,13 @@ function ChallengePlayer({
           'You used all 3 available attempts for this Hacker challenge date.',
         shareButton: 'Share result',
         shareCopied: 'Copied!',
+        giveUpButton: 'Give up',
+        giveUpConfirmTitle: 'Are you sure you want to give up?',
+        giveUpConfirmText: 'If you give up you will not be able to retry this challenge. Available hints and the solution will be revealed.',
+        giveUpConfirm: 'Yes, give up',
+        giveUpCancel: 'Cancel',
+        giveUpBadge: 'Given up',
+        solutionLabel: 'Solution',
       },
     }[language];
   }, [language, isPython]);
@@ -275,6 +291,7 @@ function ChallengePlayer({
       setRevealedHints(0);
       setCompleted(false);
       setLocked(false);
+      setGivenUp(false);
       return;
     }
 
@@ -290,6 +307,7 @@ function ChallengePlayer({
     setRevealedHints(progress.revealedHints || 0);
     setCompleted(progress.completed || false);
     setLocked(progress.locked || false);
+    setGivenUp(progress.givenUp || false);
   }, [baseChallenge?.id, baseChallenge?.language, effectivePlayMode, challengeDate, programmingLanguage]);
 
   useEffect(() => {
@@ -307,6 +325,7 @@ function ChallengePlayer({
         revealedHints,
         completed,
         locked,
+        givenUp,
       },
     });
   }, [
@@ -315,6 +334,7 @@ function ChallengePlayer({
     revealedHints,
     completed,
     locked,
+    givenUp,
     baseChallenge,
     effectivePlayMode,
     challengeDate,
@@ -397,6 +417,16 @@ function ChallengePlayer({
 
     setCode(baseChallenge.starterCode);
     setValidationResult(null);
+  };
+
+  const handleGiveUp = () => {
+    if (!baseChallenge || completed || givenUp) return;
+    // Desbloquea todas las pistas y bloquea el reto
+    const allHints = dailyChallenge?.localizedHints?.length || 0;
+    setRevealedHints(allHints);
+    setLocked(true);
+    setGivenUp(true);
+    setShowGiveUpConfirm(false);
   };
 
   const [copied, setCopied] = useState(false);
@@ -539,6 +569,10 @@ function ChallengePlayer({
 
                     {completed && (
                       <span className="completed-pill">{text.completedBadge}</span>
+                    )}
+
+                    {givenUp && !completed && (
+                      <span className="hacker-pill">{text.giveUpBadge}</span>
                     )}
 
                     <span className="difficulty-pill">
@@ -769,15 +803,82 @@ function ChallengePlayer({
                     {copied ? text.shareCopied : `↑ ${text.shareButton}`}
                   </button>
                 )}
+
+                {/* Botón rendirse: solo en modo normal, sin completar, sin rendido, con 3+ intentos fallidos */}
+                {!isHackerMode && !completed && !givenUp && attemptCount >= 3 && !locked && (
+                  <button
+                    className="secondary-button"
+                    onClick={() => setShowGiveUpConfirm(true)}
+                    style={{ borderColor: 'rgba(248,81,73,0.3)', color: 'var(--danger)' }}
+                  >
+                    {text.giveUpButton}
+                  </button>
+                )}
               </div>
+
+              {/* Modal de confirmación de rendirse */}
+              {showGiveUpConfirm && (
+                <div style={{
+                  position: 'fixed', inset: 0, background: 'rgba(1,4,9,0.85)',
+                  backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center',
+                  justifyContent: 'center', padding: '20px', zIndex: 9999,
+                }}>
+                  <div style={{
+                    width: 'min(480px, 92%)', background: 'var(--bg-overlay)',
+                    borderRadius: 'var(--radius-lg, 10px)', padding: '28px',
+                    border: '1px solid rgba(248,81,73,0.3)',
+                    boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
+                  }}>
+                    <h3 style={{ margin: '0 0 12px', fontFamily: 'var(--mono)', color: 'var(--danger)', fontSize: '1rem' }}>
+                      {text.giveUpConfirmTitle}
+                    </h3>
+                    <p style={{ margin: '0 0 24px', color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.6, fontFamily: 'Inter, sans-serif' }}>
+                      {text.giveUpConfirmText}
+                    </p>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <button
+                        className="secondary-button"
+                        onClick={() => setShowGiveUpConfirm(false)}
+                        style={{ flex: 1 }}
+                      >
+                        {text.giveUpCancel}
+                      </button>
+                      <button
+                        onClick={handleGiveUp}
+                        style={{
+                          flex: 1, padding: '8px 18px', borderRadius: '6px',
+                          background: 'rgba(248,81,73,0.15)', color: 'var(--danger)',
+                          border: '1px solid rgba(248,81,73,0.4)', fontWeight: 600,
+                          fontSize: '0.85rem', cursor: 'pointer',
+                          fontFamily: 'Inter, sans-serif',
+                        }}
+                      >
+                        {text.giveUpConfirm}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="editor-grid">
                 <div className="result-panel">
                   <h3>{text.resultTitle}</h3>
 
-                  {!validationResult ? (
+                  {/* Bloque rendido */}
+                  {givenUp && !completed && (
+                    <div className="feedback-box error-box" style={{ marginBottom: '14px' }}>
+                      <h4>{text.giveUpBadge}</h4>
+                      <p style={{ marginTop: '4px', fontSize: '0.83rem' }}>
+                        {language === 'es'
+                          ? 'Te has rendido. Revisa las pistas desbloqueadas para entender la solución.'
+                          : 'You gave up. Check the unlocked hints to understand the solution.'}
+                      </p>
+                    </div>
+                  )}
+
+                  {!givenUp && !validationResult ? (
                     <p className="muted-text">{text.waitingResult}</p>
-                  ) : validationResult.success ? (
+                  ) : !givenUp && validationResult?.success ? (
                     <div className="feedback-box success-box">
                       <h4>{text.passedTitle}</h4>
                       <p>{text.passedText}</p>
@@ -786,7 +887,7 @@ function ChallengePlayer({
                         {text.testsPassedText}
                       </p>
                     </div>
-                  ) : (
+                  ) : !givenUp && validationResult ? (
                     <div className="feedback-box error-box">
                       <h4>{text.failedTitle}</h4>
                       <p>
@@ -794,7 +895,7 @@ function ChallengePlayer({
                         {text.testsPassedText}
                       </p>
                     </div>
-                  )}
+                  ) : null}
 
                   {(validationResult?.pythonError || validationResult?.runtimeError) && (
                     <div className="result-subsection">
