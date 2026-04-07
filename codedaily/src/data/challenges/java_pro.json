@@ -28,12 +28,14 @@
     },
     "hints": {
       "es": [
-        "Un HashMap valor->índice ayuda a resolverlo en O(n).",
-        "Revisa primero si `target - n` ya apareció."
+        "Usa un `HashMap<Integer,Integer>` para guardar valor → índice.",
+        "Para cada número calcula `target - numbers[i]`.",
+        "Si el complemento ya está en el mapa, encontraste la pareja."
       ],
       "en": [
-        "A HashMap value->index helps solve it in O(n).",
-        "First check whether `target - n` has already appeared."
+        "Use a `HashMap<Integer,Integer>` to store value → index.",
+        "For each number compute `target - numbers[i]`.",
+        "If the complement is already in the map, you found the pair."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] numbers, int target) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -90,7 +92,8 @@
           1
         ]
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] numbers, int target) {\n        Map<Integer,Integer> seen = new HashMap<>();\n        for (int i = 0; i < numbers.length; i++) {\n            int complement = target - numbers[i];\n            if (seen.containsKey(complement)) return new int[]{seen.get(complement), i};\n            seen.put(numbers[i], i);\n        }\n        return new int[]{};\n    }\n}"
   },
   {
     "id": "flatten_one_level",
@@ -119,12 +122,14 @@
     },
     "hints": {
       "es": [
-        "Calcula la longitud total, luego copia.",
-        "Puedes usar ArrayList<Integer>."
+        "Recorre el array externo y luego el interno.",
+        "Añade cada elemento a una lista.",
+        "Convierte la lista a array al final."
       ],
       "en": [
-        "Compute total length, then copy.",
-        "You can use ArrayList<Integer>."
+        "Iterate the outer array then the inner one.",
+        "Add each element to a list.",
+        "Convert the list to array at the end."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[][] nested) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -185,7 +190,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[][] nested) {\n        List<Integer> result = new ArrayList<>();\n        for (int[] sub : nested) for (int x : sub) result.add(x);\n        return result.stream().mapToInt(Integer::intValue).toArray();\n    }\n}"
   },
   {
     "id": "transpose_matrix",
@@ -214,12 +220,14 @@
     },
     "hints": {
       "es": [
-        "Las columnas pasan a ser filas.",
-        "Usa índices `[i][j]` -> `[j][i]`."
+        "El elemento `[i][j]` de la original pasa a `[j][i]`.",
+        "Crea una nueva matriz de dimensiones intercambiadas.",
+        "Recorre con dos bucles anidados."
       ],
       "en": [
-        "Columns become rows.",
-        "Use indices `[i][j]` -> `[j][i]`."
+        "Element `[i][j]` of the original goes to `[j][i]`.",
+        "Create a new matrix with swapped dimensions.",
+        "Iterate with two nested loops."
       ]
     },
     "starterCode": "class Solution {\n    public static int[][] solve(int[][] matrix) {\n        // TODO: replace this with your solution\n        return new int[][]{};\n    }\n}",
@@ -310,7 +318,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[][] solve(int[][] matrix) {\n        int rows = matrix.length, cols = matrix[0].length;\n        int[][] result = new int[cols][rows];\n        for (int i = 0; i < rows; i++)\n            for (int j = 0; j < cols; j++)\n                result[j][i] = matrix[i][j];\n        return result;\n    }\n}"
   },
   {
     "id": "diagonal_difference",
@@ -339,12 +348,14 @@
     },
     "hints": {
       "es": [
-        "La diagonal principal usa `matrix[i][i]`.",
-        "La secundaria usa `matrix[i][n-1-i]`."
+        "La diagonal principal es `matrix[i][i]`.",
+        "La diagonal secundaria es `matrix[i][n-1-i]`.",
+        "Devuelve el valor absoluto de la diferencia."
       ],
       "en": [
-        "The main diagonal uses `matrix[i][i]`.",
-        "The secondary uses `matrix[i][n-1-i]`."
+        "The main diagonal is `matrix[i][i]`.",
+        "The secondary diagonal is `matrix[i][n-1-i]`.",
+        "Return the absolute value of the difference."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[][] matrix) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -418,7 +429,8 @@
         ],
         "expected": 15
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[][] matrix) {\n        int n = matrix.length, d1 = 0, d2 = 0;\n        for (int i = 0; i < n; i++) {\n            d1 += matrix[i][i];\n            d2 += matrix[i][n-1-i];\n        }\n        return Math.abs(d1 - d2);\n    }\n}"
   },
   {
     "id": "count_islands",
@@ -447,12 +459,14 @@
     },
     "hints": {
       "es": [
-        "Usa DFS para marcar celdas visitadas.",
-        "Cada nuevo `\"1\"` no visitado inicia una isla nueva."
+        "Usa DFS para marcar todas las celdas de una isla.",
+        "Cada '1' no visitado inicia una isla nueva.",
+        "Explora en 4 direcciones."
       ],
       "en": [
-        "Use DFS to mark visited cells.",
-        "Each new unvisited `\"1\"` starts a new island."
+        "Use DFS to mark all cells of an island.",
+        "Each unvisited '1' starts a new island.",
+        "Explore in 4 directions."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(String[][] grid) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -515,7 +529,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    static int rows, cols;\n    static boolean[][] visited;\n    public static int solve(String[] grid) {\n        if (grid == null || grid.length == 0) return 0;\n        rows = grid.length; cols = grid[0].length();\n        visited = new boolean[rows][cols];\n        int count = 0;\n        for (int r = 0; r < rows; r++)\n            for (int c = 0; c < cols; c++)\n                if (grid[r].charAt(c) == '1' && !visited[r][c]) { dfs(grid,r,c); count++; }\n        return count;\n    }\n    static void dfs(String[] grid, int r, int c) {\n        if (r<0||r>=rows||c<0||c>=cols||visited[r][c]||grid[r].charAt(c)=='0') return;\n        visited[r][c] = true;\n        dfs(grid,r+1,c); dfs(grid,r-1,c); dfs(grid,r,c+1); dfs(grid,r,c-1);\n    }\n}"
   },
   {
     "id": "first_non_repeating_char",
@@ -544,12 +559,14 @@
     },
     "hints": {
       "es": [
-        "Primero cuenta frecuencias con un HashMap.",
-        "Luego recorre el texto original para encontrar el primero con frecuencia 1."
+        "Cuenta la frecuencia de cada carácter con un mapa.",
+        "Usa `LinkedHashMap` para mantener el orden de inserción.",
+        "Recorre el mapa y devuelve el primero con frecuencia 1."
       ],
       "en": [
-        "Count frequencies first with a HashMap.",
-        "Then scan the original text to find the first one with frequency 1."
+        "Count each character's frequency with a map.",
+        "Use `LinkedHashMap` to maintain insertion order.",
+        "Iterate the map and return the first with frequency 1."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"#\";\n    }\n}",
@@ -582,7 +599,8 @@
         ],
         "expected": "w"
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static String solve(String text) {\n        Map<Character,Integer> freq = new LinkedHashMap<>();\n        for (char c : text.toCharArray()) freq.merge(c, 1, Integer::sum);\n        for (Map.Entry<Character,Integer> e : freq.entrySet())\n            if (e.getValue() == 1) return String.valueOf(e.getKey());\n        return \"\";\n    }\n}"
   },
   {
     "id": "longest_substring_without_repeat",
@@ -611,12 +629,14 @@
     },
     "hints": {
       "es": [
-        "La técnica de ventana deslizante funciona bien.",
-        "Guarda la última posición vista de cada carácter en un HashMap."
+        "Usa ventana deslizante con dos punteros.",
+        "Guarda la última posición de cada carácter en un HashMap.",
+        "Cuando encuentres un duplicado, mueve el puntero izquierdo."
       ],
       "en": [
-        "The sliding window technique works well.",
-        "Store the last seen index of each character in a HashMap."
+        "Use sliding window with two pointers.",
+        "Store the last position of each character in a HashMap.",
+        "When you find a duplicate, move the left pointer."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -649,7 +669,8 @@
         ],
         "expected": 3
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int solve(String text) {\n        Map<Character,Integer> seen = new HashMap<>();\n        int left = 0, best = 0;\n        for (int right = 0; right < text.length(); right++) {\n            char c = text.charAt(right);\n            if (seen.containsKey(c) && seen.get(c) >= left) left = seen.get(c) + 1;\n            seen.put(c, right);\n            best = Math.max(best, right - left + 1);\n        }\n        return best;\n    }\n}"
   },
   {
     "id": "palindrome_ignore_non_alnum",
@@ -678,12 +699,14 @@
     },
     "hints": {
       "es": [
-        "Filtra con `Character.isLetterOrDigit(ch)`.",
-        "Compara el string limpio con su reverso."
+        "Filtra alfanuméricos con `Character.isLetterOrDigit()`.",
+        "Convierte a minúsculas con `Character.toLowerCase()`.",
+        "Compara con su inverso usando `StringBuilder.reverse()`."
       ],
       "en": [
-        "Filter with `Character.isLetterOrDigit(ch)`.",
-        "Compare the cleaned string with its reverse."
+        "Filter alphanumerics with `Character.isLetterOrDigit()`.",
+        "Convert to lowercase with `Character.toLowerCase()`.",
+        "Compare with its reverse using `StringBuilder.reverse()`."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -716,7 +739,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        StringBuilder sb = new StringBuilder();\n        for (char c : text.toCharArray()) if (Character.isLetterOrDigit(c)) sb.append(Character.toLowerCase(c));\n        String clean = sb.toString();\n        return clean.equals(new StringBuilder(clean).reverse().toString());\n    }\n}"
   },
   {
     "id": "run_length_encode",
@@ -745,12 +769,14 @@
     },
     "hints": {
       "es": [
-        "Recorre y cuenta bloques consecutivos.",
-        "Usa StringBuilder para construir el resultado."
+        "Recorre el string contando bloques consecutivos.",
+        "Cuando el carácter cambia, añade el bloque anterior al resultado.",
+        "No olvides añadir el último bloque al final."
       ],
       "en": [
-        "Traverse and count consecutive blocks.",
-        "Use StringBuilder to build the result."
+        "Traverse the string counting consecutive blocks.",
+        "When the character changes, append the previous block.",
+        "Don't forget to add the last block at the end."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -783,7 +809,8 @@
         ],
         "expected": ""
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        if (text.isEmpty()) return \"\";\n        StringBuilder sb = new StringBuilder();\n        int count = 1;\n        for (int i = 1; i < text.length(); i++) {\n            if (text.charAt(i) == text.charAt(i-1)) count++;\n            else { sb.append(text.charAt(i-1)).append(count); count = 1; }\n        }\n        sb.append(text.charAt(text.length()-1)).append(count);\n        return sb.toString();\n    }\n}"
   },
   {
     "id": "run_length_decode",
@@ -812,12 +839,14 @@
     },
     "hints": {
       "es": [
-        "Recorre y agrupa los dígitos consecutivos para formar el número.",
-        "Usa `Character.isDigit(ch)`."
+        "Cada bloque es una letra seguida de dígitos.",
+        "Agrupa los dígitos consecutivos para formar el número.",
+        "Repite el carácter tantas veces como indique el número."
       ],
       "en": [
-        "Traverse and group consecutive digits to form the number.",
-        "Use `Character.isDigit(ch)`."
+        "Each block is a letter followed by digits.",
+        "Group consecutive digits to form the number.",
+        "Repeat the character as many times as the number indicates."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String encoded) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -850,7 +879,8 @@
         ],
         "expected": ""
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String encoded) {\n        StringBuilder sb = new StringBuilder();\n        int i = 0;\n        while (i < encoded.length()) {\n            char ch = encoded.charAt(i++);\n            StringBuilder num = new StringBuilder();\n            while (i < encoded.length() && Character.isDigit(encoded.charAt(i))) num.append(encoded.charAt(i++));\n            int count = Integer.parseInt(num.toString());\n            for (int k = 0; k < count; k++) sb.append(ch);\n        }\n        return sb.toString();\n    }\n}"
   },
   {
     "id": "gcd_euclid",
@@ -879,10 +909,14 @@
     },
     "hints": {
       "es": [
-        "Mientras `b != 0`, reemplaza `(a, b)` por `(b, a % b)`."
+        "Algoritmo de Euclides: mientras `b != 0`, intercambia `(a, b) = (b, a % b)`.",
+        "Cuando `b` sea 0, `a` es el MCD.",
+        "Usa una variable temporal para el intercambio."
       ],
       "en": [
-        "While `b != 0`, replace `(a, b)` with `(b, a % b)`."
+        "Euclid's algorithm: while `b != 0`, swap `(a, b) = (b, a % b)`.",
+        "When `b` is 0, `a` is the GCD.",
+        "Use a temporary variable for the swap."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -918,7 +952,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int a, int b) {\n        while (b != 0) { int t = b; b = a % b; a = t; }\n        return a;\n    }\n}"
   },
   {
     "id": "lcm_from_gcd",
@@ -947,12 +982,14 @@
     },
     "hints": {
       "es": [
-        "Implementa una función auxiliar para el MCD.",
-        "Cuida el caso con 0."
+        "Usa la fórmula: `MCM = |a * b| / MCD(a, b)`.",
+        "Divide antes de multiplicar para evitar overflow.",
+        "Si alguno es 0, el MCM es 0."
       ],
       "en": [
-        "Implement a helper for GCD.",
-        "Handle the 0 case carefully."
+        "Use the formula: `LCM = |a * b| / GCD(a, b)`.",
+        "Divide before multiplying to avoid overflow.",
+        "If either is 0, the LCM is 0."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -988,7 +1025,8 @@
         ],
         "expected": 42
       }
-    ]
+    ],
+    "solution": "class Solution {\n    static int gcd(int a, int b) { while (b != 0) { int t = b; b = a % b; a = t; } return a; }\n    public static int solve(int a, int b) {\n        if (a == 0 || b == 0) return 0;\n        return Math.abs(a / gcd(a, b) * b);\n    }\n}"
   },
   {
     "id": "is_prime_optimized",
@@ -1017,12 +1055,14 @@
     },
     "hints": {
       "es": [
-        "Todos los `n < 2` no son primos.",
-        "Usa `Math.sqrt(n)` como límite."
+        "Los números menores de 2 no son primos.",
+        "Solo necesitas comprobar hasta `Math.sqrt(n)`.",
+        "Después del 2, puedes avanzar de 2 en 2."
       ],
       "en": [
-        "All `n < 2` are not prime.",
-        "Use `Math.sqrt(n)` as the limit."
+        "Numbers less than 2 are not prime.",
+        "You only need to check up to `Math.sqrt(n)`.",
+        "After 2, you can step by 2."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int n) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -1055,7 +1095,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int n) {\n        if (n < 2) return false;\n        if (n == 2) return true;\n        if (n % 2 == 0) return false;\n        for (int i = 3; i <= Math.sqrt(n); i += 2) if (n % i == 0) return false;\n        return true;\n    }\n}"
   },
   {
     "id": "fibonacci_nth_iterative",
@@ -1084,10 +1125,14 @@
     },
     "hints": {
       "es": [
-        "Mantener solo dos variables es suficiente."
+        "Usa solo dos variables `a` y `b`.",
+        "En cada paso: `(a, b) = (b, a + b)`.",
+        "Repite `n-1` veces partiendo de F(0)=0, F(1)=1."
       ],
       "en": [
-        "Keeping only two variables is enough."
+        "Use only two variables `a` and `b`.",
+        "Each step: `(a, b) = (b, a + b)`.",
+        "Repeat `n-1` times starting from F(0)=0, F(1)=1."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1120,7 +1165,8 @@
         ],
         "expected": 55
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        if (n == 0) return 0;\n        int a = 0, b = 1;\n        for (int i = 1; i < n; i++) { int t = b; b = a + b; a = t; }\n        return b;\n    }\n}"
   },
   {
     "id": "product_except_self",
@@ -1149,12 +1195,14 @@
     },
     "hints": {
       "es": [
-        "Calcula productos prefijo y sufijo.",
-        "Multiplica ambos para cada índice."
+        "Calcula productos prefijo de izquierda a derecha.",
+        "Luego multiplica por sufijos de derecha a izquierda.",
+        "No uses división."
       ],
       "en": [
-        "Compute prefix and suffix products.",
-        "Multiply both for each index."
+        "Compute prefix products left to right.",
+        "Then multiply by suffixes right to left.",
+        "Do not use division."
       ]
     },
     "starterCode": "class Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -1219,7 +1267,8 @@
           0
         ]
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[] solve(int[] numbers) {\n        int n = numbers.length;\n        int[] result = new int[n];\n        result[0] = 1;\n        for (int i = 1; i < n; i++) result[i] = result[i-1] * numbers[i-1];\n        int suffix = 1;\n        for (int i = n-1; i >= 0; i--) { result[i] *= suffix; suffix *= numbers[i]; }\n        return result;\n    }\n}"
   },
   {
     "id": "move_zeroes",
@@ -1248,10 +1297,14 @@
     },
     "hints": {
       "es": [
-        "Separa no-ceros y luego agrega tantos ceros como falten."
+        "Crea un nuevo array inicializado a ceros.",
+        "Copia los no-ceros en orden al inicio.",
+        "Los ceros quedan al final automáticamente."
       ],
       "en": [
-        "Separate non-zeroes then append as many zeroes as needed."
+        "Create a new array initialized to zeros.",
+        "Copy non-zeros in order to the beginning.",
+        "Zeros stay at the end automatically."
       ]
     },
     "starterCode": "class Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -1312,7 +1365,8 @@
           6
         ]
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[] solve(int[] numbers) {\n        int[] result = new int[numbers.length];\n        int pos = 0;\n        for (int n : numbers) if (n != 0) result[pos++] = n;\n        return result;\n    }\n}"
   },
   {
     "id": "sliding_window_max_sum",
@@ -1341,12 +1395,14 @@
     },
     "hints": {
       "es": [
-        "Calcula la suma inicial de los primeros `k`.",
-        "Luego resta el que sale y suma el que entra."
+        "Calcula la suma de los primeros `k` elementos.",
+        "Desliza: suma el nuevo y resta el que sale.",
+        "Guarda el máximo en cada paso."
       ],
       "en": [
-        "Compute the initial sum of the first `k` elements.",
-        "Then subtract the outgoing value and add the incoming one."
+        "Compute the sum of the first `k` elements.",
+        "Slide: add the new one and subtract the outgoing one.",
+        "Keep the maximum at each step."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] numbers, int k) {\n        // TODO: replace this with your solution\n        return Integer.MIN_VALUE;\n    }\n}",
@@ -1397,7 +1453,8 @@
         ],
         "expected": -2147483648
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] numbers, int k) {\n        int window = 0;\n        for (int i = 0; i < k; i++) window += numbers[i];\n        int best = window;\n        for (int i = k; i < numbers.length; i++) {\n            window += numbers[i] - numbers[i-k];\n            best = Math.max(best, window);\n        }\n        return best;\n    }\n}"
   },
   {
     "id": "chunk_list",
@@ -1426,10 +1483,14 @@
     },
     "hints": {
       "es": [
-        "Avanza de `size` en `size` y copia con `Arrays.copyOfRange`."
+        "Si `size <= 0` devuelve `null`.",
+        "Usa `Arrays.copyOfRange` para extraer cada chunk.",
+        "El último chunk puede ser más pequeño."
       ],
       "en": [
-        "Advance by `size` and copy with `Arrays.copyOfRange`."
+        "If `size <= 0` return `null`.",
+        "Use `Arrays.copyOfRange` to extract each chunk.",
+        "The last chunk may be smaller."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[] items, int size) {\n        // TODO: replace this with your solution\n        return new int[][]{};\n    }\n}",
@@ -1496,7 +1557,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[] items, int size) {\n        if (size <= 0) return null;\n        List<int[]> chunks = new ArrayList<>();\n        for (int i = 0; i < items.length; i += size) chunks.add(Arrays.copyOfRange(items, i, Math.min(i+size, items.length)));\n        return chunks.toArray(new int[0][]);\n    }\n}"
   },
   {
     "id": "matrix_spiral_order",
@@ -1525,12 +1587,14 @@
     },
     "hints": {
       "es": [
-        "Controla cuatro límites: arriba, abajo, izquierda, derecha.",
-        "Reduce límites después de cada borde recorrido."
+        "Mantén cuatro límites: top, bottom, left, right.",
+        "Recorre: derecha → abajo → izquierda → arriba.",
+        "Ajusta cada límite después de cada borde."
       ],
       "en": [
-        "Track four boundaries: top, bottom, left, right.",
-        "Shrink boundaries after traversing each edge."
+        "Maintain four boundaries: top, bottom, left, right.",
+        "Traverse: right → down → left → up.",
+        "Shrink each boundary after each edge."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[][] matrix) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -1603,7 +1667,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[][] matrix) {\n        if (matrix == null || matrix.length == 0) return new int[]{};\n        List<Integer> result = new ArrayList<>();\n        int top=0, bottom=matrix.length-1, left=0, right=matrix[0].length-1;\n        while (top<=bottom && left<=right) {\n            for (int c=left;c<=right;c++) result.add(matrix[top][c]); top++;\n            for (int r=top;r<=bottom;r++) result.add(matrix[r][right]); right--;\n            if (top<=bottom) { for (int c=right;c>=left;c--) result.add(matrix[bottom][c]); bottom--; }\n            if (left<=right) { for (int r=bottom;r>=top;r--) result.add(matrix[r][left]); left++; }\n        }\n        return result.stream().mapToInt(Integer::intValue).toArray();\n    }\n}"
   },
   {
     "id": "roman_to_int",
@@ -1632,12 +1697,14 @@
     },
     "hints": {
       "es": [
-        "Si un símbolo es menor que el siguiente, se resta en lugar de sumar.",
-        "Recorre de izquierda a derecha."
+        "Crea un mapa con los valores de cada símbolo.",
+        "Si un símbolo es menor que el siguiente, réstalo.",
+        "Si no, súmalo."
       ],
       "en": [
-        "If a symbol is smaller than the next one, subtract instead of add.",
-        "Scan from left to right."
+        "Create a map with each symbol's value.",
+        "If a symbol is smaller than the next, subtract it.",
+        "Otherwise, add it."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(String roman) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1670,7 +1737,8 @@
         ],
         "expected": 40
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int solve(String roman) {\n        Map<Character,Integer> vals = Map.of('I',1,'V',5,'X',10,'L',50,'C',100,'D',500,'M',1000);\n        int result = 0;\n        for (int i = 0; i < roman.length(); i++) {\n            int v = vals.get(roman.charAt(i));\n            int next = i+1 < roman.length() ? vals.get(roman.charAt(i+1)) : 0;\n            result += v < next ? -v : v;\n        }\n        return result;\n    }\n}"
   },
   {
     "id": "int_to_roman",
@@ -1699,12 +1767,14 @@
     },
     "hints": {
       "es": [
-        "Usa una tabla de valores de mayor a menor.",
-        "Resta repetidamente mientras puedas agregar símbolos."
+        "Usa dos arrays paralelos: valores y símbolos.",
+        "De mayor a menor: mientras `n >= val`, añade el símbolo y réstalo.",
+        "Incluye los casos sustractivos: CM, CD, XC, XL, IX, IV."
       ],
       "en": [
-        "Use a value table from largest to smallest.",
-        "Repeatedly subtract while appending symbols."
+        "Use two parallel arrays: values and symbols.",
+        "From largest to smallest: while `n >= val`, append the symbol and subtract.",
+        "Include subtractive cases: CM, CD, XC, XL, IX, IV."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(int n) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -1737,7 +1807,8 @@
         ],
         "expected": "MCMXCIV"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(int n) {\n        int[] vals = {1000,900,500,400,100,90,50,40,10,9,5,4,1};\n        String[] syms = {\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"};\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < vals.length; i++) while (n >= vals[i]) { sb.append(syms[i]); n -= vals[i]; }\n        return sb.toString();\n    }\n}"
   },
   {
     "id": "evaluate_rpn",
@@ -1766,12 +1837,14 @@
     },
     "hints": {
       "es": [
-        "Usa una pila de enteros (Deque<Integer>).",
-        "Cuando veas operador, saca dos valores en orden correcto."
+        "Usa una pila (`Deque`).",
+        "Cuando veas un número, apílalo.",
+        "Cuando veas un operador, saca dos valores y apila el resultado."
       ],
       "en": [
-        "Use an integer stack (Deque<Integer>).",
-        "When you see an operator, pop two values in the correct order."
+        "Use a stack (`Deque`).",
+        "When you see a number, push it.",
+        "When you see an operator, pop two values and push the result."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(String[] tokens) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1830,7 +1903,8 @@
         ],
         "expected": 22
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int solve(String[] tokens) {\n        Deque<Integer> stack = new ArrayDeque<>();\n        for (String t : tokens) {\n            if (\"+-*/\".contains(t)) {\n                int b = stack.pop(), a = stack.pop();\n                switch (t) {\n                    case \"+\": stack.push(a+b); break;\n                    case \"-\": stack.push(a-b); break;\n                    case \"*\": stack.push(a*b); break;\n                    case \"/\": stack.push((int)(a/b)); break;\n                }\n            } else stack.push(Integer.parseInt(t));\n        }\n        return stack.peek();\n    }\n}"
   },
   {
     "id": "anagram_check_normalized",
@@ -1859,12 +1933,14 @@
     },
     "hints": {
       "es": [
-        "Normaliza con `toLowerCase()` y filtra con `Character.isLetterOrDigit()`.",
-        "Compara conteos de caracteres."
+        "Normaliza: filtra alfanuméricos y convierte a minúsculas.",
+        "Ordena los caracteres de ambos strings.",
+        "Compara los arrays ordenados con `Arrays.equals()`."
       ],
       "en": [
-        "Normalize with `toLowerCase()` and filter with `Character.isLetterOrDigit()`.",
-        "Compare character counts."
+        "Normalize: filter alphanumerics and convert to lowercase.",
+        "Sort the characters of both strings.",
+        "Compare the sorted arrays with `Arrays.equals()`."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static boolean solve(String a, String b) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -1900,7 +1976,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static boolean solve(String a, String b) {\n        char[] ca = a.toLowerCase().chars().filter(Character::isLetterOrDigit).sorted().toArray().length > 0 ?\n            a.toLowerCase().replaceAll(\"[^a-z0-9]\",\"\").toCharArray() : new char[]{};\n        char[] cb = b.toLowerCase().replaceAll(\"[^a-z0-9]\",\"\").toCharArray();\n        Arrays.sort(ca); Arrays.sort(cb);\n        return Arrays.equals(ca, cb);\n    }\n}"
   },
   {
     "id": "word_frequency_map",
@@ -1929,12 +2006,14 @@
     },
     "hints": {
       "es": [
-        "Usa un HashMap<String, Integer>.",
-        "Convierte todo a minúsculas antes de contar."
+        "Divide por espacios con `.split(\"\\\\s+\")`.",
+        "Convierte a minúsculas.",
+        "Usa `merge(word, 1, Integer::sum)` para contar."
       ],
       "en": [
-        "Use a HashMap<String, Integer>.",
-        "Convert everything to lowercase before counting."
+        "Split by spaces with `.split(\"\\\\s+\")`.",
+        "Convert to lowercase.",
+        "Use `merge(word, 1, Integer::sum)` to count."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static Map<String, Integer> solve(String text) {\n        // TODO: replace this with your solution\n        return new HashMap<>();\n    }\n}",
@@ -1974,7 +2053,8 @@
         ],
         "expected": {}
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static Map<String,Integer> solve(String text) {\n        Map<String,Integer> freq = new LinkedHashMap<>();\n        if (text.isEmpty()) return freq;\n        for (String word : text.toLowerCase().split(\"\\\\s+\")) freq.merge(word, 1, Integer::sum);\n        return freq;\n    }\n}"
   },
   {
     "id": "sort_by_multiple_keys",
@@ -2003,12 +2083,14 @@
     },
     "hints": {
       "es": [
-        "Usa `Arrays.sort` con un Comparator.",
-        "Ordena por score descendente y nombre ascendente."
+        "Usa `Arrays.sort` con un `Comparator`.",
+        "Primero compara por score descendente.",
+        "En caso de empate, compara por nombre ascendente."
       ],
       "en": [
-        "Use `Arrays.sort` with a Comparator.",
-        "Sort by descending score and ascending name."
+        "Use `Arrays.sort` with a `Comparator`.",
+        "First compare by score descending.",
+        "On tie, compare by name ascending."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static String[][] solve(String[][] records) {\n        // TODO: replace this with your solution\n        return new String[][]{};\n    }\n}",
@@ -2093,7 +2175,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static Object[][] solve(Object[][] records) {\n        Arrays.sort(records, (a, b) -> {\n            int scoreA = (int) a[1], scoreB = (int) b[1];\n            if (scoreB != scoreA) return scoreB - scoreA;\n            return ((String)a[0]).compareTo((String)b[0]);\n        });\n        return records;\n    }\n}"
   },
   {
     "id": "minimum_path_sum_grid",
@@ -2122,12 +2205,14 @@
     },
     "hints": {
       "es": [
-        "Programación dinámica funciona muy bien aquí.",
-        "`dp[i][j]` depende de arriba e izquierda."
+        "Usa DP: `dp[i][j]` = coste mínimo para llegar.",
+        "`dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])`.",
+        "Rellena los bordes primero."
       ],
       "en": [
-        "Dynamic programming works very well here.",
-        "`dp[i][j]` depends on top and left cells."
+        "Use DP: `dp[i][j]` = minimum cost to reach.",
+        "`dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])`.",
+        "Fill the borders first."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[][] grid) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2189,7 +2274,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[][] grid) {\n        int rows = grid.length, cols = grid[0].length;\n        int[][] dp = new int[rows][cols];\n        dp[0][0] = grid[0][0];\n        for (int i=1;i<rows;i++) dp[i][0] = dp[i-1][0] + grid[i][0];\n        for (int j=1;j<cols;j++) dp[0][j] = dp[0][j-1] + grid[0][j];\n        for (int i=1;i<rows;i++) for (int j=1;j<cols;j++) dp[i][j] = grid[i][j] + Math.min(dp[i-1][j], dp[i][j-1]);\n        return dp[rows-1][cols-1];\n    }\n}"
   },
   {
     "id": "coin_change_min_coins",
@@ -2218,12 +2304,14 @@
     },
     "hints": {
       "es": [
-        "Usa DP: `dp[x]` como mínimo para formar `x`.",
-        "Inicializa con un valor grande salvo `dp[0] = 0`."
+        "Usa DP: `dp[x]` = mínimo de monedas para `x`.",
+        "Inicializa con `Integer.MAX_VALUE` salvo `dp[0] = 0`.",
+        "Para cada moneda, actualiza los montos posibles."
       ],
       "en": [
-        "Use DP: `dp[x]` as minimum coins for `x`.",
-        "Initialize with a large value except `dp[0] = 0`."
+        "Use DP: `dp[x]` = minimum coins to make `x`.",
+        "Initialize with `Integer.MAX_VALUE` except `dp[0] = 0`.",
+        "For each coin, update possible amounts."
       ]
     },
     "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int solve(int[] coins, int amount) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
@@ -2267,7 +2355,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] coins, int amount) {\n        int[] dp = new int[amount+1];\n        Arrays.fill(dp, Integer.MAX_VALUE);\n        dp[0] = 0;\n        for (int coin : coins) for (int x=coin;x<=amount;x++) if (dp[x-coin] != Integer.MAX_VALUE) dp[x] = Math.min(dp[x], dp[x-coin]+1);\n        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];\n    }\n}"
   },
   {
     "id": "longest_increasing_subsequence_length",
@@ -2296,10 +2385,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar DP O(n^2)."
+        "Usa DP O(n²): `dp[i]` = longitud de la LIS terminando en `i`.",
+        "Para cada `i`, mira todos los `j < i` con `numbers[j] < numbers[i]`.",
+        "La respuesta es el máximo de `dp`."
       ],
       "en": [
-        "You can use O(n^2) DP."
+        "Use O(n²) DP: `dp[i]` = length of LIS ending at `i`.",
+        "For each `i`, check all `j < i` with `numbers[j] < numbers[i]`.",
+        "The answer is the maximum of `dp`."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2353,7 +2446,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] numbers) {\n        if (numbers.length == 0) return 0;\n        int[] dp = new int[numbers.length];\n        Arrays.fill(dp, 1);\n        int best = 1;\n        for (int i=1;i<numbers.length;i++) {\n            for (int j=0;j<i;j++) if (numbers[j]<numbers[i]) dp[i]=Math.max(dp[i],dp[j]+1);\n            best = Math.max(best, dp[i]);\n        }\n        return best;\n    }\n}"
   },
   {
     "id": "merge_intervals",
@@ -2382,12 +2476,14 @@
     },
     "hints": {
       "es": [
-        "Primero ordena por inicio.",
-        "Compara el actual con el último intervalo fusionado."
+        "Ordena los intervalos por inicio.",
+        "Si el inicio del siguiente <= fin del último fusionado, fusiónalos.",
+        "Si no, añade el nuevo intervalo."
       ],
       "en": [
-        "Sort by start first.",
-        "Compare current interval with the last merged one."
+        "Sort intervals by start.",
+        "If the next start <= last merged end, merge them.",
+        "Otherwise, add the new interval."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[][] intervals) {\n        // TODO: replace this with your solution\n        return new int[][]{};\n    }\n}",
@@ -2466,7 +2562,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[][] solve(int[][] intervals) {\n        if (intervals.length == 0) return new int[][]{};\n        Arrays.sort(intervals, (a,b) -> a[0]-b[0]);\n        List<int[]> merged = new ArrayList<>();\n        merged.add(intervals[0]);\n        for (int i=1;i<intervals.length;i++) {\n            int[] last = merged.get(merged.size()-1);\n            if (intervals[i][0] <= last[1]) last[1] = Math.max(last[1], intervals[i][1]);\n            else merged.add(intervals[i]);\n        }\n        return merged.toArray(new int[0][]);\n    }\n}"
   },
   {
     "id": "kth_largest_element",
@@ -2495,12 +2592,14 @@
     },
     "hints": {
       "es": [
-        "Puedes ordenar descendente con `Arrays.sort` y negación.",
-        "Con orden descendente, responde `numbers[k-1]`."
+        "Ordena el array.",
+        "El k-ésimo mayor está en el índice `length - k`.",
+        "No elimines duplicados."
       ],
       "en": [
-        "You can sort descending with `Arrays.sort` and negation.",
-        "With descending order, answer `numbers[k-1]`."
+        "Sort the array.",
+        "The kth largest is at index `length - k`.",
+        "Do not remove duplicates."
       ]
     },
     "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int solve(int[] numbers, int k) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2555,7 +2654,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers, int k) {\n        int[] sorted = numbers.clone();\n        Arrays.sort(sorted);\n        return sorted[sorted.length - k];\n    }\n}"
   },
   {
     "id": "search_insert_position",
@@ -2584,10 +2684,14 @@
     },
     "hints": {
       "es": [
-        "La búsqueda binaria encaja bien en este problema."
+        "Usa búsqueda binaria.",
+        "Cuando `lo == hi`, ese es el índice de inserción.",
+        "Usa `hi = numbers.length` para incluir la inserción al final."
       ],
       "en": [
-        "Binary search fits this problem well."
+        "Use binary search.",
+        "When `lo == hi`, that is the insertion index.",
+        "Use `hi = numbers.length` to include insertion at the end."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] numbers, int target) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2638,7 +2742,8 @@
         ],
         "expected": 4
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] numbers, int target) {\n        int lo = 0, hi = numbers.length;\n        while (lo < hi) { int mid = (lo+hi)/2; if (numbers[mid] < target) lo=mid+1; else hi=mid; }\n        return lo;\n    }\n}"
   },
   {
     "id": "majority_element",
@@ -2667,12 +2772,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar el algoritmo de Boyer-Moore.",
-        "También puedes contar frecuencias con un HashMap."
+        "Algoritmo Boyer-Moore Voting.",
+        "Mantén un candidato y un contador.",
+        "Cuando el contador llega a 0, cambia de candidato."
       ],
       "en": [
-        "You can use the Boyer-Moore algorithm.",
-        "You can also count frequencies with a HashMap."
+        "Boyer-Moore Voting algorithm.",
+        "Maintain a candidate and a counter.",
+        "When the counter reaches 0, change the candidate."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2719,7 +2826,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] numbers) {\n        int count = 0, candidate = 0;\n        for (int n : numbers) {\n            if (count == 0) candidate = n;\n            count += n == candidate ? 1 : -1;\n        }\n        return candidate;\n    }\n}"
   },
   {
     "id": "valid_anagram_exact",
@@ -2748,12 +2856,14 @@
     },
     "hints": {
       "es": [
-        "Compara longitudes antes de contar.",
-        "Puedes ordenar ambos strings o usar frecuencias."
+        "Convierte ambos strings a arrays de chars.",
+        "Ordénalos con `Arrays.sort()`.",
+        "Compara con `Arrays.equals()`."
       ],
       "en": [
-        "Compare lengths before counting.",
-        "You can sort both strings or use frequencies."
+        "Convert both strings to char arrays.",
+        "Sort them with `Arrays.sort()`.",
+        "Compare with `Arrays.equals()`."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static boolean solve(String a, String b) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -2789,7 +2899,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static boolean solve(String a, String b) {\n        char[] ca = a.toCharArray(), cb = b.toCharArray();\n        Arrays.sort(ca); Arrays.sort(cb);\n        return Arrays.equals(ca, cb);\n    }\n}"
   },
   {
     "id": "reverse_words_order",
@@ -2818,12 +2929,14 @@
     },
     "hints": {
       "es": [
-        "`text.trim().split(\"\\\\s+\")` divide limpiando espacios.",
-        "Invierte el array y une con un espacio."
+        "Divide en palabras con `.split(\"\\\\s+\")`.",
+        "Recorre el array al revés.",
+        "Une con espacios."
       ],
       "en": [
-        "`text.trim().split(\"\\\\s+\")` splits while cleaning spaces.",
-        "Reverse the array and join with a space."
+        "Split into words with `.split(\"\\\\s+\")`.",
+        "Iterate the array in reverse.",
+        "Join with spaces."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -2856,7 +2969,8 @@
         ],
         "expected": "example good a"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        String[] words = text.trim().split(\"\\\\s+\");\n        StringBuilder sb = new StringBuilder();\n        for (int i = words.length-1; i >= 0; i--) {\n            sb.append(words[i]);\n            if (i > 0) sb.append(\" \");\n        }\n        return sb.toString();\n    }\n}"
   },
   {
     "id": "longest_word_in_sentence",
@@ -2885,10 +2999,14 @@
     },
     "hints": {
       "es": [
-        "Divide con `split` y guarda la palabra más larga."
+        "Divide en palabras.",
+        "Recorre guardando la más larga.",
+        "En caso de empate devuelve la primera."
       ],
       "en": [
-        "Split with `split` and track the longest word."
+        "Split into words.",
+        "Iterate keeping track of the longest.",
+        "On tie returns the first."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -2921,7 +3039,8 @@
         ],
         "expected": "python"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        String[] words = text.split(\"\\\\s+\");\n        String longest = \"\";\n        for (String w : words) if (w.length() > longest.length()) longest = w;\n        return longest;\n    }\n}"
   },
   {
     "id": "prefix_sums",
@@ -2950,10 +3069,14 @@
     },
     "hints": {
       "es": [
-        "Usa un acumulador progresivo."
+        "Acumula la suma progresivamente.",
+        "Guarda el acumulador en cada posición.",
+        "Array vacío devuelve array vacío."
       ],
       "en": [
-        "Use a running accumulator."
+        "Accumulate the sum progressively.",
+        "Store the accumulator at each position.",
+        "Empty array returns empty array."
       ]
     },
     "starterCode": "class Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -3000,7 +3123,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[] solve(int[] numbers) {\n        int[] result = new int[numbers.length];\n        int total = 0;\n        for (int i=0;i<numbers.length;i++) { total += numbers[i]; result[i] = total; }\n        return result;\n    }\n}"
   },
   {
     "id": "running_average",
@@ -3029,10 +3153,14 @@
     },
     "hints": {
       "es": [
-        "Acumula suma y divide por cantidad actual."
+        "Acumula la suma y divide por la posición (1-indexada).",
+        "Usa `double` para el resultado.",
+        "Array vacío devuelve array vacío."
       ],
       "en": [
-        "Accumulate sum and divide by current count."
+        "Accumulate the sum and divide by position (1-indexed).",
+        "Use `double` for the result.",
+        "Empty array returns empty array."
       ]
     },
     "starterCode": "class Solution {\n    public static double[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new double[]{};\n    }\n}",
@@ -3077,7 +3205,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static double[] solve(int[] numbers) {\n        double[] result = new double[numbers.length];\n        double total = 0;\n        for (int i=0;i<numbers.length;i++) { total += numbers[i]; result[i] = total/(i+1); }\n        return result;\n    }\n}"
   },
   {
     "id": "matrix_row_sums",
@@ -3106,10 +3235,14 @@
     },
     "hints": {
       "es": [
-        "Suma cada fila por separado."
+        "Para cada fila, suma todos sus elementos.",
+        "Usa un for-each anidado.",
+        "El resultado tiene tantos elementos como filas."
       ],
       "en": [
-        "Sum each row separately."
+        "For each row, sum all its elements.",
+        "Use a nested for-each.",
+        "The result has as many elements as rows."
       ]
     },
     "starterCode": "class Solution {\n    public static int[] solve(int[][] matrix) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -3175,7 +3308,8 @@
           0
         ]
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[] solve(int[][] matrix) {\n        int[] result = new int[matrix.length];\n        for (int i=0;i<matrix.length;i++) for (int v : matrix[i]) result[i] += v;\n        return result;\n    }\n}"
   },
   {
     "id": "matrix_col_sums",
@@ -3204,10 +3338,14 @@
     },
     "hints": {
       "es": [
-        "Recorre por índice de columna."
+        "Para cada columna `j`, suma `matrix[i][j]` para todas las filas.",
+        "Recorre fila por fila actualizando el resultado.",
+        "El resultado tiene tantos elementos como columnas."
       ],
       "en": [
-        "Iterate by column index."
+        "For each column `j`, sum `matrix[i][j]` for all rows.",
+        "Iterate row by row updating the result.",
+        "The result has as many elements as columns."
       ]
     },
     "starterCode": "class Solution {\n    public static int[] solve(int[][] matrix) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -3267,7 +3405,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[] solve(int[][] matrix) {\n        if (matrix.length == 0) return new int[]{};\n        int[] result = new int[matrix[0].length];\n        for (int[] row : matrix) for (int j=0;j<row.length;j++) result[j] += row[j];\n        return result;\n    }\n}"
   },
   {
     "id": "pascal_row_n",
@@ -3296,12 +3435,14 @@
     },
     "hints": {
       "es": [
-        "Cada fila inicia y termina con 1.",
-        "Los valores internos son suma de vecinos de la fila anterior."
+        "Construye cada fila a partir de la anterior.",
+        "Los extremos siempre son 1.",
+        "Cada elemento interior es la suma de los dos de arriba."
       ],
       "en": [
-        "Each row starts and ends with 1.",
-        "Inner values are sums of neighbors from previous row."
+        "Build each row from the previous one.",
+        "The edges are always 1.",
+        "Each inner element is the sum of the two above."
       ]
     },
     "starterCode": "class Solution {\n    public static int[] solve(int n) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -3348,7 +3489,8 @@
           1
         ]
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int n) {\n        int[] row = {1};\n        for (int i=0;i<n;i++) {\n            int[] next = new int[row.length+1];\n            next[0] = next[next.length-1] = 1;\n            for (int j=1;j<row.length;j++) next[j] = row[j-1]+row[j];\n            row = next;\n        }\n        return row;\n    }\n}"
   },
   {
     "id": "climb_stairs",
@@ -3377,12 +3519,14 @@
     },
     "hints": {
       "es": [
-        "Es una recurrencia tipo Fibonacci.",
-        "Resuelto con DP iterativa."
+        "Es idéntico a Fibonacci con F(1)=1, F(2)=2.",
+        "Usa DP iterativa con dos variables.",
+        "Repite `n-2` veces."
       ],
       "en": [
-        "It is a Fibonacci-like recurrence.",
-        "Solve with iterative DP."
+        "Identical to Fibonacci with F(1)=1, F(2)=2.",
+        "Use iterative DP with two variables.",
+        "Repeat `n-2` times."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -3415,7 +3559,8 @@
         ],
         "expected": 8
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        if (n <= 2) return n;\n        int a = 1, b = 2;\n        for (int i=2;i<n;i++) { int t = b; b = a+b; a = t; }\n        return b;\n    }\n}"
   },
   {
     "id": "max_profit_one_transaction",
@@ -3444,12 +3589,14 @@
     },
     "hints": {
       "es": [
-        "Lleva el mínimo precio visto hasta cada punto.",
-        "Actualiza la mejor ganancia al recorrer."
+        "Lleva el precio mínimo visto.",
+        "En cada precio calcula la ganancia potencial.",
+        "Si la ganancia es negativa, devuelve 0."
       ],
       "en": [
-        "Track minimum price seen so far.",
-        "Update best profit while scanning."
+        "Track the minimum price seen.",
+        "At each price compute the potential profit.",
+        "If profit is negative, return 0."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] prices) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -3499,7 +3646,8 @@
         ],
         "expected": 2
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] prices) {\n        if (prices.length < 2) return 0;\n        int minPrice = prices[0], best = 0;\n        for (int i=1;i<prices.length;i++) {\n            best = Math.max(best, prices[i]-minPrice);\n            minPrice = Math.min(minPrice, prices[i]);\n        }\n        return best;\n    }\n}"
   },
   {
     "id": "missing_number_zero_to_n",
@@ -3528,10 +3676,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar la suma esperada `n*(n+1)/2`."
+        "La suma esperada de 0 a n es `n*(n+1)/2`.",
+        "Resta la suma real.",
+        "El resultado es el número faltante."
       ],
       "en": [
-        "You can use expected sum `n*(n+1)/2`."
+        "The expected sum from 0 to n is `n*(n+1)/2`.",
+        "Subtract the actual sum.",
+        "The result is the missing number."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -3581,7 +3733,8 @@
         ],
         "expected": 8
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] numbers) {\n        int n = numbers.length, sum = n*(n+1)/2;\n        for (int x : numbers) sum -= x;\n        return sum;\n    }\n}"
   },
   {
     "id": "intersection_unique",
@@ -3610,12 +3763,14 @@
     },
     "hints": {
       "es": [
-        "Usa HashSet para la intersección.",
-        "Ordena el resultado antes de devolver."
+        "Convierte `a` a un `HashSet`.",
+        "Para cada elemento de `b`, comprueba si está en el set.",
+        "Usa `TreeSet` para el resultado ordenado."
       ],
       "en": [
-        "Use HashSet for the intersection.",
-        "Sort result before returning."
+        "Convert `a` to a `HashSet`.",
+        "For each element of `b`, check if it is in the set.",
+        "Use `TreeSet` for the sorted result."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] a, int[] b) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -3680,7 +3835,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] a, int[] b) {\n        Set<Integer> setA = new HashSet<>(), result = new TreeSet<>();\n        for (int x : a) setA.add(x);\n        for (int x : b) if (setA.contains(x)) result.add(x);\n        return result.stream().mapToInt(Integer::intValue).toArray();\n    }\n}"
   },
   {
     "id": "symmetric_difference_sorted",
@@ -3709,12 +3865,14 @@
     },
     "hints": {
       "es": [
-        "Usa HashSet y la diferencia simétrica.",
-        "Ordena al final."
+        "Añade a A los que no están en B.",
+        "Añade a B los que no están en A.",
+        "Usa `TreeSet` para que quede ordenado."
       ],
       "en": [
-        "Use HashSet and symmetric difference.",
-        "Sort at the end."
+        "Add from A those not in B.",
+        "Add from B those not in A.",
+        "Use `TreeSet` so the result is sorted."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] a, int[] b) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -3778,7 +3936,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] a, int[] b) {\n        Set<Integer> setA = new HashSet<>(), setB = new HashSet<>();\n        for (int x : a) setA.add(x);\n        for (int x : b) setB.add(x);\n        Set<Integer> result = new TreeSet<>();\n        for (int x : setA) if (!setB.contains(x)) result.add(x);\n        for (int x : setB) if (!setA.contains(x)) result.add(x);\n        return result.stream().mapToInt(Integer::intValue).toArray();\n    }\n}"
   },
   {
     "id": "valid_mountain_array",
@@ -3807,12 +3966,14 @@
     },
     "hints": {
       "es": [
-        "Encuentra el pico y valida ambos lados.",
-        "No se permiten mesetas."
+        "Sube estrictamente hasta el pico.",
+        "El pico no puede ser el primero ni el último.",
+        "Baja estrictamente hasta el final."
       ],
       "en": [
-        "Find the peak and validate both sides.",
-        "Plateaus are not allowed."
+        "Strictly ascend to the peak.",
+        "The peak cannot be the first or last element.",
+        "Strictly descend to the end."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -3861,7 +4022,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int[] numbers) {\n        if (numbers.length < 3) return false;\n        int i = 0;\n        while (i+1 < numbers.length && numbers[i] < numbers[i+1]) i++;\n        if (i == 0 || i == numbers.length-1) return false;\n        while (i+1 < numbers.length && numbers[i] > numbers[i+1]) i++;\n        return i == numbers.length-1;\n    }\n}"
   },
   {
     "id": "rotate_string_right",
@@ -3890,12 +4052,14 @@
     },
     "hints": {
       "es": [
-        "Separa el sufijo final y ponlo delante.",
-        "Usa `substring`."
+        "Normaliza `k` con `k % length`.",
+        "Los últimos `k` caracteres van al principio.",
+        "Usa `substring` para dividir y unir."
       ],
       "en": [
-        "Take the trailing suffix and put it in front.",
-        "Use `substring`."
+        "Normalize `k` with `k % length`.",
+        "The last `k` characters go to the front.",
+        "Use `substring` to split and join."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text, int k) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -3931,7 +4095,8 @@
         ],
         "expected": ""
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text, int k) {\n        if (text.isEmpty()) return \"\";\n        k = k % text.length();\n        if (k == 0) return text;\n        return text.substring(text.length()-k) + text.substring(0, text.length()-k);\n    }\n}"
   },
   {
     "id": "remove_duplicates_sorted",
@@ -3960,10 +4125,14 @@
     },
     "hints": {
       "es": [
-        "Compara cada elemento con el último agregado."
+        "La lista ya viene ordenada.",
+        "Añade un elemento solo si es diferente al anterior.",
+        "Empieza con el primer elemento."
       ],
       "en": [
-        "Compare each item with last appended."
+        "The list is already sorted.",
+        "Add an element only if it differs from the previous.",
+        "Start with the first element."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -4018,7 +4187,8 @@
           3
         ]
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int[] solve(int[] numbers) {\n        if (numbers.length == 0) return new int[]{};\n        List<Integer> result = new ArrayList<>();\n        result.add(numbers[0]);\n        for (int i=1;i<numbers.length;i++) if (numbers[i] != numbers[i-1]) result.add(numbers[i]);\n        return result.stream().mapToInt(Integer::intValue).toArray();\n    }\n}"
   },
   {
     "id": "max_consecutive_ones",
@@ -4047,12 +4217,14 @@
     },
     "hints": {
       "es": [
-        "Cuenta la racha actual y el máximo global.",
-        "Reinicia contador al encontrar 0."
+        "Lleva un contador de la racha actual de 1s.",
+        "Reinícialo a 0 cuando encuentres un 0.",
+        "Guarda el máximo en cada paso."
       ],
       "en": [
-        "Track current streak and global max.",
-        "Reset counter when seeing 0."
+        "Track a counter for the current streak of 1s.",
+        "Reset to 0 when you find a 0.",
+        "Keep the maximum at each step."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -4103,7 +4275,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] numbers) {\n        int best = 0, count = 0;\n        for (int n : numbers) {\n            if (n == 1) { count++; best = Math.max(best, count); }\n            else count = 0;\n        }\n        return best;\n    }\n}"
   },
   {
     "id": "first_unique_number",
@@ -4132,12 +4305,14 @@
     },
     "hints": {
       "es": [
-        "Cuenta frecuencias primero con un LinkedHashMap.",
-        "Luego recorre en orden original."
+        "Cuenta frecuencias con un `LinkedHashMap` (mantiene orden).",
+        "Recorre el mapa y devuelve el primero con frecuencia 1.",
+        "Si no hay ninguno devuelve -1."
       ],
       "en": [
-        "Count frequencies first with a LinkedHashMap.",
-        "Then iterate in original order."
+        "Count frequencies with a `LinkedHashMap` (maintains order).",
+        "Iterate the map and return the first with frequency 1.",
+        "If there is none return -1."
       ]
     },
     "starterCode": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return -1;\n    }\n}",
@@ -4183,6 +4358,7 @@
         ],
         "expected": 7
       }
-    ]
+    ],
+    "solution": "import java.util.*;\n\nclass Solution {\n    public static int solve(int[] numbers) {\n        Map<Integer,Integer> freq = new LinkedHashMap<>();\n        for (int n : numbers) freq.merge(n, 1, Integer::sum);\n        for (Map.Entry<Integer,Integer> e : freq.entrySet()) if (e.getValue() == 1) return e.getKey();\n        return -1;\n    }\n}"
   }
 ]

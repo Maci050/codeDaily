@@ -28,24 +28,50 @@
     },
     "hints": {
       "es": [
-        "Puedes sumar con `a + b`.",
-        "Recuerda usar `return`."
+        "Usa el operador `+`.",
+        "Recuerda usar `return`.",
+        "La función recibe dos parámetros `a` y `b`."
       ],
       "en": [
-        "You can add with `a + b`.",
-        "Remember to use `return`."
+        "Use the `+` operator.",
+        "Remember to use `return`.",
+        "The function receives two parameters `a` and `b`."
       ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [2, 3], "expected": 5 },
-      { "input": [-1, 4], "expected": 3 },
-      { "input": [0, 0], "expected": 0 }
-    ]
+      {
+        "input": [
+          2,
+          3
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          -1,
+          4
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          0,
+          0
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "def solve(a, b):\n    return a + b"
   },
   {
     "id": "subtract_two_numbers",
@@ -65,29 +91,59 @@
       "en": "Return the subtraction of both values."
     },
     "restrictions": {
-      "es": ["La función debe llamarse `solve`."],
-      "en": ["The function must be named `solve`."]
+      "es": [
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "The function must be named `solve`."
+      ]
     },
     "hints": {
       "es": [
-        "La resta se hace con `-`.",
-        "Devuelve `a - b`."
+        "Usa el operador `-`.",
+        "Devuelve `a - b`.",
+        "El orden importa: primero `a`, luego `b`."
       ],
       "en": [
-        "Subtraction uses `-`.",
-        "Return `a - b`."
+        "Use the `-` operator.",
+        "Return `a - b`.",
+        "Order matters: first `a`, then `b`."
       ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [7, 2], "expected": 5 },
-      { "input": [0, 3], "expected": -3 },
-      { "input": [-2, -2], "expected": 0 }
-    ]
+      {
+        "input": [
+          7,
+          2
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          0,
+          3
+        ],
+        "expected": -3
+      },
+      {
+        "input": [
+          -2,
+          -2
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "def solve(a, b):\n    return a - b"
   },
   {
     "id": "multiply_two_numbers",
@@ -107,29 +163,59 @@
       "en": "Use the multiplication operator."
     },
     "restrictions": {
-      "es": ["La función debe llamarse `solve`."],
-      "en": ["The function must be named `solve`."]
+      "es": [
+        "La función debe llamarse `solve`."
+      ],
+      "en": [
+        "The function must be named `solve`."
+      ]
     },
     "hints": {
       "es": [
-        "La multiplicación se hace con `*`.",
-        "Devuelve `a * b`."
+        "Usa el operador `*`.",
+        "Devuelve el producto de `a` y `b`.",
+        "Cualquier número multiplicado por 0 da 0."
       ],
       "en": [
-        "Multiplication uses `*`.",
-        "Return `a * b`."
+        "Use the `*` operator.",
+        "Return the product of `a` and `b`.",
+        "Any number multiplied by 0 gives 0."
       ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3, 4], "expected": 12 },
-      { "input": [-2, 5], "expected": -10 },
-      { "input": [0, 8], "expected": 0 }
-    ]
+      {
+        "input": [
+          3,
+          4
+        ],
+        "expected": 12
+      },
+      {
+        "input": [
+          -2,
+          5
+        ],
+        "expected": -10
+      },
+      {
+        "input": [
+          0,
+          8
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "def solve(a, b):\n    return a * b"
   },
   {
     "id": "is_even",
@@ -149,29 +235,56 @@
       "en": "You can use `%`."
     },
     "restrictions": {
-      "es": ["La función debe devolver un booleano."],
-      "en": ["The function must return a boolean."]
+      "es": [
+        "La función debe devolver un booleano."
+      ],
+      "en": [
+        "The function must return a boolean."
+      ]
     },
     "hints": {
       "es": [
-        "Un número es par si el resto al dividir entre 2 es 0.",
-        "Prueba con `n % 2 == 0`."
+        "Un número par tiene resto 0 al dividir entre 2.",
+        "Usa el operador `%` (módulo).",
+        "Compara el resto con `== 0`."
       ],
       "en": [
-        "A number is even if dividing by 2 leaves remainder 0.",
-        "Try `n % 2 == 0`."
+        "An even number has remainder 0 when divided by 2.",
+        "Use the `%` (modulo) operator.",
+        "Compare the remainder with `== 0`."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [4], "expected": true },
-      { "input": [7], "expected": false },
-      { "input": [0], "expected": true }
-    ]
+      {
+        "input": [
+          4
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          7
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "def solve(n):\n    return n % 2 == 0"
   },
   {
     "id": "is_positive",
@@ -191,29 +304,56 @@
       "en": "If `n` is 0 or negative, return `False`."
     },
     "restrictions": {
-      "es": ["Usa un booleano como resultado."],
-      "en": ["Use a boolean as the result."]
+      "es": [
+        "Usa un booleano como resultado."
+      ],
+      "en": [
+        "Use a boolean as the result."
+      ]
     },
     "hints": {
       "es": [
-        "Piensa en la comparación `n > 0`.",
-        "La función debe devolver `True` o `False`."
+        "Compara `n` con 0.",
+        "Usa `>` para mayor que.",
+        "El 0 no es positivo."
       ],
       "en": [
-        "Think about the comparison `n > 0`.",
-        "The function must return `True` or `False`."
+        "Compare `n` with 0.",
+        "Use `>` for greater than.",
+        "0 is not positive."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3], "expected": true },
-      { "input": [0], "expected": false },
-      { "input": [-5], "expected": false }
-    ]
+      {
+        "input": [
+          3
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          -5
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(n):\n    return n > 0"
   },
   {
     "id": "is_negative",
@@ -233,29 +373,56 @@
       "en": "If `n` is 0 or positive, return `False`."
     },
     "restrictions": {
-      "es": ["Usa `return`."],
-      "en": ["Use `return`."]
+      "es": [
+        "Usa `return`."
+      ],
+      "en": [
+        "Use `return`."
+      ]
     },
     "hints": {
       "es": [
-        "Piensa en `n < 0`.",
-        "El resultado es booleano."
+        "Compara `n` con 0.",
+        "Usa `<` para menor que.",
+        "El 0 no es negativo."
       ],
       "en": [
-        "Think about `n < 0`.",
-        "The result is boolean."
+        "Compare `n` with 0.",
+        "Use `<` for less than.",
+        "0 is not negative."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [-1], "expected": true },
-      { "input": [0], "expected": false },
-      { "input": [2], "expected": false }
-    ]
+      {
+        "input": [
+          -1
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          2
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(n):\n    return n < 0"
   },
   {
     "id": "double_number",
@@ -275,29 +442,56 @@
       "en": "Return `n * 2`."
     },
     "restrictions": {
-      "es": ["No uses `print()`."],
-      "en": ["Do not use `print()`."]
+      "es": [
+        "No uses `print()`."
+      ],
+      "en": [
+        "Do not use `print()`."
+      ]
     },
     "hints": {
       "es": [
-        "Multiplica por 2.",
-        "Usa `return`."
+        "Multiplicar por 2 es doblar.",
+        "Usa `n * 2`.",
+        "También puedes usar `n + n`."
       ],
       "en": [
-        "Multiply by 2.",
-        "Use `return`."
+        "Multiplying by 2 doubles it.",
+        "Use `n * 2`.",
+        "You can also use `n + n`."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3], "expected": 6 },
-      { "input": [0], "expected": 0 },
-      { "input": [-4], "expected": -8 }
-    ]
+      {
+        "input": [
+          3
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          -4
+        ],
+        "expected": -8
+      }
+    ],
+    "solution": "def solve(n):\n    return n * 2"
   },
   {
     "id": "square_number",
@@ -317,29 +511,56 @@
       "en": "You can use `n * n`."
     },
     "restrictions": {
-      "es": ["La función debe devolver un número."],
-      "en": ["The function must return a number."]
+      "es": [
+        "La función debe devolver un número."
+      ],
+      "en": [
+        "The function must return a number."
+      ]
     },
     "hints": {
       "es": [
-        "Multiplica el número por sí mismo.",
-        "Devuelve `n * n`."
+        "Elevar al cuadrado es multiplicar el número por sí mismo.",
+        "Usa `n ** 2` o `n * n`.",
+        "El operador de potencia en Python es `**`."
       ],
       "en": [
-        "Multiply the number by itself.",
-        "Return `n * n`."
+        "Squaring means multiplying the number by itself.",
+        "Use `n ** 2` or `n * n`.",
+        "The power operator in Python is `**`."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [5], "expected": 25 },
-      { "input": [0], "expected": 0 },
-      { "input": [-3], "expected": 9 }
-    ]
+      {
+        "input": [
+          5
+        ],
+        "expected": 25
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          -3
+        ],
+        "expected": 9
+      }
+    ],
+    "solution": "def solve(n):\n    return n ** 2"
   },
   {
     "id": "cube_number",
@@ -359,29 +580,56 @@
       "en": "You can use `n * n * n`."
     },
     "restrictions": {
-      "es": ["Usa `return`."],
-      "en": ["Use `return`."]
+      "es": [
+        "Usa `return`."
+      ],
+      "en": [
+        "Use `return`."
+      ]
     },
     "hints": {
       "es": [
-        "Multiplica el número tres veces.",
-        "Piensa en `n * n * n`."
+        "El cubo es el número multiplicado por sí mismo 3 veces.",
+        "Usa `n ** 3`.",
+        "También puedes escribir `n * n * n`."
       ],
       "en": [
-        "Multiply the number three times.",
-        "Think about `n * n * n`."
+        "Cube means the number multiplied by itself 3 times.",
+        "Use `n ** 3`.",
+        "You can also write `n * n * n`."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [2], "expected": 8 },
-      { "input": [-2], "expected": -8 },
-      { "input": [0], "expected": 0 }
-    ]
+      {
+        "input": [
+          2
+        ],
+        "expected": 8
+      },
+      {
+        "input": [
+          -2
+        ],
+        "expected": -8
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "def solve(n):\n    return n ** 3"
   },
   {
     "id": "absolute_value",
@@ -401,29 +649,56 @@
       "en": "You can use `abs()` or do it manually."
     },
     "restrictions": {
-      "es": ["Devuelve siempre un número no negativo."],
-      "en": ["Always return a non-negative number."]
+      "es": [
+        "Devuelve siempre un número no negativo."
+      ],
+      "en": [
+        "Always return a non-negative number."
+      ]
     },
     "hints": {
       "es": [
-        "Python tiene `abs(n)`.",
-        "El valor absoluto nunca es negativo."
+        "El valor absoluto elimina el signo negativo.",
+        "Python tiene la función `abs()`.",
+        "Un número positivo no cambia con `abs`."
       ],
       "en": [
-        "Python has `abs(n)`.",
-        "Absolute value is never negative."
+        "Absolute value removes the negative sign.",
+        "Python has the `abs()` function.",
+        "A positive number doesn't change with `abs`."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [-5], "expected": 5 },
-      { "input": [3], "expected": 3 },
-      { "input": [0], "expected": 0 }
-    ]
+      {
+        "input": [
+          -5
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          3
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "def solve(n):\n    return abs(n)"
   },
   {
     "id": "max_of_two",
@@ -443,29 +718,59 @@
       "en": "You can use `max()`."
     },
     "restrictions": {
-      "es": ["Devuelve un único número."],
-      "en": ["Return a single number."]
+      "es": [
+        "Devuelve un único número."
+      ],
+      "en": [
+        "Return a single number."
+      ]
     },
     "hints": {
       "es": [
-        "Python tiene la función `max`.",
-        "También puedes usar `if`."
+        "Python tiene una función `max` que compara valores.",
+        "También puedes usar `if a > b: return a`.",
+        "`max(a, b)` devuelve el mayor de los dos."
       ],
       "en": [
-        "Python has the `max` function.",
-        "You can also use `if`."
+        "Python has a `max` function that compares values.",
+        "You can also use `if a > b: return a`.",
+        "`max(a, b)` returns the larger of the two."
       ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3, 8], "expected": 8 },
-      { "input": [10, 2], "expected": 10 },
-      { "input": [5, 5], "expected": 5 }
-    ]
+      {
+        "input": [
+          3,
+          8
+        ],
+        "expected": 8
+      },
+      {
+        "input": [
+          10,
+          2
+        ],
+        "expected": 10
+      },
+      {
+        "input": [
+          5,
+          5
+        ],
+        "expected": 5
+      }
+    ],
+    "solution": "def solve(a, b):\n    return max(a, b)"
   },
   {
     "id": "min_of_two",
@@ -485,29 +790,59 @@
       "en": "You can use `min()`."
     },
     "restrictions": {
-      "es": ["Devuelve un único número."],
-      "en": ["Return a single number."]
+      "es": [
+        "Devuelve un único número."
+      ],
+      "en": [
+        "Return a single number."
+      ]
     },
     "hints": {
       "es": [
-        "Python tiene la función `min`.",
-        "También puedes comparar con `if`."
+        "Python tiene una función `min` que compara valores.",
+        "También puedes usar `if a < b: return a`.",
+        "`min(a, b)` devuelve el menor de los dos."
       ],
       "en": [
-        "Python has the `min` function.",
-        "You can also compare with `if`."
+        "Python has a `min` function that compares values.",
+        "You can also use `if a < b: return a`.",
+        "`min(a, b)` returns the smaller of the two."
       ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3, 8], "expected": 3 },
-      { "input": [10, 2], "expected": 2 },
-      { "input": [5, 5], "expected": 5 }
-    ]
+      {
+        "input": [
+          3,
+          8
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          10,
+          2
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          5,
+          5
+        ],
+        "expected": 5
+      }
+    ],
+    "solution": "def solve(a, b):\n    return min(a, b)"
   },
   {
     "id": "string_length",
@@ -527,29 +862,56 @@
       "en": "You can use `len()`."
     },
     "restrictions": {
-      "es": ["Devuelve un entero."],
-      "en": ["Return an integer."]
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
     },
     "hints": {
       "es": [
-        "`len(text)` devuelve la longitud.",
-        "No olvides usar `return`."
+        "Usa la función `len()` para medir la longitud.",
+        "`len('hola')` devuelve 4.",
+        "Los espacios también cuentan."
       ],
       "en": [
-        "`len(text)` returns the length.",
-        "Do not forget to use `return`."
+        "Use the `len()` function to measure length.",
+        "`len('hola')` returns 4.",
+        "Spaces count too."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": 4 },
-      { "input": [""], "expected": 0 },
-      { "input": ["abcde"], "expected": 5 }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          "abcde"
+        ],
+        "expected": 5
+      }
+    ],
+    "solution": "def solve(text):\n    return len(text)"
   },
   {
     "id": "first_character",
@@ -569,29 +931,56 @@
       "en": "The text will always have at least one character."
     },
     "restrictions": {
-      "es": ["Devuelve un string de longitud 1."],
-      "en": ["Return a string of length 1."]
+      "es": [
+        "Devuelve un string de longitud 1."
+      ],
+      "en": [
+        "Return a string of length 1."
+      ]
     },
     "hints": {
       "es": [
-        "Los strings usan índices.",
-        "El primer índice es `0`."
+        "Los strings se indexan desde 0.",
+        "El primer carácter es `text[0]`.",
+        "Puedes acceder a cualquier carácter con `text[índice]`."
       ],
       "en": [
-        "Strings use indexes.",
-        "The first index is `0`."
+        "Strings are indexed from 0.",
+        "The first character is `text[0]`.",
+        "You can access any character with `text[index]`."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": "h" },
-      { "input": ["A"], "expected": "A" },
-      { "input": ["python"], "expected": "p" }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "h"
+      },
+      {
+        "input": [
+          "A"
+        ],
+        "expected": "A"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "p"
+      }
+    ],
+    "solution": "def solve(text):\n    return text[0]"
   },
   {
     "id": "last_character",
@@ -611,29 +1000,56 @@
       "en": "The text will always have at least one character."
     },
     "restrictions": {
-      "es": ["Devuelve un string de longitud 1."],
-      "en": ["Return a string of length 1."]
+      "es": [
+        "Devuelve un string de longitud 1."
+      ],
+      "en": [
+        "Return a string of length 1."
+      ]
     },
     "hints": {
       "es": [
-        "Puedes usar índices negativos.",
-        "El último elemento es `-1`."
+        "En Python los índices negativos cuentan desde el final.",
+        "`text[-1]` es el último carácter.",
+        "También puedes usar `text[len(text) - 1]`."
       ],
       "en": [
-        "You can use negative indexes.",
-        "The last element is `-1`."
+        "In Python, negative indices count from the end.",
+        "`text[-1]` is the last character.",
+        "You can also use `text[len(text) - 1]`."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": "a" },
-      { "input": ["Z"], "expected": "Z" },
-      { "input": ["python"], "expected": "n" }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "a"
+      },
+      {
+        "input": [
+          "Z"
+        ],
+        "expected": "Z"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "n"
+      }
+    ],
+    "solution": "def solve(text):\n    return text[-1]"
   },
   {
     "id": "reverse_word",
@@ -653,29 +1069,56 @@
       "en": "For example, `hola` should return `aloh`."
     },
     "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
+      "es": [
+        "Devuelve un string."
+      ],
+      "en": [
+        "Return a string."
+      ]
     },
     "hints": {
       "es": [
-        "Puedes usar slicing.",
-        "Prueba con `text[::-1]`."
+        "El slicing con paso -1 invierte un string.",
+        "La sintaxis es `text[::-1]`.",
+        "El slicing funciona como `[inicio:fin:paso]`."
       ],
       "en": [
-        "You can use slicing.",
-        "Try `text[::-1]`."
+        "Slicing with step -1 reverses a string.",
+        "The syntax is `text[::-1]`.",
+        "Slicing works as `[start:end:step]`."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": "aloh" },
-      { "input": ["abc"], "expected": "cba" },
-      { "input": [""], "expected": "" }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "aloh"
+      },
+      {
+        "input": [
+          "abc"
+        ],
+        "expected": "cba"
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": ""
+      }
+    ],
+    "solution": "def solve(text):\n    return text[::-1]"
   },
   {
     "id": "to_uppercase",
@@ -695,29 +1138,56 @@
       "en": "You can use `.upper()`."
     },
     "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
+      "es": [
+        "Devuelve un string."
+      ],
+      "en": [
+        "Return a string."
+      ]
     },
     "hints": {
       "es": [
-        "Los strings tienen métodos útiles.",
-        "Prueba con `text.upper()`."
+        "Los strings tienen métodos de transformación.",
+        "El método `.upper()` convierte a mayúsculas.",
+        "Se llama como `text.upper()`."
       ],
       "en": [
-        "Strings have useful methods.",
-        "Try `text.upper()`."
+        "Strings have transformation methods.",
+        "The `.upper()` method converts to uppercase.",
+        "Call it as `text.upper()`."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": "HOLA" },
-      { "input": ["Python"], "expected": "PYTHON" },
-      { "input": ["123"], "expected": "123" }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "HOLA"
+      },
+      {
+        "input": [
+          "Python"
+        ],
+        "expected": "PYTHON"
+      },
+      {
+        "input": [
+          "123"
+        ],
+        "expected": "123"
+      }
+    ],
+    "solution": "def solve(text):\n    return text.upper()"
   },
   {
     "id": "to_lowercase",
@@ -737,29 +1207,56 @@
       "en": "You can use `.lower()`."
     },
     "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
+      "es": [
+        "Devuelve un string."
+      ],
+      "en": [
+        "Return a string."
+      ]
     },
     "hints": {
       "es": [
-        "Prueba con `text.lower()`.",
-        "Devuelve el resultado."
+        "Similar a `.upper()` pero al contrario.",
+        "El método `.lower()` convierte a minúsculas.",
+        "Se llama como `text.lower()`."
       ],
       "en": [
-        "Try `text.lower()`.",
-        "Return the result."
+        "Similar to `.upper()` but the opposite.",
+        "The `.lower()` method converts to lowercase.",
+        "Call it as `text.lower()`."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["HOLA"], "expected": "hola" },
-      { "input": ["Python"], "expected": "python" },
-      { "input": ["123"], "expected": "123" }
-    ]
+      {
+        "input": [
+          "HOLA"
+        ],
+        "expected": "hola"
+      },
+      {
+        "input": [
+          "Python"
+        ],
+        "expected": "python"
+      },
+      {
+        "input": [
+          "123"
+        ],
+        "expected": "123"
+      }
+    ],
+    "solution": "def solve(text):\n    return text.lower()"
   },
   {
     "id": "append_exclamation",
@@ -779,29 +1276,56 @@
       "en": "Concatenate the string with `!`."
     },
     "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
+      "es": [
+        "Devuelve un string."
+      ],
+      "en": [
+        "Return a string."
+      ]
     },
     "hints": {
       "es": [
-        "Puedes concatenar con `+`.",
-        "Prueba con `text + \"!\"`."
+        "Los strings se concatenan con `+`.",
+        "Añade `'!'` al final del texto.",
+        "`'hola' + '!'` produce `'hola!'`."
       ],
       "en": [
-        "You can concatenate with `+`.",
-        "Try `text + \"!\"`."
+        "Strings are concatenated with `+`.",
+        "Add `'!'` at the end of the text.",
+        "`'hola' + '!'` produces `'hola!'`."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": "hola!" },
-      { "input": [""], "expected": "!" },
-      { "input": ["ok"], "expected": "ok!" }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "hola!"
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": "!"
+      },
+      {
+        "input": [
+          "ok"
+        ],
+        "expected": "ok!"
+      }
+    ],
+    "solution": "def solve(text):\n    return text + '!'"
   },
   {
     "id": "starts_with_a",
@@ -821,29 +1345,56 @@
       "en": "The text will always have at least one character."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
       "es": [
-        "Puedes mirar el primer carácter.",
-        "También puedes usar `.lower()`."
+        "Usa `.startswith()` para comprobar el inicio.",
+        "Convierte a minúsculas antes para ignorar mayúsculas.",
+        "`text.lower().startswith('a')` cubre ambos casos."
       ],
       "en": [
-        "You can look at the first character.",
-        "You can also use `.lower()`."
+        "Use `.startswith()` to check the beginning.",
+        "Convert to lowercase first to ignore case.",
+        "`text.lower().startswith('a')` covers both cases."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["avion"], "expected": true },
-      { "input": ["Arbol"], "expected": true },
-      { "input": ["casa"], "expected": false }
-    ]
+      {
+        "input": [
+          "avion"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "Arbol"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "casa"
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(text):\n    return text.lower().startswith('a')"
   },
   {
     "id": "ends_with_s",
@@ -863,29 +1414,56 @@
       "en": "The text will always have at least one character."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
       "es": [
-        "Puedes usar el último carácter.",
-        "También sirve `.endswith(\"s\")`."
+        "Usa `.endswith()` para comprobar el final.",
+        "Convierte a minúsculas antes para ignorar mayúsculas.",
+        "`text.lower().endswith('s')` cubre ambos casos."
       ],
       "en": [
-        "You can use the last character.",
-        "`.endswith(\"s\")` also works."
+        "Use `.endswith()` to check the end.",
+        "Convert to lowercase first to ignore case.",
+        "`text.lower().endswith('s')` covers both cases."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["casas"], "expected": true },
-      { "input": ["sol"], "expected": false },
-      { "input": ["s"], "expected": true }
-    ]
+      {
+        "input": [
+          "casas"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "sol"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "s"
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "def solve(text):\n    return text.lower().endswith('s')"
   },
   {
     "id": "sum_list_two_items",
@@ -905,29 +1483,65 @@
       "en": "The list will always contain exactly 2 numbers."
     },
     "restrictions": {
-      "es": ["Accede a los elementos por índice o usa `sum()`."],
-      "en": ["Access the items by index or use `sum()`."]
+      "es": [
+        "Accede a los elementos por índice o usa `sum()`."
+      ],
+      "en": [
+        "Access the items by index or use `sum()`."
+      ]
     },
     "hints": {
       "es": [
-        "Los índices serían `0` y `1`.",
-        "También puedes usar `sum(numbers)`."
+        "Accede a cada elemento con su índice.",
+        "`items[0]` es el primero, `items[1]` el segundo.",
+        "Súmalos con `+`."
       ],
       "en": [
-        "The indexes are `0` and `1`.",
-        "You can also use `sum(numbers)`."
+        "Access each element with its index.",
+        "`items[0]` is the first, `items[1]` the second.",
+        "Add them with `+`."
       ]
     },
     "starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [[2, 3]], "expected": 5 },
-      { "input": [[0, 0]], "expected": 0 },
-      { "input": [[-1, 4]], "expected": 3 }
-    ]
+      {
+        "input": [
+          [
+            2,
+            3
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            -1,
+            4
+          ]
+        ],
+        "expected": 3
+      }
+    ],
+    "solution": "def solve(items):\n    return items[0] + items[1]"
   },
   {
     "id": "first_list_item",
@@ -947,29 +1561,66 @@
       "en": "The list will always have at least one item."
     },
     "restrictions": {
-      "es": ["Devuelve el elemento, no su índice."],
-      "en": ["Return the item, not its index."]
+      "es": [
+        "Devuelve el elemento, no su índice."
+      ],
+      "en": [
+        "Return the item, not its index."
+      ]
     },
     "hints": {
       "es": [
         "Las listas se indexan igual que los strings.",
-        "El primer índice es `0`."
+        "El primer elemento tiene índice 0.",
+        "Usa `items[0]`."
       ],
       "en": [
-        "Lists are indexed like strings.",
-        "The first index is `0`."
+        "Lists are indexed the same as strings.",
+        "The first element has index 0.",
+        "Use `items[0]`."
       ]
     },
     "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": 1 },
-      { "input": [["a", "b"]], "expected": "a" },
-      { "input": [[true, false]], "expected": true }
-    ]
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "expected": "a"
+      },
+      {
+        "input": [
+          [
+            true,
+            false
+          ]
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "def solve(items):\n    return items[0]"
   },
   {
     "id": "last_list_item",
@@ -989,29 +1640,66 @@
       "en": "The list will always have at least one item."
     },
     "restrictions": {
-      "es": ["Devuelve el elemento, no su índice."],
-      "en": ["Return the item, not its index."]
+      "es": [
+        "Devuelve el elemento, no su índice."
+      ],
+      "en": [
+        "Return the item, not its index."
+      ]
     },
     "hints": {
       "es": [
-        "Puedes usar `-1`.",
-        "El último elemento está al final de la lista."
+        "El índice -1 accede al último elemento.",
+        "Funciona igual que en strings.",
+        "Usa `items[-1]`."
       ],
       "en": [
-        "You can use `-1`.",
-        "The last item is at the end of the list."
+        "Index -1 accesses the last element.",
+        "Works the same as with strings.",
+        "Use `items[-1]`."
       ]
     },
     "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": 3 },
-      { "input": [["a", "b"]], "expected": "b" },
-      { "input": [[true, false]], "expected": false }
-    ]
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "expected": "b"
+      },
+      {
+        "input": [
+          [
+            true,
+            false
+          ]
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(items):\n    return items[-1]"
   },
   {
     "id": "list_length",
@@ -1031,29 +1719,62 @@
       "en": "You can use `len()`."
     },
     "restrictions": {
-      "es": ["Devuelve un entero."],
-      "en": ["Return an integer."]
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
     },
     "hints": {
       "es": [
-        "`len(items)` te da la longitud.",
-        "No uses `print()`."
+        "`len()` funciona con listas igual que con strings.",
+        "Devuelve el número de elementos.",
+        "Una lista vacía tiene longitud 0."
       ],
       "en": [
-        "`len(items)` gives you the length.",
-        "Do not use `print()`."
+        "`len()` works with lists just like strings.",
+        "Returns the number of elements.",
+        "An empty list has length 0."
       ]
     },
     "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": 3 },
-      { "input": [[]], "expected": 0 },
-      { "input": [["a"]], "expected": 1 }
-    ]
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            "a"
+          ]
+        ],
+        "expected": 1
+      }
+    ],
+    "solution": "def solve(items):\n    return len(items)"
   },
   {
     "id": "add_one",
@@ -1073,29 +1794,56 @@
       "en": "Increase the number by 1."
     },
     "restrictions": {
-      "es": ["Devuelve un número."],
-      "en": ["Return a number."]
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
     },
     "hints": {
       "es": [
-        "Usa `+ 1`.",
-        "Devuelve el valor incrementado."
+        "Suma 1 al número.",
+        "Usa `n + 1`.",
+        "También puedes usar `n += 1` antes del return."
       ],
       "en": [
-        "Use `+ 1`.",
-        "Return the incremented value."
+        "Add 1 to the number.",
+        "Use `n + 1`.",
+        "You can also use `n += 1` before the return."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3], "expected": 4 },
-      { "input": [0], "expected": 1 },
-      { "input": [-2], "expected": -1 }
-    ]
+      {
+        "input": [
+          3
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          -2
+        ],
+        "expected": -1
+      }
+    ],
+    "solution": "def solve(n):\n    return n + 1"
   },
   {
     "id": "subtract_one",
@@ -1115,29 +1863,56 @@
       "en": "Decrease the number by 1."
     },
     "restrictions": {
-      "es": ["Devuelve un número."],
-      "en": ["Return a number."]
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
     },
     "hints": {
       "es": [
-        "Usa `- 1`.",
-        "Devuelve el resultado."
+        "Resta 1 al número.",
+        "Usa `n - 1`.",
+        "El resultado puede ser negativo."
       ],
       "en": [
-        "Use `- 1`.",
-        "Return the result."
+        "Subtract 1 from the number.",
+        "Use `n - 1`.",
+        "The result can be negative."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3], "expected": 2 },
-      { "input": [0], "expected": -1 },
-      { "input": [-2], "expected": -3 }
-    ]
+      {
+        "input": [
+          3
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": -1
+      },
+      {
+        "input": [
+          -2
+        ],
+        "expected": -3
+      }
+    ],
+    "solution": "def solve(n):\n    return n - 1"
   },
   {
     "id": "is_zero",
@@ -1157,29 +1932,56 @@
       "en": "Otherwise return `False`."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
       "es": [
         "Compara con `== 0`.",
-        "Usa `return`."
+        "Devuelve un booleano.",
+        "`==` comprueba igualdad, no lo confundas con `=`."
       ],
       "en": [
         "Compare with `== 0`.",
-        "Use `return`."
+        "Returns a boolean.",
+        "`==` checks equality, don't confuse it with `=`."
       ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [0], "expected": true },
-      { "input": [1], "expected": false },
-      { "input": [-1], "expected": false }
-    ]
+      {
+        "input": [
+          0
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          -1
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(n):\n    return n == 0"
   },
   {
     "id": "same_numbers",
@@ -1199,29 +2001,59 @@
       "en": "If they are different, return `False`."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
       "es": [
-        "Puedes comparar con `==`.",
-        "La respuesta es `True` o `False`."
+        "Compara los dos números con `==`.",
+        "Devuelve `True` si son iguales.",
+        "`==` es comparación, `=` es asignación."
       ],
       "en": [
-        "You can compare with `==`.",
-        "The answer is `True` or `False`."
+        "Compare both numbers with `==`.",
+        "Returns `True` if they are equal.",
+        "`==` is comparison, `=` is assignment."
       ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3, 3], "expected": true },
-      { "input": [2, 5], "expected": false },
-      { "input": [0, 0], "expected": true }
-    ]
+      {
+        "input": [
+          3,
+          3
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          2,
+          5
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          0,
+          0
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "def solve(a, b):\n    return a == b"
   },
   {
     "id": "sum_three_numbers",
@@ -1241,29 +2073,62 @@
       "en": "Use `return`."
     },
     "restrictions": {
-      "es": ["No uses `print()`."],
-      "en": ["Do not use `print()`."]
+      "es": [
+        "No uses `print()`."
+      ],
+      "en": [
+        "Do not use `print()`."
+      ]
     },
     "hints": {
       "es": [
-        "Suma `a + b + c`.",
-        "Devuelve el resultado."
+        "Suma los tres parámetros.",
+        "Usa `a + b + c`.",
+        "También puedes usar `sum([a, b, c])`."
       ],
       "en": [
-        "Add `a + b + c`.",
-        "Return the result."
+        "Add the three parameters.",
+        "Use `a + b + c`.",
+        "You can also use `sum([a, b, c])`."
       ]
     },
     "starterCode": "def solve(a, b, c):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [1, 2, 3], "expected": 6 },
-      { "input": [0, 0, 0], "expected": 0 },
-      { "input": [-1, 2, 1], "expected": 2 }
-    ]
+      {
+        "input": [
+          1,
+          2,
+          3
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          0,
+          0,
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          -1,
+          2,
+          1
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "def solve(a, b, c):\n    return a + b + c"
   },
   {
     "id": "average_of_two",
@@ -1283,29 +2148,59 @@
       "en": "The average is `(a + b) / 2`."
     },
     "restrictions": {
-      "es": ["Devuelve un número."],
-      "en": ["Return a number."]
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
     },
     "hints": {
       "es": [
-        "Suma y divide entre 2.",
-        "Usa paréntesis."
+        "La media es la suma dividida entre el número de elementos.",
+        "Suma `a` y `b`, luego divide entre 2.",
+        "Usa paréntesis: `(a + b) / 2`."
       ],
       "en": [
-        "Add and divide by 2.",
-        "Use parentheses."
+        "Average is the sum divided by the number of elements.",
+        "Add `a` and `b`, then divide by 2.",
+        "Use parentheses: `(a + b) / 2`."
       ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [2, 4], "expected": 3 },
-      { "input": [0, 10], "expected": 5 },
-      { "input": [-2, 2], "expected": 0 }
-    ]
+      {
+        "input": [
+          2,
+          4
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          0,
+          10
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          -2,
+          2
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "def solve(a, b):\n    return (a + b) / 2"
   },
   {
     "id": "is_long_word",
@@ -1325,29 +2220,56 @@
       "en": "If it has 5 or fewer, return `False`."
     },
     "restrictions": {
-      "es": ["Usa `len()` o una solución equivalente."],
-      "en": ["Use `len()` or an equivalent solution."]
+      "es": [
+        "Usa `len()` o una solución equivalente."
+      ],
+      "en": [
+        "Use `len()` or an equivalent solution."
+      ]
     },
     "hints": {
       "es": [
-        "Mira la longitud del string.",
-        "Compara con `> 5`."
+        "Calcula la longitud con `len()`.",
+        "Compara con `> 7`.",
+        "Devuelve un booleano directamente."
       ],
       "en": [
-        "Check the string length.",
-        "Compare with `> 5`."
+        "Calculate the length with `len()`.",
+        "Compare with `> 7`.",
+        "Returns a boolean directly."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": false },
-      { "input": ["python"], "expected": true },
-      { "input": ["abcdef"], "expected": true }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "abcdef"
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "def solve(text):\n    return len(text) > 7"
   },
   {
     "id": "count_letters_simple",
@@ -1367,29 +2289,56 @@
       "en": "In this simple version, the text has no spaces."
     },
     "restrictions": {
-      "es": ["Devuelve un entero."],
-      "en": ["Return an integer."]
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
     },
     "hints": {
       "es": [
-        "Este reto es equivalente a la longitud del texto.",
-        "Puedes usar `len(text)`."
+        "`len()` cuenta todos los caracteres.",
+        "Los espacios también cuentan como caracteres.",
+        "Devuelve un entero."
       ],
       "en": [
-        "This challenge is equivalent to the text length.",
-        "You can use `len(text)`."
+        "`len()` counts all characters.",
+        "Spaces also count as characters.",
+        "Returns an integer."
       ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": 4 },
-      { "input": ["abc"], "expected": 3 },
-      { "input": ["z"], "expected": 1 }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          "abc"
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          "z"
+        ],
+        "expected": 1
+      }
+    ],
+    "solution": "def solve(text):\n    return len(text)"
   },
   {
     "id": "contains_letter_a",
@@ -1409,23 +2358,56 @@
       "en": "The comparison is case-sensitive."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
-      "es": ["Puedes usar `in`.", "Prueba con `'a' in text`."],
-      "en": ["You can use `in`.", "Try `'a' in text`."]
+      "es": [
+        "Usa el operador `in` para buscar dentro de un string.",
+        "Convierte a minúsculas para no distinguir mayúsculas.",
+        "`'a' in text.lower()` devuelve True si encuentra una 'a'."
+      ],
+      "en": [
+        "Use the `in` operator to search inside a string.",
+        "Convert to lowercase to ignore case.",
+        "`'a' in text.lower()` returns True if it finds an 'a'."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["casa"], "expected": true },
-      { "input": ["sol"], "expected": false },
-      { "input": ["Ala"], "expected": true }
-    ]
+      {
+        "input": [
+          "casa"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "sol"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "Ala"
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "def solve(text):\n    return 'a' in text.lower()"
   },
   {
     "id": "is_uppercase_text",
@@ -1445,23 +2427,56 @@
       "en": "Use standard Python string behavior."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
-      "es": ["Puedes comparar con `text.upper()`.", "También existe `text.isupper()`."],
-      "en": ["You can compare with `text.upper()`.", "`text.isupper()` also exists."]
+      "es": [
+        "Los strings tienen el método `.isupper()`.",
+        "Devuelve True si todos los caracteres son mayúsculas.",
+        "Un string con solo números o espacios puede dar resultados inesperados."
+      ],
+      "en": [
+        "Strings have the `.isupper()` method.",
+        "Returns True if all characters are uppercase.",
+        "A string with only numbers or spaces may give unexpected results."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["HOLA"], "expected": true },
-      { "input": ["Hola"], "expected": false },
-      { "input": ["123"], "expected": false }
-    ]
+      {
+        "input": [
+          "HOLA"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "Hola"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "123"
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(text):\n    return text.isupper()"
   },
   {
     "id": "is_lowercase_text",
@@ -1481,23 +2496,56 @@
       "en": "Use standard Python string behavior."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
-      "es": ["Puedes comparar con `text.lower()`.", "También existe `text.islower()`."],
-      "en": ["You can compare with `text.lower()`.", "`text.islower()` also exists."]
+      "es": [
+        "Similar a `.isupper()` pero para minúsculas.",
+        "El método `.islower()` comprueba si todo está en minúsculas.",
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Similar to `.isupper()` but for lowercase.",
+        "The `.islower()` method checks if everything is lowercase.",
+        "Returns a boolean."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": true },
-      { "input": ["Hola"], "expected": false },
-      { "input": ["123"], "expected": false }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "Hola"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "123"
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(text):\n    return text.islower()"
   },
   {
     "id": "remove_first_list_item",
@@ -1517,23 +2565,70 @@
       "en": "The list will always have at least one element."
     },
     "restrictions": {
-      "es": ["Devuelve una lista nueva."],
-      "en": ["Return a new list."]
+      "es": [
+        "Devuelve una lista nueva."
+      ],
+      "en": [
+        "Return a new list."
+      ]
     },
     "hints": {
-      "es": ["Puedes usar slicing desde índice 1.", "Prueba con `items[1:]`."],
-      "en": ["You can use slicing from index 1.", "Try `items[1:]`."]
+      "es": [
+        "El slicing permite obtener sublistas.",
+        "`items[1:]` omite el primer elemento.",
+        "El `1:` significa 'desde el índice 1 hasta el final'."
+      ],
+      "en": [
+        "Slicing allows you to get sublists.",
+        "`items[1:]` skips the first element.",
+        "The `1:` means 'from index 1 to the end'."
+      ]
     },
     "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": [2, 3] },
-      { "input": [["a"]], "expected": [] },
-      { "input": [[true, false]], "expected": [false] }
-    ]
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          2,
+          3
+        ]
+      },
+      {
+        "input": [
+          [
+            "a"
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "input": [
+          [
+            true,
+            false
+          ]
+        ],
+        "expected": [
+          false
+        ]
+      }
+    ],
+    "solution": "def solve(items):\n    return items[1:]"
   },
   {
     "id": "remove_last_list_item",
@@ -1553,23 +2648,70 @@
       "en": "The list will always have at least one element."
     },
     "restrictions": {
-      "es": ["Devuelve una lista nueva."],
-      "en": ["Return a new list."]
+      "es": [
+        "Devuelve una lista nueva."
+      ],
+      "en": [
+        "Return a new list."
+      ]
     },
     "hints": {
-      "es": ["Puedes usar slicing hasta `-1`.", "Prueba con `items[:-1]`."],
-      "en": ["You can use slicing up to `-1`.", "Try `items[:-1]`."]
+      "es": [
+        "El slicing también acepta índices negativos.",
+        "`items[:-1]` omite el último elemento.",
+        "`:-1` significa 'desde el inicio hasta el penúltimo'."
+      ],
+      "en": [
+        "Slicing also accepts negative indices.",
+        "`items[:-1]` skips the last element.",
+        "`:-1` means 'from start up to the second to last'."
+      ]
     },
     "starterCode": "def solve(items):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": [1, 2] },
-      { "input": [["a"]], "expected": [] },
-      { "input": [[true, false]], "expected": [true] }
-    ]
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          2
+        ]
+      },
+      {
+        "input": [
+          [
+            "a"
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "input": [
+          [
+            true,
+            false
+          ]
+        ],
+        "expected": [
+          true
+        ]
+      }
+    ],
+    "solution": "def solve(items):\n    return items[:-1]"
   },
   {
     "id": "sum_first_last",
@@ -1589,23 +2731,65 @@
       "en": "The list will always have at least one element."
     },
     "restrictions": {
-      "es": ["Devuelve un número."],
-      "en": ["Return a number."]
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
     },
     "hints": {
-      "es": ["Usa índices `0` y `-1`.", "Si hay un solo elemento, se suma consigo mismo."],
-      "en": ["Use indexes `0` and `-1`.", "If there is one element, it is added to itself."]
+      "es": [
+        "Accede al primero con `items[0]`.",
+        "Accede al último con `items[-1]`.",
+        "Súmalos con `+`."
+      ],
+      "en": [
+        "Access the first with `items[0]`.",
+        "Access the last with `items[-1]`.",
+        "Add them with `+`."
+      ]
     },
     "starterCode": "def solve(numbers):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": 4 },
-      { "input": [[5]], "expected": 10 },
-      { "input": [[-2, 4]], "expected": 2 }
-    ]
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": 10
+      },
+      {
+        "input": [
+          [
+            -2,
+            4
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "def solve(items):\n    return items[0] + items[-1]"
   },
   {
     "id": "multiply_by_ten",
@@ -1625,23 +2809,56 @@
       "en": "Use `return`."
     },
     "restrictions": {
-      "es": ["Devuelve un número."],
-      "en": ["Return a number."]
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
     },
     "hints": {
-      "es": ["Multiplica por 10.", "Recuerda devolver el resultado."],
-      "en": ["Multiply by 10.", "Remember to return the result."]
+      "es": [
+        "Multiplica por 10.",
+        "Usa `n * 10`.",
+        "Recuerda devolver el resultado con `return`."
+      ],
+      "en": [
+        "Multiply by 10.",
+        "Use `n * 10`.",
+        "Remember to return the result with `return`."
+      ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [3], "expected": 30 },
-      { "input": [0], "expected": 0 },
-      { "input": [-2], "expected": -20 }
-    ]
+      {
+        "input": [
+          3
+        ],
+        "expected": 30
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          -2
+        ],
+        "expected": -20
+      }
+    ],
+    "solution": "def solve(n):\n    return n * 10"
   },
   {
     "id": "half_number",
@@ -1661,23 +2878,56 @@
       "en": "Use division by 2."
     },
     "restrictions": {
-      "es": ["Devuelve un número."],
-      "en": ["Return a number."]
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
     },
     "hints": {
-      "es": ["Prueba con `n / 2`.", "Devuelve el resultado."],
-      "en": ["Try `n / 2`.", "Return the result."]
+      "es": [
+        "Divide entre 2.",
+        "Usa `n / 2`.",
+        "El resultado puede ser decimal (float)."
+      ],
+      "en": [
+        "Divide by 2.",
+        "Use `n / 2`.",
+        "The result can be a decimal (float)."
+      ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [8], "expected": 4 },
-      { "input": [5], "expected": 2.5 },
-      { "input": [-6], "expected": -3 }
-    ]
+      {
+        "input": [
+          8
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          5
+        ],
+        "expected": 2.5
+      },
+      {
+        "input": [
+          -6
+        ],
+        "expected": -3
+      }
+    ],
+    "solution": "def solve(n):\n    return n / 2"
   },
   {
     "id": "is_multiple_of_five",
@@ -1697,23 +2947,56 @@
       "en": "Otherwise, return `False`."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
-      "es": ["Usa módulo `%`.", "Piensa en `n % 5 == 0`."],
-      "en": ["Use modulo `%`.", "Think about `n % 5 == 0`."]
+      "es": [
+        "Un múltiplo de 5 tiene resto 0 al dividir entre 5.",
+        "Usa `n % 5` para obtener el resto.",
+        "Compara con `== 0`."
+      ],
+      "en": [
+        "A multiple of 5 has remainder 0 when divided by 5.",
+        "Use `n % 5` to get the remainder.",
+        "Compare with `== 0`."
+      ]
     },
     "starterCode": "def solve(n):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [10], "expected": true },
-      { "input": [12], "expected": false },
-      { "input": [0], "expected": true }
-    ]
+      {
+        "input": [
+          10
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          12
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "def solve(n):\n    return n % 5 == 0"
   },
   {
     "id": "count_spaces",
@@ -1733,23 +3016,56 @@
       "en": "Count only the normal space character."
     },
     "restrictions": {
-      "es": ["Devuelve un entero."],
-      "en": ["Return an integer."]
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
     },
     "hints": {
-      "es": ["Puedes usar `text.count(' ')`.", "También sirve un bucle."],
-      "en": ["You can use `text.count(' ')`.", "A loop also works."]
+      "es": [
+        "Los strings tienen el método `.count()`.",
+        "`.count(' ')` cuenta los espacios.",
+        "Pasa el carácter a buscar como argumento."
+      ],
+      "en": [
+        "Strings have the `.count()` method.",
+        "`.count(' ')` counts spaces.",
+        "Pass the character to search as argument."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola mundo"], "expected": 1 },
-      { "input": [" a b c "], "expected": 4 },
-      { "input": ["python"], "expected": 0 }
-    ]
+      {
+        "input": [
+          "hola mundo"
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          " a b c "
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "def solve(text):\n    return text.count(' ')"
   },
   {
     "id": "replace_spaces_with_dash",
@@ -1769,23 +3085,56 @@
       "en": "Replace each space with a dash."
     },
     "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
+      "es": [
+        "Devuelve un string."
+      ],
+      "en": [
+        "Return a string."
+      ]
     },
     "hints": {
-      "es": ["Puedes usar `.replace(' ', '-')`.", "Devuelve el texto transformado."],
-      "en": ["You can use `.replace(' ', '-')`.", "Return the transformed text."]
+      "es": [
+        "Usa el método `.replace()`.",
+        "`.replace(' ', '-')` sustituye espacios por guiones.",
+        "El primer argumento es lo que buscas, el segundo lo que pones."
+      ],
+      "en": [
+        "Use the `.replace()` method.",
+        "`.replace(' ', '-')` replaces spaces with dashes.",
+        "The first argument is what you search, the second is what you put."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola mundo"], "expected": "hola-mundo" },
-      { "input": ["a b c"], "expected": "a-b-c" },
-      { "input": ["abc"], "expected": "abc" }
-    ]
+      {
+        "input": [
+          "hola mundo"
+        ],
+        "expected": "hola-mundo"
+      },
+      {
+        "input": [
+          "a b c"
+        ],
+        "expected": "a-b-c"
+      },
+      {
+        "input": [
+          "abc"
+        ],
+        "expected": "abc"
+      }
+    ],
+    "solution": "def solve(text):\n    return text.replace(' ', '-')"
   },
   {
     "id": "repeat_first_character",
@@ -1805,23 +3154,56 @@
       "en": "The text will always have at least one character."
     },
     "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
+      "es": [
+        "Devuelve un string."
+      ],
+      "en": [
+        "Return a string."
+      ]
     },
     "hints": {
-      "es": ["Toma `text[0]`.", "Concaténalo consigo mismo."],
-      "en": ["Take `text[0]`.", "Concatenate it with itself."]
+      "es": [
+        "Accede al primer carácter con `text[0]`.",
+        "Multiplica un string por un entero para repetirlo.",
+        "`'a' * 3` produce `'aaa'`."
+      ],
+      "en": [
+        "Access the first character with `text[0]`.",
+        "Multiply a string by an integer to repeat it.",
+        "`'a' * 3` produces `'aaa'`."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": "hh" },
-      { "input": ["A"], "expected": "AA" },
-      { "input": ["python"], "expected": "pp" }
-    ]
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": "hh"
+      },
+      {
+        "input": [
+          "A"
+        ],
+        "expected": "AA"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "pp"
+      }
+    ],
+    "solution": "def solve(text):\n    return text[0] * 3"
   },
   {
     "id": "concat_two_words",
@@ -1841,23 +3223,59 @@
       "en": "Use the `+` operator."
     },
     "restrictions": {
-      "es": ["Devuelve un string."],
-      "en": ["Return a string."]
+      "es": [
+        "Devuelve un string."
+      ],
+      "en": [
+        "Return a string."
+      ]
     },
     "hints": {
-      "es": ["Puedes hacer `a + b`.", "No uses `print()`."],
-      "en": ["You can do `a + b`.", "Do not use `print()`." ]
+      "es": [
+        "Concatena los dos strings con `+`.",
+        "Añade un espacio entre ellos.",
+        "`a + ' ' + b` une las palabras con espacio."
+      ],
+      "en": [
+        "Concatenate both strings with `+`.",
+        "Add a space between them.",
+        "`a + ' ' + b` joins the words with a space."
+      ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["hola", "mundo"], "expected": "holamundo" },
-      { "input": ["a", "b"], "expected": "ab" },
-      { "input": ["", "ok"], "expected": "ok" }
-    ]
+      {
+        "input": [
+          "hola",
+          "mundo"
+        ],
+        "expected": "holamundo"
+      },
+      {
+        "input": [
+          "a",
+          "b"
+        ],
+        "expected": "ab"
+      },
+      {
+        "input": [
+          "",
+          "ok"
+        ],
+        "expected": "ok"
+      }
+    ],
+    "solution": "def solve(a, b):\n    return a + ' ' + b"
   },
   {
     "id": "middle_two_chars_even",
@@ -1877,23 +3295,56 @@
       "en": "The text length will always be even and at least 2."
     },
     "restrictions": {
-      "es": ["Devuelve un string de longitud 2."],
-      "en": ["Return a string of length 2."]
+      "es": [
+        "Devuelve un string de longitud 2."
+      ],
+      "en": [
+        "Return a string of length 2."
+      ]
     },
     "hints": {
-      "es": ["Usa `len(text) // 2` como centro.", "Extrae dos posiciones con slicing."],
-      "en": ["Use `len(text) // 2` as center.", "Extract two positions with slicing."]
+      "es": [
+        "La longitud siempre es par.",
+        "El centro está en `len(text) // 2`.",
+        "Usa slicing para extraer dos caracteres: `text[mid-1:mid+1]`."
+      ],
+      "en": [
+        "The length is always even.",
+        "The center is at `len(text) // 2`.",
+        "Use slicing to extract two characters: `text[mid-1:mid+1]`."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["abcd"], "expected": "bc" },
-      { "input": ["python"], "expected": "th" },
-      { "input": ["aa"], "expected": "aa" }
-    ]
+      {
+        "input": [
+          "abcd"
+        ],
+        "expected": "bc"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "th"
+      },
+      {
+        "input": [
+          "aa"
+        ],
+        "expected": "aa"
+      }
+    ],
+    "solution": "def solve(text):\n    mid = len(text) // 2\n    return text[mid - 1:mid + 1]"
   },
   {
     "id": "count_digit_characters",
@@ -1913,23 +3364,56 @@
       "en": "Count characters from `0` to `9`."
     },
     "restrictions": {
-      "es": ["Devuelve un entero."],
-      "en": ["Return an integer."]
+      "es": [
+        "Devuelve un entero."
+      ],
+      "en": [
+        "Return an integer."
+      ]
     },
     "hints": {
-      "es": ["Puedes usar `ch.isdigit()`.", "Recorre carácter por carácter."],
-      "en": ["You can use `ch.isdigit()`.", "Iterate character by character."]
+      "es": [
+        "Los strings tienen el método `.isdigit()` por carácter.",
+        "Recorre el string y cuenta los dígitos.",
+        "Usa `sum()` con un generador o un bucle acumulador."
+      ],
+      "en": [
+        "Strings have the `.isdigit()` method per character.",
+        "Iterate through the string and count digits.",
+        "Use `sum()` with a generator or an accumulator loop."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": ["a1b2c3"], "expected": 3 },
-      { "input": ["python"], "expected": 0 },
-      { "input": ["2026"], "expected": 4 }
-    ]
+      {
+        "input": [
+          "a1b2c3"
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          "2026"
+        ],
+        "expected": 4
+      }
+    ],
+    "solution": "def solve(text):\n    return sum(1 for c in text if c.isdigit())"
   },
   {
     "id": "is_empty_text",
@@ -1949,23 +3433,56 @@
       "en": "If it has any character, return `False`."
     },
     "restrictions": {
-      "es": ["Devuelve un booleano."],
-      "en": ["Return a boolean."]
+      "es": [
+        "Devuelve un booleano."
+      ],
+      "en": [
+        "Return a boolean."
+      ]
     },
     "hints": {
-      "es": ["Puedes comparar con `''`.", "También sirve `len(text) == 0`."],
-      "en": ["You can compare with `''`.", "`len(text) == 0` also works."]
+      "es": [
+        "Comprueba si la longitud es 0.",
+        "Usa `len(text) == 0`.",
+        "También puedes usar `text == ''` o simplemente `not text`."
+      ],
+      "en": [
+        "Check if the length is 0.",
+        "Use `len(text) == 0`.",
+        "You can also use `text == ''` or simply `not text`."
+      ]
     },
     "starterCode": "def solve(text):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [""], "expected": true },
-      { "input": ["a"], "expected": false },
-      { "input": ["hola"], "expected": false }
-    ]
+      {
+        "input": [
+          ""
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "a"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": false
+      }
+    ],
+    "solution": "def solve(text):\n    return len(text) == 0"
   },
   {
     "id": "safe_divide_or_zero",
@@ -1985,22 +3502,58 @@
       "en": "Avoid division-by-zero error."
     },
     "restrictions": {
-      "es": ["Devuelve un número."],
-      "en": ["Return a number."]
+      "es": [
+        "Devuelve un número."
+      ],
+      "en": [
+        "Return a number."
+      ]
     },
     "hints": {
-      "es": ["Usa `if` para comprobar el divisor.", "Si `b == 0`, devuelve 0."],
-      "en": ["Use `if` to check the divisor.", "If `b == 0`, return 0."]
+      "es": [
+        "Comprueba si el divisor es 0 antes de dividir.",
+        "Si `b == 0` devuelve 0.",
+        "Si no, devuelve `a / b` normalmente."
+      ],
+      "en": [
+        "Check if the divisor is 0 before dividing.",
+        "If `b == 0` return 0.",
+        "Otherwise return `a / b` normally."
+      ]
     },
     "starterCode": "def solve(a, b):\n    # TODO: replace this with your solution\n    pass",
     "solutionShape": {
-      "requiredTokens": ["def", "return"],
-      "forbiddenTokens": ["print("]
+      "requiredTokens": [
+        "def",
+        "return"
+      ],
+      "forbiddenTokens": [
+        "print("
+      ]
     },
     "tests": [
-      { "input": [10, 2], "expected": 5 },
-      { "input": [7, 0], "expected": 0 },
-      { "input": [-9, 3], "expected": -3 }
-    ]
+      {
+        "input": [
+          10,
+          2
+        ],
+        "expected": 5
+      },
+      {
+        "input": [
+          7,
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          -9,
+          3
+        ],
+        "expected": -3
+      }
+    ],
+    "solution": "def solve(a, b):\n    if b == 0:\n        return 0\n    return a / b"
   }
 ]

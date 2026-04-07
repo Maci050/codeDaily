@@ -421,9 +421,8 @@ function ChallengePlayer({
 
   const handleGiveUp = () => {
     if (!baseChallenge || completed || givenUp) return;
-    // Desbloquea todas las pistas y bloquea el reto
-    const allHints = dailyChallenge?.localizedHints?.length || 0;
-    setRevealedHints(allHints);
+    const hints = dailyChallenge?.localizedHints || [];
+    setRevealedHints(hints.length);
     setLocked(true);
     setGivenUp(true);
     setShowGiveUpConfirm(false);
@@ -805,7 +804,7 @@ function ChallengePlayer({
                 )}
 
                 {/* Botón rendirse: solo en modo normal, sin completar, sin rendido, con 3+ intentos fallidos */}
-                {!isHackerMode && !completed && !givenUp && attemptCount >= 3 && !locked && (
+                {!isHackerMode && !completed && !givenUp && attemptCount >= 1 && !locked && (
                   <button
                     className="secondary-button"
                     onClick={() => setShowGiveUpConfirm(true)}
@@ -868,11 +867,22 @@ function ChallengePlayer({
                   {givenUp && !completed && (
                     <div className="feedback-box error-box" style={{ marginBottom: '14px' }}>
                       <h4>{text.giveUpBadge}</h4>
-                      <p style={{ marginTop: '4px', fontSize: '0.83rem' }}>
-                        {language === 'es'
-                          ? 'Te has rendido. Revisa las pistas desbloqueadas para entender la solución.'
-                          : 'You gave up. Check the unlocked hints to understand the solution.'}
-                      </p>
+                      {baseChallenge?.solution ? (
+                        <div style={{ marginTop: '10px' }}>
+                          <strong style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                            {text.solutionLabel}
+                          </strong>
+                          <pre className="code-block" style={{ marginTop: '8px' }}>
+                            <code>{baseChallenge.solution}</code>
+                          </pre>
+                        </div>
+                      ) : (
+                        <p style={{ marginTop: '4px', fontSize: '0.83rem' }}>
+                          {language === 'es'
+                            ? 'Revisa las pistas para entender la solución.'
+                            : 'Check the hints to understand the solution.'}
+                        </p>
+                      )}
                     </div>
                   )}
 

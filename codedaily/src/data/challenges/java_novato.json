@@ -28,12 +28,14 @@
     },
     "hints": {
       "es": [
-        "Puedes sumar con `a + b`.",
-        "Recuerda usar `return`."
+        "Usa el operador `+`.",
+        "Devuelve `a + b` directamente.",
+        "Recuerda poner `return`."
       ],
       "en": [
-        "You can add with `a + b`.",
-        "Remember to use `return`."
+        "Use the `+` operator.",
+        "Return `a + b` directly.",
+        "Remember to put `return`."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -69,7 +71,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int a, int b) {\n        return a + b;\n    }\n}"
   },
   {
     "id": "subtract_two_numbers",
@@ -98,12 +101,14 @@
     },
     "hints": {
       "es": [
-        "La resta se hace con `-`.",
-        "Devuelve `a - b`."
+        "Usa el operador `-`.",
+        "El orden importa: `a - b`.",
+        "Devuelve el resultado directamente."
       ],
       "en": [
-        "Subtraction uses `-`.",
-        "Return `a - b`."
+        "Use the `-` operator.",
+        "Order matters: `a - b`.",
+        "Return the result directly."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -139,7 +144,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int a, int b) {\n        return a - b;\n    }\n}"
   },
   {
     "id": "multiply_two_numbers",
@@ -168,12 +174,14 @@
     },
     "hints": {
       "es": [
-        "La multiplicación se hace con `*`.",
-        "Devuelve `a * b`."
+        "Usa el operador `*`.",
+        "Devuelve `a * b`.",
+        "Cualquier número por 0 da 0."
       ],
       "en": [
-        "Multiplication uses `*`.",
-        "Return `a * b`."
+        "Use the `*` operator.",
+        "Return `a * b`.",
+        "Any number times 0 gives 0."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -209,7 +217,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int a, int b) {\n        return a * b;\n    }\n}"
   },
   {
     "id": "is_even",
@@ -238,12 +247,14 @@
     },
     "hints": {
       "es": [
-        "Un número es par si el resto al dividir entre 2 es 0.",
-        "Prueba con `n % 2 == 0`."
+        "Un número par tiene `n % 2 == 0`.",
+        "Usa el operador `%` (módulo).",
+        "Devuelve la comparación directamente."
       ],
       "en": [
-        "A number is even if dividing by 2 leaves remainder 0.",
-        "Try `n % 2 == 0`."
+        "An even number has `n % 2 == 0`.",
+        "Use the `%` (modulo) operator.",
+        "Return the comparison directly."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int n) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -276,7 +287,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int n) {\n        return n % 2 == 0;\n    }\n}"
   },
   {
     "id": "is_positive",
@@ -305,12 +317,14 @@
     },
     "hints": {
       "es": [
-        "Piensa en la comparación `n > 0`.",
-        "El método debe devolver `true` o `false`."
+        "Compara `n` con 0 usando `>`.",
+        "El 0 no es positivo.",
+        "Devuelve la comparación directamente."
       ],
       "en": [
-        "Think about the comparison `n > 0`.",
-        "The method must return `true` or `false`."
+        "Compare `n` with 0 using `>`.",
+        "0 is not positive.",
+        "Return the comparison directly."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int n) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -343,7 +357,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int n) {\n        return n > 0;\n    }\n}"
   },
   {
     "id": "is_negative",
@@ -372,12 +387,14 @@
     },
     "hints": {
       "es": [
-        "Piensa en `n < 0`.",
-        "El resultado es booleano."
+        "Compara `n` con 0 usando `<`.",
+        "El 0 no es negativo.",
+        "Devuelve la comparación directamente."
       ],
       "en": [
-        "Think about `n < 0`.",
-        "The result is boolean."
+        "Compare `n` with 0 using `<`.",
+        "0 is not negative.",
+        "Return the comparison directly."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int n) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -410,7 +427,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int n) {\n        return n < 0;\n    }\n}"
   },
   {
     "id": "double_number",
@@ -440,11 +458,13 @@
     "hints": {
       "es": [
         "Multiplica por 2.",
-        "Usa `return`."
+        "Usa `n * 2`.",
+        "También puedes usar `n + n`."
       ],
       "en": [
         "Multiply by 2.",
-        "Use `return`."
+        "Use `n * 2`.",
+        "You can also use `n + n`."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -477,7 +497,8 @@
         ],
         "expected": -8
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        return n * 2;\n    }\n}"
   },
   {
     "id": "square_number",
@@ -506,12 +527,14 @@
     },
     "hints": {
       "es": [
-        "Multiplica el número por sí mismo.",
-        "Devuelve `n * n`."
+        "Eleva al cuadrado multiplicando el número por sí mismo.",
+        "Usa `n * n`.",
+        "En Java también puedes usar `Math.pow(n, 2)` pero devuelve double."
       ],
       "en": [
-        "Multiply the number by itself.",
-        "Return `n * n`."
+        "Square by multiplying the number by itself.",
+        "Use `n * n`.",
+        "In Java you can also use `Math.pow(n, 2)` but it returns double."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -544,7 +567,8 @@
         ],
         "expected": 9
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        return n * n;\n    }\n}"
   },
   {
     "id": "cube_number",
@@ -573,12 +597,14 @@
     },
     "hints": {
       "es": [
-        "Multiplica el número tres veces.",
-        "Piensa en `n * n * n`."
+        "Multiplica el número por sí mismo 3 veces.",
+        "Usa `n * n * n`.",
+        "Equivale a elevar a la potencia 3."
       ],
       "en": [
-        "Multiply the number three times.",
-        "Think about `n * n * n`."
+        "Multiply the number by itself 3 times.",
+        "Use `n * n * n`.",
+        "It is equivalent to raising to the power 3."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -611,7 +637,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        return n * n * n;\n    }\n}"
   },
   {
     "id": "absolute_value",
@@ -640,12 +667,14 @@
     },
     "hints": {
       "es": [
-        "Java tiene `Math.abs(n)`.",
-        "El valor absoluto nunca es negativo."
+        "Java tiene `Math.abs()` para el valor absoluto.",
+        "Elimina el signo negativo.",
+        "Un número positivo no cambia."
       ],
       "en": [
-        "Java has `Math.abs(n)`.",
-        "Absolute value is never negative."
+        "Java has `Math.abs()` for absolute value.",
+        "It removes the negative sign.",
+        "A positive number does not change."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -678,7 +707,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        return Math.abs(n);\n    }\n}"
   },
   {
     "id": "max_of_two",
@@ -708,11 +738,13 @@
     "hints": {
       "es": [
         "Java tiene `Math.max(a, b)`.",
-        "También puedes usar `if`."
+        "También puedes usar `if (a > b) return a; return b;`.",
+        "Devuelve el mayor de los dos."
       ],
       "en": [
         "Java has `Math.max(a, b)`.",
-        "You can also use `if`."
+        "You can also use `if (a > b) return a; return b;`.",
+        "Returns the larger of the two."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -748,7 +780,8 @@
         ],
         "expected": 5
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int a, int b) {\n        return Math.max(a, b);\n    }\n}"
   },
   {
     "id": "min_of_two",
@@ -778,11 +811,13 @@
     "hints": {
       "es": [
         "Java tiene `Math.min(a, b)`.",
-        "También puedes comparar con `if`."
+        "También puedes usar `if (a < b) return a; return b;`.",
+        "Devuelve el menor de los dos."
       ],
       "en": [
         "Java has `Math.min(a, b)`.",
-        "You can also compare with `if`."
+        "You can also use `if (a < b) return a; return b;`.",
+        "Returns the smaller of the two."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -818,7 +853,8 @@
         ],
         "expected": 5
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int a, int b) {\n        return Math.min(a, b);\n    }\n}"
   },
   {
     "id": "string_length",
@@ -847,12 +883,14 @@
     },
     "hints": {
       "es": [
-        "`text.length()` devuelve la longitud.",
-        "No olvides usar `return`."
+        "Los Strings en Java tienen el método `.length()`.",
+        "A diferencia de Python, en Java es un método: `text.length()` no `len(text)`.",
+        "Devuelve el número de caracteres."
       ],
       "en": [
-        "`text.length()` returns the length.",
-        "Do not forget to use `return`."
+        "Strings in Java have the `.length()` method.",
+        "Unlike Python, in Java it is a method: `text.length()` not `len(text)`.",
+        "Returns the number of characters."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -885,7 +923,8 @@
         ],
         "expected": 5
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(String text) {\n        return text.length();\n    }\n}"
   },
   {
     "id": "first_character",
@@ -914,12 +953,14 @@
     },
     "hints": {
       "es": [
-        "Los strings usan índices.",
-        "El primer índice es `0` con `charAt(0)`."
+        "Usa `text.charAt(0)` para acceder al primer carácter.",
+        "`charAt` devuelve un `char`, conviértelo a `String` con `String.valueOf()`.",
+        "Los índices empiezan en 0."
       ],
       "en": [
-        "Strings use indexes.",
-        "The first index is `0` with `charAt(0)`."
+        "Use `text.charAt(0)` to access the first character.",
+        "`charAt` returns a `char`, convert it to `String` with `String.valueOf()`.",
+        "Indices start at 0."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -952,7 +993,8 @@
         ],
         "expected": "p"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return String.valueOf(text.charAt(0));\n    }\n}"
   },
   {
     "id": "last_character",
@@ -981,12 +1023,14 @@
     },
     "hints": {
       "es": [
-        "Usa `charAt(text.length() - 1)`.",
-        "El último carácter está al final."
+        "El último índice es `text.length() - 1`.",
+        "Usa `text.charAt(text.length() - 1)`.",
+        "Convierte el `char` a `String` con `String.valueOf()`."
       ],
       "en": [
-        "Use `charAt(text.length() - 1)`.",
-        "The last character is at the end."
+        "The last index is `text.length() - 1`.",
+        "Use `text.charAt(text.length() - 1)`.",
+        "Convert the `char` to `String` with `String.valueOf()`."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -1019,7 +1063,8 @@
         ],
         "expected": "n"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return String.valueOf(text.charAt(text.length() - 1));\n    }\n}"
   },
   {
     "id": "reverse_word",
@@ -1048,12 +1093,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar `StringBuilder` con `.reverse()`.",
-        "Prueba con `new StringBuilder(text).reverse().toString()`."
+        "Usa `new StringBuilder(text).reverse().toString()`.",
+        "`StringBuilder` tiene el método `.reverse()`.",
+        "No olvides convertir de vuelta a `String` con `.toString()`."
       ],
       "en": [
-        "You can use `StringBuilder` with `.reverse()`.",
-        "Try `new StringBuilder(text).reverse().toString()`."
+        "Use `new StringBuilder(text).reverse().toString()`.",
+        "`StringBuilder` has the `.reverse()` method.",
+        "Don't forget to convert back to `String` with `.toString()`."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -1086,7 +1133,8 @@
         ],
         "expected": ""
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return new StringBuilder(text).reverse().toString();\n    }\n}"
   },
   {
     "id": "to_uppercase",
@@ -1115,12 +1163,14 @@
     },
     "hints": {
       "es": [
-        "Los strings tienen métodos útiles.",
-        "Prueba con `text.toUpperCase()`."
+        "Los Strings tienen `.toUpperCase()`.",
+        "Devuelve un nuevo String en mayúsculas.",
+        "No modifica el String original."
       ],
       "en": [
-        "Strings have useful methods.",
-        "Try `text.toUpperCase()`."
+        "Strings have `.toUpperCase()`.",
+        "Returns a new String in uppercase.",
+        "Does not modify the original String."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -1153,7 +1203,8 @@
         ],
         "expected": "123"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return text.toUpperCase();\n    }\n}"
   },
   {
     "id": "to_lowercase",
@@ -1182,12 +1233,14 @@
     },
     "hints": {
       "es": [
-        "Prueba con `text.toLowerCase()`.",
-        "Devuelve el resultado."
+        "Los Strings tienen `.toLowerCase()`.",
+        "Devuelve un nuevo String en minúsculas.",
+        "No modifica el String original."
       ],
       "en": [
-        "Try `text.toLowerCase()`.",
-        "Return the result."
+        "Strings have `.toLowerCase()`.",
+        "Returns a new String in lowercase.",
+        "Does not modify the original String."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -1220,7 +1273,8 @@
         ],
         "expected": "123"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return text.toLowerCase();\n    }\n}"
   },
   {
     "id": "append_exclamation",
@@ -1249,12 +1303,14 @@
     },
     "hints": {
       "es": [
-        "Puedes concatenar con `+`.",
-        "Prueba con `text + \"!\"`."
+        "En Java los Strings se concatenan con `+`.",
+        "Añade `\"!\"` al final.",
+        "Devuelve el resultado."
       ],
       "en": [
-        "You can concatenate with `+`.",
-        "Try `text + \"!\"`."
+        "In Java Strings are concatenated with `+`.",
+        "Append `\"!\"` at the end.",
+        "Return the result."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -1287,7 +1343,8 @@
         ],
         "expected": "ok!"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return text + \"!\";\n    }\n}"
   },
   {
     "id": "starts_with_a",
@@ -1316,12 +1373,14 @@
     },
     "hints": {
       "es": [
-        "Puedes mirar el primer carácter.",
-        "Usa `.toLowerCase()` para ignorar mayúsculas."
+        "Convierte a minúsculas con `.toLowerCase()`.",
+        "Usa `.startsWith(\"a\")` para comprobar el inicio.",
+        "Así cubres tanto 'a' como 'A'."
       ],
       "en": [
-        "You can look at the first character.",
-        "Use `.toLowerCase()` to ignore case."
+        "Convert to lowercase with `.toLowerCase()`.",
+        "Use `.startsWith(\"a\")` to check the beginning.",
+        "This covers both 'a' and 'A'."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -1354,7 +1413,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        return text.toLowerCase().startsWith(\"a\");\n    }\n}"
   },
   {
     "id": "ends_with_s",
@@ -1383,12 +1443,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar `.endsWith(\"s\")`.",
-        "También puedes mirar el último carácter."
+        "Convierte a minúsculas con `.toLowerCase()`.",
+        "Usa `.endsWith(\"s\")` para comprobar el final.",
+        "Así cubres tanto 's' como 'S'."
       ],
       "en": [
-        "You can use `.endsWith(\"s\")`.",
-        "You can also look at the last character."
+        "Convert to lowercase with `.toLowerCase()`.",
+        "Use `.endsWith(\"s\")` to check the end.",
+        "This covers both 's' and 'S'."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -1421,7 +1483,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        return text.toLowerCase().endsWith(\"s\");\n    }\n}"
   },
   {
     "id": "sum_list_two_items",
@@ -1450,12 +1513,14 @@
     },
     "hints": {
       "es": [
-        "Los índices serían `0` y `1`.",
-        "Devuelve `numbers[0] + numbers[1]`."
+        "Accede a los elementos con su índice.",
+        "`items[0]` es el primero, `items[1]` el segundo.",
+        "Súmalos con `+`."
       ],
       "en": [
-        "The indexes are `0` and `1`.",
-        "Return `numbers[0] + numbers[1]`."
+        "Access elements with their index.",
+        "`items[0]` is the first, `items[1]` the second.",
+        "Add them with `+`."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1497,7 +1562,8 @@
         ],
         "expected": 3
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] items) {\n        return items[0] + items[1];\n    }\n}"
   },
   {
     "id": "first_list_item",
@@ -1526,12 +1592,14 @@
     },
     "hints": {
       "es": [
-        "El primer índice es `0`.",
-        "Devuelve `items[0]`."
+        "Los arrays se indexan desde 0.",
+        "El primer elemento es `items[0]`.",
+        "Devuélvelo directamente."
       ],
       "en": [
-        "The first index is `0`.",
-        "Return `items[0]`."
+        "Arrays are indexed from 0.",
+        "The first element is `items[0]`.",
+        "Return it directly."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] items) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1573,7 +1641,8 @@
         ],
         "expected": -5
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] items) {\n        return items[0];\n    }\n}"
   },
   {
     "id": "last_list_item",
@@ -1602,12 +1671,14 @@
     },
     "hints": {
       "es": [
-        "Usa `items[items.length - 1]`.",
-        "El último elemento está al final."
+        "El último índice es `items.length - 1`.",
+        "A diferencia de Python, en Java no hay índices negativos.",
+        "Usa `items[items.length - 1]`."
       ],
       "en": [
-        "Use `items[items.length - 1]`.",
-        "The last item is at the end."
+        "The last index is `items.length - 1`.",
+        "Unlike Python, Java does not have negative indices.",
+        "Use `items[items.length - 1]`."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] items) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1649,7 +1720,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] items) {\n        return items[items.length - 1];\n    }\n}"
   },
   {
     "id": "list_length",
@@ -1678,12 +1750,14 @@
     },
     "hints": {
       "es": [
-        "`items.length` te da la longitud.",
-        "No uses `System.out.println()`."
+        "Los arrays en Java tienen la propiedad `.length`.",
+        "No es un método, no lleva paréntesis.",
+        "Devuelve el número de elementos."
       ],
       "en": [
-        "`items.length` gives you the length.",
-        "Do not use `System.out.println()`."
+        "Arrays in Java have the `.length` property.",
+        "It is not a method, no parentheses needed.",
+        "Returns the number of elements."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] items) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1722,7 +1796,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] items) {\n        return items.length;\n    }\n}"
   },
   {
     "id": "add_one",
@@ -1751,12 +1826,14 @@
     },
     "hints": {
       "es": [
-        "Usa `+ 1`.",
-        "Devuelve el valor incrementado."
+        "Suma 1 al número.",
+        "Usa `n + 1`.",
+        "Devuelve el resultado directamente."
       ],
       "en": [
-        "Use `+ 1`.",
-        "Return the incremented value."
+        "Add 1 to the number.",
+        "Use `n + 1`.",
+        "Return the result directly."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1789,7 +1866,8 @@
         ],
         "expected": -1
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        return n + 1;\n    }\n}"
   },
   {
     "id": "subtract_one",
@@ -1818,12 +1896,14 @@
     },
     "hints": {
       "es": [
-        "Usa `- 1`.",
-        "Devuelve el resultado."
+        "Resta 1 al número.",
+        "Usa `n - 1`.",
+        "El resultado puede ser negativo."
       ],
       "en": [
-        "Use `- 1`.",
-        "Return the result."
+        "Subtract 1 from the number.",
+        "Use `n - 1`.",
+        "The result can be negative."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -1856,7 +1936,8 @@
         ],
         "expected": -3
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        return n - 1;\n    }\n}"
   },
   {
     "id": "is_zero",
@@ -1886,11 +1967,13 @@
     "hints": {
       "es": [
         "Compara con `== 0`.",
-        "Usa `return`."
+        "Devuelve un booleano.",
+        "`==` compara igualdad en Java."
       ],
       "en": [
         "Compare with `== 0`.",
-        "Use `return`."
+        "Returns a boolean.",
+        "`==` compares equality in Java."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int n) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -1923,7 +2006,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int n) {\n        return n == 0;\n    }\n}"
   },
   {
     "id": "same_numbers",
@@ -1952,12 +2036,14 @@
     },
     "hints": {
       "es": [
-        "Puedes comparar con `==`.",
-        "La respuesta es `true` o `false`."
+        "Compara los dos enteros con `==`.",
+        "Devuelve `true` si son iguales.",
+        "Para primitivos como `int`, `==` compara el valor."
       ],
       "en": [
-        "You can compare with `==`.",
-        "The answer is `true` or `false`."
+        "Compare both integers with `==`.",
+        "Returns `true` if they are equal.",
+        "For primitives like `int`, `==` compares value."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int a, int b) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -1993,7 +2079,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int a, int b) {\n        return a == b;\n    }\n}"
   },
   {
     "id": "sum_three_numbers",
@@ -2022,12 +2109,14 @@
     },
     "hints": {
       "es": [
-        "Suma `a + b + c`.",
-        "Devuelve el resultado."
+        "Suma los tres parámetros.",
+        "Usa `a + b + c`.",
+        "Devuelve el resultado directamente."
       ],
       "en": [
-        "Add `a + b + c`.",
-        "Return the result."
+        "Add the three parameters.",
+        "Use `a + b + c`.",
+        "Return the result directly."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int a, int b, int c) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2066,7 +2155,8 @@
         ],
         "expected": 2
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int a, int b, int c) {\n        return a + b + c;\n    }\n}"
   },
   {
     "id": "average_of_two",
@@ -2095,12 +2185,14 @@
     },
     "hints": {
       "es": [
-        "Usa `2.0` para obtener división decimal.",
-        "Usa paréntesis."
+        "Divide entre `2.0` para obtener un resultado decimal.",
+        "Si divides entre `2` (entero), Java trunca el resultado.",
+        "Usa `(a + b) / 2.0`."
       ],
       "en": [
-        "Use `2.0` to get decimal division.",
-        "Use parentheses."
+        "Divide by `2.0` to get a decimal result.",
+        "If you divide by `2` (integer), Java truncates the result.",
+        "Use `(a + b) / 2.0`."
       ]
     },
     "starterCode": "class Solution {\n    public static double solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2136,7 +2228,8 @@
         ],
         "expected": 0.0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static double solve(int a, int b) {\n        return (a + b) / 2.0;\n    }\n}"
   },
   {
     "id": "is_long_word",
@@ -2165,12 +2258,14 @@
     },
     "hints": {
       "es": [
-        "Mira la longitud del String.",
-        "Compara con `> 5`."
+        "Calcula la longitud con `.length()`.",
+        "Compara con `> 7`.",
+        "Devuelve el booleano directamente."
       ],
       "en": [
-        "Check the String length.",
-        "Compare with `> 5`."
+        "Calculate the length with `.length()`.",
+        "Compare with `> 7`.",
+        "Return the boolean directly."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -2203,7 +2298,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        return text.length() > 7;\n    }\n}"
   },
   {
     "id": "count_letters_simple",
@@ -2232,12 +2328,14 @@
     },
     "hints": {
       "es": [
-        "Este reto es equivalente a la longitud del texto.",
-        "Puedes usar `text.length()`."
+        "`.length()` cuenta todos los caracteres incluidos espacios.",
+        "Devuelve un entero.",
+        "No necesitas ningún bucle."
       ],
       "en": [
-        "This challenge is equivalent to the text length.",
-        "You can use `text.length()`."
+        "`.length()` counts all characters including spaces.",
+        "Returns an integer.",
+        "No loop needed."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2270,7 +2368,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(String text) {\n        return text.length();\n    }\n}"
   },
   {
     "id": "contains_letter_a",
@@ -2299,12 +2398,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar `.contains(\"a\")`.",
-        "También sirve `.indexOf('a') >= 0`."
+        "Convierte a minúsculas con `.toLowerCase()`.",
+        "Usa `.contains(\"a\")` para buscar.",
+        "Así cubres 'a' y 'A'."
       ],
       "en": [
-        "You can use `.contains(\"a\")`.",
-        "`.indexOf('a') >= 0` also works."
+        "Convert to lowercase with `.toLowerCase()`.",
+        "Use `.contains(\"a\")` to search.",
+        "This covers both 'a' and 'A'."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -2337,7 +2438,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        return text.toLowerCase().contains(\"a\");\n    }\n}"
   },
   {
     "id": "is_uppercase_text",
@@ -2366,12 +2468,14 @@
     },
     "hints": {
       "es": [
-        "Puedes comparar con `text.toUpperCase()`.",
-        "Compara si `text.equals(text.toUpperCase())`."
+        "Compara el texto con su versión en mayúsculas.",
+        "`text.equals(text.toUpperCase())` devuelve true si ya estaba todo en mayúsculas.",
+        "Usa `.equals()` para comparar Strings en Java, no `==`."
       ],
       "en": [
-        "You can compare with `text.toUpperCase()`.",
-        "Check if `text.equals(text.toUpperCase())`."
+        "Compare the text with its uppercase version.",
+        "`text.equals(text.toUpperCase())` returns true if it was already all uppercase.",
+        "Use `.equals()` to compare Strings in Java, not `==`."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -2404,7 +2508,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        return text.equals(text.toUpperCase());\n    }\n}"
   },
   {
     "id": "is_lowercase_text",
@@ -2433,10 +2538,14 @@
     },
     "hints": {
       "es": [
-        "Compara si `text.equals(text.toLowerCase())`."
+        "Compara el texto con su versión en minúsculas.",
+        "`text.equals(text.toLowerCase())` devuelve true si ya estaba en minúsculas.",
+        "Usa `.equals()` para comparar Strings."
       ],
       "en": [
-        "Check if `text.equals(text.toLowerCase())`."
+        "Compare the text with its lowercase version.",
+        "`text.equals(text.toLowerCase())` returns true if it was already lowercase.",
+        "Use `.equals()` to compare Strings."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -2469,7 +2578,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        return text.equals(text.toLowerCase());\n    }\n}"
   },
   {
     "id": "remove_first_list_item",
@@ -2499,11 +2609,13 @@
     "hints": {
       "es": [
         "Usa `Arrays.copyOfRange(items, 1, items.length)`.",
-        "Importa `java.util.Arrays`."
+        "Copia desde el índice 1 hasta el final.",
+        "Devuelve un nuevo array sin el primer elemento."
       ],
       "en": [
         "Use `Arrays.copyOfRange(items, 1, items.length)`.",
-        "Import `java.util.Arrays`."
+        "Copies from index 1 to the end.",
+        "Returns a new array without the first element."
       ]
     },
     "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int[] solve(int[] items) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -2550,7 +2662,8 @@
           0
         ]
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[] solve(int[] items) {\n        return java.util.Arrays.copyOfRange(items, 1, items.length);\n    }\n}"
   },
   {
     "id": "remove_last_list_item",
@@ -2580,11 +2693,13 @@
     "hints": {
       "es": [
         "Usa `Arrays.copyOfRange(items, 0, items.length - 1)`.",
-        "Importa `java.util.Arrays`."
+        "Copia desde el inicio hasta el penúltimo.",
+        "Devuelve un nuevo array sin el último elemento."
       ],
       "en": [
         "Use `Arrays.copyOfRange(items, 0, items.length - 1)`.",
-        "Import `java.util.Arrays`."
+        "Copies from start up to the second to last.",
+        "Returns a new array without the last element."
       ]
     },
     "starterCode": "import java.util.Arrays;\n\nclass Solution {\n    public static int[] solve(int[] items) {\n        // TODO: replace this with your solution\n        return new int[]{};\n    }\n}",
@@ -2631,7 +2746,8 @@
           -1
         ]
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int[] solve(int[] items) {\n        return java.util.Arrays.copyOfRange(items, 0, items.length - 1);\n    }\n}"
   },
   {
     "id": "sum_first_last",
@@ -2660,12 +2776,14 @@
     },
     "hints": {
       "es": [
-        "Usa índices `0` y `numbers.length - 1`.",
-        "Si hay un solo elemento, se suma consigo mismo."
+        "Accede al primero con `items[0]`.",
+        "Accede al último con `items[items.length - 1]`.",
+        "Súmalos."
       ],
       "en": [
-        "Use indexes `0` and `numbers.length - 1`.",
-        "If there is one element, it is added to itself."
+        "Access the first with `items[0]`.",
+        "Access the last with `items[items.length - 1]`.",
+        "Add them."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int[] numbers) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2707,7 +2825,8 @@
         ],
         "expected": 2
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int[] items) {\n        return items[0] + items[items.length - 1];\n    }\n}"
   },
   {
     "id": "multiply_by_ten",
@@ -2737,11 +2856,13 @@
     "hints": {
       "es": [
         "Multiplica por 10.",
-        "Recuerda devolver el resultado."
+        "Usa `n * 10`.",
+        "Devuelve directamente."
       ],
       "en": [
         "Multiply by 10.",
-        "Remember to return the result."
+        "Use `n * 10`.",
+        "Return directly."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2774,7 +2895,8 @@
         ],
         "expected": -20
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(int n) {\n        return n * 10;\n    }\n}"
   },
   {
     "id": "half_number",
@@ -2803,12 +2925,14 @@
     },
     "hints": {
       "es": [
-        "Prueba con `n / 2.0`.",
-        "Devuelve el resultado."
+        "Divide entre `2.0` para obtener resultado decimal.",
+        "Si divides `n / 2` con enteros Java trunca.",
+        "Usa `n / 2.0`."
       ],
       "en": [
-        "Try `n / 2.0`.",
-        "Return the result."
+        "Divide by `2.0` to get a decimal result.",
+        "If you divide `n / 2` with integers Java truncates.",
+        "Use `n / 2.0`."
       ]
     },
     "starterCode": "class Solution {\n    public static double solve(int n) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2841,7 +2965,8 @@
         ],
         "expected": -3.0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static double solve(int n) {\n        return n / 2.0;\n    }\n}"
   },
   {
     "id": "is_multiple_of_five",
@@ -2870,12 +2995,14 @@
     },
     "hints": {
       "es": [
-        "Usa módulo `%`.",
-        "Piensa en `n % 5 == 0`."
+        "Un múltiplo de 5 tiene `n % 5 == 0`.",
+        "Usa el operador módulo `%`.",
+        "Devuelve la comparación directamente."
       ],
       "en": [
-        "Use modulo `%`.",
-        "Think about `n % 5 == 0`."
+        "A multiple of 5 has `n % 5 == 0`.",
+        "Use the modulo operator `%`.",
+        "Return the comparison directly."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(int n) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -2908,7 +3035,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(int n) {\n        return n % 5 == 0;\n    }\n}"
   },
   {
     "id": "count_spaces",
@@ -2937,12 +3065,14 @@
     },
     "hints": {
       "es": [
-        "Recorre carácter por carácter con un bucle.",
-        "Compara cada carácter con `' '`."
+        "Recorre el String carácter a carácter con un for-each.",
+        "Compara cada carácter con `' '`.",
+        "Incrementa el contador cuando sea un espacio."
       ],
       "en": [
-        "Iterate character by character with a loop.",
-        "Compare each character with `' '`."
+        "Iterate the String character by character with a for-each.",
+        "Compare each character with `' '`.",
+        "Increment the counter when it is a space."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -2975,7 +3105,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(String text) {\n        int count = 0;\n        for (char c : text.toCharArray()) {\n            if (c == ' ') count++;\n        }\n        return count;\n    }\n}"
   },
   {
     "id": "replace_spaces_with_dash",
@@ -3004,12 +3135,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar `.replace(\" \", \"-\")`.",
-        "Devuelve el texto transformado."
+        "Usa `.replace(' ', '-')`.",
+        "El primer argumento es el carácter a buscar.",
+        "El segundo es el carácter de reemplazo."
       ],
       "en": [
-        "You can use `.replace(\" \", \"-\")`.",
-        "Return the transformed text."
+        "Use `.replace(' ', '-')`.",
+        "The first argument is the character to find.",
+        "The second is the replacement character."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -3042,7 +3175,8 @@
         ],
         "expected": "abc"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return text.replace(' ', '-');\n    }\n}"
   },
   {
     "id": "repeat_first_character",
@@ -3071,12 +3205,14 @@
     },
     "hints": {
       "es": [
-        "Toma `text.charAt(0)`.",
-        "Concaténalo consigo mismo."
+        "Accede al primer carácter con `text.charAt(0)`.",
+        "Conviértelo a String con `String.valueOf()`.",
+        "Repítelo 3 veces con `.repeat(3)` (Java 11+)."
       ],
       "en": [
-        "Take `text.charAt(0)`.",
-        "Concatenate it with itself."
+        "Access the first character with `text.charAt(0)`.",
+        "Convert to String with `String.valueOf()`.",
+        "Repeat it 3 times with `.repeat(3)` (Java 11+)."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -3109,7 +3245,8 @@
         ],
         "expected": "pp"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        return String.valueOf(text.charAt(0)).repeat(3);\n    }\n}"
   },
   {
     "id": "concat_two_words",
@@ -3138,12 +3275,14 @@
     },
     "hints": {
       "es": [
-        "Puedes hacer `a + b`.",
-        "No uses `System.out.println()`."
+        "Concatena con `+`.",
+        "Añade un espacio entre las palabras.",
+        "`a + \" \" + b` une con espacio."
       ],
       "en": [
-        "You can do `a + b`.",
-        "Do not use `System.out.println()`."
+        "Concatenate with `+`.",
+        "Add a space between the words.",
+        "`a + \" \" + b` joins with a space."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String a, String b) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -3179,7 +3318,8 @@
         ],
         "expected": "ok"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String a, String b) {\n        return a + \" \" + b;\n    }\n}"
   },
   {
     "id": "middle_two_chars_even",
@@ -3208,12 +3348,14 @@
     },
     "hints": {
       "es": [
-        "Usa `text.length() / 2` como centro.",
-        "Extrae dos posiciones con `substring`."
+        "La longitud siempre es par.",
+        "El centro está en `text.length() / 2`.",
+        "Usa `text.substring(mid - 1, mid + 1)`."
       ],
       "en": [
-        "Use `text.length() / 2` as center.",
-        "Extract two positions with `substring`."
+        "The length is always even.",
+        "The center is at `text.length() / 2`.",
+        "Use `text.substring(mid - 1, mid + 1)`."
       ]
     },
     "starterCode": "class Solution {\n    public static String solve(String text) {\n        // TODO: replace this with your solution\n        return \"\";\n    }\n}",
@@ -3246,7 +3388,8 @@
         ],
         "expected": "aa"
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static String solve(String text) {\n        int mid = text.length() / 2;\n        return text.substring(mid - 1, mid + 1);\n    }\n}"
   },
   {
     "id": "count_digit_characters",
@@ -3275,12 +3418,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar `Character.isDigit(ch)`.",
-        "Recorre carácter por carácter."
+        "Recorre el String con un for-each.",
+        "Usa `Character.isDigit(c)` para detectar dígitos.",
+        "Incrementa el contador cuando sea un dígito."
       ],
       "en": [
-        "You can use `Character.isDigit(ch)`.",
-        "Iterate character by character."
+        "Iterate the String with a for-each.",
+        "Use `Character.isDigit(c)` to detect digits.",
+        "Increment the counter when it is a digit."
       ]
     },
     "starterCode": "class Solution {\n    public static int solve(String text) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -3313,7 +3458,8 @@
         ],
         "expected": 4
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static int solve(String text) {\n        int count = 0;\n        for (char c : text.toCharArray()) {\n            if (Character.isDigit(c)) count++;\n        }\n        return count;\n    }\n}"
   },
   {
     "id": "is_empty_text",
@@ -3342,12 +3488,14 @@
     },
     "hints": {
       "es": [
-        "Puedes usar `.isEmpty()`.",
-        "También sirve `text.length() == 0`."
+        "Los Strings tienen el método `.isEmpty()`.",
+        "También puedes usar `text.length() == 0`.",
+        "O `text.equals(\"\")`."
       ],
       "en": [
-        "You can use `.isEmpty()`.",
-        "`text.length() == 0` also works."
+        "Strings have the `.isEmpty()` method.",
+        "You can also use `text.length() == 0`.",
+        "Or `text.equals(\"\")`."
       ]
     },
     "starterCode": "class Solution {\n    public static boolean solve(String text) {\n        // TODO: replace this with your solution\n        return false;\n    }\n}",
@@ -3380,7 +3528,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static boolean solve(String text) {\n        return text.isEmpty();\n    }\n}"
   },
   {
     "id": "safe_divide_or_zero",
@@ -3409,12 +3558,14 @@
     },
     "hints": {
       "es": [
-        "Usa `if` para comprobar el divisor.",
-        "Si `b == 0`, devuelve 0."
+        "Comprueba si `b == 0` antes de dividir.",
+        "Devuelve 0 si el divisor es cero.",
+        "Usa `(double) a / b` para resultado decimal."
       ],
       "en": [
-        "Use `if` to check the divisor.",
-        "If `b == 0`, return 0."
+        "Check if `b == 0` before dividing.",
+        "Return 0 if the divisor is zero.",
+        "Use `(double) a / b` for a decimal result."
       ]
     },
     "starterCode": "class Solution {\n    public static double solve(int a, int b) {\n        // TODO: replace this with your solution\n        return 0;\n    }\n}",
@@ -3450,6 +3601,7 @@
         ],
         "expected": -3.0
       }
-    ]
+    ],
+    "solution": "class Solution {\n    public static double solve(int a, int b) {\n        if (b == 0) return 0;\n        return (double) a / b;\n    }\n}"
   }
 ]
