@@ -292,6 +292,16 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
                 <div className="feedback-box error-box">
                   <h4>{text.lockedTitle}</h4>
                   <p>{text.lockedText}</p>
+                  {challenge.solution && (
+                    <div style={{ marginTop: '12px' }}>
+                      <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>
+                        {text.solutionLabel}
+                      </strong>
+                      <pre className="code-block" style={{ marginTop: '8px' }}>
+                        <code>{challenge.solution}</code>
+                      </pre>
+                    </div>
+                  )}
                 </div>
               )}
 

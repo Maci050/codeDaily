@@ -52,7 +52,8 @@
         ],
         "expected": 42
       }
-    ]
+    ],
+    "solution": "def solve(items):\n    return items[len(items) - 1]"
   },
   {
     "id": "fb_wrong_operator",
@@ -98,7 +99,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return n % 2 == 0"
   },
   {
     "id": "fb_wrong_return",
@@ -147,7 +149,8 @@
         ],
         "expected": 5
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    if a > b:\n        return a\n    return b"
   },
   {
     "id": "fb_wrong_slice",
@@ -193,7 +196,8 @@
         ],
         "expected": "b"
       }
-    ]
+    ],
+    "solution": "def solve(text):\n    return text[1:]"
   },
   {
     "id": "fb_accumulator_init",
@@ -249,7 +253,8 @@
         ],
         "expected": 5
       }
-    ]
+    ],
+    "solution": "def solve(numbers):\n    total = 0\n    for n in numbers:\n        total += n\n    return total"
   },
   {
     "id": "fb_wrong_condition",
@@ -295,7 +300,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "def solve(text):\n    return text[0].lower() in 'aeiou'"
   },
   {
     "id": "fb_missing_abs",
@@ -344,7 +350,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return abs(a - b)"
   },
   {
     "id": "fb_off_by_one_loop",
@@ -406,7 +413,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "def solve(numbers, threshold):\n    count = 0\n    for n in numbers:\n        if n > threshold:\n            count += 1\n    return count"
   },
   {
     "id": "fb_wrong_string_method",
@@ -452,7 +460,8 @@
         ],
         "expected": 3
       }
-    ]
+    ],
+    "solution": "def solve(text):\n    return len(text.split())"
   },
   {
     "id": "fb_mutation_bug",
@@ -516,7 +525,8 @@
           10
         ]
       }
-    ]
+    ],
+    "solution": "def solve(numbers):\n    return [n * 2 for n in numbers]"
   },
   {
     "id": "fb_wrong_base_case",
@@ -562,7 +572,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    if n == 0:\n        return 0\n    return n + solve(n - 1)"
   },
   {
     "id": "fb_logic_error",
@@ -611,7 +622,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return a > 0 and b > 0"
   },
   {
     "id": "fb_infinite_loop",
@@ -657,7 +669,8 @@
         ],
         "expected": 4
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    count = 0\n    while n > 0:\n        n = n // 2\n        count += 1\n    return count"
   },
   {
     "id": "fb_scope_bug",
@@ -717,7 +730,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "def solve(numbers, threshold):\n    result = -1\n    for i, n in enumerate(numbers):\n        if n > threshold:\n            result = i\n            break\n    return result"
   },
   {
     "id": "fb_wrong_recursion",
@@ -783,7 +797,8 @@
           1
         ]
       }
-    ]
+    ],
+    "solution": "def solve(items):\n    if len(items) <= 1:\n        return items\n    return solve(items[1:]) + [items[0]]"
   },
   {
     "id": "fb_dict_default",
@@ -851,7 +866,8 @@
           "x": 1
         }
       }
-    ]
+    ],
+    "solution": "def solve(items):\n    freq = {}\n    for item in items:\n        freq[item] = freq.get(item, 0) + 1\n    return freq"
   },
   {
     "id": "fb_two_sum_bug",
@@ -921,7 +937,8 @@
           1
         ]
       }
-    ]
+    ],
+    "solution": "def solve(numbers, target):\n    seen = {}\n    for i, n in enumerate(numbers):\n        complement = target - n\n        if complement in seen:\n            return [seen[complement], i]\n        seen[n] = i\n    return []"
   },
   {
     "id": "fb_novato_case_sensitive_vowel",
@@ -967,7 +984,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "def solve(ch):\n    return ch.lower() in 'aeiou'"
   },
   {
     "id": "fb_novato_average_divisor",
@@ -1022,7 +1040,8 @@
         ],
         "expected": 5.0
       }
-    ]
+    ],
+    "solution": "def solve(nums):\n    return sum(nums) / len(nums)"
   },
   {
     "id": "fb_novato_reverse_slice",
@@ -1068,7 +1087,8 @@
         ],
         "expected": "a"
       }
-    ]
+    ],
+    "solution": "def solve(text):\n    return text[::-1]"
   },
   {
     "id": "fb_intermedio_floor_division",
@@ -1114,7 +1134,8 @@
         ],
         "expected": 0.5
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return n / 2"
   },
   {
     "id": "fb_intermedio_sort_mutates",
@@ -1180,7 +1201,8 @@
           9
         ]
       }
-    ]
+    ],
+    "solution": "def solve(nums):\n    return sorted(nums)"
   },
   {
     "id": "fb_intermedio_index_zero",
@@ -1241,7 +1263,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "def solve(items, target):\n    return target in items"
   },
   {
     "id": "fb_pro_recursive_factorial_base",
@@ -1287,7 +1310,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    if n == 0:\n        return 1\n    return n * solve(n - 1)"
   },
   {
     "id": "fb_pro_default_mutable_arg",
@@ -1339,7 +1363,8 @@
           3
         ]
       }
-    ]
+    ],
+    "solution": "def solve(value, acc=None):\n    if acc is None:\n        acc = []\n    acc.append(value)\n    return acc"
   },
   {
     "id": "fb_pro_recursive_step",
@@ -1385,7 +1410,8 @@
         ],
         "expected": 2
       }
-    ]
+    ],
+    "solution": "def solve(text):\n    if text == '':\n        return 0\n    return 1 + solve(text[1:])"
   },
   {
     "id": "fb_novato_wrong_concat",
@@ -1434,7 +1460,8 @@
         ],
         "expected": "a b"
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return a + ' ' + b"
   },
   {
     "id": "fb_novato_missing_return",
@@ -1480,7 +1507,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    if n > 0:\n        return True\n    if n <= 0:\n        return False"
   },
   {
     "id": "fb_intermedio_wrong_range",
@@ -1538,7 +1566,8 @@
           3
         ]
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return list(range(1, n + 1))"
   },
   {
     "id": "fb_intermedio_string_int_compare",
@@ -1595,7 +1624,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "def solve(items):\n    return sum(1 for x in items if x > 5)"
   },
   {
     "id": "fb_intermedio_dict_update",
@@ -1663,7 +1693,8 @@
           "k": 5
         }
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    a.update(b)\n    return a"
   },
   {
     "id": "fb_intermedio_set_ops",
@@ -1739,7 +1770,8 @@
           2
         ]
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return sorted(set(a) - set(b))"
   },
   {
     "id": "fb_pro_nonlocal_missing",
@@ -1792,7 +1824,8 @@
         ],
         "expected": 2
       }
-    ]
+    ],
+    "solution": "def solve(items):\n    count = 0\n    def inc():\n        nonlocal count\n        count += 1\n    for _ in items:\n        inc()\n    return count"
   },
   {
     "id": "fb_pro_list_multiply",
@@ -1871,7 +1904,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return [[0] * 3 for _ in range(n)]"
   },
   {
     "id": "fb_pro_zip_truncates",
@@ -1950,7 +1984,8 @@
           10
         ]
       }
-    ]
+    ],
+    "solution": "from itertools import zip_longest\n\ndef solve(a, b):\n    return [x + y for x, y in zip_longest(a, b, fillvalue=0)]"
   },
   {
     "id": "fb_pro_generator_exhausted",
@@ -2014,7 +2049,8 @@
           2
         ]
       }
-    ]
+    ],
+    "solution": "def solve(nums):\n    gen = list(x * 2 for x in nums)\n    total = sum(gen)\n    count = sum(1 for _ in gen)\n    return [total, count]"
   },
   {
     "id": "fb_pro_is_vs_equals",
@@ -2077,7 +2113,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return a == b"
   },
   {
     "id": "fb_novato_type_error",
@@ -2123,7 +2160,8 @@
         ],
         "expected": 4
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return len(str(n))"
   },
   {
     "id": "fb_novato_wrong_power",
@@ -2169,7 +2207,8 @@
         ],
         "expected": 0
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return n ** 2"
   },
   {
     "id": "fb_novato_string_multiply",
@@ -2218,7 +2257,8 @@
         ],
         "expected": "haha"
       }
-    ]
+    ],
+    "solution": "def solve(s, n):\n    return s * n"
   },
   {
     "id": "fb_novato_lower_before",
@@ -2267,7 +2307,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return a.lower() == b.lower()"
   },
   {
     "id": "fb_novato_return_none",
@@ -2313,7 +2354,8 @@
         ],
         "expected": -6
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    result = n * 2\n    return result"
   },
   {
     "id": "fb_novato_count_wrong_target",
@@ -2371,7 +2413,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "def solve(nums):\n    return nums.count(0)"
   },
   {
     "id": "fb_novato_step_range",
@@ -2428,7 +2471,8 @@
           4
         ]
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return list(range(0, n, 2))"
   },
   {
     "id": "fb_novato_bool_return",
@@ -2484,7 +2528,8 @@
         ],
         "expected": true
       }
-    ]
+    ],
+    "solution": "def solve(nums):\n    return all(n % 2 != 0 for n in nums)"
   },
   {
     "id": "fb_novato_wrong_min",
@@ -2533,7 +2578,8 @@
         ],
         "expected": 5
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return min(a, b)"
   },
   {
     "id": "fb_intermedio_nested_list_sum",
@@ -2606,7 +2652,8 @@
         ],
         "expected": 1
       }
-    ]
+    ],
+    "solution": "def solve(matrix):\n    return sum(sum(row) for row in matrix)"
   },
   {
     "id": "fb_intermedio_wrong_enumerate",
@@ -2670,7 +2717,8 @@
           1
         ]
       }
-    ]
+    ],
+    "solution": "def solve(nums):\n    return [i for i, n in enumerate(nums) if n == 0]"
   },
   {
     "id": "fb_intermedio_strip_split",
@@ -2725,7 +2773,8 @@
           "x"
         ]
       }
-    ]
+    ],
+    "solution": "def solve(text):\n    return list(set(text.split()))"
   },
   {
     "id": "fb_pro_shadowed_builtin",
@@ -2781,7 +2830,8 @@
         ],
         "expected": -1
       }
-    ]
+    ],
+    "solution": "def solve(nums):\n    best = nums[0]\n    for n in nums:\n        if n > best:\n            best = n\n    return best"
   },
   {
     "id": "fb_pro_wrong_lambda_scope",
@@ -2838,7 +2888,8 @@
           3
         ]
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    funcs = []\n    for i in range(n):\n        funcs.append(lambda i=i: i)\n    return [f() for f in funcs]"
   },
   {
     "id": "fb_int_missing_else",
@@ -2884,7 +2935,8 @@
         ],
         "expected": "even"
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    if n % 2 == 0:\n        return 'even'\n    return 'odd'"
   },
   {
     "id": "fb_int_append_vs_extend",
@@ -2961,7 +3013,8 @@
           4
         ]
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    result = a[:]\n    result.extend(b)\n    return result"
   },
   {
     "id": "fb_int_wrong_not_in",
@@ -3035,7 +3088,8 @@
         ],
         "expected": []
       }
-    ]
+    ],
+    "solution": "def solve(a, b):\n    return [x for x in a if x not in b]"
   },
   {
     "id": "fb_int_counter_wrong_key",
@@ -3097,7 +3151,8 @@
         ],
         "expected": 2
       }
-    ]
+    ],
+    "solution": "def solve(items):\n    freq = {}\n    for x in items:\n        freq[x] = freq.get(x, 0) + 1\n    return max(freq, key=freq.get)"
   },
   {
     "id": "fb_pro_tuple_single",
@@ -3149,7 +3204,8 @@
           -1
         ]
       }
-    ]
+    ],
+    "solution": "def solve(n):\n    return (n,)"
   },
   {
     "id": "fb_pro_chained_comparison",
@@ -3201,7 +3257,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "def solve(a, b, c):\n    return a < b < c"
   },
   {
     "id": "fb_pro_dict_merge_shallow",
@@ -3277,7 +3334,8 @@
           ]
         }
       }
-    ]
+    ],
+    "solution": "import copy\n\ndef solve(d):\n    return copy.deepcopy(d)"
   },
   {
     "id": "fb_pro_float_precision",
@@ -3326,7 +3384,8 @@
         ],
         "expected": false
       }
-    ]
+    ],
+    "solution": "import math\n\ndef solve(a, b):\n    return math.isclose(a, b)"
   },
   {
     "id": "fb_pro_recursion_no_base",
@@ -3374,6 +3433,7 @@
         ],
         "expected": 8
       }
-    ]
+    ],
+    "solution": "def solve(n, power=1):\n    if power >= n:\n        return power\n    return solve(n, power * 2)"
   }
 ]
