@@ -4,9 +4,17 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(n):\n    total = 0\n    for i in range(n):\n        total += i\n    return total",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "El bucle recorre `n` elementos una vez → complejidad lineal **O(n)**.",
       "en": "The loop iterates over `n` elements once → linear complexity **O(n)**."
@@ -17,9 +25,17 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(items):\n    return items[0] + items[-1]",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
     "expected": "O(1)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Acceder a un índice de lista es una operación de tiempo constante → **O(1)**.",
       "en": "Accessing a list index is a constant time operation → **O(1)**."
@@ -30,9 +46,17 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(n):\n    count = 0\n    for i in range(n):\n        for j in range(n):\n            count += 1\n    return count",
-    "options": ["O(1)", "O(n)", "O(n log n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
     "expected": "O(n²)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Dos bucles anidados, cada uno de `n` iteraciones → **O(n²)**.",
       "en": "Two nested loops, each of `n` iterations → **O(n²)**."
@@ -43,9 +67,17 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(words):\n    result = ''\n    for word in words:\n        result += word\n    return result",
-    "options": ["O(1)", "O(n)", "O(n²)", "O(n log n)"],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n²)",
+      "O(n log n)"
+    ],
     "expected": "O(n²)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Concatenar strings con `+=` en un bucle es O(n²) porque cada concatenación crea un nuevo string copiando los anteriores. Usa `''.join(words)` para O(n).",
       "en": "String concatenation with `+=` in a loop is O(n²) because each concatenation creates a new string copying previous ones. Use `''.join(words)` for O(n)."
@@ -56,9 +88,17 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(nums, target):\n    lo, hi = 0, len(nums) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if nums[mid] == target:\n            return mid\n        elif nums[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
     "expected": "O(log n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Búsqueda binaria: en cada iteración el espacio de búsqueda se divide a la mitad → **O(log n)**.",
       "en": "Binary search: each iteration halves the search space → **O(log n)**."
@@ -69,9 +109,17 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(nums):\n    total = 0\n    for n in nums:\n        total += n\n    for n in nums:\n        total -= n // 2\n    return total",
-    "options": ["O(1)", "O(n)", "O(n²)", "O(2n)"],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n²)",
+      "O(2n)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Dos bucles secuenciales (no anidados) sobre `n` elementos → O(2n) = **O(n)**. Las constantes se eliminan en notación Big O.",
       "en": "Two sequential (not nested) loops over `n` elements → O(2n) = **O(n)**. Constants are dropped in Big O notation."
@@ -82,9 +130,17 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        complement = target - n\n        if complement in seen:\n            return [seen[complement], i]\n        seen[n] = i\n    return []",
-    "options": ["O(1)", "O(n)", "O(n log n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Un solo bucle sobre `n` elementos. Las búsquedas en diccionario son O(1) amortizado → complejidad total **O(n)**.",
       "en": "One loop over `n` elements. Dictionary lookups are O(1) amortized → total complexity **O(n)**."
@@ -95,9 +151,17 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(nums):\n    nums.sort()\n    return nums[len(nums) // 2]",
-    "options": ["O(1)", "O(n)", "O(n log n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
     "expected": "O(n log n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "`.sort()` usa Timsort → **O(n log n)**. Acceder al elemento central después es O(1), dominando el sort.",
       "en": "`.sort()` uses Timsort → **O(n log n)**. Accessing the middle element is O(1), dominated by the sort."
@@ -108,9 +172,17 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(n):\n    if n <= 1:\n        return n\n    return solve(n - 1) + solve(n - 2)",
-    "options": ["O(n)", "O(n log n)", "O(2ⁿ)", "O(n²)"],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(2ⁿ)",
+      "O(n²)"
+    ],
     "expected": "O(2ⁿ)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Fibonacci recursivo sin memoización: cada llamada genera 2 llamadas recursivas → árbol exponencial → **O(2ⁿ)**.",
       "en": "Recursive Fibonacci without memoization: each call spawns 2 recursive calls → exponential tree → **O(2ⁿ)**."
@@ -121,9 +193,17 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(a, b):\n    return list(set(a) & set(b))",
-    "options": ["O(1)", "O(n)", "O(n + m)", "O(n × m)"],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n + m)",
+      "O(n × m)"
+    ],
     "expected": "O(n + m)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Crear cada set es O(n) y O(m). La intersección es O(min(n,m)). Total: **O(n + m)** donde n y m son los tamaños de cada lista.",
       "en": "Creating each set is O(n) and O(m). Intersection is O(min(n,m)). Total: **O(n + m)** where n and m are the sizes of each list."
@@ -134,9 +214,17 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(nums):\n    n = len(nums)\n    for i in range(n):\n        for j in range(0, n - i - 1):\n            if nums[j] > nums[j + 1]:\n                nums[j], nums[j + 1] = nums[j + 1], nums[j]\n    return nums",
-    "options": ["O(n)", "O(n log n)", "O(n²)", "O(n³)"],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n³)"
+    ],
     "expected": "O(n²)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Bubble sort: dos bucles anidados sobre n elementos. El bucle interno decrece pero sigue siendo O(n) amortizado → **O(n²)**.",
       "en": "Bubble sort: two nested loops over n elements. The inner loop shrinks but remains O(n) amortized → **O(n²)**."
@@ -147,9 +235,17 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(n):\n    memo = {}\n    def fib(k):\n        if k <= 1:\n            return k\n        if k in memo:\n            return memo[k]\n        memo[k] = fib(k-1) + fib(k-2)\n        return memo[k]\n    return fib(n)",
-    "options": ["O(log n)", "O(n)", "O(n log n)", "O(2ⁿ)"],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n log n)",
+      "O(2ⁿ)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Fibonacci con memoización: cada valor se calcula solo una vez y se cachea → **O(n)** en tiempo y espacio.",
       "en": "Fibonacci with memoization: each value is computed only once and cached → **O(n)** in time and space."
@@ -160,9 +256,17 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "def solve(A, B):\n    n = len(A)\n    C = [[0]*n for _ in range(n)]\n    for i in range(n):\n        for j in range(n):\n            for k in range(n):\n                C[i][j] += A[i][k] * B[k][j]\n    return C",
-    "options": ["O(n²)", "O(n² log n)", "O(n³)", "O(2ⁿ)"],
+    "options": [
+      "O(n²)",
+      "O(n² log n)",
+      "O(n³)",
+      "O(2ⁿ)"
+    ],
     "expected": "O(n³)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Multiplicación de matrices n×n: tres bucles anidados cada uno de n iteraciones → **O(n³)**.",
       "en": "n×n matrix multiplication: three nested loops each of n iterations → **O(n³)**."
@@ -173,9 +277,17 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "def solve(nums, k):\n    window_sum = sum(nums[:k])\n    max_sum = window_sum\n    for i in range(k, len(nums)):\n        window_sum += nums[i] - nums[i - k]\n        max_sum = max(max_sum, window_sum)\n    return max_sum",
-    "options": ["O(1)", "O(k)", "O(n)", "O(n × k)"],
+    "options": [
+      "O(1)",
+      "O(k)",
+      "O(n)",
+      "O(n × k)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "La suma inicial es O(k). El bucle recorre los n-k elementos restantes en O(1) cada uno. Total: O(k + n-k) = **O(n)**. Esta es la ventaja del sliding window.",
       "en": "Initial sum is O(k). The loop processes the remaining n-k elements in O(1) each. Total: O(k + n-k) = **O(n)**. This is the advantage of the sliding window."
@@ -186,9 +298,17 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "def solve(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for coin in coins:\n        for x in range(coin, amount + 1):\n            dp[x] = min(dp[x], dp[x - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1",
-    "options": ["O(n)", "O(amount)", "O(n × amount)", "O(n² × amount)"],
+    "options": [
+      "O(n)",
+      "O(amount)",
+      "O(n × amount)",
+      "O(n² × amount)"
+    ],
     "expected": "O(n × amount)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Dos bucles: el exterior sobre `n` monedas y el interior hasta `amount`. Total: **O(n × amount)** donde n es el número de tipos de moneda.",
       "en": "Two loops: outer over `n` coins, inner up to `amount`. Total: **O(n × amount)** where n is the number of coin types."
@@ -199,9 +319,17 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "import random\n\ndef solve(nums, k):\n    pivot = random.choice(nums)\n    low  = [x for x in nums if x < pivot]\n    mid  = [x for x in nums if x == pivot]\n    high = [x for x in nums if x > pivot]\n    if k <= len(low):\n        return solve(low, k)\n    elif k <= len(low) + len(mid):\n        return pivot\n    else:\n        return solve(high, k - len(low) - len(mid))",
-    "options": ["O(log n)", "O(n)", "O(n log n)", "O(n²)"],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Quickselect tiene complejidad promedio **O(n)** con pivot aleatorio. Cada nivel procesa n, n/2, n/4... elementos → serie geométrica que converge a 2n. El peor caso es O(n²) pero es improbable con aleatoriedad.",
       "en": "Quickselect has average complexity **O(n)** with random pivot. Each level processes n, n/2, n/4... elements → geometric series converging to 2n. Worst case is O(n²) but unlikely with randomization."
@@ -212,9 +340,17 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "def solve(base, exp):\n    if exp == 0:\n        return 1\n    if exp % 2 == 0:\n        half = solve(base, exp // 2)\n        return half * half\n    return base * solve(base, exp - 1)",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
     "expected": "O(log n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
       "es": "Exponenciación rápida: cuando el exponente es par, se divide entre 2 en cada llamada → profundidad de recursión O(log n) → **O(log n)**.",
       "en": "Fast exponentiation: when exponent is even, it halves each call → recursion depth O(log n) → **O(log n)**."
@@ -225,12 +361,20 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(s):\n    return len(s)",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
     "expected": "O(1)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "`len(s)` en strings de Python se obtiene en tiempo constante porque la longitud se guarda internamente → **O(1)**.",
-      "en": "`len(s)` on Python strings is constant time because the length is stored internally → **O(1)**."
+      "es": "`len(s)` en Python se obtiene en tiempo constante porque la longitud se guarda internamente → **O(1)**.",
+      "en": "`len(s)` in Python is constant time because the length is stored internally → **O(1)**."
     }
   },
   {
@@ -238,12 +382,20 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(nums):\n    m = nums[0]\n    for n in nums:\n        if n > m:\n            m = n\n    return m",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "Recorre todos los elementos una vez para encontrar el máximo. Una sola pasada de `n` elementos → **O(n)**.",
-      "en": "It scans all elements once to find the maximum. One pass over `n` elements → **O(n)**."
+      "es": "Recorre todos los elementos una vez → **O(n)**.",
+      "en": "Scans all elements once → **O(n)**."
     }
   },
   {
@@ -251,12 +403,20 @@
     "type": "guess_complexity",
     "difficulty": "novato",
     "code": "def solve(nums):\n    count = 0\n    for i in nums:\n        for j in nums:\n            if i != j:\n                count += 1\n    return count",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
     "expected": "O(n²)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "Hay dos bucles anidados que iteran sobre la misma lista. El total de iteraciones crece como `n * n` → **O(n²)**.",
-      "en": "There are two nested loops over the same list. Total iterations grow as `n * n` → **O(n²)**."
+      "es": "Dos bucles anidados sobre la misma lista → **O(n²)**.",
+      "en": "Two nested loops over the same list → **O(n²)**."
     }
   },
   {
@@ -264,25 +424,41 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        s = nums[left] + nums[right]\n        if s == target:\n            return [left, right]\n        if s < target:\n            left += 1\n        else:\n            right -= 1\n    return []",
-    "options": ["O(log n)", "O(n)", "O(n log n)", "O(n²)"],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
     "expected": "O(n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "Con dos punteros en arreglo ordenado, cada iteración mueve `left` o `right`. Cada índice se mueve como máximo `n` veces en total → **O(n)**.",
-      "en": "With two pointers on a sorted array, each iteration moves `left` or `right`. Each index moves at most `n` times total → **O(n)**."
+      "es": "Dos punteros que se mueven en total como máximo `n` veces → **O(n)**.",
+      "en": "Two pointers that move at most `n` times total → **O(n)**."
     }
   },
   {
     "id": "gc_intermedio_merge_like",
     "type": "guess_complexity",
     "difficulty": "intermedio",
-    "code": "def solve(a, b):\n    i = j = 0\n    out = []\n    while i < len(a) and j < len(b):\n        if a[i] < b[j]:\n            out.append(a[i])\n            i += 1\n        else:\n            out.append(b[j])\n            j += 1\n    out.extend(a[i:])\n    out.extend(b[j:])\n    return out",
-    "options": ["O(log n)", "O(n)", "O(n + m)", "O(n × m)"],
+    "code": "def solve(a, b):\n    i = j = 0\n    out = []\n    while i < len(a) and j < len(b):\n        if a[i] < b[j]:\n            out.append(a[i]); i += 1\n        else:\n            out.append(b[j]); j += 1\n    out.extend(a[i:])\n    out.extend(b[j:])\n    return out",
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n + m)",
+      "O(n × m)"
+    ],
     "expected": "O(n + m)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "Es el paso de mezcla de merge sort: cada elemento de `a` y `b` se procesa una sola vez. Total proporcional a `n + m` → **O(n + m)**.",
-      "en": "This is merge sort's merge step: each element of `a` and `b` is processed once. Total work proportional to `n + m` → **O(n + m)**."
+      "es": "Cada elemento de `a` y `b` se procesa una sola vez → **O(n + m)**.",
+      "en": "Each element of `a` and `b` is processed once → **O(n + m)**."
     }
   },
   {
@@ -290,12 +466,20 @@
     "type": "guess_complexity",
     "difficulty": "intermedio",
     "code": "def solve(a, b):\n    count = 0\n    for x in a:\n        if x in b:\n            count += 1\n    return count",
-    "options": ["O(n)", "O(n log n)", "O(n + m)", "O(n × m)"],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n + m)",
+      "O(n × m)"
+    ],
     "expected": "O(n × m)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "Para cada elemento de `a` (`n`), la operación `x in b` sobre lista cuesta O(m). Producto de costos: **O(n × m)**.",
-      "en": "For each element in `a` (`n`), `x in b` on a list costs O(m). Product of costs: **O(n × m)**."
+      "es": "Para cada elemento de `a` (n), `x in b` sobre lista cuesta O(m) → **O(n × m)**.",
+      "en": "For each element in `a` (n), `x in b` on a list costs O(m) → **O(n × m)**."
     }
   },
   {
@@ -303,12 +487,20 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "def solve(nums):\n    if len(nums) <= 1:\n        return sum(nums)\n    mid = len(nums) // 2\n    return solve(nums[:mid]) + solve(nums[mid:])",
-    "options": ["O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(2ⁿ)"
+    ],
     "expected": "O(n log n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "La recursión divide en dos mitades (profundidad log n), pero cada nivel copia sublistas con slicing por un total O(n). Entonces: O(n) por nivel × log n niveles = **O(n log n)**.",
-      "en": "Recursion splits into halves (depth log n), but each level copies sublists via slicing for total O(n). So: O(n) per level × log n levels = **O(n log n)**."
+      "es": "Divide en dos mitades (profundidad log n), pero el slicing copia O(n) por nivel → O(n) × log n niveles = **O(n log n)**.",
+      "en": "Splits into halves (depth log n), but slicing copies O(n) per level → O(n) × log n levels = **O(n log n)**."
     }
   },
   {
@@ -316,12 +508,20 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "def solve(nums):\n    out = []\n    def bt(i, path):\n        if i == len(nums):\n            out.append(path[:])\n            return\n        bt(i + 1, path)\n        path.append(nums[i])\n        bt(i + 1, path)\n        path.pop()\n    bt(0, [])\n    return out",
-    "options": ["O(n)", "O(n log n)", "O(2ⁿ)", "O(n²)"],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(2ⁿ)",
+      "O(n²)"
+    ],
     "expected": "O(2ⁿ)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "Genera todos los subconjuntos: por cada elemento hay 2 decisiones (tomar/no tomar). El árbol tiene alrededor de 2ⁿ hojas → tiempo exponencial **O(2ⁿ)**.",
-      "en": "It generates all subsets: each element has 2 choices (take/skip). The recursion tree has about 2ⁿ leaves → exponential time **O(2ⁿ)**."
+      "es": "Genera todos los subconjuntos: 2 decisiones por elemento → árbol exponencial **O(2ⁿ)**.",
+      "en": "Generates all subsets: 2 choices per element → exponential tree **O(2ⁿ)**."
     }
   },
   {
@@ -329,12 +529,734 @@
     "type": "guess_complexity",
     "difficulty": "pro",
     "code": "def solve(nums, target, lo=0, hi=None):\n    if hi is None:\n        hi = len(nums) - 1\n    if lo > hi:\n        return -1\n    mid = (lo + hi) // 2\n    if nums[mid] == target:\n        return mid\n    if nums[mid] < target:\n        return solve(nums, target, mid + 1, hi)\n    return solve(nums, target, lo, mid - 1)",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
     "expected": "O(log n)",
-    "title": { "es": "¿Cuál es la complejidad?", "en": "What is the complexity?" },
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
     "explanation": {
-      "es": "Es búsqueda binaria recursiva: en cada llamada se reduce el rango a la mitad. Número de niveles de recursión: **O(log n)**.",
-      "en": "This is recursive binary search: each call halves the search range. Number of recursion levels: **O(log n)**."
+      "es": "Búsqueda binaria recursiva: cada llamada reduce el rango a la mitad → **O(log n)**.",
+      "en": "Recursive binary search: each call halves the range → **O(log n)**."
+    }
+  },
+  {
+    "id": "gc_novato_single_if",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(n):\n    if n % 2 == 0:\n        return 'even'\n    return 'odd'",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(1)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Una sola operación de módulo y comparación, sin depender del tamaño de la entrada → **O(1)**.",
+      "en": "A single modulo and comparison, independent of input size → **O(1)**."
+    }
+  },
+  {
+    "id": "gc_novato_sum_builtin",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(nums):\n    return sum(nums)",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "`sum` recorre todos los elementos una vez para acumular → **O(n)**.",
+      "en": "`sum` iterates through all elements once to accumulate → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_novato_in_list",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(items, target):\n    return target in items",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "`in` sobre una lista recorre los elementos uno a uno en el peor caso → **O(n)**.",
+      "en": "`in` on a list scans elements one by one in the worst case → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_novato_in_set",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(items, target):\n    s = set(items)\n    return target in s",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Crear el set es O(n). La búsqueda en el set es O(1). El total está dominado por la creación → **O(n)**.",
+      "en": "Creating the set is O(n). Lookup in the set is O(1). The total is dominated by creation → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_novato_triple_nested",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(n):\n    count = 0\n    for i in range(n):\n        for j in range(n):\n            for k in range(n):\n                count += 1\n    return count",
+    "options": [
+      "O(n)",
+      "O(n²)",
+      "O(n³)",
+      "O(2ⁿ)"
+    ],
+    "expected": "O(n³)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Tres bucles anidados de `n` iteraciones cada uno → **O(n³)**.",
+      "en": "Three nested loops of `n` iterations each → **O(n³)**."
+    }
+  },
+  {
+    "id": "gc_int_counting_sort",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums, k):\n    count = [0] * (k + 1)\n    for n in nums:\n        count[n] += 1\n    result = []\n    for i, c in enumerate(count):\n        result.extend([i] * c)\n    return result",
+    "options": [
+      "O(n)",
+      "O(n + k)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "expected": "O(n + k)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Contar es O(n). Reconstruir el array es O(k). Total: **O(n + k)** donde k es el rango de valores.",
+      "en": "Counting is O(n). Reconstructing the array is O(k). Total: **O(n + k)** where k is the value range."
+    }
+  },
+  {
+    "id": "gc_int_prefix_sum",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    prefix = [0] * len(nums)\n    prefix[0] = nums[0]\n    for i in range(1, len(nums)):\n        prefix[i] = prefix[i-1] + nums[i]\n    return prefix",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Un solo bucle de `n` iteraciones para calcular sumas acumuladas → **O(n)**.",
+      "en": "A single loop of `n` iterations to compute prefix sums → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_int_nested_partial",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    n = len(nums)\n    result = []\n    for i in range(n):\n        for j in range(i, n):\n            result.append(nums[i] + nums[j])\n    return result",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n³)"
+    ],
+    "expected": "O(n²)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "El bucle interior va de `i` a `n`. Aunque decrece, el número total de iteraciones es n*(n+1)/2 ≈ **O(n²)**.",
+      "en": "The inner loop goes from `i` to `n`. Although it shrinks, total iterations are n*(n+1)/2 ≈ **O(n²)**."
+    }
+  },
+  {
+    "id": "gc_int_dedup_set",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    return len(set(nums)) == len(nums)",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Crear el set itera todos los elementos → O(n). Comparar longitudes es O(1) → total **O(n)**.",
+      "en": "Creating the set iterates all elements → O(n). Comparing lengths is O(1) → total **O(n)**."
+    }
+  },
+  {
+    "id": "gc_int_binary_in_loop",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "import bisect\n\ndef solve(nums, targets):\n    nums.sort()\n    return [bisect.bisect_left(nums, t) for t in targets]",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n × m)"
+    ],
+    "expected": "O(n log n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "`.sort()` es O(n log n). Luego m búsquedas binarias de O(log n) cada una. Si m ≈ n, el total es **O(n log n)**.",
+      "en": "`.sort()` is O(n log n). Then m binary searches of O(log n) each. If m ≈ n, total is **O(n log n)**."
+    }
+  },
+  {
+    "id": "gc_int_deque_sliding",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "from collections import deque\n\ndef solve(nums, k):\n    q = deque()\n    result = []\n    for i, n in enumerate(nums):\n        while q and nums[q[-1]] <= n:\n            q.pop()\n        q.append(i)\n        if q[0] == i - k:\n            q.popleft()\n        if i >= k - 1:\n            result.append(nums[q[0]])\n    return result",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n × k)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Aunque hay un while interno, cada elemento se añade y elimina de la deque como máximo una vez → total **O(n)** amortizado.",
+      "en": "Although there is an inner while, each element is added and removed from the deque at most once → total **O(n)** amortized."
+    }
+  },
+  {
+    "id": "gc_pro_lcs",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(a, b):\n    m, n = len(a), len(b)\n    dp = [[0]*(n+1) for _ in range(m+1)]\n    for i in range(1, m+1):\n        for j in range(1, n+1):\n            if a[i-1] == b[j-1]:\n                dp[i][j] = dp[i-1][j-1] + 1\n            else:\n                dp[i][j] = max(dp[i-1][j], dp[i][j-1])\n    return dp[m][n]",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(m + n)",
+      "O(m × n)"
+    ],
+    "expected": "O(m × n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "LCS con DP: dos bucles anidados, uno de m y otro de n → tabla de (m+1)×(n+1) → **O(m × n)**.",
+      "en": "LCS with DP: two nested loops of m and n respectively → (m+1)×(n+1) table → **O(m × n)**."
+    }
+  },
+  {
+    "id": "gc_pro_dfs_graph",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(graph, start):\n    visited = set()\n    def dfs(node):\n        visited.add(node)\n        for neighbor in graph[node]:\n            if neighbor not in visited:\n                dfs(neighbor)\n    dfs(start)\n    return len(visited)",
+    "options": [
+      "O(V)",
+      "O(E)",
+      "O(V + E)",
+      "O(V × E)"
+    ],
+    "expected": "O(V + E)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "DFS visita cada vértice (V) una vez y recorre cada arista (E) una vez → **O(V + E)**.",
+      "en": "DFS visits each vertex (V) once and traverses each edge (E) once → **O(V + E)**."
+    }
+  },
+  {
+    "id": "gc_pro_merge_sort",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(nums):\n    if len(nums) <= 1:\n        return nums\n    mid = len(nums) // 2\n    left = solve(nums[:mid])\n    right = solve(nums[mid:])\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i]); i += 1\n        else:\n            result.append(right[j]); j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(2ⁿ)"
+    ],
+    "expected": "O(n log n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Merge sort: divide en log n niveles y cada nivel procesa n elementos en la mezcla → **O(n log n)**.",
+      "en": "Merge sort: divides into log n levels and each level processes n elements in the merge → **O(n log n)**."
+    }
+  },
+  {
+    "id": "gc_pro_kadane",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(nums):\n    max_sum = current = nums[0]\n    for n in nums[1:]:\n        current = max(n, current + n)\n        max_sum = max(max_sum, current)\n    return max_sum",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Algoritmo de Kadane: un único bucle que recorre el array una vez → **O(n)**.",
+      "en": "Kadane's algorithm: a single loop that traverses the array once → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_pro_sieve",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(n):\n    is_prime = [True] * (n + 1)\n    is_prime[0] = is_prime[1] = False\n    for i in range(2, int(n**0.5) + 1):\n        if is_prime[i]:\n            for j in range(i*i, n+1, i):\n                is_prime[j] = False\n    return [i for i, p in enumerate(is_prime) if p]",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n log log n)",
+      "O(n²)"
+    ],
+    "expected": "O(n log log n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "La Criba de Eratóstenes: el número total de operaciones es proporcional a n(1/2 + 1/3 + 1/5 + ...) → suma de recíprocos de primos → **O(n log log n)**.",
+      "en": "Sieve of Eratosthenes: total operations proportional to n(1/2 + 1/3 + 1/5 + ...) → sum of prime reciprocals → **O(n log log n)**."
+    }
+  },
+  {
+    "id": "gc_pro_topological_sort",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "from collections import deque\n\ndef solve(n, edges):\n    indegree = [0] * n\n    graph = [[] for _ in range(n)]\n    for u, v in edges:\n        graph[u].append(v)\n        indegree[v] += 1\n    q = deque(i for i in range(n) if indegree[i] == 0)\n    order = []\n    while q:\n        node = q.popleft()\n        order.append(node)\n        for neighbor in graph[node]:\n            indegree[neighbor] -= 1\n            if indegree[neighbor] == 0:\n                q.append(neighbor)\n    return order",
+    "options": [
+      "O(V)",
+      "O(E)",
+      "O(V + E)",
+      "O(V × E)"
+    ],
+    "expected": "O(V + E)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Kahn's algorithm: cada nodo se procesa una vez (V) y cada arista se reduce una vez (E) → **O(V + E)**.",
+      "en": "Kahn's algorithm: each node is processed once (V) and each edge is reduced once (E) → **O(V + E)**."
+    }
+  },
+  {
+    "id": "gc_pro_knapsack",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(weights, values, capacity):\n    n = len(weights)\n    dp = [[0]*(capacity+1) for _ in range(n+1)]\n    for i in range(1, n+1):\n        for w in range(capacity+1):\n            dp[i][w] = dp[i-1][w]\n            if weights[i-1] <= w:\n                dp[i][w] = max(dp[i][w], dp[i-1][w-weights[i-1]] + values[i-1])\n    return dp[n][capacity]",
+    "options": [
+      "O(n)",
+      "O(n × capacity)",
+      "O(n²)",
+      "O(2ⁿ)"
+    ],
+    "expected": "O(n × capacity)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Mochila 0/1 con DP: dos bucles, uno sobre n ítems y otro sobre capacity valores → **O(n × capacity)**.",
+      "en": "0/1 Knapsack with DP: two loops, one over n items and one over capacity values → **O(n × capacity)**."
+    }
+  },
+  {
+    "id": "gc_pro_heap_push_pop",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "import heapq\n\ndef solve(nums, k):\n    heap = []\n    for n in nums:\n        heapq.heappush(heap, n)\n        if len(heap) > k:\n            heapq.heappop(heap)\n    return heap[0]",
+    "options": [
+      "O(n)",
+      "O(n log k)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "expected": "O(n log k)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Para cada uno de los n elementos se hace push y pop en un heap de tamaño máximo k. Cada operación cuesta O(log k) → total **O(n log k)**.",
+      "en": "For each of the n elements, push and pop are done on a heap of max size k. Each operation costs O(log k) → total **O(n log k)**."
+    }
+  },
+  {
+    "id": "gc_pro_trie_insert",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(words):\n    trie = {}\n    for word in words:\n        node = trie\n        for ch in word:\n            node = node.setdefault(ch, {})\n        node['#'] = True\n    return trie",
+    "options": [
+      "O(n)",
+      "O(n × L)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "expected": "O(n × L)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Insertar n palabras de longitud media L: cada inserción recorre L caracteres → **O(n × L)** total.",
+      "en": "Inserting n words of average length L: each insertion traverses L characters → **O(n × L)** total."
+    }
+  },
+  {
+    "id": "gc_nov_dict_access",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(d, key):\n    return d.get(key, 0)",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(1)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Acceder a un diccionario con `.get()` es O(1) amortizado por el hash → **O(1)**.",
+      "en": "Accessing a dictionary with `.get()` is O(1) amortized due to hashing → **O(1)**."
+    }
+  },
+  {
+    "id": "gc_nov_append_list",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(nums, n):\n    result = []\n    for i in range(n):\n        result.append(i)\n    return result",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Un bucle de n iteraciones con append O(1) amortizado → total **O(n)**.",
+      "en": "A loop of n iterations with O(1) amortized append → total **O(n)**."
+    }
+  },
+  {
+    "id": "gc_nov_slice_copy",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(lst):\n    return lst[:]",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "El slicing `[:]` copia todos los elementos de la lista → **O(n)**.",
+      "en": "The slice `[:]` copies all elements of the list → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_nov_list_reverse",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(lst):\n    return lst[::-1]",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "`[::-1]` crea una copia invertida recorriendo todos los elementos → **O(n)**.",
+      "en": "`[::-1]` creates a reversed copy by traversing all elements → **O(n)**."
+    }
+  },
+  {
+    "id": "gc_nov_string_join",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(words):\n    return ' '.join(words)",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n²)",
+      "O(n log n)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "`join` recorre todas las palabras y concatena en un único paso lineal → **O(n)** (n = caracteres totales).",
+      "en": "`join` traverses all words and concatenates in a single linear pass → **O(n)** (n = total characters)."
+    }
+  },
+  {
+    "id": "gc_nov_linear_search",
+    "type": "guess_complexity",
+    "difficulty": "novato",
+    "code": "def solve(nums, target):\n    for i, n in enumerate(nums):\n        if n == target:\n            return i\n    return -1",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "En el peor caso recorre todos los elementos → búsqueda lineal **O(n)**.",
+      "en": "In the worst case scans all elements → linear search **O(n)**."
+    }
+  },
+  {
+    "id": "gc_int_sort_then_scan",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    nums.sort()\n    for i in range(len(nums) - 1):\n        if nums[i] == nums[i+1]:\n            return True\n    return False",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(1)"
+    ],
+    "expected": "O(n log n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "El sort es O(n log n). El bucle posterior es O(n). Domina el sort → **O(n log n)**.",
+      "en": "The sort is O(n log n). The subsequent loop is O(n). Sort dominates → **O(n log n)**."
+    }
+  },
+  {
+    "id": "gc_int_all_pairs",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    pairs = []\n    for i in range(len(nums)):\n        for j in range(i+1, len(nums)):\n            pairs.append((nums[i], nums[j]))\n    return pairs",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n³)"
+    ],
+    "expected": "O(n²)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Se generan todos los pares posibles: n*(n-1)/2 iteraciones → **O(n²)**.",
+      "en": "All possible pairs are generated: n*(n-1)/2 iterations → **O(n²)**."
+    }
+  },
+  {
+    "id": "gc_int_bfs",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "from collections import deque\n\ndef solve(graph, start):\n    visited = {start}\n    q = deque([start])\n    while q:\n        node = q.popleft()\n        for neighbor in graph[node]:\n            if neighbor not in visited:\n                visited.add(neighbor)\n                q.append(neighbor)\n    return len(visited)",
+    "options": [
+      "O(V)",
+      "O(E)",
+      "O(V + E)",
+      "O(V × E)"
+    ],
+    "expected": "O(V + E)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "BFS visita cada vértice (V) una vez y procesa cada arista (E) una vez → **O(V + E)**.",
+      "en": "BFS visits each vertex (V) once and processes each edge (E) once → **O(V + E)**."
+    }
+  },
+  {
+    "id": "gc_int_matrix_scan",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(matrix):\n    total = 0\n    for row in matrix:\n        for val in row:\n            total += val\n    return total",
+    "options": [
+      "O(n)",
+      "O(n + m)",
+      "O(n × m)",
+      "O(n²)"
+    ],
+    "expected": "O(n × m)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Dos bucles anidados: el exterior sobre n filas y el interior sobre m columnas → **O(n × m)** (o O(n²) si la matriz es cuadrada).",
+      "en": "Two nested loops: outer over n rows and inner over m columns → **O(n × m)** (or O(n²) for square matrices)."
+    }
+  },
+  {
+    "id": "gc_int_nlogn_check",
+    "type": "guess_complexity",
+    "difficulty": "intermedio",
+    "code": "def solve(nums):\n    return sorted(set(nums))",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(1)"
+    ],
+    "expected": "O(n log n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Crear el set es O(n). Ordenarlo es O(k log k) donde k ≤ n. En el peor caso: **O(n log n)**.",
+      "en": "Creating the set is O(n). Sorting it is O(k log k) where k ≤ n. Worst case: **O(n log n)**."
+    }
+  },
+  {
+    "id": "gc_pro_floyd_warshall",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(dist):\n    n = len(dist)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                if dist[i][k] + dist[k][j] < dist[i][j]:\n                    dist[i][j] = dist[i][k] + dist[k][j]\n    return dist",
+    "options": [
+      "O(V²)",
+      "O(V² log V)",
+      "O(V³)",
+      "O(V × E)"
+    ],
+    "expected": "O(V³)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Floyd-Warshall: tres bucles anidados sobre los V vértices → **O(V³)**.",
+      "en": "Floyd-Warshall: three nested loops over V vertices → **O(V³)**."
+    }
+  },
+  {
+    "id": "gc_pro_hash_then_scan",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(nums):\n    freq = {}\n    for n in nums:\n        freq[n] = freq.get(n, 0) + 1\n    return [n for n, c in freq.items() if c > len(nums) // 2]",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "expected": "O(n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "Un bucle para contar frecuencias O(n) y otro para filtrar O(n). Total: **O(n)**.",
+      "en": "One loop to count frequencies O(n) and one to filter O(n). Total: **O(n)**."
+    }
+  },
+  {
+    "id": "gc_pro_nlogn_vs_n2",
+    "type": "guess_complexity",
+    "difficulty": "pro",
+    "code": "def solve(intervals):\n    intervals.sort(key=lambda x: x[0])\n    merged = [intervals[0]]\n    for start, end in intervals[1:]:\n        if start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n³)"
+    ],
+    "expected": "O(n log n)",
+    "title": {
+      "es": "¿Cuál es la complejidad?",
+      "en": "What is the complexity?"
+    },
+    "explanation": {
+      "es": "El sort de intervalos cuesta O(n log n). El bucle de mezcla posterior es O(n). Domina el sort → **O(n log n)**.",
+      "en": "Sorting intervals costs O(n log n). The subsequent merge loop is O(n). Sort dominates → **O(n log n)**."
     }
   }
 ]

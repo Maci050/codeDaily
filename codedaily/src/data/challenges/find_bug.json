@@ -1,10 +1,13 @@
-    [
+[
   {
     "id": "fb_off_by_one",
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver el último elemento de la lista, pero tiene un error.",
       "en": "This function should return the last element of the list, but it has a bug."
@@ -12,13 +15,43 @@
     "buggyCode": "def solve(items):\n    return items[len(items)]",
     "starterCode": "def solve(items):\n    return items[len(items)]",
     "hints": {
-      "es": ["Los índices en Python empiezan en 0.", "El último índice válido es `len(items) - 1`."],
-      "en": ["Indexes in Python start at 0.", "The last valid index is `len(items) - 1`."]
+      "es": [
+        "Los índices en Python empiezan en 0.",
+        "El último índice válido es `len(items) - 1`."
+      ],
+      "en": [
+        "Indexes in Python start at 0.",
+        "The last valid index is `len(items) - 1`."
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": 3 },
-      { "input": [["a", "b"]], "expected": "b" },
-      { "input": [[42]], "expected": 42 }
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "expected": "b"
+      },
+      {
+        "input": [
+          [
+            42
+          ]
+        ],
+        "expected": 42
+      }
     ]
   },
   {
@@ -26,7 +59,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver `True` si `n` es par, pero falla.",
       "en": "This function should return `True` if `n` is even, but it fails."
@@ -34,13 +70,34 @@
     "buggyCode": "def solve(n):\n    return n % 2 == 1",
     "starterCode": "def solve(n):\n    return n % 2 == 1",
     "hints": {
-      "es": ["Un número par tiene resto 0 al dividir entre 2.", "Revisa la comparación."],
-      "en": ["An even number has remainder 0 when divided by 2.", "Check the comparison."]
+      "es": [
+        "Un número par tiene resto 0 al dividir entre 2.",
+        "Revisa la comparación."
+      ],
+      "en": [
+        "An even number has remainder 0 when divided by 2.",
+        "Check the comparison."
+      ]
     },
     "tests": [
-      { "input": [4], "expected": true },
-      { "input": [7], "expected": false },
-      { "input": [0], "expected": true }
+      {
+        "input": [
+          4
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          7
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": true
+      }
     ]
   },
   {
@@ -48,7 +105,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver el mayor de dos números, pero devuelve el menor.",
       "en": "This function should return the larger of two numbers, but returns the smaller one."
@@ -56,13 +116,37 @@
     "buggyCode": "def solve(a, b):\n    if a > b:\n        return b\n    return a",
     "starterCode": "def solve(a, b):\n    if a > b:\n        return b\n    return a",
     "hints": {
-      "es": ["Si `a > b`, ¿qué deberías devolver?", "El `return` dentro del `if` es incorrecto."],
-      "en": ["If `a > b`, what should you return?", "The `return` inside the `if` is wrong."]
+      "es": [
+        "Si `a > b`, ¿qué deberías devolver?",
+        "El `return` dentro del `if` es incorrecto."
+      ],
+      "en": [
+        "If `a > b`, what should you return?",
+        "The `return` inside the `if` is wrong."
+      ]
     },
     "tests": [
-      { "input": [3, 7], "expected": 7 },
-      { "input": [10, 2], "expected": 10 },
-      { "input": [5, 5], "expected": 5 }
+      {
+        "input": [
+          3,
+          7
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          10,
+          2
+        ],
+        "expected": 10
+      },
+      {
+        "input": [
+          5,
+          5
+        ],
+        "expected": 5
+      }
     ]
   },
   {
@@ -70,7 +154,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver el texto sin su primer carácter, pero devuelve otra cosa.",
       "en": "This function should return the text without its first character, but returns something else."
@@ -78,13 +165,34 @@
     "buggyCode": "def solve(text):\n    return text[:-1]",
     "starterCode": "def solve(text):\n    return text[:-1]",
     "hints": {
-      "es": ["`text[:-1]` elimina el último carácter, no el primero.", "Prueba con `text[1:]`."],
-      "en": ["`text[:-1]` removes the last character, not the first.", "Try `text[1:]`."]
+      "es": [
+        "`text[:-1]` elimina el último carácter, no el primero.",
+        "Prueba con `text[1:]`."
+      ],
+      "en": [
+        "`text[:-1]` removes the last character, not the first.",
+        "Try `text[1:]`."
+      ]
     },
     "tests": [
-      { "input": ["hello"], "expected": "ello" },
-      { "input": ["python"], "expected": "ython" },
-      { "input": ["ab"], "expected": "b" }
+      {
+        "input": [
+          "hello"
+        ],
+        "expected": "ello"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "ython"
+      },
+      {
+        "input": [
+          "ab"
+        ],
+        "expected": "b"
+      }
     ]
   },
   {
@@ -92,7 +200,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería sumar todos los números de la lista, pero da resultados incorrectos.",
       "en": "This function should sum all numbers in the list, but gives wrong results."
@@ -100,13 +211,44 @@
     "buggyCode": "def solve(numbers):\n    total = 1\n    for n in numbers:\n        total += n\n    return total",
     "starterCode": "def solve(numbers):\n    total = 1\n    for n in numbers:\n        total += n\n    return total",
     "hints": {
-      "es": ["El acumulador de suma debería empezar en 0, no en 1.", "Revisa la inicialización de `total`."],
-      "en": ["A sum accumulator should start at 0, not 1.", "Check the initialization of `total`."]
+      "es": [
+        "El acumulador de suma debería empezar en 0, no en 1.",
+        "Revisa la inicialización de `total`."
+      ],
+      "en": [
+        "A sum accumulator should start at 0, not 1.",
+        "Check the initialization of `total`."
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": 6 },
-      { "input": [[0, 0, 0]], "expected": 0 },
-      { "input": [[5]], "expected": 5 }
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "input": [
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": 5
+      }
     ]
   },
   {
@@ -114,7 +256,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver `True` si el texto empieza por vocal, pero falla.",
       "en": "This function should return `True` if the text starts with a vowel, but it fails."
@@ -122,13 +267,34 @@
     "buggyCode": "def solve(text):\n    return text[0] in 'bcdfghjklmnpqrstvwxyz'",
     "starterCode": "def solve(text):\n    return text[0] in 'bcdfghjklmnpqrstvwxyz'",
     "hints": {
-      "es": ["La función comprueba si empieza por consonante, no por vocal.", "Cambia el conjunto de letras o usa la negación."],
-      "en": ["The function checks for consonants, not vowels.", "Change the letter set or use negation."]
+      "es": [
+        "La función comprueba si empieza por consonante, no por vocal.",
+        "Cambia el conjunto de letras o usa la negación."
+      ],
+      "en": [
+        "The function checks for consonants, not vowels.",
+        "Change the letter set or use negation."
+      ]
     },
     "tests": [
-      { "input": ["apple"], "expected": true },
-      { "input": ["python"], "expected": false },
-      { "input": ["echo"], "expected": true }
+      {
+        "input": [
+          "apple"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          "echo"
+        ],
+        "expected": true
+      }
     ]
   },
   {
@@ -136,7 +302,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver la distancia entre dos números (siempre positiva), pero falla con ciertos inputs.",
       "en": "This function should return the distance between two numbers (always positive), but fails with some inputs."
@@ -144,13 +313,37 @@
     "buggyCode": "def solve(a, b):\n    return a - b",
     "starterCode": "def solve(a, b):\n    return a - b",
     "hints": {
-      "es": ["La distancia siempre es positiva.", "¿Qué pasa si `b > a`?"],
-      "en": ["Distance is always positive.", "What happens if `b > a`?"]
+      "es": [
+        "La distancia siempre es positiva.",
+        "¿Qué pasa si `b > a`?"
+      ],
+      "en": [
+        "Distance is always positive.",
+        "What happens if `b > a`?"
+      ]
     },
     "tests": [
-      { "input": [10, 3], "expected": 7 },
-      { "input": [3, 10], "expected": 7 },
-      { "input": [5, 5], "expected": 0 }
+      {
+        "input": [
+          10,
+          3
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          3,
+          10
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          5,
+          5
+        ],
+        "expected": 0
+      }
     ]
   },
   {
@@ -158,7 +351,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería contar cuántos números en la lista son mayores que el umbral, pero da un resultado incorrecto.",
       "en": "This function should count how many numbers in the list are greater than the threshold, but gives a wrong result."
@@ -166,13 +362,50 @@
     "buggyCode": "def solve(numbers, threshold):\n    count = 0\n    for n in numbers:\n        if n >= threshold:\n            count += 1\n    return count",
     "starterCode": "def solve(numbers, threshold):\n    count = 0\n    for n in numbers:\n        if n >= threshold:\n            count += 1\n    return count",
     "hints": {
-      "es": ["La condición usa `>=` pero debería ser estrictamente mayor.", "Revisa el operador de comparación."],
-      "en": ["The condition uses `>=` but should be strictly greater.", "Check the comparison operator."]
+      "es": [
+        "La condición usa `>=` pero debería ser estrictamente mayor.",
+        "Revisa el operador de comparación."
+      ],
+      "en": [
+        "The condition uses `>=` but should be strictly greater.",
+        "Check the comparison operator."
+      ]
     },
     "tests": [
-      { "input": [[1, 5, 8, 2], 4], "expected": 2 },
-      { "input": [[10, 10, 10], 10], "expected": 0 },
-      { "input": [[1, 2, 3], 5], "expected": 0 }
+      {
+        "input": [
+          [
+            1,
+            5,
+            8,
+            2
+          ],
+          4
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            10,
+            10,
+            10
+          ],
+          10
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          5
+        ],
+        "expected": 0
+      }
     ]
   },
   {
@@ -180,7 +413,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver el número de palabras en el texto, pero falla con strings vacíos.",
       "en": "This function should return the number of words in the text, but fails with empty strings."
@@ -188,13 +424,34 @@
     "buggyCode": "def solve(text):\n    return len(text.split(' '))",
     "starterCode": "def solve(text):\n    return len(text.split(' '))",
     "hints": {
-      "es": ["`''.split(' ')` devuelve `['']` (lista con un string vacío), no `[]`.", "`.split()` sin argumentos maneja strings vacíos correctamente."],
-      "en": ["`''.split(' ')` returns `['']` (list with one empty string), not `[]`.", "`.split()` without arguments handles empty strings correctly."]
+      "es": [
+        "`''.split(' ')` devuelve `['']` (lista con un string vacío), no `[]`.",
+        "`.split()` sin argumentos maneja strings vacíos correctamente."
+      ],
+      "en": [
+        "`''.split(' ')` returns `['']` (list with one empty string), not `[]`.",
+        "`.split()` without arguments handles empty strings correctly."
+      ]
     },
     "tests": [
-      { "input": ["hola mundo"], "expected": 2 },
-      { "input": [""], "expected": 0 },
-      { "input": ["uno dos tres"], "expected": 3 }
+      {
+        "input": [
+          "hola mundo"
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          "uno dos tres"
+        ],
+        "expected": 3
+      }
     ]
   },
   {
@@ -202,7 +459,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver una nueva lista con los elementos duplicados, sin modificar la original.",
       "en": "This function should return a new list with doubled elements, without modifying the original."
@@ -210,13 +470,52 @@
     "buggyCode": "def solve(numbers):\n    for i in range(len(numbers)):\n        numbers[i] *= 2\n    return numbers",
     "starterCode": "def solve(numbers):\n    for i in range(len(numbers)):\n        numbers[i] *= 2\n    return numbers",
     "hints": {
-      "es": ["La función modifica la lista original en lugar de crear una nueva.", "Prueba con una list comprehension o copia la lista primero."],
-      "en": ["The function modifies the original list instead of creating a new one.", "Try a list comprehension or copy the list first."]
+      "es": [
+        "La función modifica la lista original en lugar de crear una nueva.",
+        "Prueba con una list comprehension o copia la lista primero."
+      ],
+      "en": [
+        "The function modifies the original list instead of creating a new one.",
+        "Try a list comprehension or copy the list first."
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": [2, 4, 6] },
-      { "input": [[0, -1]], "expected": [0, -2] },
-      { "input": [[5]], "expected": [10] }
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          2,
+          4,
+          6
+        ]
+      },
+      {
+        "input": [
+          [
+            0,
+            -1
+          ]
+        ],
+        "expected": [
+          0,
+          -2
+        ]
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          10
+        ]
+      }
     ]
   },
   {
@@ -224,7 +523,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función recursiva debería calcular la suma de 1 a n, pero el caso base es incorrecto.",
       "en": "This recursive function should calculate the sum from 1 to n, but the base case is wrong."
@@ -232,13 +534,34 @@
     "buggyCode": "def solve(n):\n    if n == 0:\n        return 1\n    return n + solve(n - 1)",
     "starterCode": "def solve(n):\n    if n == 0:\n        return 1\n    return n + solve(n - 1)",
     "hints": {
-      "es": ["El caso base de una suma acumulada debe devolver 0, no 1.", "¿Qué debería sumar cuando `n` llega a 0?"],
-      "en": ["The base case of a cumulative sum should return 0, not 1.", "What should be added when `n` reaches 0?"]
+      "es": [
+        "El caso base de una suma acumulada debe devolver 0, no 1.",
+        "¿Qué debería sumar cuando `n` llega a 0?"
+      ],
+      "en": [
+        "The base case of a cumulative sum should return 0, not 1.",
+        "What should be added when `n` reaches 0?"
+      ]
     },
     "tests": [
-      { "input": [5], "expected": 15 },
-      { "input": [1], "expected": 1 },
-      { "input": [0], "expected": 0 }
+      {
+        "input": [
+          5
+        ],
+        "expected": 15
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      }
     ]
   },
   {
@@ -246,7 +569,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver `True` solo si ambos números son positivos, pero su lógica está invertida.",
       "en": "This function should return `True` only if both numbers are positive, but its logic is inverted."
@@ -254,13 +580,37 @@
     "buggyCode": "def solve(a, b):\n    return a > 0 or b > 0",
     "starterCode": "def solve(a, b):\n    return a > 0 or b > 0",
     "hints": {
-      "es": ["`or` devuelve `True` si al menos uno es positivo.", "¿Qué operador lógico necesitas para que los DOS sean positivos?"],
-      "en": ["`or` returns `True` if at least one is positive.", "Which logical operator requires BOTH to be positive?"]
+      "es": [
+        "`or` devuelve `True` si al menos uno es positivo.",
+        "¿Qué operador lógico necesitas para que los DOS sean positivos?"
+      ],
+      "en": [
+        "`or` returns `True` if at least one is positive.",
+        "Which logical operator requires BOTH to be positive?"
+      ]
     },
     "tests": [
-      { "input": [3, 5], "expected": true },
-      { "input": [3, -1], "expected": false },
-      { "input": [-2, -4], "expected": false }
+      {
+        "input": [
+          3,
+          5
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          3,
+          -1
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          -2,
+          -4
+        ],
+        "expected": false
+      }
     ]
   },
   {
@@ -268,7 +618,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería contar cuántas veces se puede dividir `n` entre 2 (división entera) hasta llegar a 0, pero tiene un bug que puede causar bucle infinito.",
       "en": "This function should count how many times `n` can be integer-divided by 2 until reaching 0, but has a bug that can cause an infinite loop."
@@ -276,13 +629,34 @@
     "buggyCode": "def solve(n):\n    count = 0\n    while n > 0:\n        n = n // 2\n        count + 1\n    return count",
     "starterCode": "def solve(n):\n    count = 0\n    while n > 0:\n        n = n // 2\n        count + 1\n    return count",
     "hints": {
-      "es": ["`count + 1` no modifica `count`, solo calcula un valor que se descarta.", "Necesitas `count += 1`."],
-      "en": ["`count + 1` does not modify `count`, it just computes a value that is discarded.", "You need `count += 1`."]
+      "es": [
+        "`count + 1` no modifica `count`, solo calcula un valor que se descarta.",
+        "Necesitas `count += 1`."
+      ],
+      "en": [
+        "`count + 1` does not modify `count`, it just computes a value that is discarded.",
+        "You need `count += 1`."
+      ]
     },
     "tests": [
-      { "input": [8], "expected": 3 },
-      { "input": [1], "expected": 1 },
-      { "input": [16], "expected": 4 }
+      {
+        "input": [
+          8
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          16
+        ],
+        "expected": 4
+      }
     ]
   },
   {
@@ -290,7 +664,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver el índice del primer elemento que supera el umbral, o -1 si no hay ninguno. Tiene un error de scope.",
       "en": "This function should return the index of the first element exceeding the threshold, or -1 if none. It has a scope bug."
@@ -298,13 +675,48 @@
     "buggyCode": "def solve(numbers, threshold):\n    for i, n in enumerate(numbers):\n        if n > threshold:\n            result = i\n            break\n    return result",
     "starterCode": "def solve(numbers, threshold):\n    for i, n in enumerate(numbers):\n        if n > threshold:\n            result = i\n            break\n    return result",
     "hints": {
-      "es": ["Si ningún elemento supera el umbral, `result` nunca se define y el `return` falla.", "Inicializa `result = -1` antes del bucle."],
-      "en": ["If no element exceeds the threshold, `result` is never defined and `return` fails.", "Initialize `result = -1` before the loop."]
+      "es": [
+        "Si ningún elemento supera el umbral, `result` nunca se define y el `return` falla.",
+        "Inicializa `result = -1` antes del bucle."
+      ],
+      "en": [
+        "If no element exceeds the threshold, `result` is never defined and `return` fails.",
+        "Initialize `result = -1` before the loop."
+      ]
     },
     "tests": [
-      { "input": [[1, 5, 8, 2], 4], "expected": 2 },
-      { "input": [[1, 2, 3], 10], "expected": -1 },
-      { "input": [[10], 5], "expected": 0 }
+      {
+        "input": [
+          [
+            1,
+            5,
+            8,
+            2
+          ],
+          4
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          10
+        ],
+        "expected": -1
+      },
+      {
+        "input": [
+          [
+            10
+          ],
+          5
+        ],
+        "expected": 0
+      }
     ]
   },
   {
@@ -312,7 +724,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función recursiva debería invertir una lista, pero devuelve el resultado incorrecto.",
       "en": "This recursive function should reverse a list, but returns the wrong result."
@@ -320,13 +735,54 @@
     "buggyCode": "def solve(items):\n    if len(items) <= 1:\n        return items\n    return [items[0]] + solve(items[1:])",
     "starterCode": "def solve(items):\n    if len(items) <= 1:\n        return items\n    return [items[0]] + solve(items[1:])",
     "hints": {
-      "es": ["La función concatena el primer elemento al principio de la recursión, no al final.", "Para invertir, el primer elemento debería ir al final: `solve(items[1:]) + [items[0]]`."],
-      "en": ["The function prepends the first element instead of appending it.", "To reverse, the first element should go last: `solve(items[1:]) + [items[0]]`."]
+      "es": [
+        "La función concatena el primer elemento al principio de la recursión, no al final.",
+        "Para invertir, el primer elemento debería ir al final: `solve(items[1:]) + [items[0]]`."
+      ],
+      "en": [
+        "The function prepends the first element instead of appending it.",
+        "To reverse, the first element should go last: `solve(items[1:]) + [items[0]]`."
+      ]
     },
     "tests": [
-      { "input": [[1, 2, 3]], "expected": [3, 2, 1] },
-      { "input": [["a", "b", "c"]], "expected": ["c", "b", "a"] },
-      { "input": [[1]], "expected": [1] }
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          3,
+          2,
+          1
+        ]
+      },
+      {
+        "input": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "expected": [
+          "c",
+          "b",
+          "a"
+        ]
+      },
+      {
+        "input": [
+          [
+            1
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      }
     ]
   },
   {
@@ -334,7 +790,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería contar la frecuencia de cada elemento, pero lanza un KeyError.",
       "en": "This function should count the frequency of each element, but raises a KeyError."
@@ -342,13 +801,56 @@
     "buggyCode": "def solve(items):\n    freq = {}\n    for item in items:\n        freq[item] += 1\n    return freq",
     "starterCode": "def solve(items):\n    freq = {}\n    for item in items:\n        freq[item] += 1\n    return freq",
     "hints": {
-      "es": ["Si la clave no existe en el diccionario, `freq[item] += 1` falla.", "Usa `freq.get(item, 0) + 1` o inicializa antes de incrementar."],
-      "en": ["If the key doesn't exist in the dict, `freq[item] += 1` fails.", "Use `freq.get(item, 0) + 1` or initialize before incrementing."]
+      "es": [
+        "Si la clave no existe en el diccionario, `freq[item] += 1` falla.",
+        "Usa `freq.get(item, 0) + 1` o inicializa antes de incrementar."
+      ],
+      "en": [
+        "If the key doesn't exist in the dict, `freq[item] += 1` fails.",
+        "Use `freq.get(item, 0) + 1` or initialize before incrementing."
+      ]
     },
     "tests": [
-      { "input": [["a", "b", "a", "c", "b", "a"]], "expected": {"a": 3, "b": 2, "c": 1} },
-      { "input": [[1, 1, 2]], "expected": {"1": 2, "2": 1} },
-      { "input": [["x"]], "expected": {"x": 1} }
+      {
+        "input": [
+          [
+            "a",
+            "b",
+            "a",
+            "c",
+            "b",
+            "a"
+          ]
+        ],
+        "expected": {
+          "a": 3,
+          "b": 2,
+          "c": 1
+        }
+      },
+      {
+        "input": [
+          [
+            1,
+            1,
+            2
+          ]
+        ],
+        "expected": {
+          "1": 2,
+          "2": 1
+        }
+      },
+      {
+        "input": [
+          [
+            "x"
+          ]
+        ],
+        "expected": {
+          "x": 1
+        }
+      }
     ]
   },
   {
@@ -356,7 +858,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver los índices de los dos números que suman el target. El algoritmo es correcto pero reutiliza el mismo índice.",
       "en": "This function should return the indices of two numbers that add up to target. The algorithm is right but reuses the same index."
@@ -364,13 +869,58 @@
     "buggyCode": "def solve(numbers, target):\n    seen = {}\n    for i, n in enumerate(numbers):\n        complement = target - n\n        if complement in seen:\n            return [seen[complement], i]\n        seen[n] = i\n    return []",
     "starterCode": "def solve(numbers, target):\n    seen = {}\n    for i, n in enumerate(numbers):\n        complement = target - n\n        if complement in seen:\n            return [seen[complement], i]\n        seen[n] = i\n    return []",
     "hints": {
-      "es": ["Este código en realidad es correcto. Lee bien el enunciado.", "El bug está en que para `[3,3]` con target `6`, ¿funciona? Traza la ejecución."],
-      "en": ["This code is actually correct. Read the description carefully.", "The bug is: for `[3,3]` with target `6`, does it work? Trace the execution."]
+      "es": [
+        "Este código en realidad es correcto. Lee bien el enunciado.",
+        "El bug está en que para `[3,3]` con target `6`, ¿funciona? Traza la ejecución."
+      ],
+      "en": [
+        "This code is actually correct. Read the description carefully.",
+        "The bug is: for `[3,3]` with target `6`, does it work? Trace the execution."
+      ]
     },
     "tests": [
-      { "input": [[2, 7, 11, 15], 9], "expected": [0, 1] },
-      { "input": [[3, 2, 4], 6], "expected": [1, 2] },
-      { "input": [[3, 3], 6], "expected": [0, 1] }
+      {
+        "input": [
+          [
+            2,
+            7,
+            11,
+            15
+          ],
+          9
+        ],
+        "expected": [
+          0,
+          1
+        ]
+      },
+      {
+        "input": [
+          [
+            3,
+            2,
+            4
+          ],
+          6
+        ],
+        "expected": [
+          1,
+          2
+        ]
+      },
+      {
+        "input": [
+          [
+            3,
+            3
+          ],
+          6
+        ],
+        "expected": [
+          0,
+          1
+        ]
+      }
     ]
   },
   {
@@ -378,7 +928,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería detectar si una letra es vocal, pero falla con mayúsculas.",
       "en": "This function should detect whether a letter is a vowel, but it fails with uppercase letters."
@@ -386,13 +939,34 @@
     "buggyCode": "def solve(ch):\n    return ch in 'aeiou'",
     "starterCode": "def solve(ch):\n    return ch in 'aeiou'",
     "hints": {
-      "es": ["`'A'` no está en `'aeiou'`.", "Normaliza con `lower()` antes de comparar."],
-      "en": ["`'A'` is not in `'aeiou'`.", "Normalize with `lower()` before comparing."]
+      "es": [
+        "`'A'` no está en `'aeiou'`.",
+        "Normaliza con `lower()` antes de comparar."
+      ],
+      "en": [
+        "`'A'` is not in `'aeiou'`.",
+        "Normalize with `lower()` before comparing."
+      ]
     },
     "tests": [
-      { "input": ["a"], "expected": true },
-      { "input": ["E"], "expected": true },
-      { "input": ["z"], "expected": false }
+      {
+        "input": [
+          "a"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "E"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "z"
+        ],
+        "expected": false
+      }
     ]
   },
   {
@@ -400,7 +974,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería calcular el promedio de una lista, pero divide por un valor incorrecto.",
       "en": "This function should compute the average of a list, but it divides by the wrong value."
@@ -408,13 +985,43 @@
     "buggyCode": "def solve(nums):\n    return sum(nums) / (len(nums) - 1)",
     "starterCode": "def solve(nums):\n    return sum(nums) / (len(nums) - 1)",
     "hints": {
-      "es": ["El promedio es suma entre cantidad de elementos.", "Revisa el denominador de la división."],
-      "en": ["Average is sum divided by number of elements.", "Check the division denominator."]
+      "es": [
+        "El promedio es suma entre cantidad de elementos.",
+        "Revisa el denominador de la división."
+      ],
+      "en": [
+        "Average is sum divided by number of elements.",
+        "Check the division denominator."
+      ]
     },
     "tests": [
-      { "input": [[2, 4, 6]], "expected": 4.0 },
-      { "input": [[10, 20]], "expected": 15.0 },
-      { "input": [[5]], "expected": 5.0 }
+      {
+        "input": [
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": 4.0
+      },
+      {
+        "input": [
+          [
+            10,
+            20
+          ]
+        ],
+        "expected": 15.0
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": 5.0
+      }
     ]
   },
   {
@@ -422,7 +1029,10 @@
     "type": "find_bug",
     "difficulty": "novato",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver el string invertido, pero el slicing está mal.",
       "en": "This function should return the reversed string, but the slice is wrong."
@@ -430,13 +1040,34 @@
     "buggyCode": "def solve(text):\n    return text[::-2]",
     "starterCode": "def solve(text):\n    return text[::-2]",
     "hints": {
-      "es": ["`[::-2]` salta caracteres.", "Para invertir completo usa paso `-1`."],
-      "en": ["`[::-2]` skips characters.", "To reverse fully, use step `-1`."]
+      "es": [
+        "`[::-2]` salta caracteres.",
+        "Para invertir completo usa paso `-1`."
+      ],
+      "en": [
+        "`[::-2]` skips characters.",
+        "To reverse fully, use step `-1`."
+      ]
     },
     "tests": [
-      { "input": ["abcd"], "expected": "dcba" },
-      { "input": ["python"], "expected": "nohtyp" },
-      { "input": ["a"], "expected": "a" }
+      {
+        "input": [
+          "abcd"
+        ],
+        "expected": "dcba"
+      },
+      {
+        "input": [
+          "python"
+        ],
+        "expected": "nohtyp"
+      },
+      {
+        "input": [
+          "a"
+        ],
+        "expected": "a"
+      }
     ]
   },
   {
@@ -444,7 +1075,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería calcular la mitad exacta, pero trunca el resultado en impares.",
       "en": "This function should compute the exact half, but it truncates odd values."
@@ -452,13 +1086,34 @@
     "buggyCode": "def solve(n):\n    return n // 2",
     "starterCode": "def solve(n):\n    return n // 2",
     "hints": {
-      "es": ["`//` hace división entera.", "Para mitad exacta usa `/`."],
-      "en": ["`//` is floor division.", "Use `/` for exact half."]
+      "es": [
+        "`//` hace división entera.",
+        "Para mitad exacta usa `/`."
+      ],
+      "en": [
+        "`//` is floor division.",
+        "Use `/` for exact half."
+      ]
     },
     "tests": [
-      { "input": [9], "expected": 4.5 },
-      { "input": [10], "expected": 5.0 },
-      { "input": [1], "expected": 0.5 }
+      {
+        "input": [
+          9
+        ],
+        "expected": 4.5
+      },
+      {
+        "input": [
+          10
+        ],
+        "expected": 5.0
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": 0.5
+      }
     ]
   },
   {
@@ -466,7 +1121,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver una lista ordenada sin modificar la original, pero la muta.",
       "en": "This function should return a sorted list without modifying the original, but it mutates it."
@@ -474,13 +1132,54 @@
     "buggyCode": "def solve(nums):\n    nums.sort()\n    return nums",
     "starterCode": "def solve(nums):\n    nums.sort()\n    return nums",
     "hints": {
-      "es": ["`.sort()` modifica la lista en sitio.", "Usa `sorted(nums)` o una copia antes de ordenar."],
-      "en": ["`.sort()` mutates the list in place.", "Use `sorted(nums)` or copy before sorting."]
+      "es": [
+        "`.sort()` modifica la lista en sitio.",
+        "Usa `sorted(nums)` o una copia antes de ordenar."
+      ],
+      "en": [
+        "`.sort()` mutates the list in place.",
+        "Use `sorted(nums)` or copy before sorting."
+      ]
     },
     "tests": [
-      { "input": [[3, 1, 2]], "expected": [1, 2, 3] },
-      { "input": [[5, 5, 1]], "expected": [1, 5, 5] },
-      { "input": [[9]], "expected": [9] }
+      {
+        "input": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "input": [
+          [
+            5,
+            5,
+            1
+          ]
+        ],
+        "expected": [
+          1,
+          5,
+          5
+        ]
+      },
+      {
+        "input": [
+          [
+            9
+          ]
+        ],
+        "expected": [
+          9
+        ]
+      }
     ]
   },
   {
@@ -488,7 +1187,10 @@
     "type": "find_bug",
     "difficulty": "intermedio",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver `True` si encuentra el target, pero falla cuando está en la posición 0.",
       "en": "This function should return `True` if target is found, but it fails when target is at index 0."
@@ -496,13 +1198,49 @@
     "buggyCode": "def solve(items, target):\n    return bool(items.index(target))",
     "starterCode": "def solve(items, target):\n    return bool(items.index(target))",
     "hints": {
-      "es": ["`bool(0)` es `False`.", "No conviertas el índice directamente a booleano para esta verificación."],
-      "en": ["`bool(0)` is `False`.", "Do not convert index directly to bool for this check."]
+      "es": [
+        "`bool(0)` es `False`.",
+        "No conviertas el índice directamente a booleano."
+      ],
+      "en": [
+        "`bool(0)` is `False`.",
+        "Do not convert index directly to bool."
+      ]
     },
     "tests": [
-      { "input": [[4, 2, 9], 4], "expected": true },
-      { "input": [[4, 2, 9], 9], "expected": true },
-      { "input": [[1, 3, 5], 2], "expected": false }
+      {
+        "input": [
+          [
+            4,
+            2,
+            9
+          ],
+          4
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            4,
+            2,
+            9
+          ],
+          9
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            1,
+            3,
+            5
+          ],
+          2
+        ],
+        "expected": false
+      }
     ]
   },
   {
@@ -510,7 +1248,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función recursiva debería calcular factorial, pero su caso base rompe el resultado.",
       "en": "This recursive function should compute factorial, but its base case breaks the result."
@@ -518,13 +1259,34 @@
     "buggyCode": "def solve(n):\n    if n == 0:\n        return 0\n    return n * solve(n - 1)",
     "starterCode": "def solve(n):\n    if n == 0:\n        return 0\n    return n * solve(n - 1)",
     "hints": {
-      "es": ["`0!` vale 1, no 0.", "El caso base debe preservar el producto."],
-      "en": ["`0!` equals 1, not 0.", "The base case must preserve multiplication."]
+      "es": [
+        "`0!` vale 1, no 0.",
+        "El caso base debe preservar el producto."
+      ],
+      "en": [
+        "`0!` equals 1, not 0.",
+        "The base case must preserve multiplication."
+      ]
     },
     "tests": [
-      { "input": [5], "expected": 120 },
-      { "input": [1], "expected": 1 },
-      { "input": [0], "expected": 1 }
+      {
+        "input": [
+          5
+        ],
+        "expected": 120
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 1
+      }
     ]
   },
   {
@@ -532,7 +1294,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función debería devolver una nueva lista con el valor agregado en cada llamada, pero comparte estado entre llamadas.",
       "en": "This function should return a fresh list with the value appended on each call, but it shares state across calls."
@@ -540,13 +1305,40 @@
     "buggyCode": "def solve(value, acc=[]):\n    acc.append(value)\n    return acc",
     "starterCode": "def solve(value, acc=[]):\n    acc.append(value)\n    return acc",
     "hints": {
-      "es": ["Los argumentos por defecto mutables se crean una sola vez.", "Usa `None` y crea la lista dentro de la función."],
-      "en": ["Mutable default arguments are created only once.", "Use `None` and create the list inside the function."]
+      "es": [
+        "Los argumentos por defecto mutables se crean una sola vez.",
+        "Usa `None` y crea la lista dentro de la función."
+      ],
+      "en": [
+        "Mutable default arguments are created only once.",
+        "Use `None` and create the list inside the function."
+      ]
     },
     "tests": [
-      { "input": [1], "expected": [1] },
-      { "input": [2], "expected": [2] },
-      { "input": [3], "expected": [3] }
+      {
+        "input": [
+          1
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "input": [
+          2
+        ],
+        "expected": [
+          2
+        ]
+      },
+      {
+        "input": [
+          3
+        ],
+        "expected": [
+          3
+        ]
+      }
     ]
   },
   {
@@ -554,7 +1346,10 @@
     "type": "find_bug",
     "difficulty": "pro",
     "functionName": "solve",
-    "title": { "es": "Encuentra el bug", "en": "Find the bug" },
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
     "description": {
       "es": "Esta función recursiva debería contar cuántos caracteres hay en un string, pero no reduce correctamente el problema.",
       "en": "This recursive function should count characters in a string, but it does not shrink the problem correctly."
@@ -562,13 +1357,2023 @@
     "buggyCode": "def solve(text):\n    if text == '':\n        return 0\n    return 1 + solve(text[:-0])",
     "starterCode": "def solve(text):\n    if text == '':\n        return 0\n    return 1 + solve(text[:-0])",
     "hints": {
-      "es": ["`text[:-0]` devuelve string vacío por la regla de slicing con -0, rompiendo la lógica esperada.", "El paso recursivo debe quitar exactamente un carácter por llamada."],
-      "en": ["`text[:-0]` returns an empty string due to slicing behavior with -0, breaking intended logic.", "The recursive step should remove exactly one character per call."]
+      "es": [
+        "`text[:-0]` devuelve el string completo (slicing con -0).",
+        "El paso recursivo debe quitar exactamente un carácter por llamada."
+      ],
+      "en": [
+        "`text[:-0]` returns the full string (slicing with -0).",
+        "The recursive step should remove exactly one character per call."
+      ]
     },
     "tests": [
-      { "input": ["hola"], "expected": 4 },
-      { "input": [""], "expected": 0 },
-      { "input": ["ab"], "expected": 2 }
+      {
+        "input": [
+          "hola"
+        ],
+        "expected": 4
+      },
+      {
+        "input": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          "ab"
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_wrong_concat",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería concatenar dos strings con un espacio entre ellos, pero el espacio está mal colocado.",
+      "en": "This function should concatenate two strings with a space between them, but the space is misplaced."
+    },
+    "buggyCode": "def solve(a, b):\n    return a + b + ' '",
+    "starterCode": "def solve(a, b):\n    return a + b + ' '",
+    "hints": {
+      "es": [
+        "El espacio debe ir entre `a` y `b`, no al final.",
+        "Revisa el orden de la concatenación."
+      ],
+      "en": [
+        "The space should go between `a` and `b`, not at the end.",
+        "Check the concatenation order."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola",
+          "mundo"
+        ],
+        "expected": "hola mundo"
+      },
+      {
+        "input": [
+          "py",
+          "thon"
+        ],
+        "expected": "py thon"
+      },
+      {
+        "input": [
+          "a",
+          "b"
+        ],
+        "expected": "a b"
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_missing_return",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver si un número es positivo, pero no devuelve nada.",
+      "en": "This function should return whether a number is positive, but returns nothing."
+    },
+    "buggyCode": "def solve(n):\n    if n > 0:\n        return True\n    if n <= 0:\n        False",
+    "starterCode": "def solve(n):\n    if n > 0:\n        return True\n    if n <= 0:\n        False",
+    "hints": {
+      "es": [
+        "La segunda condición no tiene `return`.",
+        "Falta la palabra clave `return` antes de `False`."
+      ],
+      "en": [
+        "The second condition is missing `return`.",
+        "The keyword `return` is missing before `False`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          5
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          -3
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "fb_intermedio_wrong_range",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver los números del 1 al n incluido, pero el rango está mal.",
+      "en": "This function should return numbers from 1 to n inclusive, but the range is wrong."
+    },
+    "buggyCode": "def solve(n):\n    return list(range(1, n))",
+    "starterCode": "def solve(n):\n    return list(range(1, n))",
+    "hints": {
+      "es": [
+        "`range(1, n)` no incluye `n`.",
+        "`range(1, n+1)` incluye `n`."
+      ],
+      "en": [
+        "`range(1, n)` does not include `n`.",
+        "`range(1, n+1)` includes `n`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          5
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "input": [
+          3
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_intermedio_string_int_compare",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver cuántos números en la lista son mayores que 5, pero compara mal los tipos.",
+      "en": "This function should return how many numbers in the list are greater than 5, but it compares types incorrectly."
+    },
+    "buggyCode": "def solve(items):\n    return sum(1 for x in items if x > '5')",
+    "starterCode": "def solve(items):\n    return sum(1 for x in items if x > '5')",
+    "hints": {
+      "es": [
+        "Estás comparando enteros con el string `'5'`.",
+        "El umbral debe ser el entero `5`, no el string `'5'`."
+      ],
+      "en": [
+        "You are comparing integers with the string `'5'`.",
+        "The threshold should be the integer `5`, not the string `'5'`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            6,
+            3,
+            8
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          [
+            5,
+            5,
+            5
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            10
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "fb_intermedio_dict_update",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería combinar dos diccionarios, pero solo devuelve el primero.",
+      "en": "This function should merge two dictionaries, but only returns the first one."
+    },
+    "buggyCode": "def solve(a, b):\n    a.update(b)\n    return b",
+    "starterCode": "def solve(a, b):\n    a.update(b)\n    return b",
+    "hints": {
+      "es": [
+        "`.update()` modifica `a` con los valores de `b`.",
+        "Estás devolviendo `b` en lugar del diccionario actualizado `a`."
+      ],
+      "en": [
+        "`.update()` modifies `a` with values from `b`.",
+        "You are returning `b` instead of the updated dictionary `a`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          {
+            "a": 1
+          },
+          {
+            "b": 2
+          }
+        ],
+        "expected": {
+          "a": 1,
+          "b": 2
+        }
+      },
+      {
+        "input": [
+          {
+            "x": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ],
+        "expected": {
+          "x": 2,
+          "y": 3
+        }
+      },
+      {
+        "input": [
+          {},
+          {
+            "k": 5
+          }
+        ],
+        "expected": {
+          "k": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "fb_intermedio_set_ops",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver los elementos que están en `a` pero no en `b`, pero devuelve la intersección.",
+      "en": "This function should return elements in `a` but not in `b`, but it returns the intersection."
+    },
+    "buggyCode": "def solve(a, b):\n    return list(set(a) & set(b))",
+    "starterCode": "def solve(a, b):\n    return list(set(a) & set(b))",
+    "hints": {
+      "es": [
+        "`&` es intersección (elementos en ambos).",
+        "Para la diferencia usa `-` o `difference()`."
+      ],
+      "en": [
+        "`&` is intersection (elements in both).",
+        "For difference use `-` or `difference()`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "input": [
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "expected": [
+          5
+        ]
+      },
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_nonlocal_missing",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería contar elementos usando un contador en el scope externo, pero el contador nunca se actualiza.",
+      "en": "This function should count elements using a counter in the outer scope, but the counter is never updated."
+    },
+    "buggyCode": "def solve(items):\n    count = 0\n    def inc():\n        count += 1\n    for _ in items:\n        inc()\n    return count",
+    "starterCode": "def solve(items):\n    count = 0\n    def inc():\n        count += 1\n    for _ in items:\n        inc()\n    return count",
+    "hints": {
+      "es": [
+        "En Python, asignar a una variable en una función anidada la crea localmente.",
+        "Necesitas `nonlocal count` dentro de `inc`."
+      ],
+      "en": [
+        "In Python, assigning to a variable in a nested function creates a local one.",
+        "You need `nonlocal count` inside `inc`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_list_multiply",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función crea una lista de listas, pero todas las sublistas son la misma referencia.",
+      "en": "This function creates a list of lists, but all sublists share the same reference."
+    },
+    "buggyCode": "def solve(n):\n    return [[0] * 3] * n",
+    "starterCode": "def solve(n):\n    return [[0] * 3] * n",
+    "hints": {
+      "es": [
+        "`[[0]*3] * n` crea `n` referencias a la misma lista interna.",
+        "Usa una comprensión para crear listas independientes."
+      ],
+      "en": [
+        "`[[0]*3] * n` creates `n` references to the same inner list.",
+        "Use a comprehension to create independent lists."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          3
+        ],
+        "expected": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": [
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "input": [
+          2
+        ],
+        "expected": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_zip_truncates",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería sumar listas de distinto tamaño completando con ceros, pero trunca la más larga.",
+      "en": "This function should sum lists of different sizes padding with zeros, but it truncates the longer one."
+    },
+    "buggyCode": "def solve(a, b):\n    return [x + y for x, y in zip(a, b)]",
+    "starterCode": "def solve(a, b):\n    return [x + y for x, y in zip(a, b)]",
+    "hints": {
+      "es": [
+        "`zip` se detiene en la lista más corta.",
+        "Usa `itertools.zip_longest` con `fillvalue=0`."
+      ],
+      "en": [
+        "`zip` stops at the shorter list.",
+        "Use `itertools.zip_longest` with `fillvalue=0`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            10,
+            20
+          ]
+        ],
+        "expected": [
+          11,
+          22,
+          3
+        ]
+      },
+      {
+        "input": [
+          [
+            1
+          ],
+          [
+            10,
+            20,
+            30
+          ]
+        ],
+        "expected": [
+          11,
+          20,
+          30
+        ]
+      },
+      {
+        "input": [
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "expected": [
+          10,
+          10
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_generator_exhausted",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función crea un generador y lo usa dos veces, pero la segunda vez está vacío.",
+      "en": "This function creates a generator and uses it twice, but the second time it is empty."
+    },
+    "buggyCode": "def solve(nums):\n    gen = (x * 2 for x in nums)\n    total = sum(gen)\n    count = sum(1 for _ in gen)\n    return total, count",
+    "starterCode": "def solve(nums):\n    gen = (x * 2 for x in nums)\n    total = sum(gen)\n    count = sum(1 for _ in gen)\n    return total, count",
+    "hints": {
+      "es": [
+        "Un generador solo se puede recorrer una vez.",
+        "Convierte `gen` a lista antes de usarlo dos veces."
+      ],
+      "en": [
+        "A generator can only be iterated once.",
+        "Convert `gen` to a list before using it twice."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          12,
+          3
+        ]
+      },
+      {
+        "input": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          10,
+          1
+        ]
+      },
+      {
+        "input": [
+          [
+            2,
+            4
+          ]
+        ],
+        "expected": [
+          12,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_is_vs_equals",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería comprobar si dos listas tienen el mismo contenido, pero falla al comparar.",
+      "en": "This function should check if two lists have the same content, but fails to compare correctly."
+    },
+    "buggyCode": "def solve(a, b):\n    return a is b",
+    "starterCode": "def solve(a, b):\n    return a is b",
+    "hints": {
+      "es": [
+        "`is` compara identidad (si son el mismo objeto en memoria).",
+        "Para comparar contenido usa `==`."
+      ],
+      "en": [
+        "`is` compares identity (whether they are the same object in memory).",
+        "To compare content use `==`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          [],
+          []
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_type_error",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver la longitud de un número, pero falla porque recibe un entero.",
+      "en": "This function should return the length of a number, but it fails because it receives an integer."
+    },
+    "buggyCode": "def solve(n):\n    return len(n)",
+    "starterCode": "def solve(n):\n    return len(n)",
+    "hints": {
+      "es": [
+        "`len()` no funciona con enteros.",
+        "Convierte a string primero con `str(n)`."
+      ],
+      "en": [
+        "`len()` does not work with integers.",
+        "Convert to string first with `str(n)`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          123
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          9999
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_wrong_power",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería elevar al cuadrado, pero usa el operador incorrecto.",
+      "en": "This function should square a number, but uses the wrong operator."
+    },
+    "buggyCode": "def solve(n):\n    return n ^ 2",
+    "starterCode": "def solve(n):\n    return n ^ 2",
+    "hints": {
+      "es": [
+        "`^` es XOR bit a bit, no potencia.",
+        "Para elevar al cuadrado usa `n ** 2` o `n * n`."
+      ],
+      "en": [
+        "`^` is bitwise XOR, not exponentiation.",
+        "To square use `n ** 2` or `n * n`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          3
+        ],
+        "expected": 9
+      },
+      {
+        "input": [
+          5
+        ],
+        "expected": 25
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_string_multiply",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería repetir el string n veces, pero usa suma en lugar de multiplicación.",
+      "en": "This function should repeat the string n times, but uses addition instead of multiplication."
+    },
+    "buggyCode": "def solve(s, n):\n    return s + n",
+    "starterCode": "def solve(s, n):\n    return s + n",
+    "hints": {
+      "es": [
+        "No puedes sumar un string y un entero.",
+        "Usa `s * n` para repetir un string."
+      ],
+      "en": [
+        "You cannot add a string and an integer.",
+        "Use `s * n` to repeat a string."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "ab",
+          3
+        ],
+        "expected": "ababab"
+      },
+      {
+        "input": [
+          "x",
+          1
+        ],
+        "expected": "x"
+      },
+      {
+        "input": [
+          "ha",
+          2
+        ],
+        "expected": "haha"
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_lower_before",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería comparar dos strings ignorando mayúsculas, pero la comparación es sensible.",
+      "en": "This function should compare two strings ignoring case, but the comparison is case-sensitive."
+    },
+    "buggyCode": "def solve(a, b):\n    return a == b",
+    "starterCode": "def solve(a, b):\n    return a == b",
+    "hints": {
+      "es": [
+        "Compara sin convertir a minúsculas.",
+        "Usa `a.lower() == b.lower()`."
+      ],
+      "en": [
+        "Comparison is done without lowercasing.",
+        "Use `a.lower() == b.lower()`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "Hello",
+          "hello"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "Python",
+          "PYTHON"
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          "abc",
+          "xyz"
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_return_none",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver el doble de n, pero le falta el return.",
+      "en": "This function should return double n, but it is missing the return."
+    },
+    "buggyCode": "def solve(n):\n    result = n * 2",
+    "starterCode": "def solve(n):\n    result = n * 2",
+    "hints": {
+      "es": [
+        "La función calcula el resultado pero no lo devuelve.",
+        "Añade `return result` o directamente `return n * 2`."
+      ],
+      "en": [
+        "The function computes the result but does not return it.",
+        "Add `return result` or directly `return n * 2`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          5
+        ],
+        "expected": 10
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          -3
+        ],
+        "expected": -6
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_count_wrong_target",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería contar cuántas veces aparece el número 0 en la lista, pero busca otro valor.",
+      "en": "This function should count how many times 0 appears in the list, but it searches for the wrong value."
+    },
+    "buggyCode": "def solve(nums):\n    return nums.count(1)",
+    "starterCode": "def solve(nums):\n    return nums.count(1)",
+    "hints": {
+      "es": [
+        "`count(1)` cuenta los unos, no los ceros.",
+        "Cambia el argumento a `0`."
+      ],
+      "en": [
+        "`count(1)` counts ones, not zeros.",
+        "Change the argument to `0`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            0,
+            1,
+            0,
+            2,
+            0
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "input": [
+          [
+            0
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_step_range",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver solo los números pares de 0 a n, pero el paso es incorrecto.",
+      "en": "This function should return only even numbers from 0 to n, but the step is wrong."
+    },
+    "buggyCode": "def solve(n):\n    return list(range(0, n, 1))",
+    "starterCode": "def solve(n):\n    return list(range(0, n, 1))",
+    "hints": {
+      "es": [
+        "Un paso de 1 devuelve todos los números.",
+        "Para solo pares el paso debe ser 2."
+      ],
+      "en": [
+        "A step of 1 returns all numbers.",
+        "For only even numbers the step must be 2."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          8
+        ],
+        "expected": [
+          0,
+          2,
+          4,
+          6
+        ]
+      },
+      {
+        "input": [
+          2
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "input": [
+          6
+        ],
+        "expected": [
+          0,
+          2,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_bool_return",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver True si todos los elementos son impares, pero usa la condición contraria.",
+      "en": "This function should return True if all elements are odd, but uses the wrong condition."
+    },
+    "buggyCode": "def solve(nums):\n    return all(n % 2 == 0 for n in nums)",
+    "starterCode": "def solve(nums):\n    return all(n % 2 == 0 for n in nums)",
+    "hints": {
+      "es": [
+        "`n % 2 == 0` detecta pares, no impares.",
+        "Para impar la condición es `n % 2 != 0`."
+      ],
+      "en": [
+        "`n % 2 == 0` detects even numbers, not odd.",
+        "For odd the condition is `n % 2 != 0`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            3,
+            5
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          [
+            7
+          ]
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "fb_novato_wrong_min",
+    "type": "find_bug",
+    "difficulty": "novato",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver el menor de dos números, pero devuelve el mayor.",
+      "en": "This function should return the smaller of two numbers, but returns the larger one."
+    },
+    "buggyCode": "def solve(a, b):\n    return max(a, b)",
+    "starterCode": "def solve(a, b):\n    return max(a, b)",
+    "hints": {
+      "es": [
+        "Estás usando `max` en lugar de `min`.",
+        "Cambia a `min(a, b)`."
+      ],
+      "en": [
+        "You are using `max` instead of `min`.",
+        "Change to `min(a, b)`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          3,
+          7
+        ],
+        "expected": 3
+      },
+      {
+        "input": [
+          10,
+          2
+        ],
+        "expected": 2
+      },
+      {
+        "input": [
+          5,
+          5
+        ],
+        "expected": 5
+      }
+    ]
+  },
+  {
+    "id": "fb_intermedio_nested_list_sum",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería sumar todos los elementos de una lista de listas, pero solo suma el primer nivel.",
+      "en": "This function should sum all elements of a list of lists, but only sums the first level."
+    },
+    "buggyCode": "def solve(matrix):\n    return sum(matrix)",
+    "starterCode": "def solve(matrix):\n    return sum(matrix)",
+    "hints": {
+      "es": [
+        "`sum` sobre una lista de listas suma las sublistas, no los elementos.",
+        "Necesitas aplanar primero o usar `sum(sum(row) for row in matrix)`."
+      ],
+      "en": [
+        "`sum` over a list of lists sums sublists, not elements.",
+        "You need to flatten first or use `sum(sum(row) for row in matrix)`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        ],
+        "expected": 10
+      },
+      {
+        "input": [
+          [
+            [
+              5
+            ],
+            [
+              1,
+              2,
+              3
+            ]
+          ]
+        ],
+        "expected": 11
+      },
+      {
+        "input": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "fb_intermedio_wrong_enumerate",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver los índices de los elementos que son cero, pero recorre mal el enumerate.",
+      "en": "This function should return the indices of zero elements, but iterates enumerate incorrectly."
+    },
+    "buggyCode": "def solve(nums):\n    return [n for i, n in enumerate(nums) if n == 0]",
+    "starterCode": "def solve(nums):\n    return [n for i, n in enumerate(nums) if n == 0]",
+    "hints": {
+      "es": [
+        "Devuelves `n` (el valor) en lugar de `i` (el índice).",
+        "Cambia `n` por `i` en la expresión."
+      ],
+      "en": [
+        "You return `n` (the value) instead of `i` (the index).",
+        "Change `n` to `i` in the expression."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            0,
+            1,
+            0,
+            2
+          ]
+        ],
+        "expected": [
+          0,
+          2
+        ]
+      },
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "input": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_intermedio_strip_split",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver las palabras únicas de un texto, pero no limpia los espacios correctamente.",
+      "en": "This function should return unique words from a text, but does not clean spaces correctly."
+    },
+    "buggyCode": "def solve(text):\n    return list(set(text.split(' ')))",
+    "starterCode": "def solve(text):\n    return list(set(text.split(' ')))",
+    "hints": {
+      "es": [
+        "`split(' ')` puede generar strings vacíos si hay espacios múltiples.",
+        "Usa `split()` sin argumentos para limpiar correctamente."
+      ],
+      "en": [
+        "`split(' ')` can generate empty strings with multiple spaces.",
+        "Use `split()` without arguments to clean properly."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          "hola mundo hola"
+        ],
+        "expected": [
+          "hola",
+          "mundo"
+        ]
+      },
+      {
+        "input": [
+          "a b c"
+        ],
+        "expected": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      {
+        "input": [
+          "x x x"
+        ],
+        "expected": [
+          "x"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_shadowed_builtin",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver el máximo de la lista, pero ha sobreescrito el builtin `max`.",
+      "en": "This function should return the maximum of the list, but it has shadowed the `max` builtin."
+    },
+    "buggyCode": "def solve(nums):\n    max = nums[0]\n    for n in nums:\n        if n > max:\n            max = n\n    return max(nums)",
+    "starterCode": "def solve(nums):\n    max = nums[0]\n    for n in nums:\n        if n > max:\n            max = n\n    return max(nums)",
+    "hints": {
+      "es": [
+        "La variable `max` sobreescribe la función builtin `max`.",
+        "Usa un nombre distinto como `best` o `mayor`."
+      ],
+      "en": [
+        "The variable `max` shadows the builtin `max` function.",
+        "Use a different name like `best` or `largest`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            3,
+            7,
+            2
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "input": [
+          [
+            1
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          [
+            -1,
+            -5,
+            -2
+          ]
+        ],
+        "expected": -1
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_wrong_lambda_scope",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería crear una lista de funciones que devuelvan sus índices, pero todas devuelven el mismo valor.",
+      "en": "This function should create a list of functions each returning their index, but they all return the same value."
+    },
+    "buggyCode": "def solve(n):\n    funcs = []\n    for i in range(n):\n        funcs.append(lambda: i)\n    return [f() for f in funcs]",
+    "starterCode": "def solve(n):\n    funcs = []\n    for i in range(n):\n        funcs.append(lambda: i)\n    return [f() for f in funcs]",
+    "hints": {
+      "es": [
+        "Las lambdas capturan `i` por referencia, no por valor.",
+        "Usa `lambda i=i: i` para capturar el valor actual de `i`."
+      ],
+      "en": [
+        "Lambdas capture `i` by reference, not by value.",
+        "Use `lambda i=i: i` to capture the current value of `i`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          3
+        ],
+        "expected": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "input": [
+          1
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "input": [
+          4
+        ],
+        "expected": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_int_missing_else",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver 'even' o 'odd', pero no devuelve nada para los impares.",
+      "en": "This function should return 'even' or 'odd', but returns nothing for odd numbers."
+    },
+    "buggyCode": "def solve(n):\n    if n % 2 == 0:\n        return 'even'",
+    "starterCode": "def solve(n):\n    if n % 2 == 0:\n        return 'even'",
+    "hints": {
+      "es": [
+        "Falta el caso para números impares.",
+        "Añade un `else` o un segundo `return`."
+      ],
+      "en": [
+        "The odd number case is missing.",
+        "Add an `else` or a second `return`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          4
+        ],
+        "expected": "even"
+      },
+      {
+        "input": [
+          3
+        ],
+        "expected": "odd"
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": "even"
+      }
+    ]
+  },
+  {
+    "id": "fb_int_append_vs_extend",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería añadir todos los elementos de una lista a otra, pero los añade como sublista.",
+      "en": "This function should add all elements of a list to another, but adds them as a sublist."
+    },
+    "buggyCode": "def solve(a, b):\n    result = a[:]\n    result.append(b)\n    return result",
+    "starterCode": "def solve(a, b):\n    result = a[:]\n    result.append(b)\n    return result",
+    "hints": {
+      "es": [
+        "`append` añade `b` como un único elemento (sublista).",
+        "Usa `extend` para añadir los elementos individuales."
+      ],
+      "en": [
+        "`append` adds `b` as a single element (sublist).",
+        "Use `extend` to add individual elements."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "input": [
+          [],
+          [
+            5,
+            6
+          ]
+        ],
+        "expected": [
+          5,
+          6
+        ]
+      },
+      {
+        "input": [
+          [
+            1
+          ],
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_int_wrong_not_in",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver los elementos de `a` que no están en `b`, pero la condición está al revés.",
+      "en": "This function should return elements of `a` not in `b`, but the condition is reversed."
+    },
+    "buggyCode": "def solve(a, b):\n    return [x for x in a if x in b]",
+    "starterCode": "def solve(a, b):\n    return [x for x in a if x in b]",
+    "hints": {
+      "es": [
+        "La condición `x in b` incluye los que sí están.",
+        "Cambia a `x not in b`."
+      ],
+      "en": [
+        "The condition `x in b` includes elements that are present.",
+        "Change to `x not in b`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "expected": [
+          1,
+          3
+        ]
+      },
+      {
+        "input": [
+          [
+            5,
+            6,
+            7
+          ],
+          [
+            5
+          ]
+        ],
+        "expected": [
+          6,
+          7
+        ]
+      },
+      {
+        "input": [
+          [
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "fb_int_counter_wrong_key",
+    "type": "find_bug",
+    "difficulty": "intermedio",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver el elemento más frecuente, pero busca el mínimo en lugar del máximo.",
+      "en": "This function should return the most frequent element, but it looks for the minimum instead of the maximum."
+    },
+    "buggyCode": "def solve(items):\n    freq = {}\n    for x in items:\n        freq[x] = freq.get(x, 0) + 1\n    return min(freq, key=freq.get)",
+    "starterCode": "def solve(items):\n    freq = {}\n    for x in items:\n        freq[x] = freq.get(x, 0) + 1\n    return min(freq, key=freq.get)",
+    "hints": {
+      "es": [
+        "Buscas el mínimo en lugar del máximo.",
+        "Cambia `min` por `max`."
+      ],
+      "en": [
+        "You are looking for the minimum instead of the maximum.",
+        "Change `min` to `max`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          [
+            "a",
+            "b",
+            "a",
+            "c",
+            "a"
+          ]
+        ],
+        "expected": "a"
+      },
+      {
+        "input": [
+          [
+            "x",
+            "y",
+            "y"
+          ]
+        ],
+        "expected": "y"
+      },
+      {
+        "input": [
+          [
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_tuple_single",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería devolver una tupla de un solo elemento, pero devuelve el valor directamente.",
+      "en": "This function should return a single-element tuple, but returns the value directly."
+    },
+    "buggyCode": "def solve(n):\n    return (n)",
+    "starterCode": "def solve(n):\n    return (n)",
+    "hints": {
+      "es": [
+        "En Python `(n)` no es una tupla, es solo `n` entre paréntesis.",
+        "Necesitas la coma: `(n,)`."
+      ],
+      "en": [
+        "In Python `(n)` is not a tuple, it is just `n` in parentheses.",
+        "You need the comma: `(n,)`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          5
+        ],
+        "expected": [
+          5
+        ]
+      },
+      {
+        "input": [
+          0
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "input": [
+          -1
+        ],
+        "expected": [
+          -1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_chained_comparison",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería verificar que `b` está estrictamente entre `a` y `c`, pero su lógica falla.",
+      "en": "This function should verify that `b` is strictly between `a` and `c`, but its logic is wrong."
+    },
+    "buggyCode": "def solve(a, b, c):\n    return a < b and b > c",
+    "starterCode": "def solve(a, b, c):\n    return a < b and b > c",
+    "hints": {
+      "es": [
+        "La segunda condición compara `b > c` cuando debería ser `b < c`.",
+        "Para que `b` esté entre `a` y `c` necesitas `a < b < c`."
+      ],
+      "en": [
+        "The second condition checks `b > c` when it should be `b < c`.",
+        "For `b` to be between `a` and `c` you need `a < b < c`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          1,
+          5,
+          10
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          1,
+          10,
+          5
+        ],
+        "expected": false
+      },
+      {
+        "input": [
+          3,
+          3,
+          7
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_dict_merge_shallow",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería crear una copia independiente del diccionario, pero la copia comparte las listas internas.",
+      "en": "This function should create an independent copy of the dictionary, but the copy shares inner lists."
+    },
+    "buggyCode": "import copy\n\ndef solve(d):\n    return copy.copy(d)",
+    "starterCode": "import copy\n\ndef solve(d):\n    return copy.copy(d)",
+    "hints": {
+      "es": [
+        "`copy.copy` hace una copia superficial — las listas internas siguen siendo el mismo objeto.",
+        "Usa `copy.deepcopy` para copiar también las estructuras anidadas."
+      ],
+      "en": [
+        "`copy.copy` makes a shallow copy — inner lists remain the same object.",
+        "Use `copy.deepcopy` to also copy nested structures."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          {
+            "a": [
+              1,
+              2
+            ],
+            "b": [
+              3,
+              4
+            ]
+          }
+        ],
+        "expected": {
+          "a": [
+            1,
+            2
+          ],
+          "b": [
+            3,
+            4
+          ]
+        }
+      },
+      {
+        "input": [
+          {
+            "x": []
+          }
+        ],
+        "expected": {
+          "x": []
+        }
+      },
+      {
+        "input": [
+          {
+            "k": [
+              1
+            ]
+          }
+        ],
+        "expected": {
+          "k": [
+            1
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_float_precision",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función debería comprobar si dos floats son iguales, pero la comparación directa falla por precisión.",
+      "en": "This function should check if two floats are equal, but direct comparison fails due to precision."
+    },
+    "buggyCode": "def solve(a, b):\n    return a == b",
+    "starterCode": "def solve(a, b):\n    return a == b",
+    "hints": {
+      "es": [
+        "Los floats tienen errores de precisión: `0.1 + 0.2 != 0.3`.",
+        "Usa `abs(a - b) < 1e-9` o `math.isclose(a, b)`."
+      ],
+      "en": [
+        "Floats have precision errors: `0.1 + 0.2 != 0.3`.",
+        "Use `abs(a - b) < 1e-9` or `math.isclose(a, b)`."
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          0.30000000000000004,
+          0.3
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          1.0,
+          1.0
+        ],
+        "expected": true
+      },
+      {
+        "input": [
+          0.1,
+          0.2
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "fb_pro_recursion_no_base",
+    "type": "find_bug",
+    "difficulty": "pro",
+    "functionName": "solve",
+    "title": {
+      "es": "Encuentra el bug",
+      "en": "Find the bug"
+    },
+    "description": {
+      "es": "Esta función recursiva debería devolver la potencia de 2 más cercana mayor o igual a n, pero no tiene caso base y causa recursión infinita.",
+      "en": "This recursive function should return the nearest power of 2 greater or equal to n, but it has no base case and causes infinite recursion."
+    },
+    "buggyCode": "def solve(n, power=1):\n    if power >= n:\n        return power\n    return solve(n, power * 2)",
+    "starterCode": "def solve(n, power=1):\n    if power >= n:\n        return power\n    return solve(n, power * 2)",
+    "hints": {
+      "es": [
+        "Traza la ejecución con `n=1`: `power=1 >= 1` → devuelve 1. Funciona.",
+        "Traza con `n=0`: `power=1 >= 0` → devuelve 1. También funciona.",
+        "En realidad este código es correcto — ¿lo ves?"
+      ],
+      "en": [
+        "Trace with `n=1`: `power=1 >= 1` → returns 1. Works.",
+        "Trace with `n=0`: `power=1 >= 0` → returns 1. Also works.",
+        "This code is actually correct — can you see it?"
+      ]
+    },
+    "tests": [
+      {
+        "input": [
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "input": [
+          5
+        ],
+        "expected": 8
+      },
+      {
+        "input": [
+          8
+        ],
+        "expected": 8
+      }
     ]
   }
 ]
