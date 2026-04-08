@@ -27,11 +27,17 @@ function getDaySeed(date = new Date()) {
 }
 
 function hashStringToNumber(value) {
-  let hash = 0;
+  let hash = 5381;
   for (let i = 0; i < value.length; i += 1) {
-    hash = (hash * 31 + value.charCodeAt(i)) % 2147483647;
+    hash = ((hash << 5) + hash + value.charCodeAt(i)) >>> 0;
   }
   return hash;
+}
+
+function getDayNumber(date = new Date()) {
+  const utcDate = normalizeDateToUTC(date);
+  const epoch = new Date(Date.UTC(2026, 2, 22)); // 22 marzo 2026 — fecha de inicio
+  return Math.floor((utcDate - epoch) / 86400000);
 }
 
 function getChallengesByLanguage(language = 'python') {
@@ -51,8 +57,9 @@ function getDailyChallenge({
 } = {}) {
   const availableChallenges = getChallengesByDifficulty(difficulty, language);
   if (availableChallenges.length === 0) return null;
-  const seed = getDaySeed(date);
-  const index = hashStringToNumber(`${seed}-${difficulty}`) % availableChallenges.length;
+  const dayNum = getDayNumber(date);
+  const diffOffset = { novato: 0, intermedio: 1000, pro: 2000 }[difficulty] || 0;
+  const index = (dayNum + diffOffset) % availableChallenges.length;
   return availableChallenges[index];
 }
 
