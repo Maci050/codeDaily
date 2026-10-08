@@ -6,6 +6,7 @@ import {
   getDaySeed,
   getDayNumber,
   loadLanguagePools,
+  getCachedLanguagePools,
   pickDailyChallenge,
 } from '../../services/challengeService';
 import { validateChallengeSolution } from '../../services/solutionValidationService';
@@ -21,6 +22,7 @@ import { useEscapeKey } from '../../hooks/useEscapeKey';
 import { buildPath } from '../../router';
 import { formatCountdown, useDayClock } from '../../hooks/useDayClock';
 import Window from '../ui/Window';
+import ArchiveCalendar from './ArchiveCalendar';
 import PixelIcon from '../ui/PixelIcon';
 
 const NORMAL_GRID_SLOTS = 5;
@@ -104,7 +106,6 @@ function ChallengePlayer({
         modeHacker: 'Hacker',
         hackerDescription:
           'El modo Hacker usa retos Pro, no muestra pistas y solo permite 3 intentos al día.',
-        dateLabel: 'Fecha',
         progLangLabel: 'Lenguaje',
         progLangPython: 'Python',
         progLangJava: 'Java',
@@ -190,7 +191,6 @@ function ChallengePlayer({
         modeHacker: 'Hacker',
         hackerDescription:
           'Hacker mode uses Pro challenges, shows no hints, and only allows 3 attempts per day.',
-        dateLabel: 'Date',
         progLangLabel: 'Language',
         progLangPython: 'Python',
         progLangJava: 'Java',
@@ -322,8 +322,10 @@ function ChallengePlayer({
   }, [programmingLanguage, poolAttempt]);
 
   const poolIsCurrent = loadedPools.language === programmingLanguage && loadedPools.attempt === poolAttempt;
-  const pools = poolIsCurrent ? loadedPools.pools : null;
-  const isPoolLoading = !poolIsCurrent;
+  // Si los bancos de este lenguaje ya se descargaron antes, se usan al instante (sin parpadeo de carga)
+  const cachedPools = getCachedLanguagePools(programmingLanguage);
+  const pools = poolIsCurrent ? loadedPools.pools : cachedPools;
+  const isPoolLoading = !poolIsCurrent && !cachedPools;
   const poolFailed = poolIsCurrent && loadedPools.failed;
 
   const stats = useMemo(() => getChallengeStats(pools), [pools]);
@@ -335,6 +337,26 @@ function ChallengePlayer({
       difficulty: effectiveDifficulty,
     });
   }, [pools, challengeDate, effectiveDifficulty, programmingLanguage]);
+
+  // Estado de un día del archivo con el lenguaje y la dificultad elegidos.
+  // El día abierto usa el estado en vivo (lo guardado se escribe justo después del render).
+  const getDayState = useCallback((ymd) => {
+    if (ymd === selectedDate) {
+      if (completed) return 'done';
+      return attemptCount > 0 || givenUp ? 'tried' : null;
+    }
+    if (!pools) return null;
+    const date = parseYMDToUTCDate(ymd);
+    const challenge = pickDailyChallenge(pools[effectiveDifficulty], {
+      date,
+      language: programmingLanguage,
+      difficulty: effectiveDifficulty,
+    });
+    if (!challenge) return null;
+    const entry = getProgressEntry({ date, challengeId: `${programmingLanguage}_${challenge.id}`, mode: 'normal' });
+    if (entry.completed) return 'done';
+    return entry.attempts > 0 || entry.givenUp ? 'tried' : null;
+  }, [selectedDate, completed, attemptCount, givenUp, pools, effectiveDifficulty, programmingLanguage]);
 
   const dailyChallenge = useMemo(() => {
     return getChallengeText(baseChallenge, language);
@@ -699,20 +721,6 @@ function ChallengePlayer({
             </div>
           )}
 
-          {allowDateSelection && (
-            <div className="field">
-              <label htmlFor="archive-date-select">{text.dateLabel}</label>
-              <input
-                id="archive-date-select"
-                type="date"
-                value={selectedDate}
-                min={minSelectableDate || undefined}
-                max={getDaySeed(new Date())}
-                onChange={(event) => onDateChange?.(event.target.value)}
-              />
-            </div>
-          )}
-
           {!isHackerMode && (
             <div className="field">
               <label htmlFor="daily-difficulty-select">{text.difficultyLabel}</label>
@@ -785,100 +793,112 @@ function ChallengePlayer({
       ) : (
         <>
           <div className="workspace">
-            <Window
-              title={`${text.briefTitle} #${dayNum}`}
-              icon="doc"
-              status={
-                <>
-                  <span>{text.statsTitle}</span>
-                  <span className="pool-row">
-                    <span>{text.total} <strong>{stats.total}</strong></span>
-                    <span>{text.difficultyNovato} <strong>{stats.novato}</strong></span>
-                    <span>{text.difficultyIntermedio} <strong>{stats.intermedio}</strong></span>
-                    <span>{text.difficultyPro} <strong>{stats.pro}</strong></span>
-                  </span>
-                </>
-              }
-            >
-              <div className="brief-body">
-                <div className="badge-row">
-                  <span className="pill">
-                    {difficultyLabelMap[dailyChallenge.difficulty] || dailyChallenge.difficulty}
-                  </span>
-                  {isHackerMode && <span className="pill inverse">{text.hackerBadge}</span>}
-                  {completed && (
-                    <span className="pill inverse">
-                      <PixelIcon name="check" size={14} />
-                      {text.completedBadge}
+            <div className="workspace-stack">
+              {allowDateSelection && (
+                <ArchiveCalendar
+                  selectedDate={selectedDate}
+                  minDate={minSelectableDate || selectedDate}
+                  maxDate={getDaySeed(new Date())}
+                  onSelect={(ymd) => onDateChange?.(ymd)}
+                  getDayState={getDayState}
+                  language={language}
+                />
+              )}
+              <Window
+                title={`${text.briefTitle} #${dayNum}`}
+                icon="doc"
+                status={
+                  <>
+                    <span>{text.statsTitle}</span>
+                    <span className="pool-row">
+                      <span>{text.total} <strong>{stats.total}</strong></span>
+                      <span>{text.difficultyNovato} <strong>{stats.novato}</strong></span>
+                      <span>{text.difficultyIntermedio} <strong>{stats.intermedio}</strong></span>
+                      <span>{text.difficultyPro} <strong>{stats.pro}</strong></span>
                     </span>
-                  )}
-                  {givenUp && !completed && <span className="pill dotted">{text.giveUpBadge}</span>}
-                </div>
-
-                <h2 className="challenge-heading">{dailyChallenge.localizedTitle}</h2>
-                <p className="challenge-description">{dailyChallenge.localizedDescription}</p>
-
-                <dl className="facts">
-                  <div>
-                    <dt>{text.selectedDate}</dt>
-                    <dd>{getDaySeed(challengeDate)}</dd>
-                  </div>
-                  <div>
-                    <dt>{text.challengeId}</dt>
-                    <dd>{dailyChallenge.id}</dd>
-                  </div>
-                  <div>
-                    <dt>{text.languageLabel}</dt>
-                    <dd>{dailyChallenge.language}</dd>
-                  </div>
-                  <div>
-                    <dt>{text.functionLabel}</dt>
-                    <dd>{dailyChallenge.functionName}</dd>
-                  </div>
-                  <div>
-                    <dt>{text.hintsPreview}</dt>
-                    <dd>{isHackerMode ? 0 : dailyChallenge.localizedHints.length}</dd>
-                  </div>
-                  <div>
-                    <dt>{text.testsCount}</dt>
-                    <dd>{dailyChallenge.tests.length}</dd>
-                  </div>
-                </dl>
-
-                <div className="section-block">
-                  <h3>{text.instructions}</h3>
-                  <p>{dailyChallenge.localizedInstructions}</p>
-                </div>
-
-                <div className="section-block">
-                  <h3>{text.restrictions}</h3>
-                  <ul className="challenge-list">
-                    {dailyChallenge.localizedRestrictions.map((restriction) => (
-                      <li key={restriction}>{restriction}</li>
-                    ))}
-                    {isHackerMode && (
-                      <>
-                        <li>{language === 'es' ? 'Sin pistas.' : 'No hints.'}</li>
-                        <li>
-                          {language === 'es'
-                            ? 'Máximo 3 intentos para esta fecha.'
-                            : 'Maximum 3 attempts for this date.'}
-                        </li>
-                      </>
+                  </>
+                }
+              >
+                <div className="brief-body">
+                  <div className="badge-row">
+                    <span className="pill">
+                      {difficultyLabelMap[dailyChallenge.difficulty] || dailyChallenge.difficulty}
+                    </span>
+                    {isHackerMode && <span className="pill inverse">{text.hackerBadge}</span>}
+                    {completed && (
+                      <span className="pill inverse">
+                        <PixelIcon name="check" size={14} />
+                        {text.completedBadge}
+                      </span>
                     )}
-                  </ul>
-                </div>
-
-                {!isHackerMode && (
-                  <div className="section-block">
-                    <h3>{text.starterCode}</h3>
-                    <pre className="code-block">
-                      <code>{dailyChallenge.starterCode}</code>
-                    </pre>
+                    {givenUp && !completed && <span className="pill dotted">{text.giveUpBadge}</span>}
                   </div>
-                )}
-              </div>
-            </Window>
+
+                  <h2 className="challenge-heading">{dailyChallenge.localizedTitle}</h2>
+                  <p className="challenge-description">{dailyChallenge.localizedDescription}</p>
+
+                  <dl className="facts">
+                    <div>
+                      <dt>{text.selectedDate}</dt>
+                      <dd>{getDaySeed(challengeDate)}</dd>
+                    </div>
+                    <div>
+                      <dt>{text.challengeId}</dt>
+                      <dd>{dailyChallenge.id}</dd>
+                    </div>
+                    <div>
+                      <dt>{text.languageLabel}</dt>
+                      <dd>{dailyChallenge.language}</dd>
+                    </div>
+                    <div>
+                      <dt>{text.functionLabel}</dt>
+                      <dd>{dailyChallenge.functionName}</dd>
+                    </div>
+                    <div>
+                      <dt>{text.hintsPreview}</dt>
+                      <dd>{isHackerMode ? 0 : dailyChallenge.localizedHints.length}</dd>
+                    </div>
+                    <div>
+                      <dt>{text.testsCount}</dt>
+                      <dd>{dailyChallenge.tests.length}</dd>
+                    </div>
+                  </dl>
+
+                  <div className="section-block">
+                    <h3>{text.instructions}</h3>
+                    <p>{dailyChallenge.localizedInstructions}</p>
+                  </div>
+
+                  <div className="section-block">
+                    <h3>{text.restrictions}</h3>
+                    <ul className="challenge-list">
+                      {dailyChallenge.localizedRestrictions.map((restriction) => (
+                        <li key={restriction}>{restriction}</li>
+                      ))}
+                      {isHackerMode && (
+                        <>
+                          <li>{language === 'es' ? 'Sin pistas.' : 'No hints.'}</li>
+                          <li>
+                            {language === 'es'
+                              ? 'Máximo 3 intentos para esta fecha.'
+                              : 'Maximum 3 attempts for this date.'}
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  {!isHackerMode && (
+                    <div className="section-block">
+                      <h3>{text.starterCode}</h3>
+                      <pre className="code-block">
+                        <code>{dailyChallenge.starterCode}</code>
+                      </pre>
+                    </div>
+                  )}
+                </div>
+              </Window>
+            </div>
 
             <Window
               className={`editor-window ${isChecking ? 'is-busy' : ''}`}

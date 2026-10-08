@@ -2,9 +2,18 @@ import { useState } from 'react';
 import ChallengePlayer from '../components/challenge/ChallengePlayer';
 import { useLanguage } from '../context/LanguageContext';
 import { ARCHIVE_START_DATE } from '../router';
+import { getDaySeed } from '../services/challengeService';
+
+// Sin fecha en la URL, el archivo abre en el reto de ayer (o en el primero si aún no hay ayer)
+function defaultArchiveDate() {
+  const yesterday = new Date();
+  yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+  const seed = getDaySeed(yesterday);
+  return seed < ARCHIVE_START_DATE ? ARCHIVE_START_DATE : seed;
+}
 
 function ArchivePage({ initialDate = null, onDateChange }) {
-  const [selectedDate, setSelectedDate] = useState(initialDate || ARCHIVE_START_DATE);
+  const [selectedDate, setSelectedDate] = useState(() => initialDate || defaultArchiveDate());
   const { language } = useLanguage();
 
   const text = {

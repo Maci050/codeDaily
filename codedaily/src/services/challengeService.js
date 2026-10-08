@@ -15,14 +15,18 @@ const POOL_LOADERS = {
 
 const DIFFICULTIES = ['novato', 'intermedio', 'pro'];
 const poolCache = new Map();
+const resolvedPools = new Map();
+const languagePoolsCache = new Map();
 
 function loadChallengePool(language = 'python', difficulty = 'novato') {
   const key = `${language}_${difficulty}`;
   if (!poolCache.has(key)) {
     const loader = POOL_LOADERS[language]?.[difficulty];
-    const promise = loader
-      ? loader().then((module) => module.default)
-      : Promise.resolve([]);
+    const promise = (loader ? loader().then((module) => module.default) : Promise.resolve([]))
+      .then((pool) => {
+        resolvedPools.set(key, pool);
+        return pool;
+      });
     // Si la descarga falla, se olvida para poder reintentar
     promise.catch(() => poolCache.delete(key));
     poolCache.set(key, promise);
@@ -30,9 +34,19 @@ function loadChallengePool(language = 'python', difficulty = 'novato') {
   return poolCache.get(key);
 }
 
+// Bancos ya descargados de un lenguaje, sin esperar (null si falta alguno)
+function getCachedLanguagePools(language = 'python') {
+  if (languagePoolsCache.has(language)) return languagePoolsCache.get(language);
+  if (!DIFFICULTIES.every((difficulty) => resolvedPools.has(`${language}_${difficulty}`))) return null;
+  // Siempre el mismo objeto, para que los useMemo/useCallback que dependen de él no se recalculen
+  const pools = Object.fromEntries(DIFFICULTIES.map((difficulty) => [difficulty, resolvedPools.get(`${language}_${difficulty}`)]));
+  languagePoolsCache.set(language, pools);
+  return pools;
+}
+
 async function loadLanguagePools(language = 'python') {
-  const pools = await Promise.all(DIFFICULTIES.map((difficulty) => loadChallengePool(language, difficulty)));
-  return Object.fromEntries(DIFFICULTIES.map((difficulty, i) => [difficulty, pools[i]]));
+  await Promise.all(DIFFICULTIES.map((difficulty) => loadChallengePool(language, difficulty)));
+  return getCachedLanguagePools(language);
 }
 
 function normalizeDateToUTC(date = new Date()) {
@@ -93,6 +107,7 @@ function getChallengeStats(pools) {
 export {
   loadChallengePool,
   loadLanguagePools,
+  getCachedLanguagePools,
   loadDailyChallenge,
   pickDailyChallenge,
   getChallengeText,
