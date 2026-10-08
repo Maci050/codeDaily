@@ -92,4 +92,5 @@ export {
   getChallengeText,
   getChallengeStats,
   getDaySeed,
+  getDayNumber,
 };

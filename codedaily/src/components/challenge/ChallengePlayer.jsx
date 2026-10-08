@@ -5,12 +5,14 @@ import {
   getChallengeText,
   getDailyChallenge,
   getDaySeed,
+  getDayNumber,
 } from '../../services/challengeService';
 import { validateChallengeSolution } from '../../services/solutionValidationService';
 import {
   getProgressEntry,
   updateProgressEntry,
   markTodayCompleted,
+  getStats,
 } from '../../services/progressService';
 import { ensurePyodideLoaded } from '../../services/pythonRunnerService';
 import { getPreferences, savePreferences } from '../../services/uiService';
@@ -433,9 +435,15 @@ function ChallengePlayer({
   const handleShare = () => {
     if (!baseChallenge) return;
 
-    const date = getDaySeed(challengeDate);
-    const [year, month, day] = date.split('-');
-    const formattedDate = `${day}/${month}/${year}`;
+    const dayNum = getDayNumber(challengeDate);
+
+    const maxAttempts = 5;
+    const emojiGrid = Array.from({ length: maxAttempts }, (_, i) => {
+      if (i < attemptCount - 1) return '🟥';
+      if (i === attemptCount - 1 && completed) return '🟩';
+      if (i === attemptCount - 1 && givenUp) return '🟥';
+      return '⬜';
+    }).join('');
 
     const diffLabel = {
       novato: language === 'es' ? 'Novato' : 'Beginner',
@@ -444,19 +452,32 @@ function ChallengePlayer({
     }[effectiveDifficulty] || effectiveDifficulty;
 
     const langLabel = programmingLanguage === 'java' ? 'Java' : 'Python';
-    const modeLabel = isHackerMode ? ' · Hacker' : '';
+    const modeLabel = isHackerMode ? ' · Hacker' : ' · Normal';
 
-    const attemptsLabel = language === 'es'
-      ? `${attemptCount} ${attemptCount === 1 ? 'intento' : 'intentos'}`
-      : `${attemptCount} ${attemptCount === 1 ? 'attempt' : 'attempts'}`;
+    const resultLabel = givenUp
+      ? (language === 'es' ? 'Rendido' : 'Given up')
+      : `${attemptCount}/${maxAttempts} ${language === 'es'
+          ? (attemptCount === 1 ? 'intento' : 'intentos')
+          : (attemptCount === 1 ? 'attempt' : 'attempts')}`;
 
-    const text = [
-      `CodeDaily ${formattedDate} ✅`,
-      `${diffLabel} · ${langLabel}${modeLabel} · ${attemptsLabel}`,
-      'https://codedaily-nu.vercel.app',
-    ].join('\n');
+    const stats = getStats();
+    const streakLine = stats.streak > 0
+      ? `🔥 ${language === 'es' ? 'Racha' : 'Streak'}: ${stats.streak} ${language === 'es'
+          ? (stats.streak === 1 ? 'día' : 'días')
+          : (stats.streak === 1 ? 'day' : 'days')}`
+      : null;
 
-    navigator.clipboard.writeText(text).then(() => {
+    const lines = [
+      `CodeDaily #${dayNum} 🧩`,
+      `${diffLabel} · ${langLabel}${modeLabel}`,
+      '',
+      `${emojiGrid} — ${resultLabel}`,
+      ...(streakLine ? [streakLine] : []),
+      '',
+      'codedaily-nu.vercel.app',
+    ];
+
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
