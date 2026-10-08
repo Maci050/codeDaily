@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import Window from '../components/ui/Window';
 import PixelIcon from '../components/ui/PixelIcon';
-import { getChallengeText, getDailyChallenge, getDayNumber, getDaySeed } from '../services/challengeService';
+import { getChallengeText, getDayNumber, getDaySeed, loadDailyChallenge } from '../services/challengeService';
 import { getPreferences } from '../services/uiService';
 import { getStats } from '../services/progressService';
 
@@ -87,16 +87,26 @@ function HomePage({ onNavigate }) {
   const dayNumber = getDayNumber(today);
   const isJava = preferences.programmingLanguage === 'java';
 
-  const todayChallenge = useMemo(() => {
-    const challenge = getDailyChallenge({
-      date: today,
+  // Solo se descarga el banco del reto de hoy; la ventana se abre cuando llega
+  const [rawChallenge, setRawChallenge] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    loadDailyChallenge({
+      date: new Date(),
       language: preferences.programmingLanguage,
       difficulty: preferences.difficulty,
-    });
-    return getChallengeText(challenge, language);
-    // La fecha solo cambia al recargar; basta con recalcular al cambiar de idioma
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [language]);
+    })
+      .then((challenge) => {
+        if (isMounted) setRawChallenge(challenge);
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, [preferences.programmingLanguage, preferences.difficulty]);
+
+  const todayChallenge = useMemo(() => getChallengeText(rawChallenge, language), [rawChallenge, language]);
 
   const streak = getStats().streak;
   const fileName = `reto_${dayNumber}.${isJava ? 'java' : 'py'}`;

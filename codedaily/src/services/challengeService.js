@@ -1,18 +1,39 @@
-import novatoChallenges from '../data/challenges/python_novato.json';
-import intermedioChallenges from '../data/challenges/python_intermedio.json';
-import proChallenges from '../data/challenges/python_pro.json';
-import javaNovato from '../data/challenges/java_novato.json';
-import javaIntermedio from '../data/challenges/java_intermedio.json';
-import javaPro from '../data/challenges/java_pro.json';
+// Cada banco de retos se descarga solo cuando hace falta: la portada necesita uno,
+// el reto diario los tres de su lenguaje.
+const POOL_LOADERS = {
+  python: {
+    novato: () => import('../data/challenges/python_novato.json'),
+    intermedio: () => import('../data/challenges/python_intermedio.json'),
+    pro: () => import('../data/challenges/python_pro.json'),
+  },
+  java: {
+    novato: () => import('../data/challenges/java_novato.json'),
+    intermedio: () => import('../data/challenges/java_intermedio.json'),
+    pro: () => import('../data/challenges/java_pro.json'),
+  },
+};
 
-const ALL_CHALLENGES = [
-  ...novatoChallenges,
-  ...intermedioChallenges,
-  ...proChallenges,
-  ...javaNovato,
-  ...javaIntermedio,
-  ...javaPro,
-];
+const DIFFICULTIES = ['novato', 'intermedio', 'pro'];
+const poolCache = new Map();
+
+function loadChallengePool(language = 'python', difficulty = 'novato') {
+  const key = `${language}_${difficulty}`;
+  if (!poolCache.has(key)) {
+    const loader = POOL_LOADERS[language]?.[difficulty];
+    const promise = loader
+      ? loader().then((module) => module.default)
+      : Promise.resolve([]);
+    // Si la descarga falla, se olvida para poder reintentar
+    promise.catch(() => poolCache.delete(key));
+    poolCache.set(key, promise);
+  }
+  return poolCache.get(key);
+}
+
+async function loadLanguagePools(language = 'python') {
+  const pools = await Promise.all(DIFFICULTIES.map((difficulty) => loadChallengePool(language, difficulty)));
+  return Object.fromEntries(DIFFICULTIES.map((difficulty, i) => [difficulty, pools[i]]));
+}
 
 function normalizeDateToUTC(date = new Date()) {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
@@ -26,41 +47,27 @@ function getDaySeed(date = new Date()) {
   return `${year}-${month}-${day}`;
 }
 
-function hashStringToNumber(value) {
-  let hash = 5381;
-  for (let i = 0; i < value.length; i += 1) {
-    hash = ((hash << 5) + hash + value.charCodeAt(i)) >>> 0;
-  }
-  return hash;
-}
-
 function getDayNumber(date = new Date()) {
   const utcDate = normalizeDateToUTC(date);
   const epoch = new Date(Date.UTC(2026, 2, 22)); // 22 marzo 2026 — fecha de inicio
   return Math.floor((utcDate - epoch) / 86400000);
 }
 
-function getChallengesByLanguage(language = 'python') {
-  return ALL_CHALLENGES.filter((challenge) => challenge.language === language);
-}
-
-function getChallengesByDifficulty(difficulty, language = 'python') {
-  const base = getChallengesByLanguage(language);
-  if (!difficulty || difficulty === 'all') return base;
-  return base.filter((challenge) => challenge.difficulty === difficulty);
-}
-
-function getDailyChallenge({
-  date = new Date(),
-  language = 'python',
-  difficulty = 'novato',
-} = {}) {
-  const availableChallenges = getChallengesByDifficulty(difficulty, language);
+// Elige el reto del día dentro de un banco ya cargado
+function pickDailyChallenge(pool, { date = new Date(), language = 'python', difficulty = 'novato' } = {}) {
+  const availableChallenges = (pool || []).filter(
+    (challenge) => challenge.language === language && challenge.difficulty === difficulty
+  );
   if (availableChallenges.length === 0) return null;
   const dayNum = getDayNumber(date);
   const diffOffset = { novato: 0, intermedio: 1000, pro: 2000 }[difficulty] || 0;
   const index = (dayNum + diffOffset) % availableChallenges.length;
   return availableChallenges[index];
+}
+
+async function loadDailyChallenge({ date = new Date(), language = 'python', difficulty = 'novato' } = {}) {
+  const pool = await loadChallengePool(language, difficulty);
+  return pickDailyChallenge(pool, { date, language, difficulty });
 }
 
 function getChallengeText(challenge, contentLanguage = 'es') {
@@ -75,20 +82,19 @@ function getChallengeText(challenge, contentLanguage = 'es') {
   };
 }
 
-function getChallengeStats(language = 'python') {
-  const challenges = getChallengesByLanguage(language);
+function getChallengeStats(pools) {
+  const counts = Object.fromEntries(DIFFICULTIES.map((difficulty) => [difficulty, pools?.[difficulty]?.length || 0]));
   return {
-    total: challenges.length,
-    novato: challenges.filter((c) => c.difficulty === 'novato').length,
-    intermedio: challenges.filter((c) => c.difficulty === 'intermedio').length,
-    pro: challenges.filter((c) => c.difficulty === 'pro').length,
+    total: counts.novato + counts.intermedio + counts.pro,
+    ...counts,
   };
 }
 
 export {
-  getChallengesByLanguage,
-  getChallengesByDifficulty,
-  getDailyChallenge,
+  loadChallengePool,
+  loadLanguagePools,
+  loadDailyChallenge,
+  pickDailyChallenge,
   getChallengeText,
   getChallengeStats,
   getDaySeed,

@@ -3,9 +3,10 @@ import { useLanguage } from '../../context/LanguageContext';
 import {
   getChallengeStats,
   getChallengeText,
-  getDailyChallenge,
   getDaySeed,
   getDayNumber,
+  loadLanguagePools,
+  pickDailyChallenge,
 } from '../../services/challengeService';
 import { validateChallengeSolution } from '../../services/solutionValidationService';
 import {
@@ -108,6 +109,10 @@ function ChallengePlayer({
         testsCount: 'Número de tests',
         emptyTitle: 'No hay retos disponibles',
         emptyText: 'No existe ningún reto para esa selección.',
+        poolLoading: 'Cargando el reto',
+        poolErrorTitle: 'No se pudo cargar el reto',
+        poolErrorText: 'Comprueba tu conexión y vuelve a intentarlo.',
+        retry: 'Reintentar',
         statsTitle: 'Banco actual de retos',
         total: 'Total',
         starterCode: 'Código base',
@@ -189,6 +194,10 @@ function ChallengePlayer({
         testsCount: 'Number of tests',
         emptyTitle: 'No challenges available',
         emptyText: 'There is no challenge for that selection.',
+        poolLoading: 'Loading the challenge',
+        poolErrorTitle: 'The challenge could not be loaded',
+        poolErrorText: 'Check your connection and try again.',
+        retry: 'Retry',
         statsTitle: 'Current challenge pool',
         total: 'Total',
         starterCode: 'Starter code',
@@ -278,14 +287,38 @@ function ChallengePlayer({
     }[language];
   }, [language]);
 
-  const stats = useMemo(() => getChallengeStats(programmingLanguage), [programmingLanguage]);
+  // Los bancos de retos del lenguaje elegido se descargan al entrar (o al cambiar de lenguaje)
+  const [poolAttempt, setPoolAttempt] = useState(0);
+  const [loadedPools, setLoadedPools] = useState({ language: null, attempt: -1, pools: null, failed: false });
+
+  useEffect(() => {
+    let isMounted = true;
+    loadLanguagePools(programmingLanguage)
+      .then((pools) => {
+        if (isMounted) setLoadedPools({ language: programmingLanguage, attempt: poolAttempt, pools, failed: false });
+      })
+      .catch(() => {
+        if (isMounted) setLoadedPools({ language: programmingLanguage, attempt: poolAttempt, pools: null, failed: true });
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [programmingLanguage, poolAttempt]);
+
+  const poolIsCurrent = loadedPools.language === programmingLanguage && loadedPools.attempt === poolAttempt;
+  const pools = poolIsCurrent ? loadedPools.pools : null;
+  const isPoolLoading = !poolIsCurrent;
+  const poolFailed = poolIsCurrent && loadedPools.failed;
+
+  const stats = useMemo(() => getChallengeStats(pools), [pools]);
   const baseChallenge = useMemo(() => {
-    return getDailyChallenge({
+    if (!pools) return null;
+    return pickDailyChallenge(pools[effectiveDifficulty], {
       date: challengeDate,
       language: programmingLanguage,
       difficulty: effectiveDifficulty,
     });
-  }, [challengeDate, effectiveDifficulty, programmingLanguage]);
+  }, [pools, challengeDate, effectiveDifficulty, programmingLanguage]);
 
   const dailyChallenge = useMemo(() => {
     return getChallengeText(baseChallenge, language);
@@ -690,7 +723,28 @@ function ChallengePlayer({
         </div>
       )}
 
-      {!dailyChallenge ? (
+      {isPoolLoading ? (
+        <Window title={text.briefTitle} icon="doc">
+          <p className="busy-dots" role="status">{text.poolLoading}</p>
+        </Window>
+      ) : poolFailed ? (
+        <Window title={text.poolErrorTitle} icon="alert">
+          <div className="alert-layout">
+            <PixelIcon name="alert" size={40} />
+            <div>
+              <p>{text.poolErrorText}</p>
+              <div className="dialog-actions">
+                <button
+                  className="secondary-button"
+                  onClick={() => setPoolAttempt((n) => n + 1)}
+                >
+                  {text.retry}
+                </button>
+              </div>
+            </div>
+          </div>
+        </Window>
+      ) : !dailyChallenge ? (
         <Window title={text.emptyTitle} icon="alert">
           <p>{text.emptyText}</p>
         </Window>

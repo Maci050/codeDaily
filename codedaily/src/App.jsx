@@ -1,17 +1,22 @@
-import { useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
-import DailyPage from './pages/DailyPage';
-import ArchivePage from './pages/ArchivePage';
-import ProfilePage from './pages/ProfilePage';
-import ModesPage from './pages/ModesPage';
+import { useLanguage } from './context/LanguageContext';
 import HowToPlayModal from './components/HowToPlayModal';
+import PageErrorBoundary from './components/ui/PageErrorBoundary';
 import { shouldShowTutorial, markTutorialSeen } from './services/uiService';
+
+// La portada va en el paquete inicial; el resto de páginas se descarga al visitarlas
+const DailyPage = lazy(() => import('./pages/DailyPage'));
+const ArchivePage = lazy(() => import('./pages/ArchivePage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const ModesPage = lazy(() => import('./pages/ModesPage'));
 
 function App() {
   const [route, setRoute] = useState({ page: 'home', mode: null, visit: 0 });
   const [isTutorialOpen, setIsTutorialOpen] = useState(() => shouldShowTutorial());
+  const { language } = useLanguage();
 
   // Cada visita remonta la página para que sus ventanas vuelvan a abrirse con zoom
   function navigate(page, options = {}) {
@@ -55,7 +60,17 @@ function App() {
 
       <main className="desktop">
         <div className="page-container" key={`${route.page}-${route.visit}`}>
-          {renderPage()}
+          <PageErrorBoundary language={language}>
+            <Suspense
+              fallback={
+                <p className="page-loading busy-dots" role="status">
+                  {language === 'es' ? 'Cargando' : 'Loading'}
+                </p>
+              }
+            >
+              {renderPage()}
+            </Suspense>
+          </PageErrorBoundary>
         </div>
       </main>
 

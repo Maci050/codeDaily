@@ -24,7 +24,8 @@
     <meta name="twitter:title" content="CodeDaily — Reto diario de programación" />
     <meta name="twitter:description" content="Un reto de programación diferente cada día, en Python o Java. Gratis, sin registro." />
 
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js"></script>
+    <!-- Pyodide se carga bajo demanda al abrir un reto de Python; aquí solo se adelanta la conexión -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   </head>
   <body>
     <div id="root"></div>

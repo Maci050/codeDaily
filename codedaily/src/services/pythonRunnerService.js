@@ -2,6 +2,32 @@ const PYODIDE_INDEX_URL = 'https://cdn.jsdelivr.net/pyodide/v0.29.3/full/';
 
 let pyodideInstance = null;
 let pyodidePromise = null;
+let scriptPromise = null;
+
+// El script de Pyodide se inyecta la primera vez que hace falta,
+// así la portada y el resto de páginas no lo descargan.
+function loadPyodideScript() {
+  if (typeof window !== 'undefined' && typeof window.loadPyodide === 'function') {
+    return Promise.resolve();
+  }
+
+  if (!scriptPromise) {
+    scriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = `${PYODIDE_INDEX_URL}pyodide.js`;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => {
+        script.remove();
+        scriptPromise = null;
+        reject(new Error('PYODIDE_SCRIPT_NOT_AVAILABLE'));
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  return scriptPromise;
+}
 
 async function ensurePyodideLoaded() {
   if (pyodideInstance) {
@@ -13,9 +39,7 @@ async function ensurePyodideLoaded() {
   }
 
   pyodidePromise = (async () => {
-    if (typeof window === 'undefined' || typeof window.loadPyodide !== 'function') {
-      throw new Error('PYODIDE_SCRIPT_NOT_AVAILABLE');
-    }
+    await loadPyodideScript();
 
     const instance = await window.loadPyodide({
       indexURL: PYODIDE_INDEX_URL,
@@ -24,6 +48,11 @@ async function ensurePyodideLoaded() {
     pyodideInstance = instance;
     return instance;
   })();
+
+  // Si falla (sin conexión, CDN caído), se permite reintentar más tarde
+  pyodidePromise.catch(() => {
+    pyodidePromise = null;
+  });
 
   return pyodidePromise;
 }
