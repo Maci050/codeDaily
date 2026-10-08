@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import PixelIcon from '../ui/PixelIcon';
+import { buildPath, isPlainLeftClick } from '../../router';
 
 function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
   const { language, setLanguage } = useLanguage();
@@ -30,6 +31,16 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
     }[language];
   }, [language]);
 
+  // Enlaces reales: Ctrl/Cmd+clic abre en pestaña nueva; el clic normal navega sin recargar
+  const linkProps = (page) => ({
+    href: buildPath({ page }),
+    onClick: (event) => {
+      if (!isPlainLeftClick(event)) return;
+      event.preventDefault();
+      onNavigate(page);
+    },
+  });
+
   const navItems = [
     { id: 'home', label: text.navHome },
     { id: 'daily', label: text.navDaily },
@@ -41,21 +52,21 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
   return (
     <header className="menubar">
       <div className="page-container menubar-inner">
-        <button className="menubar-brand" onClick={() => onNavigate('home')}>
+        <a className="menubar-brand" {...linkProps('home')}>
           <PixelIcon name="computer" size={26} />
           <span>{appName}</span>
-        </button>
+        </a>
 
         <nav className="menubar-nav" aria-label={text.mainNav}>
           {navItems.map((item) => (
-            <button
+            <a
               key={item.id}
               className="menu-item"
               aria-current={currentPage === item.id ? 'page' : undefined}
-              onClick={() => onNavigate(item.id)}
+              {...linkProps(item.id)}
             >
               {item.label}
-            </button>
+            </a>
           ))}
         </nav>
 

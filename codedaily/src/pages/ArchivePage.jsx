@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import ChallengePlayer from '../components/challenge/ChallengePlayer';
 import { useLanguage } from '../context/LanguageContext';
+import { ARCHIVE_START_DATE } from '../router';
 
-const ARCHIVE_START_DATE = '2026-03-22';
-
-function ArchivePage() {
-  const [selectedDate, setSelectedDate] = useState(ARCHIVE_START_DATE);
+function ArchivePage({ initialDate = null, onDateChange }) {
+  const [selectedDate, setSelectedDate] = useState(initialDate || ARCHIVE_START_DATE);
   const { language } = useLanguage();
 
   const text = {
@@ -27,6 +26,7 @@ function ArchivePage() {
     }
 
     setSelectedDate(newDate);
+    onDateChange?.(newDate);
   };
 
   return (

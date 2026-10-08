@@ -5,11 +5,11 @@ import FindBugPlayer from '../components/challenge/FindBugPlayer';
 import GuessComplexityPlayer from '../components/challenge/GuessComplexityPlayer';
 import PixelIcon from '../components/ui/PixelIcon';
 import { getDaySeed } from '../services/challengeService';
+import { ARCHIVE_START_DATE } from '../router';
 
-const ARCHIVE_START_DATE = '2026-03-22';
 const MODE_IDS = ['guess_output', 'find_bug', 'guess_complexity'];
 
-function ModesPage({ initialMode = null }) {
+function ModesPage({ initialMode = null, onModeChange }) {
   const { language } = useLanguage();
   const [activeMode, setActiveMode] = useState(MODE_IDS.includes(initialMode) ? initialMode : 'guess_output');
   const [selectedDate, setSelectedDate] = useState(getDaySeed(new Date()));
@@ -59,7 +59,10 @@ function ModesPage({ initialMode = null }) {
               key={mode.id}
               className="desk-icon"
               aria-pressed={activeMode === mode.id}
-              onClick={() => setActiveMode(mode.id)}
+              onClick={() => {
+                setActiveMode(mode.id);
+                onModeChange?.(mode.id);
+              }}
             >
               <PixelIcon name={mode.icon} size={48} />
               <span className="desk-icon-label">{mode.title}</span>
