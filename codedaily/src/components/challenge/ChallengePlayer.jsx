@@ -47,6 +47,7 @@ function ChallengePlayer({
   const [pythonLoadError, setPythonLoadError] = useState(null);
   const [givenUp, setGivenUp] = useState(false);
   const [showGiveUpConfirm, setShowGiveUpConfirm] = useState(false);
+  const [showResultModal, setShowResultModal] = useState(false);
 
   const effectivePlayMode = allowHackerMode ? playMode : 'normal';
   const isHackerMode = effectivePlayMode === 'hacker';
@@ -124,6 +125,10 @@ function ChallengePlayer({
           'Has agotado los 3 intentos disponibles del modo Hacker para esta fecha.',
         shareButton: 'Compartir resultado',
         shareCopied: '¡Copiado!',
+        modalTitle: '¡Reto superado!',   
+        modalClose: 'Cerrar',             
+        modalShare: 'Compartir',          
+        modalShareCopied: '¡Copiado!',
         giveUpButton: 'Rendirse',
         giveUpConfirmTitle: '¿Seguro que quieres rendirte?',
         giveUpConfirmText: 'Si te rindes no podrás volver a intentar este desafío. Se mostrarán las pistas disponibles y la solución.',
@@ -199,6 +204,10 @@ function ChallengePlayer({
           'You used all 3 available attempts for this Hacker challenge date.',
         shareButton: 'Share result',
         shareCopied: 'Copied!',
+        modalTitle: 'Challenge solved',
+        modalClose: 'Close',               
+        modalShare: 'Share',               
+        modalShareCopied: 'Copied!',      
         giveUpButton: 'Give up',
         giveUpConfirmTitle: 'Are you sure you want to give up?',
         giveUpConfirmText: 'If you give up you will not be able to retry this challenge. Available hints and the solution will be revealed.',
@@ -410,6 +419,7 @@ function ChallengePlayer({
       mode: effectivePlayMode,
     });
     setIsChecking(false);
+    setTimeout(() => setShowResultModal(true), 800);
   };
 
   const handleResetCode = () => {
@@ -482,6 +492,27 @@ function ChallengePlayer({
       setTimeout(() => setCopied(false), 2000);
     });
   };
+
+  // Estado para el botón de compartir dentro del modal
+const [modalCopied, setModalCopied] = useState(false);
+
+const handleModalShare = () => {
+  handleShare();
+  setModalCopied(true);
+  setTimeout(() => setModalCopied(false), 2000);
+};
+
+// Calcular contenido del modal
+const dayNum = baseChallenge ? getDayNumber(challengeDate) : 0;
+const maxAttempts = 5;
+const emojiGrid = baseChallenge
+  ? Array.from({ length: maxAttempts }, (_, i) => {
+      if (i < attemptCount - 1) return '🟥';
+      if (i === attemptCount - 1 && completed) return '🟩';
+      return '⬜';
+    }).join('')
+  : '';
+const currentStats = getStats();
 
   return (
     <section className="page-section">
@@ -1018,6 +1049,123 @@ function ChallengePlayer({
           </div>
         </div>
       </div>
+      {/* Modal de resultado */}
+{showResultModal && completed && (
+  <div
+    style={{
+      position: 'fixed', inset: 0,
+      background: 'rgba(1,4,9,0.85)',
+      backdropFilter: 'blur(4px)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '20px', zIndex: 9999,
+    }}
+    onClick={() => setShowResultModal(false)}
+  >
+    <div
+      style={{
+        width: 'min(420px, 92%)',
+        background: 'var(--bg-overlay)',
+        borderRadius: '14px',
+        padding: '32px 28px',
+        border: '1px solid rgba(63,185,80,0.3)',
+        boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
+        textAlign: 'center',
+      }}
+      onClick={e => e.stopPropagation()}
+    >
+      {/* Título */}
+      <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🎉</div>
+      <h2 style={{
+        margin: '0 0 20px',
+        fontFamily: 'var(--mono)',
+        fontSize: '1.1rem',
+        fontWeight: 700,
+        color: 'var(--green)',
+      }}>
+        {text.modalTitle}
+      </h2>
+
+      {/* Cabecera del resultado */}
+      <p style={{
+        margin: '0 0 4px',
+        fontFamily: 'var(--mono)',
+        fontSize: '1rem',
+        fontWeight: 700,
+        color: 'var(--text)',
+      }}>
+        CodeDaily #{dayNum} 🧩
+      </p>
+      <p style={{
+        margin: '0 0 20px',
+        fontSize: '0.82rem',
+        color: 'var(--text-muted)',
+        fontFamily: 'var(--mono)',
+      }}>
+        {({
+          novato: language === 'es' ? 'Novato' : 'Beginner',
+          intermedio: language === 'es' ? 'Intermedio' : 'Intermediate',
+          pro: 'Pro',
+        })[effectiveDifficulty]} · {programmingLanguage === 'java' ? 'Java' : 'Python'} · {isHackerMode ? 'Hacker' : 'Normal'}
+      </p>
+
+      {/* Grid de emojis */}
+      <div style={{
+        fontSize: '1.6rem',
+        letterSpacing: '4px',
+        marginBottom: '12px',
+      }}>
+        {emojiGrid}
+      </div>
+
+      {/* Intentos */}
+      <p style={{
+        margin: '0 0 8px',
+        fontFamily: 'var(--mono)',
+        fontSize: '0.9rem',
+        color: 'var(--text)',
+      }}>
+        {attemptCount}/{maxAttempts} {language === 'es'
+          ? (attemptCount === 1 ? 'intento' : 'intentos')
+          : (attemptCount === 1 ? 'attempt' : 'attempts')}
+      </p>
+
+      {/* Racha */}
+      {currentStats.streak > 0 && (
+        <p style={{
+          margin: '0 0 28px',
+          fontFamily: 'var(--mono)',
+          fontSize: '0.88rem',
+          color: 'var(--green)',
+        }}>
+          🔥 {language === 'es' ? 'Racha' : 'Streak'}: {currentStats.streak} {language === 'es'
+            ? (currentStats.streak === 1 ? 'día' : 'días')
+            : (currentStats.streak === 1 ? 'day' : 'days')}
+        </p>
+      )}
+
+      {/* Botones */}
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <button
+          className="secondary-button"
+          onClick={() => setShowResultModal(false)}
+          style={{ flex: 1 }}
+        >
+          {text.modalClose}
+        </button>
+        <button
+          className="primary-button"
+          onClick={handleModalShare}
+          style={{
+            flex: 1,
+            background: modalCopied ? 'var(--green)' : undefined,
+          }}
+        >
+          {modalCopied ? text.modalShareCopied : `↑ ${text.modalShare}`}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </section>
   );
 }
