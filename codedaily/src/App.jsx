@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
@@ -6,77 +6,62 @@ import DailyPage from './pages/DailyPage';
 import ArchivePage from './pages/ArchivePage';
 import ProfilePage from './pages/ProfilePage';
 import ModesPage from './pages/ModesPage';
-import { useLanguage } from './context/LanguageContext';
 import HowToPlayModal from './components/HowToPlayModal';
 import { shouldShowTutorial, markTutorialSeen } from './services/uiService';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  const [route, setRoute] = useState({ page: 'home', mode: null, visit: 0 });
+  const [isTutorialOpen, setIsTutorialOpen] = useState(() => shouldShowTutorial());
 
-  const { language } = useLanguage();
-
-  const appText = useMemo(() => {
-    return {
-      es: {
-        appName: 'CodeDaily',
-      },
-      en: {
-        appName: 'CodeDaily',
-      },
-    }[language];
-  }, [language]);
+  // Cada visita remonta la página para que sus ventanas vuelvan a abrirse con zoom
+  function navigate(page, options = {}) {
+    setRoute((previous) => ({ page, mode: options.mode || null, visit: previous.visit + 1 }));
+    window.scrollTo({ top: 0 });
+  }
 
   useEffect(() => {
-    if (shouldShowTutorial()) {
-      setIsTutorialOpen(true);
-    }
-  }, []);
+    document.body.style.overflow = isTutorialOpen ? 'hidden' : '';
+  }, [isTutorialOpen]);
 
   function handleCloseTutorial() {
     setIsTutorialOpen(false);
     markTutorialSeen();
   }
 
-  function handleOpenTutorial() {
-    setIsTutorialOpen(true);
-  }
-
   const renderPage = () => {
-    switch (currentPage) {
+    switch (route.page) {
       case 'daily':
         return <DailyPage />;
       case 'archive':
         return <ArchivePage />;
       case 'profile':
-        return <ProfilePage />;
+        return <ProfilePage onNavigate={navigate} />;
       case 'modes':
-        return <ModesPage />;
+        return <ModesPage initialMode={route.mode} />;
       case 'home':
       default:
-        return <HomePage onNavigate={setCurrentPage} />;
+        return <HomePage onNavigate={navigate} />;
     }
   };
 
   return (
     <div className="app-shell">
       <Header
-        appName={appText.appName}
-        currentPage={currentPage}
-        onNavigate={setCurrentPage}
-        onOpenTutorial={handleOpenTutorial}
+        appName="CodeDaily"
+        currentPage={route.page}
+        onNavigate={navigate}
+        onOpenTutorial={() => setIsTutorialOpen(true)}
       />
 
-      <main className="main-content">
-        <div className="page-container">{renderPage()}</div>
+      <main className="desktop">
+        <div className="page-container" key={`${route.page}-${route.visit}`}>
+          {renderPage()}
+        </div>
       </main>
 
       <Footer />
 
-      <HowToPlayModal
-        isOpen={isTutorialOpen}
-        onClose={handleCloseTutorial}
-      />
+      <HowToPlayModal isOpen={isTutorialOpen} onClose={handleCloseTutorial} />
     </div>
   );
 }

@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T15:35:59.089Z",
+  "title": "Design System: CodeDaily",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#000000"
+        ],
+        "note": "One-bit world: no tonal ramp exists. Intermediate tones are ordered dither patterns, never flat colors; see extensions.dither."
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#ffffff"
+        ],
+        "note": "One-bit world: no tonal ramp exists. Intermediate tones are ordered dither patterns, never flat colors; see extensions.dither."
+      }
+    },
+    "dither": [
+      {
+        "name": "dither-12",
+        "coverage": "12.5%",
+        "cell": "4px",
+        "token": "--dither-12",
+        "purpose": "The desktop; disabled editor and inputs; wrong options."
+      },
+      {
+        "name": "dither-25",
+        "coverage": "25%",
+        "cell": "2px",
+        "token": "--dither-25",
+        "purpose": "Hover on menu items, toggles, segmented buttons, icon buttons, options; heatmap level 1."
+      },
+      {
+        "name": "dither-50",
+        "coverage": "50%",
+        "cell": "2px",
+        "token": "--dither-50",
+        "purpose": "Window drop shadows; disabled button lettering; failed attempt cells; editor resizer; heatmap level 2."
+      },
+      {
+        "name": "dither-75",
+        "coverage": "75%",
+        "cell": "2px",
+        "token": "--dither-75",
+        "purpose": "Progress bar fills."
+      },
+      {
+        "name": "screen-50",
+        "coverage": "50% ink, transparent gaps",
+        "cell": "2px",
+        "token": "--screen-50",
+        "purpose": "Modal overlay over the desktop."
+      },
+      {
+        "name": "stripes",
+        "coverage": "1px horizontal lines",
+        "cell": "2px",
+        "token": "--stripes",
+        "purpose": "Title bar texture; collapsed-window box."
+      }
+    ],
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home headline in the main window only; uppercase, balanced."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles on paper plaques; uppercase."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Challenge heading and window-level headings."
+      },
+      "window-title": {
+        "displayName": "Window Title",
+        "purpose": "Title plaques, status bars, pills, field labels, desktop icon labels. Pixel face floor is 1rem."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Buttons, segmented controls, menu items."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All reading text."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Intro paragraph under page titles, max 62ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Small captions below 1rem; always Atkinson, never the pixel face."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Editor, code blocks, text answers; ligatures off."
+      },
+      "numeric": {
+        "displayName": "Numeric",
+        "purpose": "Data numbers: facts, stats, tables, counts, options. Tabular figures."
+      }
+    },
+    "shadows": [
+      {
+        "name": "window-drop",
+        "value": "pseudo-element offset 6px right/down filled with --dither-50 (4px under 640px)",
+        "purpose": "Every window and dialog."
+      },
+      {
+        "name": "default-ring",
+        "value": "0 0 0 3px #fff, 0 0 0 6px #000",
+        "purpose": "The single default button per window; the correct option after answering."
+      },
+      {
+        "name": "popup",
+        "value": "1px 1px 0 #000",
+        "purpose": "Dropdown selects."
+      },
+      {
+        "name": "plaque",
+        "value": "0 0 0 2px #000",
+        "purpose": "Paper plaques for text on the desktop."
+      },
+      {
+        "name": "pressed-in",
+        "value": "inset 0 0 0 2px #000",
+        "purpose": "Button hover."
+      }
+    ],
+    "motion": [
+      {
+        "name": "step",
+        "value": "0.26s",
+        "purpose": "Base duration for zoom and row reveals."
+      },
+      {
+        "name": "zoom-rect",
+        "value": "steps(5, end) over 0.26s, three rectangles staggered 40ms, origin --zoom-ox/--zoom-oy",
+        "purpose": "Window and dialog open from the activated element."
+      },
+      {
+        "name": "window-reveal",
+        "value": "steps(1, end) over 0.34s",
+        "purpose": "Window appears in one step after the zoom."
+      },
+      {
+        "name": "zoom-delay",
+        "value": "0.06s to 0.24s",
+        "purpose": "Stagger sibling windows on a page."
+      },
+      {
+        "name": "row-in",
+        "value": "steps(1, end), delay row * 0.14s",
+        "purpose": "Test rows and hints tick in one by one."
+      },
+      {
+        "name": "ants",
+        "value": "0.6s steps(4) infinite",
+        "purpose": "Marching ants on focused/selected desktop icons."
+      },
+      {
+        "name": "busy-dots",
+        "value": "1.2s steps(4) infinite",
+        "purpose": "Busy ellipsis while checking."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce removes all of the above",
+        "purpose": "Accessibility."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desk",
+        "value": "1080px"
+      },
+      {
+        "name": "tablet",
+        "value": "820px"
+      },
+      {
+        "name": "phone",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Window",
+      "kind": "card",
+      "refersTo": "window",
+      "description": "The only container: 2px frame, striped title bar with paper plaque and square box, dithered drop shadow.",
+      "html": "<section class=\"ds-window\"><header class=\"ds-window-bar\"><h2 class=\"ds-window-title\">reto_200.py</h2><button class=\"ds-window-box\" aria-label=\"Collapse window\"></button></header><div class=\"ds-window-body\"><p>Completa la funcion solve(a, b).</p></div><footer class=\"ds-window-status\"><span>Novato</span><span>Python</span></footer></section>",
+      "css": ".ds-window { position: relative; z-index: 0; padding: 2px; max-width: 420px; margin: 0 8px 8px 0; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; color: #000; } .ds-window::before { content: ''; position: absolute; inset: 0; z-index: -1; background: #fff; border: 2px solid #000; } .ds-window::after { content: ''; position: absolute; inset: 6px -6px -6px 6px; z-index: -2; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' shape-rendering='crispEdges'%3E%3Crect width='2' height='2' fill='%23fff'/%3E%3Crect width='1' height='1'/%3E%3Crect x='1' y='1' width='1' height='1'/%3E%3C/svg%3E\"); background-size: 2px 2px; image-rendering: pixelated; } .ds-window-bar { position: relative; display: flex; align-items: center; justify-content: center; min-height: 32px; padding: 0 40px; border-bottom: 2px solid #000; } .ds-window-bar::before { content: ''; position: absolute; inset: 7px 8px; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' shape-rendering='crispEdges'%3E%3Crect width='2' height='2' fill='%23fff'/%3E%3Crect width='2' height='1'/%3E%3C/svg%3E\"); background-size: 2px 2px; } .ds-window-title { position: relative; margin: 0; padding: 0 12px; background: #fff; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 600; font-size: 1rem; line-height: 1.6; letter-spacing: 0.02em; } .ds-window-box { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; padding: 0; background: #fff; border: 2px solid #000; cursor: pointer; } .ds-window-box:hover { background: #000; } .ds-window-box:focus-visible { outline: 2px dashed #000; outline-offset: 3px; } .ds-window-body { padding: 22px; margin: 0; } .ds-window-status { display: flex; justify-content: space-between; padding: 5px 14px; border-top: 2px solid #000; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-size: 1rem; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single default action of a window, wrapped in the thick default ring.",
+      "html": "<button class=\"ds-btn-primary\">Jugar Daily Challenge</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; min-height: 44px; margin: 6px; padding: 6px 22px; border: 2px solid #000; border-radius: 7px; background: #fff; color: #000; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 700; font-size: 1.08rem; letter-spacing: 0.02em; box-shadow: 0 0 0 3px #fff, 0 0 0 6px #000; cursor: pointer; } .ds-btn-primary:hover { box-shadow: inset 0 0 0 2px #000, 0 0 0 3px #fff, 0 0 0 6px #000; } .ds-btn-primary:active { background: #000; color: #fff; } .ds-btn-primary:focus-visible { outline: 2px dashed #000; outline-offset: 9px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Every non-default action: the same push-button without the ring.",
+      "html": "<button class=\"ds-btn-secondary\">Abrir reto</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 22px; border: 2px solid #000; border-radius: 7px; background: #fff; color: #000; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 600; font-size: 1.08rem; letter-spacing: 0.02em; cursor: pointer; } .ds-btn-secondary:hover { box-shadow: inset 0 0 0 2px #000; } .ds-btn-secondary:active { background: #000; color: #fff; } .ds-btn-secondary:focus-visible { outline: 2px dashed #000; outline-offset: 3px; }"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger-solid",
+      "description": "Destructive confirm (give up): 4px double frame; solid variant inverted.",
+      "html": "<button class=\"ds-btn-danger\">Rendirse</button>",
+      "css": ".ds-btn-danger { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 22px; border: 4px double #000; border-radius: 7px; background: #000; color: #fff; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 600; font-size: 1.08rem; cursor: pointer; } .ds-btn-danger:hover { text-decoration: underline; } .ds-btn-danger:focus-visible { outline: 2px dashed #000; outline-offset: 3px; }"
+    },
+    {
+      "name": "Select",
+      "kind": "input",
+      "refersTo": "select",
+      "description": "Square framed dropdown with a bitmap triangle and the 1px popup shadow.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Dificultad</span><select class=\"ds-select\"><option>Novato</option><option>Intermedio</option><option>Pro</option></select></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; max-width: 220px; } .ds-field-label { font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 600; font-size: 1rem; } .ds-select { min-height: 42px; padding: 6px 36px 6px 12px; border: 2px solid #000; border-radius: 0; background: #fff url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h10v1H0zM1 1h8v1H1zM2 2h6v1H2zM3 3h4v1H3zM4 4h2v1H4z'/%3E%3C/svg%3E\") no-repeat right 12px center; box-shadow: 1px 1px 0 #000; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-size: 1.02rem; color: #000; appearance: none; cursor: pointer; } .ds-select:focus-visible { outline: 2px dashed #000; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-text",
+      "description": "Free-text answer field in JetBrains Mono with a square frame.",
+      "html": "<input class=\"ds-input\" value=\"[1, 2, 3]\" aria-label=\"Respuesta\" />",
+      "css": ".ds-input { min-height: 50px; width: 100%; max-width: 360px; padding: 6px 12px; border: 2px solid #000; border-radius: 0; background: #fff; color: #000; font-family: 'JetBrains Mono', 'Cascadia Code', monospace; font-size: 1.05rem; font-variant-ligatures: none; } .ds-input:focus-visible { outline: 2px dashed #000; outline-offset: 3px; }"
+    },
+    {
+      "name": "Menu Bar",
+      "kind": "nav",
+      "refersTo": "menu-item",
+      "description": "Sticky paper menu bar; menu titles dither on hover and invert when current.",
+      "html": "<nav class=\"ds-menubar\"><span class=\"ds-menu-brand\">CodeDaily</span><button class=\"ds-menu-item\" aria-current=\"page\">Inicio</button><button class=\"ds-menu-item\">Daily Challenge</button><button class=\"ds-menu-item\">Archivo</button></nav>",
+      "css": ".ds-menubar { display: flex; align-items: stretch; min-height: 46px; gap: 4px; background: #fff; border-bottom: 2px solid #000; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; color: #000; } .ds-menu-brand { display: inline-flex; align-items: center; padding: 0 14px; font-weight: 700; font-size: 1.2rem; } .ds-menu-item { display: inline-flex; align-items: center; padding: 0 14px; border: 0; background: #fff; color: #000; font: inherit; font-size: 1.05rem; font-weight: 500; cursor: pointer; } .ds-menu-item:hover { background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' shape-rendering='crispEdges'%3E%3Crect width='2' height='2' fill='%23fff'/%3E%3Crect width='1' height='1'/%3E%3C/svg%3E\"); background-size: 2px 2px; } .ds-menu-item[aria-current='page'], .ds-menu-item:active { background: #000; color: #fff; } .ds-menu-item:focus-visible { outline: 2px dashed #000; outline-offset: -4px; }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "chip",
+      "refersTo": "option-button-selected",
+      "description": "One frame split by rules; the selected segment inverts.",
+      "html": "<div class=\"ds-seg\"><button aria-pressed=\"true\">Python</button><button aria-pressed=\"false\">Java</button></div>",
+      "css": ".ds-seg { display: inline-flex; border: 2px solid #000; background: #fff; } .ds-seg button { min-height: 40px; padding: 4px 18px; border: 0; background: #fff; color: #000; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 600; font-size: 1.02rem; cursor: pointer; } .ds-seg button + button { border-left: 2px solid #000; } .ds-seg button[aria-pressed='true'] { background: #000; color: #fff; } .ds-seg button[aria-pressed='false']:hover { background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' shape-rendering='crispEdges'%3E%3Crect width='2' height='2' fill='%23fff'/%3E%3Crect width='1' height='1'/%3E%3C/svg%3E\"); background-size: 2px 2px; } .ds-seg button:focus-visible { outline: 2px dashed #000; outline-offset: 3px; }"
+    },
+    {
+      "name": "Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Square framed tag; inverse for the day number, dotted for tentative info.",
+      "html": "<span class=\"ds-pill ds-pill-inverse\">#200</span> <span class=\"ds-pill\">Novato</span> <span class=\"ds-pill ds-pill-dotted\">Hacker</span>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; padding: 1px 9px; border: 2px solid #000; background: #fff; color: #000; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 600; font-size: 1rem; line-height: 1.45; } .ds-pill-inverse { background: #000; color: #fff; } .ds-pill-dotted { border-style: dotted; }"
+    },
+    {
+      "name": "Feedback Box",
+      "kind": "custom",
+      "refersTo": "window",
+      "description": "System alert inside a window; success inverts, error takes the 4px double frame.",
+      "html": "<div class=\"ds-alert ds-alert-error\"><h4>2 de 4 tests fallaron</h4><p>Revisa el caso con lista vacia.</p></div>",
+      "css": ".ds-alert { max-width: 420px; padding: 14px 16px; border: 2px solid #000; background: #fff; color: #000; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; } .ds-alert h4 { margin: 0 0 4px; font-family: 'Pixelify Sans Variable', 'Pixelify Sans', system-ui, sans-serif; font-weight: 700; font-size: 1.12rem; } .ds-alert p { margin: 0; font-size: 0.98rem; } .ds-alert-error { border: 4px double #000; } .ds-alert-success { background: #000; color: #fff; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The One-Bit Desktop",
+    "overview": "CodeDaily is a small black-and-white computer from the early desktop era, switched on once a day. The challenge, the editor, the tests and the hints are real windows sitting on a dithered desktop, with a menu bar across the top and desktop icons that launch the extra modes. Everything is ink on paper: there is no second hue, and every intermediate tone is an ordered dither, never a flat grey.\n\nThe density is that of a working machine, not a landing page. Windows overlap, carry a striped title bar with a paper title plaque and a square box, and drop a hard dithered shadow. State is spoken in the machine's own vocabulary: pressed and selected invert, focus and selection wear marching ants, disabled is dithered. Motion is stepped, never eased: windows zoom open as outline rectangles growing from the element that was activated, and checking a solution runs like a system job (wait cursor, test rows ticking in one per step).\n\nThree voices share the screen with strict jobs: a pixel face for the machine's chrome (titles, menus, buttons), a hyperlegible humanist sans for anything the learner has to read, and a monospace for code and tabular numbers. The world explicitly refuses the category default of a dark IDE with a neon accent.",
+    "keyCharacteristics": [
+      "Pure 1-bit palette: ink (#000) and paper (#fff); greys exist only as dither patterns.",
+      "Windows as the only container: 2px frame, striped title bar, square box, dithered drop shadow.",
+      "Inversion for pressed/current/selected; marching ants for focus/selection; dither for disabled.",
+      "Pixelify Sans for chrome at 1rem and above; Atkinson Hyperlegible for reading; JetBrains Mono for code and data numbers. No ligatures anywhere.",
+      "Stepped motion (`steps()`) only; reduced motion removes it entirely.",
+      "Authored 16x16 one-stroke bitmap icons."
+    ],
+    "rules": [
+      {
+        "name": "The One-Bit Rule",
+        "body": "Only ink and paper are ever painted. Any tone between them is one of the dither patterns above; no flat greys, no opacity tints, no third color, not even for status.",
+        "section": "colors"
+      },
+      {
+        "name": "The Inversion Rule",
+        "body": "Pressed, current page, selected option, passed result and \"lead\" values are shown by swapping ink and paper. Inversion is the only emphasis fill the system has.",
+        "section": "colors"
+      },
+      {
+        "name": "The 1rem Floor Rule",
+        "body": "The pixel face is never set below 1rem. Anything smaller is a label and goes to Atkinson.",
+        "section": "typography"
+      },
+      {
+        "name": "The Three Voices Rule",
+        "body": "Pixel for chrome, Atkinson for reading, Mono for code and data numbers. Display-scale numerals (streak count, result day) stay in the pixel face because they are headlines, not data.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Ligature Rule",
+        "body": "Code is shown exactly as typed: ligatures and contextual alternates stay off in every face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Plaque Rule",
+        "body": "Text never sits directly on the dither. Page heads and toolbar labels that fall on the desktop sit on a paper plaque outlined with a 2px ink ring.",
+        "section": "layout"
+      },
+      {
+        "name": "The Drawn Depth Rule",
+        "body": "Shadows are hard and dithered or a solid 1px offset; blur and spread-as-glow do not exist in this world.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Every-Window-Has-a-Box Rule",
+        "body": "No window ships without its square box: a cross that closes on dialogs, an empty box that windowshades everywhere else.",
+        "section": "components"
+      },
+      {
+        "name": "The Stepped Motion Rule",
+        "body": "Every animation uses `steps()`; nothing glides or eases. `prefers-reduced-motion` removes zoom rectangles, row reveals, marching ants and busy dots.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** paint only #000 and #fff; reach for the dither ladder (12.5 / 25 / 50 / 75%) whenever a tone is needed.",
+      "**Do** put every new surface in a window with a striped title bar, a square box and the dithered drop shadow.",
+      "**Do** invert ink and paper for pressed, current and selected states, and use marching ants for focus and selection on desktop icons.",
+      "**Do** keep the pixel face at 1rem or larger and move smaller labels to Atkinson Hyperlegible 700.",
+      "**Do** set code and data numbers in JetBrains Mono with tabular figures and ligatures off.",
+      "**Do** draw new icons as 16x16 one-stroke bitmaps in the PixelIcon grid.",
+      "**Do** animate with `steps()` and let reduced motion remove the animation entirely.",
+      "**Do** give each window exactly one default button with the thick ring."
+    ],
+    "donts": [
+      "**Don't** introduce any hue, flat grey or opacity tint; a grey is a dither or it does not exist.",
+      "**Don't** use blurred or glowing shadows; depth is a hard dither offset or a 1px solid popup shadow.",
+      "**Don't** use eased transitions or smooth fades.",
+      "**Don't** round windows, fields, pills or cells; the 7px radius belongs to push-buttons only.",
+      "**Don't** set the pixel face below 1rem or use it for paragraphs of reading text.",
+      "**Don't** use text glyphs or emoji as interface icons; use the bitmap set.",
+      "**Don't** place text directly on the dithered desktop without a paper plaque.",
+      "**Don't** drift toward a dark IDE with a neon accent."
+    ]
+  }
+}

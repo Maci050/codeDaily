@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import Window from '../ui/Window';
+import PixelIcon from '../ui/PixelIcon';
 import { getDaySeed } from '../../services/challengeService';
 import { getProgressEntry, updateProgressEntry, markTodayCompleted } from '../../services/progressService';
 import challenges from '../../data/challenges/guess_complexity.json';
@@ -148,162 +150,124 @@ function GuessComplexityPlayer({ selectedDate }) {
   const localizedExplanation = challenge.explanation?.[language] || challenge.explanation?.es || '';
   const showResult = submitted && (correct || locked);
 
+  const difficultyLabel = { novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty];
+
   return (
     <section className="page-section">
-      <div className="content-card">
-        <div className="page-top-row">
-          <div>
-            <h1>{text.title}</h1>
-            <p>{text.subtitle}</p>
+      <div className="page-head">
+        <div className="page-head-text">
+          <h2 className="page-title">{text.title}</h2>
+          <p className="lede">{text.subtitle}</p>
+        </div>
+        <div className="toolbar">
+          <div className="field">
+            <label htmlFor="gc-difficulty">{text.difficultyLabel}</label>
+            <select id="gc-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+              <option value="novato">{text.difficultyNovato}</option>
+              <option value="intermedio">{text.difficultyIntermedio}</option>
+              <option value="pro">{text.difficultyPro}</option>
+            </select>
           </div>
-          <div className="filters-stack">
-            <div className="filter-box">
-              <label htmlFor="gc-difficulty">{text.difficultyLabel}</label>
-              <select id="gc-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
-                <option value="novato">{text.difficultyNovato}</option>
-                <option value="intermedio">{text.difficultyIntermedio}</option>
-                <option value="pro">{text.difficultyPro}</option>
-              </select>
+        </div>
+      </div>
+
+      <div className="workspace">
+        <Window
+          title={text.codeLabel}
+          icon="clock"
+          status={
+            <>
+              <span>{difficultyLabel}</span>
+              <span>{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
+            </>
+          }
+        >
+          <div className="brief-body">
+            <div className="badge-row">
+              <span className="pill">{difficultyLabel}</span>
+              {completed && (
+                <span className="pill inverse">
+                  <PixelIcon name="check" size={14} />
+                  {text.completedBadge}
+                </span>
+              )}
             </div>
-          </div>
-        </div>
-
-        {/* Badges */}
-        <div className="badge-row" style={{ marginBottom: '20px' }}>
-          <span className="difficulty-pill">{{ novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty]}</span>
-          {completed && <span className="completed-pill">{text.completedBadge}</span>}
-          <span className="difficulty-pill">{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
-        </div>
-
-        {/* Código */}
-        <div className="challenge-card">
-          <div className="challenge-section" style={{ marginTop: 0 }}>
-            <h3>{text.codeLabel}</h3>
             <pre className="code-block">
               <code>{challenge.code}</code>
             </pre>
           </div>
-        </div>
+        </Window>
 
-        {/* Opciones */}
-        <div className="editor-card">
-          <div className="challenge-section" style={{ marginTop: 0 }}>
-            <h3>{text.chooseLabel}</h3>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '12px',
-              marginTop: '14px',
-            }}>
+        <Window title={text.chooseLabel} icon="doc" style={{ '--zoom-delay': '0.1s' }}>
+          <div className="editor-body">
+            <div className="options-grid" role="group" aria-label={text.chooseLabel}>
               {challenge.options.map((option) => {
                 const isWrong = wrongOptions.includes(option);
                 const isSelected = selected === option;
-                const isCorrectOption = option === challenge.expected;
-
-                let borderColor = 'var(--border-strong)';
-                let bg = 'var(--bg)';
-                let color = 'var(--text)';
-                let opacity = 1;
-
-                if (isWrong) {
-                  bg = 'var(--danger-dim)';
-                  borderColor = 'rgba(255,123,114,0.3)';
-                  color = 'var(--danger)';
-                  opacity = 0.6;
-                } else if (showResult && isCorrectOption) {
-                  bg = 'var(--green-dim)';
-                  borderColor = 'rgba(63,185,80,0.3)';
-                  color = 'var(--green)';
-                } else if (isSelected && !isWrong) {
-                  borderColor = 'rgba(88,166,255,0.5)';
-                  bg = 'var(--info-dim)';
-                }
+                const isCorrectOption = showResult && option === challenge.expected;
+                const stateClass = isWrong ? 'is-wrong' : isCorrectOption ? 'is-correct' : '';
 
                 return (
                   <button
                     key={option}
+                    className={`option-button ${stateClass}`}
                     onClick={() => {
                       if (isOver || isWrong || submitted) return;
                       setSelected(option);
                     }}
                     disabled={isOver || isWrong}
                     aria-pressed={isSelected}
-                    style={{
-                      padding: '16px',
-                      borderRadius: 'var(--r-md)',
-                      border: `1px solid ${borderColor}`,
-                      background: bg,
-                      color,
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '1.1rem',
-                      fontWeight: 700,
-                      cursor: isOver || isWrong ? 'not-allowed' : 'pointer',
-                      opacity,
-                      transition: '0.15s ease',
-                      textAlign: 'center',
-                    }}
                   >
                     {option}
                   </button>
                 );
               })}
             </div>
+
+            <div className="button-row">
+              {!submitted && !isOver && (
+                <button className="primary-button" onClick={handleSubmit} disabled={!selected}>
+                  {text.checkButton}
+                </button>
+              )}
+              {submitted && !correct && !locked && (
+                <button className="secondary-button" onClick={handleTryAgain}>
+                  {text.tryAgain}
+                </button>
+              )}
+            </div>
+
+            <div aria-live="polite" className="result-stack">
+              {submitted && !correct && !locked && (
+                <div className="feedback-box error-box">
+                  <PixelIcon name="cross" size={32} />
+                  <h4>{text.wrongTitle}</h4>
+                  <p>{text.attemptsLeft}: {attemptsLeft}</p>
+                </div>
+              )}
+
+              {locked && !correct && (
+                <div className="feedback-box error-box">
+                  <PixelIcon name="alert" size={32} />
+                  <h4>{text.lockedTitle}</h4>
+                  <p>{text.lockedText}</p>
+                  <p>
+                    {text.expectedLabel}: <code>{challenge.expected}</code>
+                  </p>
+                  <p><strong>{text.explanation}:</strong> {localizedExplanation}</p>
+                </div>
+              )}
+
+              {correct && (
+                <div className="feedback-box success-box">
+                  <PixelIcon name="check" size={32} />
+                  <h4>{text.correctTitle}</h4>
+                  <p><strong>{text.explanation}:</strong> {localizedExplanation}</p>
+                </div>
+              )}
+            </div>
           </div>
-
-          <div className="editor-actions" style={{ marginTop: '16px' }}>
-            {!submitted && !isOver && (
-              <button
-                className="primary-button"
-                onClick={handleSubmit}
-                disabled={!selected}
-              >
-                {text.checkButton}
-              </button>
-            )}
-            {submitted && !correct && !locked && (
-              <button className="secondary-button" onClick={handleTryAgain}>
-                {text.tryAgain}
-              </button>
-            )}
-          </div>
-
-          {/* Feedback tras intento fallido (sin revelar solución) */}
-          {submitted && !correct && !locked && (
-            <div className="feedback-box error-box" style={{ marginTop: '20px' }}>
-              <h4>{text.wrongTitle}</h4>
-              <p>{text.attemptsLeft}: {attemptsLeft}</p>
-            </div>
-          )}
-
-          {/* Bloqueado — ahora sí se muestra la solución */}
-          {locked && !correct && (
-            <div className="feedback-box error-box" style={{ marginTop: '20px' }}>
-              <h4>{text.lockedTitle}</h4>
-              <p>{text.lockedText}</p>
-              <p style={{ marginTop: '8px' }}>
-                {text.expectedLabel}:{' '}
-                <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--green)', fontWeight: 700 }}>
-                  {challenge.expected}
-                </code>
-              </p>
-              <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
-                <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
-              </div>
-            </div>
-          )}
-
-          {/* Correcto */}
-          {correct && (
-            <div className="feedback-box success-box" style={{ marginTop: '20px' }}>
-              <h4>{text.correctTitle}</h4>
-              <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
-                <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
-              </div>
-            </div>
-          )}
-        </div>
+        </Window>
       </div>
     </section>
   );

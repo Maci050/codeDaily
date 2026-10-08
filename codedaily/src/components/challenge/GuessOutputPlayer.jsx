@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import Window from '../ui/Window';
+import PixelIcon from '../ui/PixelIcon';
 import { getDaySeed } from '../../services/challengeService';
 import { getProgressEntry, updateProgressEntry, markTodayCompleted } from '../../services/progressService';
 import challenges from '../../data/challenges/guess_output.json';
@@ -172,153 +174,142 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
 
   const localizedExplanation = challenge.explanation?.[language] || challenge.explanation?.es || '';
 
+  const difficultyLabel = { novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty];
+
   return (
     <section className="page-section">
-      <div className="content-card">
-        <div className="page-top-row">
-          <div>
-            <h1>{text.title}</h1>
-            <p>{text.subtitle}</p>
-          </div>
-          <div className="filters-stack">
-            {allowDateSelection && (
-              <div className="filter-box">
-                <label htmlFor="go-date-select">{text.dateLabel}</label>
-                <input
-                  id="go-date-select"
-                  type="date"
-                  value={selectedDate}
-                  min={minSelectableDate || undefined}
-                  max={getDaySeed(new Date())}
-                  onChange={(e) => onDateChange?.(e.target.value)}
-                />
-              </div>
-            )}
-            <div className="filter-box">
-              <label htmlFor="go-difficulty">{text.difficultyLabel}</label>
-              <select
-                id="go-difficulty"
-                value={difficulty}
-                onChange={(e) => setDifficulty(e.target.value)}
-              >
-                <option value="novato">{text.difficultyNovato}</option>
-                <option value="intermedio">{text.difficultyIntermedio}</option>
-                <option value="pro">{text.difficultyPro}</option>
-              </select>
-            </div>
-          </div>
+      <div className="page-head">
+        <div className="page-head-text">
+          <h2 className="page-title">{text.title}</h2>
+          <p className="lede">{text.subtitle}</p>
         </div>
-
-        {/* Badge row */}
-        <div className="badge-row" style={{ marginBottom: '20px' }}>
-          <span className="difficulty-pill">{{ novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty]}</span>
-          {completed && <span className="completed-pill">{text.completedBadge}</span>}
-          <span className="difficulty-pill">{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
-        </div>
-
-        {/* Código */}
-        <div className="challenge-card">
-          <div className="challenge-section" style={{ marginTop: 0 }}>
-            <h3>{text.inputLabel}</h3>
-            <pre className="code-block">
-              <code>{`solve(${challenge.input.map(v => JSON.stringify(v)).join(', ')})`}</code>
-            </pre>
-          </div>
-
-          <div className="challenge-section">
-            <h3>{text.codeLabel}</h3>
-            <pre className="code-block">
-              <code>{challenge.code}</code>
-            </pre>
-          </div>
-
-          <p className="muted-text" style={{ marginTop: '12px', fontSize: '0.82rem' }}>{text.hint}</p>
-        </div>
-
-        {/* Input de respuesta */}
-        <div className="editor-card">
-          <div className="challenge-section" style={{ marginTop: 0 }}>
-            <h3 id="go-answer-label">{text.outputLabel}</h3>
-            <input
-              type="text"
-              aria-labelledby="go-answer-label"
-              autoComplete="off"
-              spellCheck={false}
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !submitted && !isOver) handleSubmit();
-              }}
-              placeholder={text.placeholder}
-              disabled={isOver}
-              style={{
-                width: '100%',
-                padding: '14px 16px',
-                borderRadius: 'var(--r-md)',
-                background: 'var(--bg)',
-                color: 'var(--info)',
-                border: '1px solid var(--border-strong)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '1rem',
-                marginTop: '8px',
-              }}
-            />
-          </div>
-
-          <div className="editor-actions">
-            {!submitted && !isOver && (
-              <button
-                className="primary-button"
-                onClick={handleSubmit}
-                disabled={!answer.trim()}
-              >
-                {text.submitButton}
-              </button>
-            )}
-            {submitted && !correct && !locked && (
-              <button className="secondary-button" onClick={handleTryAgain}>
-                {text.tryAgain}
-              </button>
-            )}
-          </div>
-
-          {/* Resultado tras cada intento fallido (sin mostrar solución) */}
-          {submitted && !correct && !locked && (
-            <div className="feedback-box error-box" style={{ marginTop: '20px' }}>
-              <h4>{text.wrongTitle}</h4>
-              <p>{text.attemptsLeft}: {attemptsLeft}</p>
+        <div className="toolbar">
+          {allowDateSelection && (
+            <div className="field">
+              <label htmlFor="go-date-select">{text.dateLabel}</label>
+              <input
+                id="go-date-select"
+                type="date"
+                value={selectedDate}
+                min={minSelectableDate || undefined}
+                max={getDaySeed(new Date())}
+                onChange={(e) => onDateChange?.(e.target.value)}
+              />
             </div>
           )}
-
-          {/* Bloqueado — agotó intentos, ahora sí se muestra la solución */}
-          {locked && (
-            <div className="feedback-box error-box" style={{ marginTop: '20px' }}>
-              <h4>{text.lockedTitle}</h4>
-              <p>{text.lockedText}</p>
-              <p style={{ marginTop: '8px' }}>
-                {text.expectedLabel}:{' '}
-                <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--green)' }}>
-                  {challenge.expected}
-                </code>
-              </p>
-              <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
-                <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
-              </div>
-            </div>
-          )}
-
-          {/* Correcto */}
-          {correct && (
-            <div className="feedback-box success-box" style={{ marginTop: '20px' }}>
-              <h4>{text.correctTitle}</h4>
-              <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
-                <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
-              </div>
-            </div>
-          )}
+          <div className="field">
+            <label htmlFor="go-difficulty">{text.difficultyLabel}</label>
+            <select id="go-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+              <option value="novato">{text.difficultyNovato}</option>
+              <option value="intermedio">{text.difficultyIntermedio}</option>
+              <option value="pro">{text.difficultyPro}</option>
+            </select>
+          </div>
         </div>
+      </div>
+
+      <div className="workspace">
+        <Window
+          title={text.title}
+          icon="braces"
+          status={
+            <>
+              <span>{difficultyLabel}</span>
+              <span>{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
+            </>
+          }
+        >
+          <div className="brief-body">
+            <div className="badge-row">
+              <span className="pill">{difficultyLabel}</span>
+              {completed && (
+                <span className="pill inverse">
+                  <PixelIcon name="check" size={14} />
+                  {text.completedBadge}
+                </span>
+              )}
+            </div>
+            <div className="section-block">
+              <h3>{text.inputLabel}</h3>
+              <pre className="code-block">
+                <code>{`solve(${challenge.input.map((v) => JSON.stringify(v)).join(', ')})`}</code>
+              </pre>
+            </div>
+            <div className="section-block">
+              <h3>{text.codeLabel}</h3>
+              <pre className="code-block">
+                <code>{challenge.code}</code>
+              </pre>
+            </div>
+            <p className="muted-text">{text.hint}</p>
+          </div>
+        </Window>
+
+        <Window title={text.outputLabel} icon="doc" style={{ '--zoom-delay': '0.1s' }}>
+          <div className="editor-body">
+            <div className="field">
+              <label htmlFor="go-answer">{text.outputLabel}</label>
+              <input
+                id="go-answer"
+                className="text-input"
+                type="text"
+                autoComplete="off"
+                spellCheck={false}
+                autoCapitalize="off"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !submitted && !isOver && answer.trim()) handleSubmit();
+                }}
+                placeholder={text.placeholder}
+                disabled={isOver}
+              />
+            </div>
+
+            <div className="button-row">
+              {!submitted && !isOver && (
+                <button className="primary-button" onClick={handleSubmit} disabled={!answer.trim()}>
+                  {text.submitButton}
+                </button>
+              )}
+              {submitted && !correct && !locked && (
+                <button className="secondary-button" onClick={handleTryAgain}>
+                  {text.tryAgain}
+                </button>
+              )}
+            </div>
+
+            <div aria-live="polite" className="result-stack">
+              {submitted && !correct && !locked && (
+                <div className="feedback-box error-box">
+                  <PixelIcon name="cross" size={32} />
+                  <h4>{text.wrongTitle}</h4>
+                  <p>{text.attemptsLeft}: {attemptsLeft}</p>
+                </div>
+              )}
+
+              {locked && (
+                <div className="feedback-box error-box">
+                  <PixelIcon name="alert" size={32} />
+                  <h4>{text.lockedTitle}</h4>
+                  <p>{text.lockedText}</p>
+                  <p>
+                    {text.expectedLabel}: <code>{challenge.expected}</code>
+                  </p>
+                  <p><strong>{text.explanation}:</strong> {localizedExplanation}</p>
+                </div>
+              )}
+
+              {correct && (
+                <div className="feedback-box success-box">
+                  <PixelIcon name="check" size={32} />
+                  <h4>{text.correctTitle}</h4>
+                  <p><strong>{text.explanation}:</strong> {localizedExplanation}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </Window>
       </div>
     </section>
   );

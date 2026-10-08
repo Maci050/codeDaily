@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import Window from '../ui/Window';
+import PixelIcon from '../ui/PixelIcon';
 import { getDaySeed } from '../../services/challengeService';
 import { getProgressEntry, updateProgressEntry, markTodayCompleted } from '../../services/progressService';
 import { ensurePyodideLoaded, runPythonChallengeTests } from '../../services/pythonRunnerService';
@@ -76,6 +78,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
       testFailed: 'Fallo',
       dateLabel: 'Fecha',
       runtimeError: 'Error de Python',
+      noResultYet: 'Todavía no has comprobado tu corrección.',
     },
     en: {
       title: 'Find the bug',
@@ -106,6 +109,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
       testFailed: 'Failed',
       dateLabel: 'Date',
       runtimeError: 'Python error',
+      noResultYet: 'You have not checked your fix yet.',
     },
   }[language]), [language]);
 
@@ -184,163 +188,205 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
   const hints = challenge.hints?.[language] || challenge.hints?.es || [];
   const localizedDescription = challenge.description?.[language] || challenge.description?.es || '';
 
+  const difficultyLabel = { novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty];
+
   return (
     <section className="page-section">
-      <div className="content-card">
-        <div className="page-top-row">
-          <div>
-            <h1>{text.title}</h1>
-            <p>{text.subtitle}</p>
-          </div>
-          <div className="filters-stack">
-            {allowDateSelection && (
-              <div className="filter-box">
-                <label htmlFor="fb-date-select">{text.dateLabel}</label>
-                <input
-                  id="fb-date-select"
-                  type="date"
-                  value={selectedDate}
-                  min={minSelectableDate || undefined}
-                  max={getDaySeed(new Date())}
-                  onChange={(e) => onDateChange?.(e.target.value)}
-                />
-              </div>
-            )}
-            <div className="filter-box">
-              <label htmlFor="fb-difficulty">{text.difficultyLabel}</label>
-              <select id="fb-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
-                <option value="novato">{text.difficultyNovato}</option>
-                <option value="intermedio">{text.difficultyIntermedio}</option>
-                <option value="pro">{text.difficultyPro}</option>
-              </select>
+      <div className="page-head">
+        <div className="page-head-text">
+          <h2 className="page-title">{text.title}</h2>
+          <p className="lede">{text.subtitle}</p>
+        </div>
+        <div className="toolbar">
+          {allowDateSelection && (
+            <div className="field">
+              <label htmlFor="fb-date-select">{text.dateLabel}</label>
+              <input
+                id="fb-date-select"
+                type="date"
+                value={selectedDate}
+                min={minSelectableDate || undefined}
+                max={getDaySeed(new Date())}
+                onChange={(e) => onDateChange?.(e.target.value)}
+              />
             </div>
+          )}
+          <div className="field">
+            <label htmlFor="fb-difficulty">{text.difficultyLabel}</label>
+            <select id="fb-difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+              <option value="novato">{text.difficultyNovato}</option>
+              <option value="intermedio">{text.difficultyIntermedio}</option>
+              <option value="pro">{text.difficultyPro}</option>
+            </select>
           </div>
         </div>
+      </div>
 
-        {/* Badges */}
-        <div className="badge-row" style={{ marginBottom: '20px' }}>
-          <span className="difficulty-pill">{{ novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty]}</span>
-          {completed && <span className="completed-pill">{text.completedBadge}</span>}
-          <span className="difficulty-pill">{isPyodideLoading ? text.pyodideLoading : text.pyodideReady}</span>
-          <span className="difficulty-pill">{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
-        </div>
-
-        {/* Descripción y código con bug */}
-        <div className="challenge-card">
-          <p className="challenge-description">{localizedDescription}</p>
-          <div className="challenge-section">
-            <h3>{text.buggyCodeLabel}</h3>
+      <div className="workspace">
+        <Window
+          title={text.buggyCodeLabel}
+          icon="bug"
+          status={
+            <>
+              <span>{difficultyLabel}</span>
+              <span>{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
+            </>
+          }
+        >
+          <div className="brief-body">
+            <div className="badge-row">
+              <span className="pill">{difficultyLabel}</span>
+              {completed && (
+                <span className="pill inverse">
+                  <PixelIcon name="check" size={14} />
+                  {text.completedBadge}
+                </span>
+              )}
+            </div>
+            <p className="challenge-description">{localizedDescription}</p>
             <pre className="code-block">
               <code>{challenge.buggyCode}</code>
             </pre>
           </div>
-        </div>
+        </Window>
 
-        {/* Editor */}
-        <div className="editor-card">
-          <div className="editor-card-header">
-            <div>
-              <h2>{text.yourFixLabel}</h2>
+        <Window
+          className={`editor-window ${isChecking ? 'is-busy' : ''}`}
+          title={text.yourFixLabel}
+          icon="doc"
+          style={{ '--zoom-delay': '0.1s' }}
+          status={
+            <>
+              <span className={isPyodideLoading || isChecking ? 'busy-dots' : undefined}>
+                {isChecking
+                  ? text.checkingButton.replace(/\.+$/, '')
+                  : isPyodideLoading
+                  ? text.pyodideLoading.replace(/\.+$/, '')
+                  : text.pyodideReady}
+              </span>
+              <span>{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
+            </>
+          }
+        >
+          <div className="editor-body">
+            <label className="sr-only" htmlFor="fb-editor">{text.yourFixLabel}</label>
+            <textarea
+              id="fb-editor"
+              className="code-editor"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Tab') {
+                  e.preventDefault();
+                  const start = e.target.selectionStart;
+                  const end = e.target.selectionEnd;
+                  const newCode = code.substring(0, start) + '    ' + code.substring(end);
+                  setCode(newCode);
+                  setTimeout(() => { e.target.selectionStart = e.target.selectionEnd = start + 4; }, 0);
+                }
+              }}
+              spellCheck={false}
+              autoCapitalize="off"
+              autoCorrect="off"
+              disabled={isOver || isChecking || isPyodideLoading}
+            />
+
+            <div className="button-row">
+              <button
+                className="primary-button"
+                onClick={handleCheck}
+                disabled={isOver || isChecking || isPyodideLoading}
+              >
+                {isChecking ? text.checkingButton : text.checkButton}
+              </button>
+              {!isOver && (
+                <button className="secondary-button" onClick={handleReset} disabled={isChecking}>
+                  {text.resetButton}
+                </button>
+              )}
             </div>
           </div>
+        </Window>
+      </div>
 
-          <textarea
-            className="code-editor"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Tab') {
-                e.preventDefault();
-                const start = e.target.selectionStart;
-                const end = e.target.selectionEnd;
-                const newCode = code.substring(0, start) + '    ' + code.substring(end);
-                setCode(newCode);
-                setTimeout(() => { e.target.selectionStart = e.target.selectionEnd = start + 4; }, 0);
-              }
-            }}
-            spellCheck={false}
-            disabled={isOver || isChecking || isPyodideLoading}
-          />
+      <div className="results-grid">
+        <Window title={text.testsLabel} icon="check" style={{ '--zoom-delay': '0.16s' }}>
+          <div className="result-stack" aria-live="polite">
+            {completed && (
+              <div className="feedback-box success-box">
+                <PixelIcon name="check" size={32} />
+                <h4>{text.correctTitle}</h4>
+                <p>{text.correctText}</p>
+              </div>
+            )}
 
-          <div className="editor-actions">
-            <button
-              className="primary-button"
-              onClick={handleCheck}
-              disabled={isOver || isChecking || isPyodideLoading}
-            >
-              {isChecking ? text.checkingButton : text.checkButton}
-            </button>
-            {!isOver && (
-              <button className="secondary-button" onClick={handleReset} disabled={isChecking}>
-                {text.resetButton}
-              </button>
+            {locked && !completed && (
+              <div className="feedback-box error-box">
+                <PixelIcon name="alert" size={32} />
+                <h4>{text.lockedTitle}</h4>
+                <p>{text.lockedText}</p>
+                {challenge.solution && (
+                  <div>
+                    <p className="tutorial-label">{text.solutionLabel}</p>
+                    <pre className="code-block">
+                      <code>{challenge.solution}</code>
+                    </pre>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {result?.pythonError && (
+              <div className="result-subsection">
+                <h4>{text.runtimeError}</h4>
+                <pre className="code-block"><code>{result.pythonError}</code></pre>
+              </div>
+            )}
+
+            {result?.testResults?.length > 0 && (
+              <div className="tests-list">
+                {result.testResults.map((t, row) => (
+                  <div
+                    key={`${attemptCount}-${t.index}`}
+                    className={`test-item ${t.passed ? 'passed' : 'failed'}`}
+                    style={{ '--row': row }}
+                  >
+                    <span className="test-mark">
+                      <PixelIcon name={t.passed ? 'check' : 'cross'} size={18} />
+                    </span>
+                    <span className="test-name">Test {t.index + 1}: {t.passed ? text.testPassed : text.testFailed}</span>
+                    <code>input: {JSON.stringify(t.input)} | expected: {JSON.stringify(t.expected)}{t.actual !== undefined ? ` | actual: ${JSON.stringify(t.actual)}` : ''}</code>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {!result && !isOver && (
+              <div className="empty-note">
+                <PixelIcon name="doc" size={28} />
+                <span>{text.noResultYet}</span>
+              </div>
             )}
           </div>
+        </Window>
 
-          {/* Grid resultado + pistas */}
-          <div className="editor-grid">
-            {/* Resultado */}
-            <div className="result-panel">
-              <h3>{text.testsLabel}</h3>
-
-              {completed && (
-                <div className="feedback-box success-box">
-                  <h4>{text.correctTitle}</h4>
-                  <p>{text.correctText}</p>
-                </div>
-              )}
-
-              {locked && !completed && (
-                <div className="feedback-box error-box">
-                  <h4>{text.lockedTitle}</h4>
-                  <p>{text.lockedText}</p>
-                  {challenge.solution && (
-                    <div style={{ marginTop: '12px' }}>
-                      <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                        {text.solutionLabel}
-                      </strong>
-                      <pre className="code-block" style={{ marginTop: '8px' }}>
-                        <code>{challenge.solution}</code>
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {result?.pythonError && (
-                <div className="result-subsection">
-                  <h4>{text.runtimeError}</h4>
-                  <pre className="code-block"><code>{result.pythonError}</code></pre>
-                </div>
-              )}
-
-              {result?.testResults?.length > 0 && (
-                <div className="tests-list">
-                  {result.testResults.map((t) => (
-                    <div key={t.index} className={`test-item ${t.passed ? 'passed' : 'failed'}`}>
-                      <span>Test {t.index + 1}: {t.passed ? text.testPassed : text.testFailed}</span>
-                      <code>input: {JSON.stringify(t.input)} | expected: {JSON.stringify(t.expected)}{t.actual !== undefined ? ` | actual: ${JSON.stringify(t.actual)}` : ''}</code>
-                    </div>
-                  ))}
-                </div>
-              )}
+        <Window title={text.hintsLabel} icon="bulb" style={{ '--zoom-delay': '0.2s' }}>
+          {revealedHints === 0 ? (
+            <div className="empty-note">
+              <PixelIcon name="bulb" size={28} />
+              <span>{text.noHints}</span>
             </div>
-
-            {/* Pistas */}
-            <div className="result-panel">
-              <h3>{text.hintsLabel}</h3>
-              {revealedHints === 0 ? (
-                <p className="muted-text">{text.noHints}</p>
-              ) : (
-                <ul className="challenge-list compact-list">
-                  {hints.slice(0, revealedHints).map((hint, i) => (
-                    <li key={i}>{hint}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-        </div>
+          ) : (
+            <ol className="hint-list">
+              {hints.slice(0, revealedHints).map((hint, i) => (
+                <li key={i}>
+                  <span className="hint-num">{i + 1}</span>
+                  <span>{hint}</span>
+                </li>
+              ))}
+            </ol>
+          )}
+        </Window>
       </div>
     </section>
   );

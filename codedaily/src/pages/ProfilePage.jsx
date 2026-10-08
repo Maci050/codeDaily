@@ -1,14 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { getStats, getDayKey } from '../services/progressService';
 import { useLanguage } from '../context/LanguageContext';
+import Window from '../components/ui/Window';
+import PixelIcon from '../components/ui/PixelIcon';
 
-function ProfilePage() {
-  const [stats, setStats] = useState(null);
+function ProfilePage({ onNavigate }) {
   const { language } = useLanguage();
-
-  useEffect(() => {
-    setStats(getStats());
-  }, []);
+  const stats = useMemo(() => getStats(), []);
 
   const text = useMemo(() => ({
     es: {
@@ -17,11 +15,11 @@ function ProfilePage() {
       streakTitle: 'Racha',
       streakCurrent: 'Racha actual',
       streakMax: 'Racha máxima',
+      days: (n) => (n === 1 ? 'día' : 'días'),
       completedTitle: 'Completados',
       completedDays: 'Días con reto',
       normalCompleted: 'Modo Normal',
       hackerCompleted: 'Modo Hacker',
-      langTitle: 'Por lenguaje',
       langPython: 'Python',
       langJava: 'Java',
       modesTitle: 'Modos extra',
@@ -29,11 +27,13 @@ function ProfilePage() {
       modeFindBug: 'Encuentra el bug',
       modeComplexity: '¿Cuál es la complejidad?',
       attemptsTitle: 'Distribución de intentos',
-      attempt: 'intento',
-      attempts: 'intentos',
+      noAttempts: 'Completa un reto para ver cuántos intentos sueles necesitar.',
       activityTitle: 'Actividad — últimos 60 días',
       noActivity: 'Aún no hay actividad registrada.',
-      loading: 'Cargando...',
+      play: 'Jugar Daily Challenge',
+      less: 'Menos',
+      more: 'Más',
+      challengesOn: (day, n) => `${day}: ${n} ${n === 1 ? 'reto' : 'retos'}`,
     },
     en: {
       title: 'Progress',
@@ -41,11 +41,11 @@ function ProfilePage() {
       streakTitle: 'Streak',
       streakCurrent: 'Current streak',
       streakMax: 'Best streak',
+      days: (n) => (n === 1 ? 'day' : 'days'),
       completedTitle: 'Completed',
       completedDays: 'Days with challenge',
       normalCompleted: 'Normal mode',
       hackerCompleted: 'Hacker mode',
-      langTitle: 'By language',
       langPython: 'Python',
       langJava: 'Java',
       modesTitle: 'Extra modes',
@@ -53,208 +53,179 @@ function ProfilePage() {
       modeFindBug: 'Find the bug',
       modeComplexity: "What's the complexity?",
       attemptsTitle: 'Attempts distribution',
-      attempt: 'attempt',
-      attempts: 'attempts',
+      noAttempts: 'Complete a challenge to see how many attempts you usually need.',
       activityTitle: 'Activity — last 60 days',
       noActivity: 'No activity recorded yet.',
-      loading: 'Loading...',
+      play: 'Play Daily Challenge',
+      less: 'Less',
+      more: 'More',
+      challengesOn: (day, n) => `${day}: ${n} ${n === 1 ? 'challenge' : 'challenges'}`,
     },
   }[language]), [language]);
 
-  // Genera los últimos 60 días para el calendario
+  // Últimos 60 días para el mapa de actividad
   const last60Days = useMemo(() => {
     const days = [];
     const today = new Date();
-    for (let i = 59; i >= 0; i--) {
+    for (let i = 59; i >= 0; i -= 1) {
       const d = new Date(today);
-      d.setDate(d.getDate() - i);
+      d.setUTCDate(d.getUTCDate() - i);
       days.push(getDayKey(d));
     }
     return days;
   }, []);
 
-  if (!stats) return (
-    <section className="page-section">
-      <div className="content-card"><p>{text?.loading}</p></div>
-    </section>
-  );
-
   const totalExtra = stats.modeStats.guess_output + stats.modeStats.find_bug + stats.modeStats.guess_complexity;
-  const maxAttempts = Math.max(...Object.values(stats.attemptsDist), 1);
+  const maxBucket = Math.max(...Object.values(stats.attemptsDist), 1);
   const totalAttempts = Object.values(stats.attemptsDist).reduce((a, b) => a + b, 0);
+  const hasActivity = Object.keys(stats.activityByDay).length > 0;
+  const todayKey = getDayKey(new Date());
 
-  const sectionStyle = {
-    marginTop: '32px',
-  };
-
-  const sectionTitleStyle = {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '0.75rem',
-    color: 'var(--text-muted)',
-    textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-    marginBottom: '14px',
-  };
-
-  const statRowStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '10px 0',
-    borderBottom: '1px solid var(--border-muted)',
-    fontSize: '0.9rem',
-  };
+  const heatLevel = (count) => (count === 0 ? '' : count === 1 ? 'l1' : count <= 3 ? 'l2' : 'l3');
 
   return (
     <section className="page-section">
-      <div className="content-card">
-        <h1>{text.title}</h1>
-        <p style={{ color: 'var(--text-muted)', marginTop: '4px' }}>{text.subtitle}</p>
-
-        {/* Racha */}
-        <div style={sectionStyle}>
-          <p style={sectionTitleStyle}>{text.streakTitle}</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            <div className="stat-card" style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '2.5rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>
-                {stats.streak}
-              </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', display: 'block' }}>
-                🔥 {text.streakCurrent}
-              </span>
-            </div>
-            <div className="stat-card" style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '2.5rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--info)', lineHeight: 1 }}>
-                {stats.maxStreak}
-              </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', display: 'block' }}>
-                🏆 {text.streakMax}
-              </span>
-            </div>
-          </div>
+      <div className="page-head">
+        <div className="page-head-text">
+          <h1 className="page-title">{text.title}</h1>
+          <p className="lede">{text.subtitle}</p>
         </div>
+      </div>
 
-        {/* Completados */}
-        <div style={sectionStyle}>
-          <p style={sectionTitleStyle}>{text.completedTitle}</p>
-          <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)', overflow: 'hidden' }}>
-            {[
-              { label: text.completedDays, value: stats.completedDays, color: 'var(--text)' },
-              { label: text.normalCompleted, value: stats.normalCompleted, color: 'var(--green)' },
-              { label: text.hackerCompleted, value: stats.hackerCompleted, color: 'var(--danger)' },
-            ].map(({ label, value, color }) => (
-              <div key={label} style={statRowStyle}>
-                <span style={{ color: 'var(--text-muted)', paddingLeft: '14px' }}>{label}</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color, paddingRight: '14px', fontSize: '1rem' }}>{value}</span>
-              </div>
-            ))}
+      <div className="progress-grid">
+        <Window className="span-5" title={text.streakTitle} icon="flame">
+          <div className="streak-body">
+            <p className="big-number">
+              <strong>{stats.streak}</strong>
+              <span>{text.days(stats.streak)}</span>
+            </p>
+            <p className="sr-only">{text.streakCurrent}</p>
+            <table className="info-table">
+              <tbody>
+                <tr>
+                  <th scope="row">{text.streakMax}</th>
+                  <td>{stats.maxStreak} {text.days(stats.maxStreak)}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
+        </Window>
 
-        {/* Por lenguaje */}
-        <div style={sectionStyle}>
-          <p style={sectionTitleStyle}>{text.langTitle}</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            {[
-              { label: text.langPython, value: stats.byLanguage.python, icon: '🐍', color: 'var(--green)' },
-              { label: text.langJava, value: stats.byLanguage.java, icon: '☕', color: 'var(--warning)' },
-            ].map(({ label, value, icon, color }) => (
-              <div key={label} className="stat-card" style={{ textAlign: 'center' }}>
-                <span style={{ fontSize: '1.4rem' }}>{icon}</span>
-                <span style={{ display: 'block', fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color, lineHeight: 1, marginTop: '6px' }}>
-                  {value}
-                </span>
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Window className="span-7" title={text.completedTitle} icon="check" style={{ '--zoom-delay': '0.06s' }}>
+          <table className="info-table">
+            <tbody>
+              <tr>
+                <th scope="row">{text.completedDays}</th>
+                <td>{stats.completedDays}</td>
+              </tr>
+              <tr>
+                <th scope="row">{text.normalCompleted}</th>
+                <td>{stats.normalCompleted}</td>
+              </tr>
+              <tr>
+                <th scope="row">{text.hackerCompleted}</th>
+                <td>{stats.hackerCompleted}</td>
+              </tr>
+              <tr>
+                <th scope="row">{text.langPython}</th>
+                <td>{stats.byLanguage.python}</td>
+              </tr>
+              <tr>
+                <th scope="row">{text.langJava}</th>
+                <td>{stats.byLanguage.java}</td>
+              </tr>
+            </tbody>
+          </table>
+        </Window>
 
-        {/* Modos extra */}
-        <div style={sectionStyle}>
-          <p style={sectionTitleStyle}>{text.modesTitle}</p>
-          <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)', overflow: 'hidden' }}>
-            {[
-              { label: text.modeGuessOutput, value: stats.modeStats.guess_output, color: 'var(--green)' },
-              { label: text.modeFindBug, value: stats.modeStats.find_bug, color: 'var(--danger)' },
-              { label: text.modeComplexity, value: stats.modeStats.guess_complexity, color: 'var(--info)' },
-            ].map(({ label, value, color }) => (
-              <div key={label} style={statRowStyle}>
-                <span style={{ color: 'var(--text-muted)', paddingLeft: '14px' }}>{label}</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color, paddingRight: '14px', fontSize: '1rem' }}>{value}</span>
-              </div>
-            ))}
-            <div style={{ ...statRowStyle, borderBottom: 'none', opacity: 0.6 }}>
-              <span style={{ color: 'var(--text-muted)', paddingLeft: '14px', fontSize: '0.85rem' }}>Total</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text)', paddingRight: '14px' }}>{totalExtra}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Distribución de intentos */}
-        {totalAttempts > 0 && (
-          <div style={sectionStyle}>
-            <p style={sectionTitleStyle}>{text.attemptsTitle}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <Window className="span-7" title={text.attemptsTitle} icon="chart" style={{ '--zoom-delay': '0.12s' }}>
+          {totalAttempts > 0 ? (
+            <div className="bars">
               {Object.entries(stats.attemptsDist).map(([bucket, count]) => {
-                const pct = maxAttempts > 0 ? (count / maxAttempts) * 100 : 0;
+                const pct = (count / maxBucket) * 100;
                 return (
-                  <div key={bucket} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-muted)', width: '28px', textAlign: 'right', flexShrink: 0 }}>
-                      {bucket}
-                    </span>
-                    <div style={{ flex: 1, background: 'var(--bg)', borderRadius: 'var(--r-sm)', height: '20px', overflow: 'hidden', border: '1px solid var(--border)' }}>
-                      <div style={{
-                        width: `${pct}%`,
-                        height: '100%',
-                        background: bucket === '1' ? 'var(--green)' : bucket === '2' ? 'var(--info)' : bucket === '3' ? 'var(--warning)' : 'var(--danger)',
-                        transition: 'width 0.4s ease',
-                        minWidth: count > 0 ? '4px' : '0',
-                      }} />
+                  <div key={bucket} className="bar-row">
+                    <span>{bucket}</span>
+                    <div className="bar-track" role="presentation">
+                      <div
+                        className={`bar-fill ${count === maxBucket ? 'lead' : ''} ${count === 0 ? 'empty' : ''}`}
+                        style={{ width: `${pct}%` }}
+                      />
                     </div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text)', width: '20px', flexShrink: 0 }}>
-                      {count}
-                    </span>
+                    <span>{count}</span>
                   </div>
                 );
               })}
             </div>
-          </div>
-        )}
-
-        {/* Calendario de actividad */}
-        <div style={sectionStyle}>
-          <p style={sectionTitleStyle}>{text.activityTitle}</p>
-          {Object.keys(stats.activityByDay).length === 0 ? (
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{text.noActivity}</p>
           ) : (
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '4px',
-            }}>
-              {last60Days.map((day) => {
-                const count = stats.activityByDay[day] || 0;
-                const opacity = count === 0 ? 0.25 : count === 1 ? 0.45 : count <= 3 ? 0.75 : 1;
-                return (
-                  <div
-                    key={day}
-                    title={`${day}: ${count}`}
-                    style={{
-                      width: '14px',
-                      height: '14px',
-                      borderRadius: '3px',
-                      background: count === 0 ? 'var(--border)' : 'var(--green)',
-                      opacity,
-                      transition: '0.2s ease',
-                    }}
-                  />
-                );
-              })}
+            <div className="empty-note">
+              <PixelIcon name="chart" size={28} />
+              <span>{text.noAttempts}</span>
             </div>
           )}
-        </div>
+        </Window>
 
+        <Window className="span-5" title={text.modesTitle} icon="braces" style={{ '--zoom-delay': '0.18s' }}>
+          <table className="info-table">
+            <tbody>
+              <tr>
+                <th scope="row">{text.modeGuessOutput}</th>
+                <td>{stats.modeStats.guess_output}</td>
+              </tr>
+              <tr>
+                <th scope="row">{text.modeFindBug}</th>
+                <td>{stats.modeStats.find_bug}</td>
+              </tr>
+              <tr>
+                <th scope="row">{text.modeComplexity}</th>
+                <td>{stats.modeStats.guess_complexity}</td>
+              </tr>
+              <tr className="total">
+                <th scope="row">Total</th>
+                <td>{totalExtra}</td>
+              </tr>
+            </tbody>
+          </table>
+        </Window>
+
+        <Window className="span-12" title={text.activityTitle} icon="calendar" style={{ '--zoom-delay': '0.24s' }}>
+          {hasActivity ? (
+            <>
+              <div className="heatmap">
+                {last60Days.map((day) => {
+                  const count = stats.activityByDay[day] || 0;
+                  return (
+                    <span
+                      key={day}
+                      className={`heat-cell ${heatLevel(count)} ${day === todayKey ? 'today' : ''}`}
+                      title={text.challengesOn(day, count)}
+                      aria-label={text.challengesOn(day, count)}
+                      role="img"
+                    />
+                  );
+                })}
+              </div>
+              <div className="heat-legend" aria-hidden="true">
+                <span>{text.less}</span>
+                <span className="heat-cell" />
+                <span className="heat-cell l1" />
+                <span className="heat-cell l2" />
+                <span className="heat-cell l3" />
+                <span>{text.more}</span>
+              </div>
+            </>
+          ) : (
+            <div className="button-row">
+              <div className="empty-note">
+                <PixelIcon name="calendar" size={28} />
+                <span>{text.noActivity}</span>
+              </div>
+              <button className="primary-button" onClick={() => onNavigate?.('daily')}>
+                {text.play}
+              </button>
+            </div>
+          )}
+        </Window>
       </div>
     </section>
   );

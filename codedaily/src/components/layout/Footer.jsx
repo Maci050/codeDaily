@@ -8,12 +8,12 @@ function Footer() {
     es: {
       line: 'Juego web de retos diarios de programación.',
       support: 'Si te gusta el proyecto, puedes apoyarlo:',
-      buyMeCoffee: '☕ Invítame a un café',
+      buyMeCoffee: 'Invítame a un café',
     },
     en: {
       line: 'Daily programming challenge web game.',
       support: 'If you enjoy the project, you can support it:',
-      buyMeCoffee: '☕ Buy me a coffee',
+      buyMeCoffee: 'Buy me a coffee',
     },
   }[language]), [language]);
 

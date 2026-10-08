@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import PixelIcon from '../ui/PixelIcon';
 
 function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
   const { language, setLanguage } = useLanguage();
@@ -13,6 +14,8 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
         navProfile: 'Progreso',
         navModes: 'Modos',
         language: 'Idioma',
+        mainNav: 'Navegación principal',
+        help: 'Cómo jugar',
       },
       en: {
         navHome: 'Home',
@@ -21,6 +24,8 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
         navProfile: 'Progress',
         navModes: 'Modes',
         language: 'Language',
+        mainNav: 'Main navigation',
+        help: 'How to play',
       },
     }[language];
   }, [language]);
@@ -34,18 +39,18 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
   ];
 
   return (
-    <header className="site-header">
-      <div className="page-container header-inner">
-        <button className="brand-button" onClick={() => onNavigate('home')}>
-          <span className="brand-mark">&lt;/&gt;</span>
-          <span className="brand-name">{appName}</span>
+    <header className="menubar">
+      <div className="page-container menubar-inner">
+        <button className="menubar-brand" onClick={() => onNavigate('home')}>
+          <PixelIcon name="computer" size={26} />
+          <span>{appName}</span>
         </button>
 
-        <nav className="main-nav" aria-label="Main navigation">
+        <nav className="menubar-nav" aria-label={text.mainNav}>
           {navItems.map((item) => (
             <button
               key={item.id}
-              className={`nav-button ${currentPage === item.id ? 'active' : ''}`}
+              className="menu-item"
               aria-current={currentPage === item.id ? 'page' : undefined}
               onClick={() => onNavigate(item.id)}
             >
@@ -54,36 +59,17 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
           ))}
         </nav>
 
-        <div className="language-switcher">
-          <span className="language-label">{text.language}</span>
-
-          <div className="language-buttons" role="group" aria-label={text.language}>
-            <button
-              className={`lang-button ${language === 'es' ? 'active' : ''}`}
-              aria-pressed={language === 'es'}
-              lang="es"
-              title="Español"
-              onClick={() => setLanguage('es')}
-            >
+        <div className="menubar-tools">
+          <div className="toggle-group" role="group" aria-label={text.language}>
+            <button aria-pressed={language === 'es'} lang="es" title="Español" onClick={() => setLanguage('es')}>
               ES
             </button>
-            <button
-              className={`lang-button ${language === 'en' ? 'active' : ''}`}
-              aria-pressed={language === 'en'}
-              lang="en"
-              title="English"
-              onClick={() => setLanguage('en')}
-            >
+            <button aria-pressed={language === 'en'} lang="en" title="English" onClick={() => setLanguage('en')}>
               EN
             </button>
           </div>
 
-          <button
-            className="lang-button"
-            onClick={onOpenTutorial}
-            title={language === 'es' ? 'Cómo jugar' : 'How to play'}
-            aria-label={language === 'es' ? 'Cómo jugar' : 'How to play'}
-          >
+          <button className="icon-button" onClick={onOpenTutorial} title={text.help} aria-label={text.help}>
             ?
           </button>
         </div>

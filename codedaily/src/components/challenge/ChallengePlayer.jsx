@@ -17,6 +17,8 @@ import {
 import { ensurePyodideLoaded } from '../../services/pythonRunnerService';
 import { getPreferences, savePreferences } from '../../services/uiService';
 import { useEscapeKey } from '../../hooks/useEscapeKey';
+import Window from '../ui/Window';
+import PixelIcon from '../ui/PixelIcon';
 
 const NORMAL_GRID_SLOTS = 5;
 
@@ -82,6 +84,7 @@ function ChallengePlayer({
     return {
       es: {
         modeLabel: 'Modo',
+        briefTitle: 'Reto',
         modeNormal: 'Normal',
         modeHacker: 'Hacker',
         hackerDescription:
@@ -162,6 +165,7 @@ function ChallengePlayer({
       },
       en: {
         modeLabel: 'Mode',
+        briefTitle: 'Challenge',
         modeNormal: 'Normal',
         modeHacker: 'Hacker',
         hackerDescription:
@@ -521,545 +525,579 @@ function ChallengePlayer({
   const shareLabel = (idleLabel) => (
     shareStatus === 'copied' ? text.shareCopied
       : shareStatus === 'failed' ? text.shareFailed
-      : `↑ ${idleLabel}`
+      : idleLabel
   );
+
+  const handleEditorKeyDown = (event) => {
+    const textarea = event.target;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const TAB = '    ';
+
+    if (event.key === 'Tab') {
+      event.preventDefault();
+
+      const hasSelection = start !== end;
+
+      if (event.shiftKey) {
+        // Shift+Tab: desindenta las líneas seleccionadas (o la línea actual)
+        const lineStart = code.lastIndexOf('\n', start - 1) + 1;
+        const lineEnd = end;
+        const selectedLines = code.substring(lineStart, lineEnd);
+
+        const dedented = selectedLines
+          .split('\n')
+          .map((line) => (line.startsWith(TAB) ? line.slice(TAB.length) : line.replace(/^ {1,3}/, '')))
+          .join('\n');
+
+        const removed = selectedLines.length - dedented.length;
+        const newValue = code.substring(0, lineStart) + dedented + code.substring(lineEnd);
+        setCode(newValue);
+
+        setTimeout(() => {
+          textarea.selectionStart = Math.max(lineStart, start - (hasSelection ? 0 : Math.min(removed, TAB.length)));
+          textarea.selectionEnd = end - removed;
+        }, 0);
+
+      } else if (hasSelection) {
+        // Tab con selección: indenta todas las líneas seleccionadas
+        const lineStart = code.lastIndexOf('\n', start - 1) + 1;
+        const lineEnd = end;
+        const selectedLines = code.substring(lineStart, lineEnd);
+
+        const indented = selectedLines.split('\n').map((line) => TAB + line).join('\n');
+        const added = indented.length - selectedLines.length;
+        const newValue = code.substring(0, lineStart) + indented + code.substring(lineEnd);
+        setCode(newValue);
+
+        setTimeout(() => {
+          textarea.selectionStart = start + TAB.length;
+          textarea.selectionEnd = end + added;
+        }, 0);
+
+      } else {
+        // Tab sin selección: inserta 4 espacios en el cursor
+        const newValue = code.substring(0, start) + TAB + code.substring(end);
+        setCode(newValue);
+        setTimeout(() => {
+          textarea.selectionStart = textarea.selectionEnd = start + TAB.length;
+        }, 0);
+      }
+
+    } else if (event.key === 'Backspace' && start === end) {
+      // Backspace inteligente: borra un TAB completo si el cursor está precedido de espacios
+      const lineStart = code.lastIndexOf('\n', start - 1) + 1;
+      const textBeforeCursor = code.substring(lineStart, start);
+      const trailingSpaces = textBeforeCursor.match(/( +)$/)?.[1] ?? '';
+
+      if (trailingSpaces.length > 0) {
+        event.preventDefault();
+        const toRemove = ((trailingSpaces.length - 1) % TAB.length) + 1;
+        const newValue = code.substring(0, start - toRemove) + code.substring(start);
+        setCode(newValue);
+        setTimeout(() => {
+          textarea.selectionStart = textarea.selectionEnd = start - toRemove;
+        }, 0);
+      }
+    }
+  };
+
+  const fileName = `solucion.${isPython ? 'py' : 'java'}`;
+  const runtimeLabel = isPythonLoading ? text.pythonLoading : text.pythonReady;
 
   return (
     <section className="page-section">
-      <div className="content-card">
-        <div className="page-top-row">
-          <div>
-            <h1>{pageTitle}</h1>
-            <p>{pageSubtitle}</p>
-          </div>
-
-          <div className="filters-stack">
-            {allowHackerMode && (
-              <div className="mode-switch">
-                <span className="mode-switch-label">{text.modeLabel}</span>
-                <div className="mode-switch-buttons">
-                  <button
-                    className={`mode-button ${playMode === 'normal' ? 'active' : ''}`}
-                    onClick={() => { setPlayMode('normal'); savePreferences({ playMode: 'normal' }); }}
-                  >
-                    {text.modeNormal}
-                  </button>
-                  <button
-                    className={`mode-button hacker ${playMode === 'hacker' ? 'active' : ''}`}
-                    onClick={() => { setPlayMode('hacker'); savePreferences({ playMode: 'hacker' }); }}
-                  >
-                    {text.modeHacker}
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {allowDateSelection && (
-              <div className="filter-box">
-                <label htmlFor="archive-date-select">{text.dateLabel}</label>
-                <input
-                  id="archive-date-select"
-                  type="date"
-                  value={selectedDate}
-                  min={minSelectableDate || undefined}
-                  max={getDaySeed(new Date())}
-                  onChange={(event) => onDateChange?.(event.target.value)}
-                />
-              </div>
-            )}
-
-            {!isHackerMode && (
-              <div className="filter-box">
-                <label htmlFor="daily-difficulty-select">{text.difficultyLabel}</label>
-                <select
-                  id="daily-difficulty-select"
-                  value={difficulty}
-                  onChange={(event) => { setDifficulty(event.target.value); savePreferences({ difficulty: event.target.value }); }}
-                >
-                  {difficulties.map((item) => (
-                    <option key={item.value} value={item.value}>
-                      {item.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            <div className="filter-box">
-              <label htmlFor="prog-lang-select">{text.progLangLabel}</label>
-              <select
-                id="prog-lang-select"
-                value={programmingLanguage}
-                onChange={(event) => {
-                  setProgrammingLanguage(event.target.value);
-                  savePreferences({ programmingLanguage: event.target.value });
-                }}
-              >
-                <option value="python">{text.progLangPython}</option>
-                <option value="java">{text.progLangJava}</option>
-              </select>
-            </div>
-          </div>
+      <div className="page-head">
+        <div className="page-head-text">
+          <h1 className="page-title">{pageTitle}</h1>
+          <p className="lede">{pageSubtitle}</p>
         </div>
 
-        {isHackerMode && (
-          <div className="status-box hacker-info-box">
-            <h2>{text.hackerBadge}</h2>
-            <p>{text.hackerDescription}</p>
-          </div>
-        )}
-
-        {!dailyChallenge ? (
-          <div className="status-box">
-            <h2>{text.emptyTitle}</h2>
-            <p>{text.emptyText}</p>
-          </div>
-        ) : (
-          <>
-            <div className="challenge-card">
-              <div className="challenge-card-header">
-                <div>
-                  <div className="badge-row">
-                    <span className="difficulty-pill">
-                      {difficultyLabelMap[dailyChallenge.difficulty] || dailyChallenge.difficulty}
-                    </span>
-
-                    {isHackerMode && (
-                      <span className="hacker-pill">{text.hackerBadge}</span>
-                    )}
-
-                    {completed && (
-                      <span className="completed-pill">{text.completedBadge}</span>
-                    )}
-
-                    {givenUp && !completed && (
-                      <span className="hacker-pill">{text.giveUpBadge}</span>
-                    )}
-
-                    <span className="difficulty-pill">
-                      {isPythonLoading ? text.pythonLoading : text.pythonReady}
-                    </span>
-                  </div>
-
-                  <h2>{dailyChallenge.localizedTitle}</h2>
-                </div>
-              </div>
-
-              <p className="challenge-description">{dailyChallenge.localizedDescription}</p>
-
-              <div className="challenge-meta-grid">
-                <div className="meta-item">
-                  <span>{text.selectedDate}</span>
-                  <strong>{getDaySeed(challengeDate)}</strong>
-                </div>
-                <div className="meta-item">
-                  <span>{text.challengeId}</span>
-                  <strong>{dailyChallenge.id}</strong>
-                </div>
-                <div className="meta-item">
-                  <span>{text.languageLabel}</span>
-                  <strong>{dailyChallenge.language}</strong>
-                </div>
-                <div className="meta-item">
-                  <span>{text.functionLabel}</span>
-                  <strong>{dailyChallenge.functionName}</strong>
-                </div>
-                <div className="meta-item">
-                  <span>{text.hintsPreview}</span>
-                  <strong>{isHackerMode ? 0 : dailyChallenge.localizedHints.length}</strong>
-                </div>
-                <div className="meta-item">
-                  <span>{text.testsCount}</span>
-                  <strong>{dailyChallenge.tests.length}</strong>
-                </div>
-              </div>
-
-              <div className="challenge-section">
-                <h3>{text.instructions}</h3>
-                <p>{dailyChallenge.localizedInstructions}</p>
-              </div>
-
-              <div className="challenge-section">
-                <h3>{text.restrictions}</h3>
-                <ul className="challenge-list">
-                  {dailyChallenge.localizedRestrictions.map((restriction) => (
-                    <li key={restriction}>{restriction}</li>
-                  ))}
-                  {isHackerMode && (
-                    <>
-                      <li>{language === 'es' ? 'Sin pistas.' : 'No hints.'}</li>
-                      <li>
-                        {language === 'es'
-                          ? 'Máximo 3 intentos para esta fecha.'
-                          : 'Maximum 3 attempts for this date.'}
-                      </li>
-                    </>
-                  )}
-                </ul>
-              </div>
-
-              {!isHackerMode && (
-                <div className="challenge-section">
-                  <h3>{text.starterCode}</h3>
-                  <pre className="code-block">
-                    <code>{dailyChallenge.starterCode}</code>
-                  </pre>
-                </div>
-              )}
-            </div>
-
-            <div className="editor-card">
-              <div className="editor-card-header">
-                <div>
-                  <h2>{text.editorTitle}</h2>
-                  <p>{text.prototypeNote}</p>
-                  {pythonLoadError && (
-                    <p className="muted-text">
-                      {text.pythonLoadError}: {pythonLoadError}
-                    </p>
-                  )}
-                </div>
-
-                <div className="editor-stats">
-                  <div className="mini-stat">
-                    <span>{text.attempts}</span>
-                    <strong>{attemptCount}</strong>
-                  </div>
-
-                  {isHackerMode ? (
-                    <div className="mini-stat hacker-stat">
-                      <span>{text.attemptsLeft}</span>
-                      <strong>{hackerAttemptsLeft}</strong>
-                    </div>
-                  ) : (
-                    <div className="mini-stat">
-                      <span>{text.visibleHints}</span>
-                      <strong>{revealedHints}</strong>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {locked && !completed && !givenUp && (
-                <div className="feedback-box error-box">
-                  <h4>{text.hackerLockedTitle}</h4>
-                  <p>{text.hackerLockedText}</p>
-                </div>
-              )}
-
-              <textarea
-                className="code-editor"
-                value={code}
-                onChange={(event) => setCode(event.target.value)}
-                onKeyDown={(event) => {
-                  const textarea = event.target;
-                  const start = textarea.selectionStart;
-                  const end = textarea.selectionEnd;
-                  const TAB = '    ';
-
-                  if (event.key === 'Tab') {
-                    event.preventDefault();
-
-                    const hasSelection = start !== end;
-
-                    if (event.shiftKey) {
-                      // Shift+Tab: desindenta las líneas seleccionadas (o la línea actual)
-                      const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-                      const lineEnd = end;
-                      const selectedLines = code.substring(lineStart, lineEnd);
-
-                      const dedented = selectedLines
-                        .split('\n')
-                        .map((line) => (line.startsWith(TAB) ? line.slice(TAB.length) : line.replace(/^ {1,3}/, '')))
-                        .join('\n');
-
-                      const removed = selectedLines.length - dedented.length;
-                      const newValue = code.substring(0, lineStart) + dedented + code.substring(lineEnd);
-                      setCode(newValue);
-
-                      setTimeout(() => {
-                        textarea.selectionStart = Math.max(lineStart, start - (hasSelection ? 0 : Math.min(removed, TAB.length)));
-                        textarea.selectionEnd = end - removed;
-                      }, 0);
-
-                    } else if (hasSelection) {
-                      // Tab con selección: indenta todas las líneas seleccionadas
-                      const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-                      const lineEnd = end;
-                      const selectedLines = code.substring(lineStart, lineEnd);
-
-                      const indented = selectedLines.split('\n').map((line) => TAB + line).join('\n');
-                      const added = indented.length - selectedLines.length;
-                      const newValue = code.substring(0, lineStart) + indented + code.substring(lineEnd);
-                      setCode(newValue);
-
-                      setTimeout(() => {
-                        textarea.selectionStart = start + TAB.length;
-                        textarea.selectionEnd = end + added;
-                      }, 0);
-
-                    } else {
-                      // Tab sin selección: inserta 4 espacios en el cursor
-                      const newValue = code.substring(0, start) + TAB + code.substring(end);
-                      setCode(newValue);
-                      setTimeout(() => {
-                        textarea.selectionStart = textarea.selectionEnd = start + TAB.length;
-                      }, 0);
-                    }
-
-                  } else if (event.key === 'Backspace' && start === end) {
-                    // Backspace inteligente: borra un TAB completo si el cursor está precedido de espacios
-                    const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-                    const textBeforeCursor = code.substring(lineStart, start);
-                    const trailingSpaces = textBeforeCursor.match(/( +)$/)?.[1] ?? '';
-
-                    if (trailingSpaces.length > 0) {
-                      event.preventDefault();
-                      const toRemove = ((trailingSpaces.length - 1) % TAB.length) + 1;
-                      const newValue = code.substring(0, start - toRemove) + code.substring(start);
-                      setCode(newValue);
-                      setTimeout(() => {
-                        textarea.selectionStart = textarea.selectionEnd = start - toRemove;
-                      }, 0);
-                    }
-                  }
-                }}
-                spellCheck={false}
-                placeholder={text.editorPlaceholder}
-                disabled={completed || locked || isChecking || isPythonLoading}
-              />
-
-              <div className="editor-actions">
+        <div className="toolbar">
+          {allowHackerMode && (
+            <div className="field">
+              <span className="field-label" id="play-mode-label">{text.modeLabel}</span>
+              <div className="segmented" role="group" aria-labelledby="play-mode-label">
                 <button
-                  className="primary-button"
-                  onClick={handleValidate}
-                  disabled={completed || locked || isChecking || isPythonLoading}
+                  aria-pressed={playMode === 'normal'}
+                  onClick={() => { setPlayMode('normal'); savePreferences({ playMode: 'normal' }); }}
                 >
-                  {completed
-                    ? text.completedBadge
-                    : isChecking
-                    ? text.checkingButton
-                    : isPythonLoading
-                    ? text.pythonLoadingButton
-                    : text.checkButton}
+                  {text.modeNormal}
                 </button>
-
-                {!isHackerMode && (
-                  <button
-                    className="secondary-button"
-                    onClick={handleResetCode}
-                    disabled={completed || locked || isChecking}
-                  >
-                    {text.resetButton}
-                  </button>
-                )}
-
-                {completed && (
-                  <button
-                    className={`secondary-button ${shareStatus === 'copied' ? 'is-confirmed' : ''}`}
-                    onClick={handleShare}
-                    aria-live="polite"
-                  >
-                    {shareLabel(text.shareButton)}
-                  </button>
-                )}
-
-                {/* Botón rendirse: solo en modo normal, sin completar, sin rendido, tras al menos un intento fallido */}
-                {!isHackerMode && !completed && !givenUp && attemptCount >= 1 && !locked && (
-                  <button
-                    className="secondary-button danger-button"
-                    onClick={() => setShowGiveUpConfirm(true)}
-                  >
-                    {text.giveUpButton}
-                  </button>
-                )}
-              </div>
-
-              {/* Modal de confirmación de rendirse */}
-              {showGiveUpConfirm && (
-                <div className="modal-overlay" onClick={closeGiveUpConfirm}>
-                  <div
-                    className="modal-card confirm-card"
-                    role="alertdialog"
-                    aria-modal="true"
-                    aria-labelledby="give-up-title"
-                    aria-describedby="give-up-text"
-                    onClick={(event) => event.stopPropagation()}
-                  >
-                    <h2 id="give-up-title">{text.giveUpConfirmTitle}</h2>
-                    <p id="give-up-text">{text.giveUpConfirmText}</p>
-                    <div className="modal-actions">
-                      <button className="secondary-button" onClick={closeGiveUpConfirm} autoFocus>
-                        {text.giveUpCancel}
-                      </button>
-                      <button className="secondary-button danger-button solid" onClick={handleGiveUp}>
-                        {text.giveUpConfirm}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <div className="editor-grid">
-                <div className="result-panel">
-                  <h3>{text.resultTitle}</h3>
-
-                  {/* Bloque rendido */}
-                  {givenUp && !completed && (
-                    <div className="feedback-box error-box" style={{ marginBottom: '14px' }}>
-                      <h4>{text.giveUpBadge}</h4>
-                      {baseChallenge?.solution ? (
-                        <div style={{ marginTop: '10px' }}>
-                          <strong style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                            {text.solutionLabel}
-                          </strong>
-                          <pre className="code-block" style={{ marginTop: '8px' }}>
-                            <code>{baseChallenge.solution}</code>
-                          </pre>
-                        </div>
-                      ) : (
-                        <p style={{ marginTop: '4px', fontSize: '0.83rem' }}>
-                          {language === 'es'
-                            ? 'Revisa las pistas para entender la solución.'
-                            : 'Check the hints to understand the solution.'}
-                        </p>
-                      )}
-                    </div>
-                  )}
-
-                  {!givenUp && !validationResult ? (
-                    <p className="muted-text">{text.waitingResult}</p>
-                  ) : !givenUp && validationResult?.success ? (
-                    <div className="feedback-box success-box">
-                      <h4>{text.passedTitle}</h4>
-                      <p>{text.passedText}</p>
-                      <p>
-                        {validationResult.passedCount} / {validationResult.totalTests}{' '}
-                        {text.testsPassedText}
-                      </p>
-                    </div>
-                  ) : !givenUp && validationResult ? (
-                    <div className="feedback-box error-box">
-                      <h4>{text.failedTitle}</h4>
-                      <p>
-                        {validationResult.passedCount} / {validationResult.totalTests}{' '}
-                        {text.testsPassedText}
-                      </p>
-                    </div>
-                  ) : null}
-
-                  {(validationResult?.pythonError || validationResult?.runtimeError) && (
-                    <div className="result-subsection">
-                      <h4>{text.runtimeTitle}</h4>
-                      <pre className="code-block">
-                        <code>{validationResult.pythonError || validationResult.runtimeError}</code>
-                      </pre>
-                    </div>
-                  )}
-
-                  {validationResult && translatedErrors.length > 0 && (
-                    <div className="result-subsection">
-                      <h4>{text.errorsSection}</h4>
-                      <ul className="challenge-list compact-list">
-                        {translatedErrors.map((error) => (
-                          <li key={error}>{error}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {validationResult && validationResult.testResults.length > 0 && (
-                    <div className="result-subsection">
-                      <h4>{text.testsSection}</h4>
-                      <div className="tests-list">
-                        {validationResult.testResults.map((test) => (
-                          <div
-                            key={test.index}
-                            className={`test-item ${test.passed ? 'passed' : 'failed'}`}
-                          >
-                            <span>
-                              Test {test.index + 1}: {test.passed ? text.testPassed : text.testFailed}
-                            </span>
-                            <code>
-                              input: {JSON.stringify(test.input)} | expected:{' '}
-                              {JSON.stringify(test.expected)}
-                              {test.actual !== undefined
-                                ? ` | actual: ${JSON.stringify(test.actual)}`
-                                : ''}
-                            </code>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="result-panel">
-                  <h3>{text.hintsSection}</h3>
-
-                  {isHackerMode ? (
-                    <p className="muted-text">{text.noHintsInHacker}</p>
-                  ) : revealedHints === 0 ? (
-                    <p className="muted-text">{text.noHintsYet}</p>
-                  ) : (
-                    <ul className="challenge-list compact-list">
-                      {dailyChallenge.localizedHints
-                        .slice(0, revealedHints)
-                        .map((hint, index) => (
-                          <li key={`${index}-${hint}`}>{hint}</li>
-                        ))}
-                    </ul>
-                  )}
-                </div>
+                <button
+                  aria-pressed={playMode === 'hacker'}
+                  onClick={() => { setPlayMode('hacker'); savePreferences({ playMode: 'hacker' }); }}
+                >
+                  {text.modeHacker}
+                </button>
               </div>
             </div>
-          </>
-        )}
+          )}
 
-        <div className="status-box">
-          <h2>{text.statsTitle}</h2>
-          <div className="stats-grid">
-            <div className="stat-card">
-              <span>{text.total}</span>
-              <strong>{stats.total}</strong>
+          {allowDateSelection && (
+            <div className="field">
+              <label htmlFor="archive-date-select">{text.dateLabel}</label>
+              <input
+                id="archive-date-select"
+                type="date"
+                value={selectedDate}
+                min={minSelectableDate || undefined}
+                max={getDaySeed(new Date())}
+                onChange={(event) => onDateChange?.(event.target.value)}
+              />
             </div>
-            <div className="stat-card">
-              <span>{text.difficultyNovato}</span>
-              <strong>{stats.novato}</strong>
+          )}
+
+          {!isHackerMode && (
+            <div className="field">
+              <label htmlFor="daily-difficulty-select">{text.difficultyLabel}</label>
+              <select
+                id="daily-difficulty-select"
+                value={difficulty}
+                onChange={(event) => { setDifficulty(event.target.value); savePreferences({ difficulty: event.target.value }); }}
+              >
+                {difficulties.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className="stat-card">
-              <span>{text.difficultyIntermedio}</span>
-              <strong>{stats.intermedio}</strong>
-            </div>
-            <div className="stat-card">
-              <span>{text.difficultyPro}</span>
-              <strong>{stats.pro}</strong>
-            </div>
+          )}
+
+          <div className="field">
+            <label htmlFor="prog-lang-select">{text.progLangLabel}</label>
+            <select
+              id="prog-lang-select"
+              value={programmingLanguage}
+              onChange={(event) => {
+                setProgrammingLanguage(event.target.value);
+                savePreferences({ programmingLanguage: event.target.value });
+              }}
+            >
+              <option value="python">{text.progLangPython}</option>
+              <option value="java">{text.progLangJava}</option>
+            </select>
           </div>
         </div>
       </div>
-      {/* Modal de resultado */}
+
+      {isHackerMode && (
+        <div className="feedback-box error-box">
+          <PixelIcon name="alert" size={36} />
+          <h4>{text.hackerBadge}</h4>
+          <p>{text.hackerDescription}</p>
+        </div>
+      )}
+
+      {!dailyChallenge ? (
+        <Window title={text.emptyTitle} icon="alert">
+          <p>{text.emptyText}</p>
+        </Window>
+      ) : (
+        <>
+          <div className="workspace">
+            <Window
+              title={`${text.briefTitle} #${dayNum}`}
+              icon="doc"
+              status={
+                <>
+                  <span>{text.statsTitle}</span>
+                  <span className="pool-row">
+                    <span>{text.total} <strong>{stats.total}</strong></span>
+                    <span>{text.difficultyNovato} <strong>{stats.novato}</strong></span>
+                    <span>{text.difficultyIntermedio} <strong>{stats.intermedio}</strong></span>
+                    <span>{text.difficultyPro} <strong>{stats.pro}</strong></span>
+                  </span>
+                </>
+              }
+            >
+              <div className="brief-body">
+                <div className="badge-row">
+                  <span className="pill">
+                    {difficultyLabelMap[dailyChallenge.difficulty] || dailyChallenge.difficulty}
+                  </span>
+                  {isHackerMode && <span className="pill inverse">{text.hackerBadge}</span>}
+                  {completed && (
+                    <span className="pill inverse">
+                      <PixelIcon name="check" size={14} />
+                      {text.completedBadge}
+                    </span>
+                  )}
+                  {givenUp && !completed && <span className="pill dotted">{text.giveUpBadge}</span>}
+                </div>
+
+                <h2 className="challenge-heading">{dailyChallenge.localizedTitle}</h2>
+                <p className="challenge-description">{dailyChallenge.localizedDescription}</p>
+
+                <dl className="facts">
+                  <div>
+                    <dt>{text.selectedDate}</dt>
+                    <dd>{getDaySeed(challengeDate)}</dd>
+                  </div>
+                  <div>
+                    <dt>{text.challengeId}</dt>
+                    <dd>{dailyChallenge.id}</dd>
+                  </div>
+                  <div>
+                    <dt>{text.languageLabel}</dt>
+                    <dd>{dailyChallenge.language}</dd>
+                  </div>
+                  <div>
+                    <dt>{text.functionLabel}</dt>
+                    <dd>{dailyChallenge.functionName}</dd>
+                  </div>
+                  <div>
+                    <dt>{text.hintsPreview}</dt>
+                    <dd>{isHackerMode ? 0 : dailyChallenge.localizedHints.length}</dd>
+                  </div>
+                  <div>
+                    <dt>{text.testsCount}</dt>
+                    <dd>{dailyChallenge.tests.length}</dd>
+                  </div>
+                </dl>
+
+                <div className="section-block">
+                  <h3>{text.instructions}</h3>
+                  <p>{dailyChallenge.localizedInstructions}</p>
+                </div>
+
+                <div className="section-block">
+                  <h3>{text.restrictions}</h3>
+                  <ul className="challenge-list">
+                    {dailyChallenge.localizedRestrictions.map((restriction) => (
+                      <li key={restriction}>{restriction}</li>
+                    ))}
+                    {isHackerMode && (
+                      <>
+                        <li>{language === 'es' ? 'Sin pistas.' : 'No hints.'}</li>
+                        <li>
+                          {language === 'es'
+                            ? 'Máximo 3 intentos para esta fecha.'
+                            : 'Maximum 3 attempts for this date.'}
+                        </li>
+                      </>
+                    )}
+                  </ul>
+                </div>
+
+                {!isHackerMode && (
+                  <div className="section-block">
+                    <h3>{text.starterCode}</h3>
+                    <pre className="code-block">
+                      <code>{dailyChallenge.starterCode}</code>
+                    </pre>
+                  </div>
+                )}
+              </div>
+            </Window>
+
+            <Window
+              className={`editor-window ${isChecking ? 'is-busy' : ''}`}
+              title={fileName}
+              icon="doc"
+              style={{ '--zoom-delay': '0.1s' }}
+              status={
+                <>
+                  <span className={isPythonLoading || isChecking ? 'busy-dots' : undefined}>
+                    {isChecking ? text.checkingButton.replace(/\.+$/, '') : runtimeLabel}
+                  </span>
+                  <span>{text.editorTitle}</span>
+                </>
+              }
+            >
+              <div className="editor-body">
+                <div className="editor-meta">
+                  <p className="muted-text">{text.prototypeNote}</p>
+                  <div className="mini-stats">
+                    <div className="mini-stat">
+                      <span>{text.attempts}</span>
+                      <strong>{attemptCount}</strong>
+                    </div>
+                    {isHackerMode ? (
+                      <div className="mini-stat inverse">
+                        <span>{text.attemptsLeft}</span>
+                        <strong>{hackerAttemptsLeft}</strong>
+                      </div>
+                    ) : (
+                      <div className="mini-stat">
+                        <span>{text.visibleHints}</span>
+                        <strong>{revealedHints}</strong>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {pythonLoadError && (
+                  <div className="feedback-box error-box">
+                    <PixelIcon name="alert" size={32} />
+                    <h4>{text.pythonLoadError}</h4>
+                    <p>{pythonLoadError}</p>
+                  </div>
+                )}
+
+                {locked && !completed && !givenUp && (
+                  <div className="feedback-box error-box">
+                    <PixelIcon name="alert" size={32} />
+                    <h4>{text.hackerLockedTitle}</h4>
+                    <p>{text.hackerLockedText}</p>
+                  </div>
+                )}
+
+                <label className="sr-only" htmlFor="solution-editor">{text.editorTitle}</label>
+                <textarea
+                  id="solution-editor"
+                  className="code-editor"
+                  value={code}
+                  onChange={(event) => setCode(event.target.value)}
+                  onKeyDown={handleEditorKeyDown}
+                  spellCheck={false}
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  placeholder={text.editorPlaceholder}
+                  disabled={completed || locked || isChecking || isPythonLoading}
+                />
+
+                <div className="button-row">
+                  <button
+                    className="primary-button"
+                    onClick={handleValidate}
+                    disabled={completed || locked || isChecking || isPythonLoading}
+                  >
+                    {completed
+                      ? text.completedBadge
+                      : isChecking
+                      ? text.checkingButton
+                      : isPythonLoading
+                      ? text.pythonLoadingButton
+                      : text.checkButton}
+                  </button>
+
+                  {!isHackerMode && (
+                    <button
+                      className="secondary-button"
+                      onClick={handleResetCode}
+                      disabled={completed || locked || isChecking}
+                    >
+                      {text.resetButton}
+                    </button>
+                  )}
+
+                  {completed && (
+                    <button
+                      className={`secondary-button ${shareStatus === 'copied' ? 'is-confirmed' : ''}`}
+                      onClick={handleShare}
+                      aria-live="polite"
+                    >
+                      {shareLabel(text.shareButton)}
+                    </button>
+                  )}
+
+                  {/* Botón rendirse: solo en modo normal, sin completar, sin rendido, tras al menos un intento fallido */}
+                  {!isHackerMode && !completed && !givenUp && attemptCount >= 1 && !locked && (
+                    <button className="secondary-button danger-button" onClick={() => setShowGiveUpConfirm(true)}>
+                      {text.giveUpButton}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </Window>
+          </div>
+
+          <div className="results-grid">
+            <Window title={text.resultTitle} icon="check" style={{ '--zoom-delay': '0.16s' }}>
+              <div className="result-stack" aria-live="polite">
+                {givenUp && !completed && (
+                  <div className="feedback-box error-box">
+                    <PixelIcon name="alert" size={32} />
+                    <h4>{text.giveUpBadge}</h4>
+                    {baseChallenge?.solution ? (
+                      <div>
+                        <p className="tutorial-label">{text.solutionLabel}</p>
+                        <pre className="code-block">
+                          <code>{baseChallenge.solution}</code>
+                        </pre>
+                      </div>
+                    ) : (
+                      <p>
+                        {language === 'es'
+                          ? 'Revisa las pistas para entender la solución.'
+                          : 'Check the hints to understand the solution.'}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {!givenUp && !validationResult ? (
+                  <div className="empty-note">
+                    <PixelIcon name="doc" size={28} />
+                    <span>{text.waitingResult}</span>
+                  </div>
+                ) : !givenUp && validationResult?.success ? (
+                  <div className="feedback-box success-box">
+                    <PixelIcon name="check" size={36} />
+                    <h4>{text.passedTitle}</h4>
+                    <p>{text.passedText}</p>
+                    <p>
+                      {validationResult.passedCount} / {validationResult.totalTests} {text.testsPassedText}
+                    </p>
+                  </div>
+                ) : !givenUp && validationResult ? (
+                  <div className="feedback-box error-box">
+                    <PixelIcon name="alert" size={36} />
+                    <h4>{text.failedTitle}</h4>
+                    <p>
+                      {validationResult.passedCount} / {validationResult.totalTests} {text.testsPassedText}
+                    </p>
+                  </div>
+                ) : null}
+
+                {(validationResult?.pythonError || validationResult?.runtimeError) && (
+                  <div className="result-subsection">
+                    <h4>{text.runtimeTitle}</h4>
+                    <pre className="code-block">
+                      <code>{validationResult.pythonError || validationResult.runtimeError}</code>
+                    </pre>
+                  </div>
+                )}
+
+                {validationResult && translatedErrors.length > 0 && (
+                  <div className="result-subsection">
+                    <h4>{text.errorsSection}</h4>
+                    <ul className="challenge-list">
+                      {translatedErrors.map((error) => (
+                        <li key={error}>{error}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {validationResult && validationResult.testResults.length > 0 && (
+                  <div className="result-subsection">
+                    <h4>{text.testsSection}</h4>
+                    <div className="tests-list">
+                      {validationResult.testResults.map((test, row) => (
+                        <div
+                          key={`${attemptCount}-${test.index}`}
+                          className={`test-item ${test.passed ? 'passed' : 'failed'}`}
+                          style={{ '--row': row }}
+                        >
+                          <span className="test-mark">
+                            <PixelIcon name={test.passed ? 'check' : 'cross'} size={18} />
+                          </span>
+                          <span className="test-name">
+                            Test {test.index + 1}: {test.passed ? text.testPassed : text.testFailed}
+                          </span>
+                          <code>
+                            input: {JSON.stringify(test.input)} | expected: {JSON.stringify(test.expected)}
+                            {test.actual !== undefined ? ` | actual: ${JSON.stringify(test.actual)}` : ''}
+                          </code>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Window>
+
+            <Window title={text.hintsSection} icon="bulb" style={{ '--zoom-delay': '0.2s' }}>
+              {isHackerMode ? (
+                <div className="empty-note">
+                  <PixelIcon name="alert" size={28} />
+                  <span>{text.noHintsInHacker}</span>
+                </div>
+              ) : revealedHints === 0 ? (
+                <div className="empty-note">
+                  <PixelIcon name="bulb" size={28} />
+                  <span>{text.noHintsYet}</span>
+                </div>
+              ) : (
+                <ol className="hint-list">
+                  {dailyChallenge.localizedHints.slice(0, revealedHints).map((hint, index) => (
+                    <li key={`${index}-${hint}`}>
+                      <span className="hint-num">{index + 1}</span>
+                      <span>{hint}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </Window>
+          </div>
+        </>
+      )}
+
+      {showGiveUpConfirm && (
+        <div className="modal-overlay" onClick={closeGiveUpConfirm}>
+          <Window
+            className="dialog"
+            title={text.giveUpButton}
+            titleAs="p"
+            onClose={closeGiveUpConfirm}
+            closeLabel={text.giveUpCancel}
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="give-up-title"
+            aria-describedby="give-up-text"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="alert-layout">
+              <PixelIcon name="alert" size={48} />
+              <div>
+                <h3 id="give-up-title">{text.giveUpConfirmTitle}</h3>
+                <p id="give-up-text">{text.giveUpConfirmText}</p>
+              </div>
+            </div>
+            <div className="dialog-actions">
+              <button className="secondary-button" onClick={closeGiveUpConfirm} autoFocus>
+                {text.giveUpCancel}
+              </button>
+              <button className="secondary-button danger-button solid" onClick={handleGiveUp}>
+                {text.giveUpConfirm}
+              </button>
+            </div>
+          </Window>
+        </div>
+      )}
+
       {showResultModal && completed && (
         <div className="modal-overlay" onClick={closeResultModal}>
-          <div
-            className="modal-card result-card"
+          <Window
+            className="dialog result-dialog"
+            title={text.modalTitle}
+            titleAs="h2"
+            titleId="result-title"
+            onClose={closeResultModal}
+            closeLabel={text.modalClose}
             role="dialog"
             aria-modal="true"
             aria-labelledby="result-title"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="result-emoji" aria-hidden="true">🎉</div>
-            <h2 id="result-title">{text.modalTitle}</h2>
-
-            <p className="result-day">CodeDaily #{dayNum} 🧩</p>
+            <p className="result-day">CodeDaily #{dayNum}</p>
             <p className="result-meta">{resultMetaLine}</p>
 
-            <div className="result-grid" role="img" aria-label={attemptsSummary}>{emojiGrid}</div>
+            <div className="attempt-grid" role="img" aria-label={attemptsSummary}>
+              {Array.from({ length: gridSlots }, (_, i) => {
+                const isLast = i === attemptCount - 1;
+                const state = i < attemptCount - 1 ? 'fail' : isLast && completed ? 'win' : '';
+                return (
+                  <span key={i} className={`attempt-cell ${state}`}>
+                    {state === 'win' && <PixelIcon name="check" size={22} />}
+                    {state === 'fail' && <PixelIcon name="cross" size={18} />}
+                  </span>
+                );
+              })}
+            </div>
 
             <p className="result-attempts">{attemptsSummary}</p>
-            {streakLine && <p className="result-streak">🔥 {streakLine}</p>}
+            {streakLine && (
+              <p className="result-streak">
+                <PixelIcon name="flame" size={22} />
+                {streakLine}
+              </p>
+            )}
 
-            <div className="modal-actions">
+            <div className="dialog-actions">
               <button className="secondary-button" onClick={closeResultModal}>
                 {text.modalClose}
               </button>
@@ -1067,7 +1105,7 @@ function ChallengePlayer({
                 {shareLabel(text.modalShare)}
               </button>
             </div>
-          </div>
+          </Window>
         </div>
       )}
     </section>

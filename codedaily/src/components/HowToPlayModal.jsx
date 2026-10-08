@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useEscapeKey } from '../hooks/useEscapeKey';
+import Window from './ui/Window';
+import PixelIcon from './ui/PixelIcon';
 
 function HowToPlayModal({ isOpen, onClose }) {
   const { language } = useLanguage();
@@ -37,11 +39,11 @@ function HowToPlayModal({ isOpen, onClose }) {
       dailyExampleJavaTitle: 'Ejemplo Java:',
 
       modesIntro: 'En la sección "Modos" encontrarás tres formas adicionales de practicar:',
-      mode1Title: '{ } ¿Qué devuelve?',
+      mode1Title: '¿Qué devuelve?',
       mode1Desc: 'Lee el código y predice el valor exacto que devuelve para la entrada dada. Tienes 3 intentos. La solución solo se revela al agotar los intentos.',
-      mode2Title: '🐛 Encuentra el bug',
+      mode2Title: 'Encuentra el bug',
       mode2Desc: 'El código tiene un error. Corrígelo para que todos los tests pasen. Se desbloquean pistas progresivas al fallar. Tienes 3 intentos.',
-      mode3Title: '⏱ ¿Cuál es la complejidad?',
+      mode3Title: '¿Cuál es la complejidad?',
       mode3Desc: 'Elige la complejidad temporal correcta en notación Big O entre 4 opciones. Las opciones incorrectas se deshabilitan. Tienes 2 intentos.',
 
       close: 'Cerrar',
@@ -66,11 +68,11 @@ function HowToPlayModal({ isOpen, onClose }) {
       dailyExampleJava: 'class Solution {\n    public static int solve(int a, int b) {\n        return a + b;\n    }\n}',
 
       modesIntro: 'In the "Modes" section you will find three additional ways to practice:',
-      mode1Title: '{ } What does it return?',
+      mode1Title: 'What does it return?',
       mode1Desc: 'Read the code and predict the exact return value for the given input. You have 3 attempts. The solution is only revealed after all attempts are used.',
-      mode2Title: '🐛 Find the bug',
+      mode2Title: 'Find the bug',
       mode2Desc: 'The code has an error. Fix it so all tests pass. Progressive hints unlock on failure. You have 3 attempts.',
-      mode3Title: '⏱ What is the complexity?',
+      mode3Title: 'What is the complexity?',
       mode3Desc: 'Choose the correct time complexity in Big O notation from 4 options. Wrong options are disabled. You have 2 attempts.',
 
       close: 'Close',
@@ -78,39 +80,32 @@ function HowToPlayModal({ isOpen, onClose }) {
   }[language];
 
   const modes = [
-    { title: text.mode1Title, desc: text.mode1Desc, accent: 'green' },
-    { title: text.mode2Title, desc: text.mode2Desc, accent: 'red' },
-    { title: text.mode3Title, desc: text.mode3Desc, accent: 'blue' },
+    { title: text.mode1Title, desc: text.mode1Desc, icon: 'braces' },
+    { title: text.mode2Title, desc: text.mode2Desc, icon: 'bug' },
+    { title: text.mode3Title, desc: text.mode3Desc, icon: 'clock' },
   ];
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div
+      <Window
         ref={cardRef}
         tabIndex={-1}
-        className="modal-card tutorial-card"
+        className="dialog dialog-wide"
+        title={text.title}
+        titleId="how-to-play-title"
+        icon="doc"
+        onClose={onClose}
+        closeLabel={text.close}
         role="dialog"
         aria-modal="true"
         aria-labelledby="how-to-play-title"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 id="how-to-play-title">{text.title}</h2>
-
-        <div className="mode-switch-buttons tutorial-tabs" role="tablist">
-          <button
-            role="tab"
-            aria-selected={tab === 'daily'}
-            className={`mode-button ${tab === 'daily' ? 'active' : ''}`}
-            onClick={() => setTab('daily')}
-          >
+        <div className="segmented tutorial-tabs" role="tablist">
+          <button role="tab" aria-selected={tab === 'daily'} onClick={() => setTab('daily')}>
             {text.tabDaily}
           </button>
-          <button
-            role="tab"
-            aria-selected={tab === 'modes'}
-            className={`mode-button ${tab === 'modes' ? 'active' : ''}`}
-            onClick={() => setTab('modes')}
-          >
+          <button role="tab" aria-selected={tab === 'modes'} onClick={() => setTab('modes')}>
             {text.tabModes}
           </button>
         </div>
@@ -125,12 +120,12 @@ function HowToPlayModal({ isOpen, onClose }) {
             </ol>
 
             <p className="tutorial-label">{text.dailyExampleTitle}</p>
-            <pre className="code-block" style={{ marginBottom: '12px' }}>
+            <pre className="code-block">
               <code>{text.dailyExample}</code>
             </pre>
 
-            <p className="tutorial-label">{text.dailyExampleJavaTitle}</p>
-            <pre className="code-block" style={{ marginBottom: '20px' }}>
+            <p className="tutorial-label" style={{ marginTop: '16px' }}>{text.dailyExampleJavaTitle}</p>
+            <pre className="code-block">
               <code>{text.dailyExampleJava}</code>
             </pre>
           </div>
@@ -139,20 +134,24 @@ function HowToPlayModal({ isOpen, onClose }) {
         {tab === 'modes' && (
           <div role="tabpanel">
             <p className="tutorial-intro">{text.modesIntro}</p>
-
-            {modes.map((mode) => (
-              <div key={mode.title} className={`tutorial-mode accent-${mode.accent}`}>
-                <h3>{mode.title}</h3>
-                <p>{mode.desc}</p>
-              </div>
-            ))}
+            <div className="tutorial-modes">
+              {modes.map((mode) => (
+                <div key={mode.title} className="tutorial-mode">
+                  <PixelIcon name={mode.icon} size={40} />
+                  <h3>{mode.title}</h3>
+                  <p>{mode.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        <button className="primary-button" onClick={onClose}>
-          {text.close}
-        </button>
-      </div>
+        <div className="dialog-actions">
+          <button className="primary-button" onClick={onClose}>
+            {text.close}
+          </button>
+        </div>
+      </Window>
     </div>
   );
 }
