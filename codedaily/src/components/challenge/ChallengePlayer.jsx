@@ -18,10 +18,21 @@ import {
 import { ensurePyodideLoaded } from '../../services/pythonRunnerService';
 import { getPreferences, savePreferences } from '../../services/uiService';
 import { useEscapeKey } from '../../hooks/useEscapeKey';
+import { buildPath } from '../../router';
 import Window from '../ui/Window';
 import PixelIcon from '../ui/PixelIcon';
 
 const NORMAL_GRID_SLOTS = 5;
+
+const SITE_ORIGIN = 'https://codedaily-nu.vercel.app';
+
+// En móvil se abre el menú nativo de compartir (WhatsApp, Telegram...);
+// en escritorio se copia al portapapeles, que es lo que se espera allí.
+function shouldUseNativeShare() {
+  return typeof navigator !== 'undefined'
+    && typeof navigator.share === 'function'
+    && window.matchMedia?.('(pointer: coarse)').matches;
+}
 
 async function copyToClipboard(value) {
   try {
@@ -155,6 +166,7 @@ function ChallengePlayer({
           'Has agotado los 3 intentos disponibles del modo Hacker para esta fecha.',
         shareButton: 'Compartir resultado',
         shareCopied: '¡Copiado!',
+        shareShared: '¡Compartido!',
         shareFailed: 'No se pudo copiar',
         modalTitle: '¡Reto superado!',
         modalClose: 'Cerrar',
@@ -240,6 +252,7 @@ function ChallengePlayer({
           'You used all 3 available attempts for this Hacker challenge date.',
         shareButton: 'Share result',
         shareCopied: 'Copied!',
+        shareShared: 'Shared!',
         shareFailed: "Couldn't copy",
         modalTitle: 'Challenge solved!',
         modalClose: 'Close',
@@ -547,16 +560,32 @@ function ChallengePlayer({
       `${emojiGrid} — ${resultLabel}`,
       ...(streakLine ? [`🔥 ${streakLine}`] : []),
       '',
-      'codedaily-nu.vercel.app',
+      // El enlace lleva al mismo reto: el de hoy o ese día del archivo
+      `${SITE_ORIGIN}${buildPath(allowDateSelection ? { page: 'archive', date: getDaySeed(challengeDate) } : { page: 'daily' })}`,
     ];
+    const shareText = lines.join('\n');
 
-    const ok = await copyToClipboard(lines.join('\n'));
-    setShareStatus(ok ? 'copied' : 'failed');
+    let status;
+    if (shouldUseNativeShare()) {
+      try {
+        await navigator.share({ text: shareText });
+        status = 'shared';
+      } catch (error) {
+        // Cerrar el menú de compartir no es un error
+        if (error?.name === 'AbortError') return;
+        status = (await copyToClipboard(shareText)) ? 'copied' : 'failed';
+      }
+    } else {
+      status = (await copyToClipboard(shareText)) ? 'copied' : 'failed';
+    }
+
+    setShareStatus(status);
     setTimeout(() => setShareStatus('idle'), 2000);
   };
 
   const shareLabel = (idleLabel) => (
     shareStatus === 'copied' ? text.shareCopied
+      : shareStatus === 'shared' ? text.shareShared
       : shareStatus === 'failed' ? text.shareFailed
       : idleLabel
   );
@@ -939,7 +968,7 @@ function ChallengePlayer({
 
                   {completed && (
                     <button
-                      className={`secondary-button ${shareStatus === 'copied' ? 'is-confirmed' : ''}`}
+                      className={`secondary-button ${shareStatus === 'copied' || shareStatus === 'shared' ? 'is-confirmed' : ''}`}
                       onClick={handleShare}
                       aria-live="polite"
                     >
