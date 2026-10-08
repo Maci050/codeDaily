@@ -1,9 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useEscapeKey } from '../hooks/useEscapeKey';
 
 function HowToPlayModal({ isOpen, onClose }) {
   const { language } = useLanguage();
   const [tab, setTab] = useState('daily');
+  const cardRef = useRef(null);
+
+  useEscapeKey(isOpen, onClose);
+
+  // Focus the dialog itself so its title stays in view on small screens
+  useEffect(() => {
+    if (isOpen) cardRef.current?.focus({ preventScroll: true });
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -68,106 +77,79 @@ function HowToPlayModal({ isOpen, onClose }) {
     },
   }[language];
 
-  const tabStyle = (isActive) => ({
-    padding: '8px 16px',
-    borderRadius: 'var(--radius-md)',
-    border: 'none',
-    background: isActive ? 'var(--primary-soft)' : 'transparent',
-    color: isActive ? 'var(--green)' : 'var(--muted)',
-    fontFamily: 'var(--mono)',
-    fontSize: '0.85rem',
-    fontWeight: isActive ? 600 : 400,
-    cursor: 'pointer',
-    transition: '0.15s ease',
-  });
+  const modes = [
+    { title: text.mode1Title, desc: text.mode1Desc, accent: 'green' },
+    { title: text.mode2Title, desc: text.mode2Desc, accent: 'red' },
+    { title: text.mode3Title, desc: text.mode3Desc, accent: 'blue' },
+  ];
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-card" style={{ width: 'min(600px, 92%)', maxHeight: '85vh', overflowY: 'auto' }}>
-        <h2>{text.title}</h2>
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        ref={cardRef}
+        tabIndex={-1}
+        className="modal-card tutorial-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="how-to-play-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <h2 id="how-to-play-title">{text.title}</h2>
 
-        {/* Tabs */}
-        <div style={{
-          display: 'flex',
-          gap: '4px',
-          background: 'var(--bg)',
-          border: '1px solid var(--border)',
-          borderRadius: 'var(--radius-md)',
-          padding: '3px',
-          margin: '16px 0',
-        }}>
-          <button style={tabStyle(tab === 'daily')} onClick={() => setTab('daily')}>{text.tabDaily}</button>
-          <button style={tabStyle(tab === 'modes')} onClick={() => setTab('modes')}>{text.tabModes}</button>
+        <div className="mode-switch-buttons tutorial-tabs" role="tablist">
+          <button
+            role="tab"
+            aria-selected={tab === 'daily'}
+            className={`mode-button ${tab === 'daily' ? 'active' : ''}`}
+            onClick={() => setTab('daily')}
+          >
+            {text.tabDaily}
+          </button>
+          <button
+            role="tab"
+            aria-selected={tab === 'modes'}
+            className={`mode-button ${tab === 'modes' ? 'active' : ''}`}
+            onClick={() => setTab('modes')}
+          >
+            {text.tabModes}
+          </button>
         </div>
 
-        {/* Tab Daily */}
         {tab === 'daily' && (
-          <>
-            <p style={{ color: 'var(--text-soft)', marginBottom: '16px' }}>{text.dailyIntro}</p>
-            <ul style={{ paddingLeft: 0, listStyle: 'none', marginBottom: '20px' }}>
-              {text.dailySteps.map((step, i) => (
-                <li key={i} style={{
-                  padding: '8px 0 8px 20px',
-                  position: 'relative',
-                  borderBottom: '1px solid var(--border-muted)',
-                  color: 'var(--text-soft)',
-                  fontSize: '0.9rem',
-                  lineHeight: 1.6,
-                }}>
-                  <span style={{
-                    position: 'absolute', left: 0,
-                    color: 'var(--green)', fontFamily: 'var(--mono)', fontSize: '0.85rem',
-                  }}>{i + 1}.</span>
-                  {step}
-                </li>
+          <div role="tabpanel">
+            <p className="tutorial-intro">{text.dailyIntro}</p>
+            <ol className="tutorial-steps">
+              {text.dailySteps.map((step) => (
+                <li key={step}>{step}</li>
               ))}
-            </ul>
+            </ol>
 
-            <p style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--muted-strong)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px' }}>
-              {text.dailyExampleTitle}
-            </p>
+            <p className="tutorial-label">{text.dailyExampleTitle}</p>
             <pre className="code-block" style={{ marginBottom: '12px' }}>
               <code>{text.dailyExample}</code>
             </pre>
 
-            <p style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--muted-strong)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px' }}>
-              {text.dailyExampleJavaTitle}
-            </p>
+            <p className="tutorial-label">{text.dailyExampleJavaTitle}</p>
             <pre className="code-block" style={{ marginBottom: '20px' }}>
               <code>{text.dailyExampleJava}</code>
             </pre>
-          </>
+          </div>
         )}
 
-        {/* Tab Modos */}
         {tab === 'modes' && (
-          <>
-            <p style={{ color: 'var(--text-soft)', marginBottom: '16px' }}>{text.modesIntro}</p>
+          <div role="tabpanel">
+            <p className="tutorial-intro">{text.modesIntro}</p>
 
-            {[
-              { title: text.mode1Title, desc: text.mode1Desc, color: 'var(--green)', bg: 'var(--green-dim)', border: 'rgba(63,185,80,0.2)' },
-              { title: text.mode2Title, desc: text.mode2Desc, color: 'var(--red)', bg: 'var(--red-soft)', border: 'rgba(255,123,114,0.2)' },
-              { title: text.mode3Title, desc: text.mode3Desc, color: 'var(--blue)', bg: 'var(--blue-soft)', border: 'rgba(88,166,255,0.2)' },
-            ].map((mode) => (
-              <div key={mode.title} style={{
-                background: mode.bg,
-                border: `1px solid ${mode.border}`,
-                borderRadius: 'var(--radius-md)',
-                padding: '14px 16px',
-                marginBottom: '12px',
-              }}>
-                <div style={{ fontFamily: 'var(--mono)', fontWeight: 600, color: mode.color, marginBottom: '6px', fontSize: '0.9rem' }}>
-                  {mode.title}
-                </div>
-                <p style={{ margin: 0, color: 'var(--text-soft)', fontSize: '0.88rem', lineHeight: 1.6 }}>
-                  {mode.desc}
-                </p>
+            {modes.map((mode) => (
+              <div key={mode.title} className={`tutorial-mode accent-${mode.accent}`}>
+                <h3>{mode.title}</h3>
+                <p>{mode.desc}</p>
               </div>
             ))}
-          </>
+          </div>
         )}
 
-        <button className="primary-button" onClick={onClose} style={{ width: '100%', marginTop: '8px' }}>
+        <button className="primary-button" onClick={onClose}>
           {text.close}
         </button>
       </div>

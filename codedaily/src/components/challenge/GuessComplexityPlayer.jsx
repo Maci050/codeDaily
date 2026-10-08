@@ -170,7 +170,7 @@ function GuessComplexityPlayer({ selectedDate }) {
 
         {/* Badges */}
         <div className="badge-row" style={{ marginBottom: '20px' }}>
-          <span className="difficulty-pill">{difficulty}</span>
+          <span className="difficulty-pill">{{ novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty]}</span>
           {completed && <span className="completed-pill">{text.completedBadge}</span>}
           <span className="difficulty-pill">{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
         </div>
@@ -206,9 +206,9 @@ function GuessComplexityPlayer({ selectedDate }) {
                 let opacity = 1;
 
                 if (isWrong) {
-                  bg = 'var(--red-soft)';
+                  bg = 'var(--danger-dim)';
                   borderColor = 'rgba(255,123,114,0.3)';
-                  color = 'var(--red)';
+                  color = 'var(--danger)';
                   opacity = 0.6;
                 } else if (showResult && isCorrectOption) {
                   bg = 'var(--green-dim)';
@@ -216,7 +216,7 @@ function GuessComplexityPlayer({ selectedDate }) {
                   color = 'var(--green)';
                 } else if (isSelected && !isWrong) {
                   borderColor = 'rgba(88,166,255,0.5)';
-                  bg = 'var(--blue-soft)';
+                  bg = 'var(--info-dim)';
                 }
 
                 return (
@@ -227,13 +227,14 @@ function GuessComplexityPlayer({ selectedDate }) {
                       setSelected(option);
                     }}
                     disabled={isOver || isWrong}
+                    aria-pressed={isSelected}
                     style={{
                       padding: '16px',
-                      borderRadius: 'var(--radius-md)',
+                      borderRadius: 'var(--r-md)',
                       border: `1px solid ${borderColor}`,
                       background: bg,
                       color,
-                      fontFamily: 'var(--mono)',
+                      fontFamily: 'var(--font-mono)',
                       fontSize: '1.1rem',
                       fontWeight: 700,
                       cursor: isOver || isWrong ? 'not-allowed' : 'pointer',
@@ -281,12 +282,12 @@ function GuessComplexityPlayer({ selectedDate }) {
               <p>{text.lockedText}</p>
               <p style={{ marginTop: '8px' }}>
                 {text.expectedLabel}:{' '}
-                <code style={{ fontFamily: 'var(--mono)', color: 'var(--green)', fontWeight: 700 }}>
+                <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--green)', fontWeight: 700 }}>
                   {challenge.expected}
                 </code>
               </p>
               <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{text.explanation}</strong>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
                 <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
               </div>
             </div>
@@ -297,7 +298,7 @@ function GuessComplexityPlayer({ selectedDate }) {
             <div className="feedback-box success-box" style={{ marginTop: '20px' }}>
               <h4>{text.correctTitle}</h4>
               <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{text.explanation}</strong>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
                 <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
               </div>
             </div>

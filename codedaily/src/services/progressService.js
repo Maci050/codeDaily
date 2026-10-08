@@ -28,6 +28,20 @@ function getDayKey(date = new Date()) {
   return date.toISOString().split('T')[0];
 }
 
+function getYesterdayKey(date = new Date()) {
+  const yesterday = new Date(date);
+  yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+  return getDayKey(yesterday);
+}
+
+// Una racha sigue viva si el último reto completado fue hoy o ayer
+function getActiveStreak(data) {
+  const now = new Date();
+  const isAlive = data.lastCompletedDate === getDayKey(now)
+    || data.lastCompletedDate === getYesterdayKey(now);
+  return isAlive ? data.streak || 0 : 0;
+}
+
 function buildProgressKey({ date = new Date(), challengeId = 'unknown', mode = 'normal' }) {
   return `${getDayKey(date)}::${challengeId}::${mode}`;
 }
@@ -73,18 +87,19 @@ function markTodayCompleted({ date = new Date(), challengeId = 'unknown', mode =
     }
   }
 
-  const yesterday = new Date(date);
-  yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayKey = getDayKey(yesterday);
+  // Solo el reto del día actual cuenta para la racha; jugar el archivo no la toca
+  if (today === getDayKey(new Date())) {
+    const yesterdayKey = getYesterdayKey(date);
 
-  if (data.lastCompletedDate === yesterdayKey) {
-    data.streak += 1;
-  } else if (data.lastCompletedDate !== today) {
-    data.streak = 1;
+    if (data.lastCompletedDate === yesterdayKey) {
+      data.streak += 1;
+    } else if (data.lastCompletedDate !== today) {
+      data.streak = 1;
+    }
+
+    data.lastCompletedDate = today;
+    data.maxStreak = Math.max(data.maxStreak || 0, data.streak);
   }
-
-  data.lastCompletedDate = today;
-  data.maxStreak = Math.max(data.maxStreak || 0, data.streak);
 
   saveProgress(data);
 }
@@ -157,7 +172,7 @@ function getStats() {
   // Para dificultad en modo normal, usamos los contadores existentes
   // normalCompleted y hackerCompleted son los más fiables
   return {
-    streak: data.streak || 0,
+    streak: getActiveStreak(data),
     maxStreak: data.maxStreak || 0,
     completedDays: completedDates.size,
     normalCompleted: data.normalCompleted || 0,

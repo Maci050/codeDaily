@@ -58,6 +58,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
       yourFixLabel: 'Tu corrección',
       checkButton: 'Comprobar',
       checkingButton: 'Comprobando...',
+      resetButton: 'Restablecer código',
       correctTitle: '¡Bug corregido!',
       correctText: 'Todos los tests pasan con tu corrección.',
       wrongTitle: 'Todavía no',
@@ -87,6 +88,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
       yourFixLabel: 'Your fix',
       checkButton: 'Check',
       checkingButton: 'Checking...',
+      resetButton: 'Reset code',
       correctTitle: 'Bug fixed!',
       correctText: 'All tests pass with your fix.',
       wrongTitle: 'Not yet',
@@ -217,7 +219,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
 
         {/* Badges */}
         <div className="badge-row" style={{ marginBottom: '20px' }}>
-          <span className="difficulty-pill">{difficulty}</span>
+          <span className="difficulty-pill">{{ novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty]}</span>
           {completed && <span className="completed-pill">{text.completedBadge}</span>}
           <span className="difficulty-pill">{isPyodideLoading ? text.pyodideLoading : text.pyodideReady}</span>
           <span className="difficulty-pill">{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
@@ -270,7 +272,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
             </button>
             {!isOver && (
               <button className="secondary-button" onClick={handleReset} disabled={isChecking}>
-                Reset
+                {text.resetButton}
               </button>
             )}
           </div>
@@ -294,7 +296,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
                   <p>{text.lockedText}</p>
                   {challenge.solution && (
                     <div style={{ marginTop: '12px' }}>
-                      <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>
+                      <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
                         {text.solutionLabel}
                       </strong>
                       <pre className="code-block" style={{ marginTop: '8px' }}>

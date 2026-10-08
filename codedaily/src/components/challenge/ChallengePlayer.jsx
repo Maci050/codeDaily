@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import {
   getChallengeStats,
@@ -16,6 +16,28 @@ import {
 } from '../../services/progressService';
 import { ensurePyodideLoaded } from '../../services/pythonRunnerService';
 import { getPreferences, savePreferences } from '../../services/uiService';
+import { useEscapeKey } from '../../hooks/useEscapeKey';
+
+const NORMAL_GRID_SLOTS = 5;
+
+async function copyToClipboard(value) {
+  try {
+    await navigator.clipboard.writeText(value);
+    return true;
+  } catch {
+    // Fallback for browsers or contexts without the async Clipboard API
+    const helper = document.createElement('textarea');
+    helper.value = value;
+    helper.setAttribute('readonly', '');
+    helper.style.position = 'fixed';
+    helper.style.opacity = '0';
+    document.body.appendChild(helper);
+    helper.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(helper);
+    return ok;
+  }
+}
 
 function parseYMDToUTCDate(ymd) {
   const [year, month, day] = ymd.split('-').map(Number);
@@ -125,10 +147,11 @@ function ChallengePlayer({
           'Has agotado los 3 intentos disponibles del modo Hacker para esta fecha.',
         shareButton: 'Compartir resultado',
         shareCopied: '¡Copiado!',
-        modalTitle: '¡Reto superado!',   
-        modalClose: 'Cerrar',             
-        modalShare: 'Compartir',          
-        modalShareCopied: '¡Copiado!',
+        shareFailed: 'No se pudo copiar',
+        modalTitle: '¡Reto superado!',
+        modalClose: 'Cerrar',
+        modalShare: 'Compartir',
+        pythonLoadingButton: 'Cargando Python...',
         giveUpButton: 'Rendirse',
         giveUpConfirmTitle: '¿Seguro que quieres rendirte?',
         giveUpConfirmText: 'Si te rindes no podrás volver a intentar este desafío. Se mostrarán las pistas disponibles y la solución.',
@@ -204,10 +227,11 @@ function ChallengePlayer({
           'You used all 3 available attempts for this Hacker challenge date.',
         shareButton: 'Share result',
         shareCopied: 'Copied!',
-        modalTitle: 'Challenge solved',
-        modalClose: 'Close',               
-        modalShare: 'Share',               
-        modalShareCopied: 'Copied!',      
+        shareFailed: "Couldn't copy",
+        modalTitle: 'Challenge solved!',
+        modalClose: 'Close',
+        modalShare: 'Share',
+        pythonLoadingButton: 'Loading Python...',
         giveUpButton: 'Give up',
         giveUpConfirmTitle: 'Are you sure you want to give up?',
         giveUpConfirmText: 'If you give up you will not be able to retry this challenge. Available hints and the solution will be revealed.',
@@ -440,79 +464,65 @@ function ChallengePlayer({
     setShowGiveUpConfirm(false);
   };
 
-  const [copied, setCopied] = useState(false);
+  const [shareStatus, setShareStatus] = useState('idle');
 
-  const handleShare = () => {
+  const closeResultModal = useCallback(() => setShowResultModal(false), []);
+  const closeGiveUpConfirm = useCallback(() => setShowGiveUpConfirm(false), []);
+  useEscapeKey(showResultModal && completed, closeResultModal);
+  useEscapeKey(showGiveUpConfirm, closeGiveUpConfirm);
+
+  // Hacker mode has a real limit of 3 attempts; Normal mode is unlimited,
+  // so its grid grows past the default 5 slots instead of overflowing.
+  const gridSlots = isHackerMode ? maxHackerAttempts : Math.max(NORMAL_GRID_SLOTS, attemptCount);
+  const emojiGrid = Array.from({ length: gridSlots }, (_, i) => {
+    if (i < attemptCount - 1) return '🟥';
+    if (i === attemptCount - 1 && completed) return '🟩';
+    if (i === attemptCount - 1 && givenUp) return '🟥';
+    return '⬜';
+  }).join('');
+
+  const attemptsWord = language === 'es'
+    ? (attemptCount === 1 ? 'intento' : 'intentos')
+    : (attemptCount === 1 ? 'attempt' : 'attempts');
+  const attemptsSummary = isHackerMode
+    ? `${attemptCount}/${maxHackerAttempts} ${attemptsWord}`
+    : `${attemptCount} ${attemptsWord}`;
+
+  const dayNum = getDayNumber(challengeDate);
+  const resultMetaLine = `${difficultyLabelMap[effectiveDifficulty] || effectiveDifficulty} · ${
+    programmingLanguage === 'java' ? 'Java' : 'Python'
+  } · ${isHackerMode ? 'Hacker' : 'Normal'}`;
+  const currentStats = getStats();
+  const streakLine = currentStats.streak > 0
+    ? `${language === 'es' ? 'Racha' : 'Streak'}: ${currentStats.streak} ${language === 'es'
+        ? (currentStats.streak === 1 ? 'día' : 'días')
+        : (currentStats.streak === 1 ? 'day' : 'days')}`
+    : null;
+
+  const handleShare = async () => {
     if (!baseChallenge) return;
 
-    const dayNum = getDayNumber(challengeDate);
-
-    const maxAttempts = 5;
-    const emojiGrid = Array.from({ length: maxAttempts }, (_, i) => {
-      if (i < attemptCount - 1) return '🟥';
-      if (i === attemptCount - 1 && completed) return '🟩';
-      if (i === attemptCount - 1 && givenUp) return '🟥';
-      return '⬜';
-    }).join('');
-
-    const diffLabel = {
-      novato: language === 'es' ? 'Novato' : 'Beginner',
-      intermedio: language === 'es' ? 'Intermedio' : 'Intermediate',
-      pro: 'Pro',
-    }[effectiveDifficulty] || effectiveDifficulty;
-
-    const langLabel = programmingLanguage === 'java' ? 'Java' : 'Python';
-    const modeLabel = isHackerMode ? ' · Hacker' : ' · Normal';
-
-    const resultLabel = givenUp
-      ? (language === 'es' ? 'Rendido' : 'Given up')
-      : `${attemptCount}/${maxAttempts} ${language === 'es'
-          ? (attemptCount === 1 ? 'intento' : 'intentos')
-          : (attemptCount === 1 ? 'attempt' : 'attempts')}`;
-
-    const stats = getStats();
-    const streakLine = stats.streak > 0
-      ? `🔥 ${language === 'es' ? 'Racha' : 'Streak'}: ${stats.streak} ${language === 'es'
-          ? (stats.streak === 1 ? 'día' : 'días')
-          : (stats.streak === 1 ? 'day' : 'days')}`
-      : null;
-
+    const resultLabel = givenUp ? text.giveUpBadge : attemptsSummary;
     const lines = [
       `CodeDaily #${dayNum} 🧩`,
-      `${diffLabel} · ${langLabel}${modeLabel}`,
+      resultMetaLine,
       '',
       `${emojiGrid} — ${resultLabel}`,
-      ...(streakLine ? [streakLine] : []),
+      ...(streakLine ? [`🔥 ${streakLine}`] : []),
       '',
       'codedaily-nu.vercel.app',
     ];
 
-    navigator.clipboard.writeText(lines.join('\n')).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    const ok = await copyToClipboard(lines.join('\n'));
+    setShareStatus(ok ? 'copied' : 'failed');
+    setTimeout(() => setShareStatus('idle'), 2000);
   };
 
-  // Estado para el botón de compartir dentro del modal
-const [modalCopied, setModalCopied] = useState(false);
-
-const handleModalShare = () => {
-  handleShare();
-  setModalCopied(true);
-  setTimeout(() => setModalCopied(false), 2000);
-};
-
-// Calcular contenido del modal
-const dayNum = baseChallenge ? getDayNumber(challengeDate) : 0;
-const maxAttempts = 5;
-const emojiGrid = baseChallenge
-  ? Array.from({ length: maxAttempts }, (_, i) => {
-      if (i < attemptCount - 1) return '🟥';
-      if (i === attemptCount - 1 && completed) return '🟩';
-      return '⬜';
-    }).join('')
-  : '';
-const currentStats = getStats();
+  const shareLabel = (idleLabel) => (
+    shareStatus === 'copied' ? text.shareCopied
+      : shareStatus === 'failed' ? text.shareFailed
+      : `↑ ${idleLabel}`
+  );
 
   return (
     <section className="page-section">
@@ -730,7 +740,7 @@ const currentStats = getStats();
                 </div>
               </div>
 
-              {locked && !completed && (
+              {locked && !completed && !givenUp && (
                 <div className="feedback-box error-box">
                   <h4>{text.hackerLockedTitle}</h4>
                   <p>{text.hackerLockedText}</p>
@@ -829,6 +839,8 @@ const currentStats = getStats();
                     ? text.completedBadge
                     : isChecking
                     ? text.checkingButton
+                    : isPythonLoading
+                    ? text.pythonLoadingButton
                     : text.checkButton}
                 </button>
 
@@ -836,7 +848,7 @@ const currentStats = getStats();
                   <button
                     className="secondary-button"
                     onClick={handleResetCode}
-                    disabled={completed || isChecking}
+                    disabled={completed || locked || isChecking}
                   >
                     {text.resetButton}
                   </button>
@@ -844,23 +856,19 @@ const currentStats = getStats();
 
                 {completed && (
                   <button
-                    className="secondary-button"
+                    className={`secondary-button ${shareStatus === 'copied' ? 'is-confirmed' : ''}`}
                     onClick={handleShare}
-                    style={{
-                      borderColor: copied ? 'rgba(63,185,80,0.4)' : undefined,
-                      color: copied ? 'var(--green)' : undefined,
-                    }}
+                    aria-live="polite"
                   >
-                    {copied ? text.shareCopied : `↑ ${text.shareButton}`}
+                    {shareLabel(text.shareButton)}
                   </button>
                 )}
 
-                {/* Botón rendirse: solo en modo normal, sin completar, sin rendido, con 3+ intentos fallidos */}
+                {/* Botón rendirse: solo en modo normal, sin completar, sin rendido, tras al menos un intento fallido */}
                 {!isHackerMode && !completed && !givenUp && attemptCount >= 1 && !locked && (
                   <button
-                    className="secondary-button"
+                    className="secondary-button danger-button"
                     onClick={() => setShowGiveUpConfirm(true)}
-                    style={{ borderColor: 'rgba(248,81,73,0.3)', color: 'var(--danger)' }}
                   >
                     {text.giveUpButton}
                   </button>
@@ -869,41 +877,22 @@ const currentStats = getStats();
 
               {/* Modal de confirmación de rendirse */}
               {showGiveUpConfirm && (
-                <div style={{
-                  position: 'fixed', inset: 0, background: 'rgba(1,4,9,0.85)',
-                  backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center',
-                  justifyContent: 'center', padding: '20px', zIndex: 9999,
-                }}>
-                  <div style={{
-                    width: 'min(480px, 92%)', background: 'var(--bg-overlay)',
-                    borderRadius: 'var(--radius-lg, 10px)', padding: '28px',
-                    border: '1px solid rgba(248,81,73,0.3)',
-                    boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
-                  }}>
-                    <h3 style={{ margin: '0 0 12px', fontFamily: 'var(--mono)', color: 'var(--danger)', fontSize: '1rem' }}>
-                      {text.giveUpConfirmTitle}
-                    </h3>
-                    <p style={{ margin: '0 0 24px', color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.6, fontFamily: 'Inter, sans-serif' }}>
-                      {text.giveUpConfirmText}
-                    </p>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                      <button
-                        className="secondary-button"
-                        onClick={() => setShowGiveUpConfirm(false)}
-                        style={{ flex: 1 }}
-                      >
+                <div className="modal-overlay" onClick={closeGiveUpConfirm}>
+                  <div
+                    className="modal-card confirm-card"
+                    role="alertdialog"
+                    aria-modal="true"
+                    aria-labelledby="give-up-title"
+                    aria-describedby="give-up-text"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <h2 id="give-up-title">{text.giveUpConfirmTitle}</h2>
+                    <p id="give-up-text">{text.giveUpConfirmText}</p>
+                    <div className="modal-actions">
+                      <button className="secondary-button" onClick={closeGiveUpConfirm} autoFocus>
                         {text.giveUpCancel}
                       </button>
-                      <button
-                        onClick={handleGiveUp}
-                        style={{
-                          flex: 1, padding: '8px 18px', borderRadius: '6px',
-                          background: 'rgba(248,81,73,0.15)', color: 'var(--danger)',
-                          border: '1px solid rgba(248,81,73,0.4)', fontWeight: 600,
-                          fontSize: '0.85rem', cursor: 'pointer',
-                          fontFamily: 'Inter, sans-serif',
-                        }}
-                      >
+                      <button className="secondary-button danger-button solid" onClick={handleGiveUp}>
                         {text.giveUpConfirm}
                       </button>
                     </div>
@@ -1050,122 +1039,37 @@ const currentStats = getStats();
         </div>
       </div>
       {/* Modal de resultado */}
-{showResultModal && completed && (
-  <div
-    style={{
-      position: 'fixed', inset: 0,
-      background: 'rgba(1,4,9,0.85)',
-      backdropFilter: 'blur(4px)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: '20px', zIndex: 9999,
-    }}
-    onClick={() => setShowResultModal(false)}
-  >
-    <div
-      style={{
-        width: 'min(420px, 92%)',
-        background: 'var(--bg-overlay)',
-        borderRadius: '14px',
-        padding: '32px 28px',
-        border: '1px solid rgba(63,185,80,0.3)',
-        boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
-        textAlign: 'center',
-      }}
-      onClick={e => e.stopPropagation()}
-    >
-      {/* Título */}
-      <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🎉</div>
-      <h2 style={{
-        margin: '0 0 20px',
-        fontFamily: 'var(--mono)',
-        fontSize: '1.1rem',
-        fontWeight: 700,
-        color: 'var(--green)',
-      }}>
-        {text.modalTitle}
-      </h2>
+      {showResultModal && completed && (
+        <div className="modal-overlay" onClick={closeResultModal}>
+          <div
+            className="modal-card result-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="result-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="result-emoji" aria-hidden="true">🎉</div>
+            <h2 id="result-title">{text.modalTitle}</h2>
 
-      {/* Cabecera del resultado */}
-      <p style={{
-        margin: '0 0 4px',
-        fontFamily: 'var(--mono)',
-        fontSize: '1rem',
-        fontWeight: 700,
-        color: 'var(--text)',
-      }}>
-        CodeDaily #{dayNum} 🧩
-      </p>
-      <p style={{
-        margin: '0 0 20px',
-        fontSize: '0.82rem',
-        color: 'var(--text-muted)',
-        fontFamily: 'var(--mono)',
-      }}>
-        {({
-          novato: language === 'es' ? 'Novato' : 'Beginner',
-          intermedio: language === 'es' ? 'Intermedio' : 'Intermediate',
-          pro: 'Pro',
-        })[effectiveDifficulty]} · {programmingLanguage === 'java' ? 'Java' : 'Python'} · {isHackerMode ? 'Hacker' : 'Normal'}
-      </p>
+            <p className="result-day">CodeDaily #{dayNum} 🧩</p>
+            <p className="result-meta">{resultMetaLine}</p>
 
-      {/* Grid de emojis */}
-      <div style={{
-        fontSize: '1.6rem',
-        letterSpacing: '4px',
-        marginBottom: '12px',
-      }}>
-        {emojiGrid}
-      </div>
+            <div className="result-grid" role="img" aria-label={attemptsSummary}>{emojiGrid}</div>
 
-      {/* Intentos */}
-      <p style={{
-        margin: '0 0 8px',
-        fontFamily: 'var(--mono)',
-        fontSize: '0.9rem',
-        color: 'var(--text)',
-      }}>
-        {attemptCount}/{maxAttempts} {language === 'es'
-          ? (attemptCount === 1 ? 'intento' : 'intentos')
-          : (attemptCount === 1 ? 'attempt' : 'attempts')}
-      </p>
+            <p className="result-attempts">{attemptsSummary}</p>
+            {streakLine && <p className="result-streak">🔥 {streakLine}</p>}
 
-      {/* Racha */}
-      {currentStats.streak > 0 && (
-        <p style={{
-          margin: '0 0 28px',
-          fontFamily: 'var(--mono)',
-          fontSize: '0.88rem',
-          color: 'var(--green)',
-        }}>
-          🔥 {language === 'es' ? 'Racha' : 'Streak'}: {currentStats.streak} {language === 'es'
-            ? (currentStats.streak === 1 ? 'día' : 'días')
-            : (currentStats.streak === 1 ? 'day' : 'days')}
-        </p>
+            <div className="modal-actions">
+              <button className="secondary-button" onClick={closeResultModal}>
+                {text.modalClose}
+              </button>
+              <button className="primary-button" onClick={handleShare} autoFocus aria-live="polite">
+                {shareLabel(text.modalShare)}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
-
-      {/* Botones */}
-      <div style={{ display: 'flex', gap: '10px' }}>
-        <button
-          className="secondary-button"
-          onClick={() => setShowResultModal(false)}
-          style={{ flex: 1 }}
-        >
-          {text.modalClose}
-        </button>
-        <button
-          className="primary-button"
-          onClick={handleModalShare}
-          style={{
-            flex: 1,
-            background: modalCopied ? 'var(--green)' : undefined,
-          }}
-        >
-          {modalCopied ? text.modalShareCopied : `↑ ${text.modalShare}`}
-        </button>
-      </div>
-    </div>
-  </div>
-)}
     </section>
   );
 }

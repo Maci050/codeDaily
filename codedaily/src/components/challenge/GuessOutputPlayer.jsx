@@ -72,6 +72,7 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
       difficultyPro: 'Pro',
       inputLabel: 'Entrada',
       outputLabel: 'Tu respuesta',
+      codeLabel: 'Código',
       placeholder: 'Escribe el valor de retorno...',
       submitButton: 'Comprobar',
       correctTitle: '¡Correcto!',
@@ -96,6 +97,7 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
       difficultyPro: 'Pro',
       inputLabel: 'Input',
       outputLabel: 'Your answer',
+      codeLabel: 'Code',
       placeholder: 'Write the return value...',
       submitButton: 'Check',
       correctTitle: 'Correct!',
@@ -209,7 +211,7 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
 
         {/* Badge row */}
         <div className="badge-row" style={{ marginBottom: '20px' }}>
-          <span className="difficulty-pill">{difficulty}</span>
+          <span className="difficulty-pill">{{ novato: text.difficultyNovato, intermedio: text.difficultyIntermedio, pro: text.difficultyPro }[difficulty]}</span>
           {completed && <span className="completed-pill">{text.completedBadge}</span>}
           <span className="difficulty-pill">{text.attemptsLeft}: {Math.max(0, attemptsLeft)}</span>
         </div>
@@ -224,7 +226,7 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
           </div>
 
           <div className="challenge-section">
-            <h3>Code</h3>
+            <h3>{text.codeLabel}</h3>
             <pre className="code-block">
               <code>{challenge.code}</code>
             </pre>
@@ -236,9 +238,12 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
         {/* Input de respuesta */}
         <div className="editor-card">
           <div className="challenge-section" style={{ marginTop: 0 }}>
-            <h3>{text.outputLabel}</h3>
+            <h3 id="go-answer-label">{text.outputLabel}</h3>
             <input
               type="text"
+              aria-labelledby="go-answer-label"
+              autoComplete="off"
+              spellCheck={false}
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               onKeyDown={(e) => {
@@ -249,11 +254,11 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
               style={{
                 width: '100%',
                 padding: '14px 16px',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 'var(--r-md)',
                 background: 'var(--bg)',
-                color: 'var(--cyan)',
+                color: 'var(--info)',
                 border: '1px solid var(--border-strong)',
-                fontFamily: 'var(--mono)',
+                fontFamily: 'var(--font-mono)',
                 fontSize: '1rem',
                 marginTop: '8px',
               }}
@@ -292,12 +297,12 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
               <p>{text.lockedText}</p>
               <p style={{ marginTop: '8px' }}>
                 {text.expectedLabel}:{' '}
-                <code style={{ fontFamily: 'var(--mono)', color: 'var(--green)' }}>
+                <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--green)' }}>
                   {challenge.expected}
                 </code>
               </p>
               <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{text.explanation}</strong>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
                 <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
               </div>
             </div>
@@ -308,7 +313,7 @@ function GuessOutputPlayer({ selectedDate, allowDateSelection = false, onDateCha
             <div className="feedback-box success-box" style={{ marginTop: '20px' }}>
               <h4>{text.correctTitle}</h4>
               <div style={{ marginTop: '10px' }}>
-                <strong style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{text.explanation}</strong>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{text.explanation}</strong>
                 <p style={{ marginTop: '4px' }}>{localizedExplanation}</p>
               </div>
             </div>

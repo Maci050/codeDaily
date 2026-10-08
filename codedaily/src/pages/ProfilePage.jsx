@@ -88,9 +88,9 @@ function ProfilePage() {
   };
 
   const sectionTitleStyle = {
-    fontFamily: 'var(--mono)',
+    fontFamily: 'var(--font-mono)',
     fontSize: '0.75rem',
-    color: 'var(--muted)',
+    color: 'var(--text-muted)',
     textTransform: 'uppercase',
     letterSpacing: '0.08em',
     marginBottom: '14px',
@@ -109,25 +109,25 @@ function ProfilePage() {
     <section className="page-section">
       <div className="content-card">
         <h1>{text.title}</h1>
-        <p style={{ color: 'var(--muted)', marginTop: '4px' }}>{text.subtitle}</p>
+        <p style={{ color: 'var(--text-muted)', marginTop: '4px' }}>{text.subtitle}</p>
 
         {/* Racha */}
         <div style={sectionStyle}>
           <p style={sectionTitleStyle}>{text.streakTitle}</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <div className="stat-card" style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '2.5rem', fontFamily: 'var(--mono)', fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>
+              <span style={{ display: 'block', fontSize: '2.5rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>
                 {stats.streak}
               </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: '6px', display: 'block' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', display: 'block' }}>
                 🔥 {text.streakCurrent}
               </span>
             </div>
             <div className="stat-card" style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '2.5rem', fontFamily: 'var(--mono)', fontWeight: 700, color: 'var(--cyan)', lineHeight: 1 }}>
+              <span style={{ display: 'block', fontSize: '2.5rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--info)', lineHeight: 1 }}>
                 {stats.maxStreak}
               </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: '6px', display: 'block' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '6px', display: 'block' }}>
                 🏆 {text.streakMax}
               </span>
             </div>
@@ -137,15 +137,15 @@ function ProfilePage() {
         {/* Completados */}
         <div style={sectionStyle}>
           <p style={sectionTitleStyle}>{text.completedTitle}</p>
-          <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+          <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)', overflow: 'hidden' }}>
             {[
               { label: text.completedDays, value: stats.completedDays, color: 'var(--text)' },
               { label: text.normalCompleted, value: stats.normalCompleted, color: 'var(--green)' },
-              { label: text.hackerCompleted, value: stats.hackerCompleted, color: 'var(--red)' },
+              { label: text.hackerCompleted, value: stats.hackerCompleted, color: 'var(--danger)' },
             ].map(({ label, value, color }) => (
               <div key={label} style={statRowStyle}>
-                <span style={{ color: 'var(--text-soft)', paddingLeft: '14px' }}>{label}</span>
-                <span style={{ fontFamily: 'var(--mono)', fontWeight: 700, color, paddingRight: '14px', fontSize: '1rem' }}>{value}</span>
+                <span style={{ color: 'var(--text-muted)', paddingLeft: '14px' }}>{label}</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color, paddingRight: '14px', fontSize: '1rem' }}>{value}</span>
               </div>
             ))}
           </div>
@@ -157,14 +157,14 @@ function ProfilePage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             {[
               { label: text.langPython, value: stats.byLanguage.python, icon: '🐍', color: 'var(--green)' },
-              { label: text.langJava, value: stats.byLanguage.java, icon: '☕', color: 'var(--yellow)' },
+              { label: text.langJava, value: stats.byLanguage.java, icon: '☕', color: 'var(--warning)' },
             ].map(({ label, value, icon, color }) => (
               <div key={label} className="stat-card" style={{ textAlign: 'center' }}>
                 <span style={{ fontSize: '1.4rem' }}>{icon}</span>
-                <span style={{ display: 'block', fontSize: '1.8rem', fontFamily: 'var(--mono)', fontWeight: 700, color, lineHeight: 1, marginTop: '6px' }}>
+                <span style={{ display: 'block', fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color, lineHeight: 1, marginTop: '6px' }}>
                   {value}
                 </span>
-                <span style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: '4px', display: 'block' }}>{label}</span>
+                <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>{label}</span>
               </div>
             ))}
           </div>
@@ -173,20 +173,20 @@ function ProfilePage() {
         {/* Modos extra */}
         <div style={sectionStyle}>
           <p style={sectionTitleStyle}>{text.modesTitle}</p>
-          <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+          <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)', overflow: 'hidden' }}>
             {[
               { label: text.modeGuessOutput, value: stats.modeStats.guess_output, color: 'var(--green)' },
-              { label: text.modeFindBug, value: stats.modeStats.find_bug, color: 'var(--red)' },
-              { label: text.modeComplexity, value: stats.modeStats.guess_complexity, color: 'var(--blue)' },
+              { label: text.modeFindBug, value: stats.modeStats.find_bug, color: 'var(--danger)' },
+              { label: text.modeComplexity, value: stats.modeStats.guess_complexity, color: 'var(--info)' },
             ].map(({ label, value, color }) => (
               <div key={label} style={statRowStyle}>
-                <span style={{ color: 'var(--text-soft)', paddingLeft: '14px' }}>{label}</span>
-                <span style={{ fontFamily: 'var(--mono)', fontWeight: 700, color, paddingRight: '14px', fontSize: '1rem' }}>{value}</span>
+                <span style={{ color: 'var(--text-muted)', paddingLeft: '14px' }}>{label}</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color, paddingRight: '14px', fontSize: '1rem' }}>{value}</span>
               </div>
             ))}
             <div style={{ ...statRowStyle, borderBottom: 'none', opacity: 0.6 }}>
-              <span style={{ color: 'var(--muted)', paddingLeft: '14px', fontSize: '0.85rem' }}>Total</span>
-              <span style={{ fontFamily: 'var(--mono)', fontWeight: 700, color: 'var(--text)', paddingRight: '14px' }}>{totalExtra}</span>
+              <span style={{ color: 'var(--text-muted)', paddingLeft: '14px', fontSize: '0.85rem' }}>Total</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text)', paddingRight: '14px' }}>{totalExtra}</span>
             </div>
           </div>
         </div>
@@ -200,19 +200,19 @@ function ProfilePage() {
                 const pct = maxAttempts > 0 ? (count / maxAttempts) * 100 : 0;
                 return (
                   <div key={bucket} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.8rem', color: 'var(--muted)', width: '28px', textAlign: 'right', flexShrink: 0 }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-muted)', width: '28px', textAlign: 'right', flexShrink: 0 }}>
                       {bucket}
                     </span>
-                    <div style={{ flex: 1, background: 'var(--bg)', borderRadius: 'var(--radius-sm)', height: '20px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+                    <div style={{ flex: 1, background: 'var(--bg)', borderRadius: 'var(--r-sm)', height: '20px', overflow: 'hidden', border: '1px solid var(--border)' }}>
                       <div style={{
                         width: `${pct}%`,
                         height: '100%',
-                        background: bucket === '1' ? 'var(--green)' : bucket === '2' ? 'var(--cyan)' : bucket === '3' ? 'var(--yellow)' : 'var(--red)',
+                        background: bucket === '1' ? 'var(--green)' : bucket === '2' ? 'var(--info)' : bucket === '3' ? 'var(--warning)' : 'var(--danger)',
                         transition: 'width 0.4s ease',
                         minWidth: count > 0 ? '4px' : '0',
                       }} />
                     </div>
-                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.8rem', color: 'var(--text)', width: '20px', flexShrink: 0 }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text)', width: '20px', flexShrink: 0 }}>
                       {count}
                     </span>
                   </div>
@@ -226,7 +226,7 @@ function ProfilePage() {
         <div style={sectionStyle}>
           <p style={sectionTitleStyle}>{text.activityTitle}</p>
           {Object.keys(stats.activityByDay).length === 0 ? (
-            <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>{text.noActivity}</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{text.noActivity}</p>
           ) : (
             <div style={{
               display: 'flex',

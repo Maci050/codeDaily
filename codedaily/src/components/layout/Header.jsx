@@ -46,6 +46,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
             <button
               key={item.id}
               className={`nav-button ${currentPage === item.id ? 'active' : ''}`}
+              aria-current={currentPage === item.id ? 'page' : undefined}
               onClick={() => onNavigate(item.id)}
             >
               {item.label}
@@ -56,15 +57,21 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
         <div className="language-switcher">
           <span className="language-label">{text.language}</span>
 
-          <div className="language-buttons">
+          <div className="language-buttons" role="group" aria-label={text.language}>
             <button
               className={`lang-button ${language === 'es' ? 'active' : ''}`}
+              aria-pressed={language === 'es'}
+              lang="es"
+              title="Español"
               onClick={() => setLanguage('es')}
             >
               ES
             </button>
             <button
               className={`lang-button ${language === 'en' ? 'active' : ''}`}
+              aria-pressed={language === 'en'}
+              lang="en"
+              title="English"
               onClick={() => setLanguage('en')}
             >
               EN
@@ -75,7 +82,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
             className="lang-button"
             onClick={onOpenTutorial}
             title={language === 'es' ? 'Cómo jugar' : 'How to play'}
-            style={{ minWidth: '36px' }}
+            aria-label={language === 'es' ? 'Cómo jugar' : 'How to play'}
           >
             ?
           </button>

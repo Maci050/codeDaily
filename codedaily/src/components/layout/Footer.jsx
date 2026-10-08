@@ -19,34 +19,15 @@ function Footer() {
 
   return (
     <footer className="site-footer">
-      <div className="page-container footer-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-        <p style={{ margin: 0 }}>{text.line}</p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>{text.support}</span>
+      <div className="page-container footer-inner">
+        <p>{text.line}</p>
+        <div className="footer-support">
+          <span>{text.support}</span>
           <a
+            className="support-link"
             href="https://ko-fi.com/codedaily"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              fontFamily: 'var(--mono)',
-              fontSize: '0.8rem',
-              color: 'var(--text)',
-              background: 'var(--bg)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-md)',
-              padding: '5px 12px',
-              textDecoration: 'none',
-              transition: '0.15s ease',
-              whiteSpace: 'nowrap',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'rgba(63,185,80,0.4)';
-              e.currentTarget.style.color = 'var(--green)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'var(--border)';
-              e.currentTarget.style.color = 'var(--text)';
-            }}
           >
             {text.buyMeCoffee}
           </a>
