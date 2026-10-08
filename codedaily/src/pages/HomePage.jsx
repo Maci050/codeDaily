@@ -5,6 +5,7 @@ import PixelIcon from '../components/ui/PixelIcon';
 import { getChallengeText, getDayNumber, getDaySeed, loadDailyChallenge } from '../services/challengeService';
 import { getPreferences } from '../services/uiService';
 import { getStats } from '../services/progressService';
+import { formatCountdown, useDayClock } from '../hooks/useDayClock';
 
 function HomePage({ onNavigate }) {
   const { language } = useLanguage();
@@ -83,7 +84,9 @@ function HomePage({ onNavigate }) {
   }, [language]);
 
   const preferences = getPreferences();
-  const today = new Date();
+  // El reloj del juego refresca la portada sola cuando cambia el día (00:00 UTC)
+  const { today: todaySeed, msUntilNext } = useDayClock();
+  const today = new Date(`${todaySeed}T00:00:00Z`);
   const dayNumber = getDayNumber(today);
   const isJava = preferences.programmingLanguage === 'java';
 
@@ -93,7 +96,7 @@ function HomePage({ onNavigate }) {
   useEffect(() => {
     let isMounted = true;
     loadDailyChallenge({
-      date: new Date(),
+      date: new Date(`${todaySeed}T00:00:00Z`),
       language: preferences.programmingLanguage,
       difficulty: preferences.difficulty,
     })
@@ -104,7 +107,7 @@ function HomePage({ onNavigate }) {
     return () => {
       isMounted = false;
     };
-  }, [preferences.programmingLanguage, preferences.difficulty]);
+  }, [todaySeed, preferences.programmingLanguage, preferences.difficulty]);
 
   const todayChallenge = useMemo(() => getChallengeText(rawChallenge, language), [rawChallenge, language]);
 
@@ -172,8 +175,10 @@ function HomePage({ onNavigate }) {
               style={{ '--zoom-delay': '0.12s' }}
               status={
                 <>
-                  <span>{text.difficulty[todayChallenge.difficulty]}</span>
-                  <span>{isJava ? 'Java' : 'Python'}</span>
+                  <span>
+                    {text.difficulty[todayChallenge.difficulty]} · {isJava ? 'Java' : 'Python'}
+                  </span>
+                  <span>{formatCountdown(msUntilNext, language)}</span>
                 </>
               }
             >

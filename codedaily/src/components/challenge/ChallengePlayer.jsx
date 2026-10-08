@@ -19,6 +19,7 @@ import { ensurePyodideLoaded } from '../../services/pythonRunnerService';
 import { getPreferences, savePreferences } from '../../services/uiService';
 import { useEscapeKey } from '../../hooks/useEscapeKey';
 import { buildPath } from '../../router';
+import { formatCountdown, useDayClock } from '../../hooks/useDayClock';
 import Window from '../ui/Window';
 import PixelIcon from '../ui/PixelIcon';
 
@@ -61,6 +62,7 @@ function parseYMDToUTCDate(ymd) {
 function ChallengePlayer({
   pageTitle,
   pageSubtitle,
+  notice = null,
   selectedDate,
   onDateChange = null,
   allowDateSelection = false,
@@ -91,6 +93,7 @@ function ChallengePlayer({
   const isPython = programmingLanguage === 'python';
   const maxHackerAttempts = 3;
   const challengeDate = useMemo(() => parseYMDToUTCDate(selectedDate), [selectedDate]);
+  const { msUntilNext } = useDayClock();
 
   const text = useMemo(() => {
     return {
@@ -744,6 +747,8 @@ function ChallengePlayer({
         </div>
       </div>
 
+      {notice}
+
       {isHackerMode && (
         <div className="feedback-box error-box">
           <PixelIcon name="alert" size={36} />
@@ -1179,6 +1184,10 @@ function ChallengePlayer({
                 {streakLine}
               </p>
             )}
+            <p className="result-next">
+              <PixelIcon name="clock" size={20} />
+              {formatCountdown(msUntilNext, language)}
+            </p>
 
             <div className="dialog-actions">
               <button className="secondary-button" onClick={closeResultModal}>
