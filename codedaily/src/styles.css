@@ -890,3 +890,54 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
   .archive-calendar { width: 100%; }
   .calendar-day { height: 42px; }
 }
+
+/* ──────────────────────────────────────────────
+   SOLUTION WALKTHROUGH (al rendirse)
+─────────────────────────────────────────────── */
+.results-grid.is-single { grid-template-columns: minmax(0, 1fr); }
+.walkthrough-body { display: flex; flex-direction: column; gap: 26px; }
+
+.code-lines code { display: block; counter-reset: line; }
+.code-line { display: block; position: relative; padding-left: 44px; min-height: 1.65em; white-space: pre-wrap; }
+.code-line::before {
+  counter-increment: line;
+  content: counter(line);
+  position: absolute;
+  left: 0;
+  width: 28px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.code-line.is-new::after {
+  content: '';
+  position: absolute;
+  left: 34px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--ink);
+}
+
+.test-table-wrap { overflow-x: auto; border: var(--frame) solid var(--ink); }
+.test-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.test-table th { text-align: left; padding: 8px 12px; border-bottom: var(--frame) solid var(--ink); font-weight: 700; white-space: nowrap; }
+.test-table td { padding: 8px 12px; vertical-align: top; overflow-wrap: break-word; }
+.test-table tr + tr td { border-top: 2px dotted var(--ink); }
+.test-table td + td, .test-table th + th { border-left: 2px dotted var(--ink); }
+.test-table code { font-size: 0.9rem; overflow-wrap: anywhere; }
+.test-outcome { display: inline-flex; align-items: flex-start; gap: 6px; }
+.test-outcome .pixel-icon { flex-shrink: 0; margin-top: 2px; }
+.test-outcome.failed .pixel-icon { background: var(--ink); color: var(--paper); }
+.test-outcome.muted { font-style: italic; }
+
+.compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.compare-label { font-weight: 700; margin-bottom: 6px; }
+.compare-legend { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-weight: 700; font-size: 0.9rem; }
+.compare-swatch { display: inline-block; width: 4px; height: 18px; background: var(--ink); }
+
+@media (max-width: 820px) {
+  .compare-grid { grid-template-columns: minmax(0, 1fr); }
+  .test-table th { white-space: normal; }
+  .test-table td, .test-table th { padding: 8px; }
+  .test-table code { font-size: 0.82rem; }
+}

@@ -23,6 +23,7 @@ import { buildPath } from '../../router';
 import { formatCountdown, useDayClock } from '../../hooks/useDayClock';
 import Window from '../ui/Window';
 import ArchiveCalendar from './ArchiveCalendar';
+import SolutionWalkthrough from './SolutionWalkthrough';
 import PixelIcon from '../ui/PixelIcon';
 import RichText from '../ui/RichText';
 
@@ -181,7 +182,7 @@ function ChallengePlayer({
         giveUpConfirm: 'Sí, rendirse',
         giveUpCancel: 'Cancelar',
         giveUpBadge: 'Rendido',
-        solutionLabel: 'Solución',
+        walkthroughPointer: 'Abajo tienes la solución explicada paso a paso.',
       },
       en: {
         modeLabel: 'Mode',
@@ -264,7 +265,7 @@ function ChallengePlayer({
         giveUpConfirm: 'Yes, give up',
         giveUpCancel: 'Cancel',
         giveUpBadge: 'Given up',
-        solutionLabel: 'Solution',
+        walkthroughPointer: 'The step-by-step solution is shown below.',
       },
     }[language];
   }, [language, isPython]);
@@ -478,6 +479,7 @@ function ChallengePlayer({
   });
 
   const hackerAttemptsLeft = Math.max(0, maxHackerAttempts - attemptCount);
+  const showWalkthrough = givenUp && !completed && Boolean(baseChallenge?.solution);
 
   const handleValidate = async () => {
     if (!baseChallenge || completed || locked || isChecking || isPythonLoading) {
@@ -1001,7 +1003,7 @@ function ChallengePlayer({
             </Window>
           </div>
 
-          <div className="results-grid">
+          <div className={`results-grid ${showWalkthrough ? 'is-single' : ''}`}>
             <Window title={text.resultTitle} icon="check" style={{ '--zoom-delay': '0.16s' }}>
               <div className="result-stack" aria-live="polite">
                 {givenUp && !completed && (
@@ -1009,12 +1011,7 @@ function ChallengePlayer({
                     <PixelIcon name="alert" size={32} />
                     <h4>{text.giveUpBadge}</h4>
                     {baseChallenge?.solution ? (
-                      <div>
-                        <p className="tutorial-label">{text.solutionLabel}</p>
-                        <pre className="code-block">
-                          <code>{baseChallenge.solution}</code>
-                        </pre>
-                      </div>
+                      <p>{text.walkthroughPointer}</p>
                     ) : (
                       <p>
                         {language === 'es'
@@ -1097,29 +1094,41 @@ function ChallengePlayer({
               </div>
             </Window>
 
-            <Window title={text.hintsSection} icon="bulb" style={{ '--zoom-delay': '0.2s' }}>
-              {isHackerMode ? (
-                <div className="empty-note">
-                  <PixelIcon name="alert" size={28} />
-                  <span>{text.noHintsInHacker}</span>
-                </div>
-              ) : revealedHints === 0 ? (
-                <div className="empty-note">
-                  <PixelIcon name="bulb" size={28} />
-                  <span>{text.noHintsYet}</span>
-                </div>
-              ) : (
-                <ol className="hint-list">
-                  {dailyChallenge.localizedHints.slice(0, revealedHints).map((hint, index) => (
-                    <li key={`${index}-${hint}`}>
-                      <span className="hint-num">{index + 1}</span>
-                      <span><RichText text={hint} /></span>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </Window>
+            {!showWalkthrough && (
+              <Window title={text.hintsSection} icon="bulb" style={{ '--zoom-delay': '0.2s' }}>
+                {isHackerMode ? (
+                  <div className="empty-note">
+                    <PixelIcon name="alert" size={28} />
+                    <span>{text.noHintsInHacker}</span>
+                  </div>
+                ) : revealedHints === 0 ? (
+                  <div className="empty-note">
+                    <PixelIcon name="bulb" size={28} />
+                    <span>{text.noHintsYet}</span>
+                  </div>
+                ) : (
+                  <ol className="hint-list">
+                    {dailyChallenge.localizedHints.slice(0, revealedHints).map((hint, index) => (
+                      <li key={`${index}-${hint}`}>
+                        <span className="hint-num">{index + 1}</span>
+                        <span><RichText text={hint} /></span>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </Window>
+            )}
           </div>
+
+          {showWalkthrough && (
+            <SolutionWalkthrough
+              challenge={baseChallenge}
+              hints={dailyChallenge.localizedHints}
+              userCode={code}
+              testResults={validationResult?.testResults || null}
+              language={language}
+            />
+          )}
         </>
       )}
 
