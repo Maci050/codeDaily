@@ -13,6 +13,7 @@ const DailyPage = lazy(() => import('./pages/DailyPage'));
 const ArchivePage = lazy(() => import('./pages/ArchivePage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const ModesPage = lazy(() => import('./pages/ModesPage'));
+const WeeklyPage = lazy(() => import('./pages/WeeklyPage'));
 
 const SITE_ORIGIN = 'https://codedaily-nu.vercel.app';
 
@@ -20,6 +21,7 @@ const PAGE_TITLES = {
   es: {
     home: 'CodeDaily — Reto diario de programación',
     daily: 'Daily Challenge — CodeDaily',
+    weekly: 'Desafío semanal — CodeDaily',
     archive: 'Archivo — CodeDaily',
     profile: 'Progreso — CodeDaily',
     modes: 'Modos de juego — CodeDaily',
@@ -27,6 +29,7 @@ const PAGE_TITLES = {
   en: {
     home: 'CodeDaily — Daily coding challenge',
     daily: 'Daily Challenge — CodeDaily',
+    weekly: 'Weekly challenge — CodeDaily',
     archive: 'Archive — CodeDaily',
     profile: 'Progress — CodeDaily',
     modes: 'Game modes — CodeDaily',
@@ -36,7 +39,7 @@ const PAGE_TITLES = {
 // Lee la ruta de la URL actual; si no es válida, corrige la URL sin añadir historial
 function readRouteFromLocation(visit) {
   const parsed = parsePath(window.location.pathname);
-  const route = { page: parsed.page, mode: parsed.mode, date: parsed.date, visit };
+  const route = { page: parsed.page, mode: parsed.mode, date: parsed.date, week: parsed.week || null, visit };
   const canonicalPath = buildPath(route);
   if (!parsed.valid || window.location.pathname !== canonicalPath) {
     window.history.replaceState(null, '', canonicalPath + window.location.search + window.location.hash);
@@ -62,16 +65,20 @@ function App() {
   useEffect(() => {
     const path = buildPath(route);
     const titles = PAGE_TITLES[language] || PAGE_TITLES.es;
-    document.title = route.page === 'archive' && route.date
-      ? `${titles.archive.replace(' — CodeDaily', '')} ${route.date} — CodeDaily`
-      : titles[route.page] || titles.home;
+    if (route.page === 'archive' && route.date) {
+      document.title = `${titles.archive.replace(' — CodeDaily', '')} ${route.date} — CodeDaily`;
+    } else if (route.page === 'weekly' && route.week) {
+      document.title = `${titles.weekly.replace(' — CodeDaily', '')} #${route.week} — CodeDaily`;
+    } else {
+      document.title = titles[route.page] || titles.home;
+    }
     document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${SITE_ORIGIN}${path}`);
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', `${SITE_ORIGIN}${path}`);
   }, [route, language]);
 
   // Cada visita remonta la página para que sus ventanas vuelvan a abrirse con zoom
   function navigate(page, options = {}) {
-    const next = { page, mode: options.mode || null, date: options.date || null };
+    const next = { page, mode: options.mode || null, date: options.date || null, week: options.week || null };
     const path = buildPath(next);
     if (window.location.pathname !== path) {
       window.history.pushState(null, '', path);
@@ -103,6 +110,8 @@ function App() {
     switch (route.page) {
       case 'daily':
         return <DailyPage />;
+      case 'weekly':
+        return <WeeklyPage initialWeek={route.week} onWeekChange={(week) => replaceRoute({ week })} />;
       case 'archive':
         return <ArchivePage initialDate={route.date} onDateChange={(date) => replaceRoute({ date })} />;
       case 'profile':

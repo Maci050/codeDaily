@@ -11,6 +11,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
       es: {
         navHome: 'Inicio',
         navDaily: 'Daily Challenge',
+        navWeekly: 'Semanal',
         navArchive: 'Archivo',
         navProfile: 'Progreso',
         navModes: 'Modos',
@@ -21,6 +22,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
       en: {
         navHome: 'Home',
         navDaily: 'Daily Challenge',
+        navWeekly: 'Weekly',
         navArchive: 'Archive',
         navProfile: 'Progress',
         navModes: 'Modes',
@@ -44,6 +46,7 @@ function Header({ appName, currentPage, onNavigate, onOpenTutorial }) {
   const navItems = [
     { id: 'home', label: text.navHome },
     { id: 'daily', label: text.navDaily },
+    { id: 'weekly', label: text.navWeekly },
     { id: 'archive', label: text.navArchive },
     { id: 'profile', label: text.navProfile },
     { id: 'modes', label: text.navModes },

@@ -1,11 +1,14 @@
 // Rutas de la app sobre la History API. Vercel reescribe cualquier ruta a index.html.
 // Los nombres de ruta coinciden con los que ya anuncia public/sitemap.xml.
 
+import { getWeekNumber } from './services/weeklyService';
+
 export const ARCHIVE_START_DATE = '2026-03-22';
 
 const PAGE_PATHS = {
   home: '/',
   daily: '/daily',
+  weekly: '/weekly',
   archive: '/archive',
   profile: '/progress',
   modes: '/modes',
@@ -33,7 +36,7 @@ function isValidArchiveDate(date) {
   return date >= ARCHIVE_START_DATE && date <= todaySeed();
 }
 
-// Convierte una ruta en { page, mode, date }. Una ruta desconocida o inválida
+// Convierte una ruta en { page, mode, date, week }. Una ruta desconocida o inválida
 // devuelve la página más cercana con valid: false para corregir la URL.
 export function parsePath(pathname) {
   const segments = pathname.replace(/\/+$/, '').split('/').filter(Boolean);
@@ -41,6 +44,13 @@ export function parsePath(pathname) {
   const page = PATH_TO_PAGE[base];
 
   if (!page) return { page: 'home', mode: null, date: null, valid: false };
+
+  if (page === 'weekly') {
+    if (segments.length === 1) return { page, mode: null, date: null, week: null, valid: true };
+    const week = /^\d+$/.test(segments[1]) ? Number(segments[1]) : NaN;
+    const ok = segments.length === 2 && week >= 1 && week <= getWeekNumber();
+    return { page, mode: null, date: null, week: ok ? week : null, valid: ok };
+  }
 
   if (page === 'modes') {
     if (segments.length === 1) return { page, mode: null, date: null, valid: true };
@@ -58,8 +68,9 @@ export function parsePath(pathname) {
   return { page, mode: null, date: null, valid: segments.length === 1 || page === 'home' };
 }
 
-export function buildPath({ page, mode = null, date = null }) {
+export function buildPath({ page, mode = null, date = null, week = null }) {
   const base = PAGE_PATHS[page] || '/';
+  if (page === 'weekly' && week) return `${base}/${week}`;
   if (page === 'modes' && mode && MODE_SLUGS[mode]) return `${base}/${MODE_SLUGS[mode]}`;
   if (page === 'archive' && date) return `${base}/${date}`;
   return base;

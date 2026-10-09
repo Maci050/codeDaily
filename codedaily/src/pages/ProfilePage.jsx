@@ -26,6 +26,7 @@ function ProfilePage({ onNavigate }) {
       modeGuessOutput: '¿Qué devuelve?',
       modeFindBug: 'Encuentra el bug',
       modeComplexity: '¿Cuál es la complejidad?',
+      modeWeekly: 'Desafío semanal',
       attemptsTitle: 'Distribución de intentos',
       noAttempts: 'Completa un reto para ver cuántos intentos sueles necesitar.',
       activityTitle: 'Actividad — últimos 60 días',
@@ -52,6 +53,7 @@ function ProfilePage({ onNavigate }) {
       modeGuessOutput: 'What does it return?',
       modeFindBug: 'Find the bug',
       modeComplexity: "What's the complexity?",
+      modeWeekly: 'Weekly challenge',
       attemptsTitle: 'Attempts distribution',
       noAttempts: 'Complete a challenge to see how many attempts you usually need.',
       activityTitle: 'Activity — last 60 days',
@@ -75,7 +77,7 @@ function ProfilePage({ onNavigate }) {
     return days;
   }, []);
 
-  const totalExtra = stats.modeStats.guess_output + stats.modeStats.find_bug + stats.modeStats.guess_complexity;
+  const totalExtra = stats.modeStats.guess_output + stats.modeStats.find_bug + stats.modeStats.guess_complexity + stats.modeStats.weekly;
   const maxBucket = Math.max(...Object.values(stats.attemptsDist), 1);
   const totalAttempts = Object.values(stats.attemptsDist).reduce((a, b) => a + b, 0);
   const hasActivity = Object.keys(stats.activityByDay).length > 0;
@@ -179,6 +181,10 @@ function ProfilePage({ onNavigate }) {
               <tr>
                 <th scope="row">{text.modeComplexity}</th>
                 <td>{stats.modeStats.guess_complexity}</td>
+              </tr>
+              <tr>
+                <th scope="row">{text.modeWeekly}</th>
+                <td>{stats.modeStats.weekly}</td>
               </tr>
               <tr className="total">
                 <th scope="row">Total</th>

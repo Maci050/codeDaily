@@ -38,6 +38,7 @@ Unlike quiz or multiple-choice coding games, the daily challenge runs real code.
 - Progressive hints on failed attempts (Normal mode only).
 - Extra modes: "What does it return?" (3 attempts), "Find the bug" (real Python execution), "What's the complexity?" (multiple-choice Big O, 2 attempts). 64 challenges across them.
 - Archive of past daily challenges, starting at the launch date 2026-03-22.
+- Weekly challenge (Python only), harder than the daily: transform code (iterative ↔ recursive), solve under rules (no `sorted`, no `[::-1]`…) or meet a time limit. Changes every Monday 00:00 UTC; week #1 started 2026-10-05. Rules are checked on the syntax tree (Python `ast`), not by text search. Challenges are authored and validated with `npm run weekly` (scripts/weekly/build_weekly.py).
 - Profile and local progress: attempts, completion, hints used, streak, preferences.
 - Result modal and share text: emoji grid, day number, streak.
 - UI and challenge content in Spanish and English.

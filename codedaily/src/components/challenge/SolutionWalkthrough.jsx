@@ -43,6 +43,12 @@ function formatValue(value, isPython) {
   return String(value);
 }
 
+// Las entradas enormes (listas de miles de números) se acortan para mostrarlas
+const MAX_SHOWN_CHARS = 160;
+function shorten(text) {
+  return text.length > MAX_SHOWN_CHARS ? `${text.slice(0, MAX_SHOWN_CHARS)} …` : text;
+}
+
 function CodeLines({ code, markLines = null }) {
   return (
     <pre className="code-block code-lines">
@@ -111,13 +117,13 @@ function SolutionWalkthrough({ challenge, hints, userCode, testResults, language
                   const result = resultByIndex.get(index);
                   return (
                     <tr key={index}>
-                      <td><code>{`${challenge.functionName}(${test.input.map((value) => formatValue(value, isPython)).join(', ')})`}</code></td>
-                      <td><code>{formatValue(test.expected, isPython)}</code></td>
+                      <td><code>{shorten(`${challenge.functionName}(${test.input.map((value) => formatValue(value, isPython)).join(', ')})`)}</code></td>
+                      <td><code>{shorten(formatValue(test.expected, isPython))}</code></td>
                       <td>
                         {result ? (
                           <span className={`test-outcome ${result.passed ? 'passed' : 'failed'}`}>
                             <PixelIcon name={result.passed ? 'check' : 'cross'} size={16} />
-                            <code>{result.actual !== undefined ? formatValue(result.actual, isPython) : text.error}</code>
+                            <code>{result.runtimeError ? text.error : shorten(formatValue(result.actual, isPython))}</code>
                           </span>
                         ) : (
                           <span className="test-outcome muted">{text.notChecked}</span>

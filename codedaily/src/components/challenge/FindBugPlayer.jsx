@@ -79,6 +79,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
       testFailed: 'Fallo',
       dateLabel: 'Fecha',
       runtimeError: 'Error de Python',
+      timeout: 'Tu código tardó demasiado y se detuvo. ¿Hay un bucle infinito?',
       noResultYet: 'Todavía no has comprobado tu corrección.',
     },
     en: {
@@ -110,6 +111,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
       testFailed: 'Failed',
       dateLabel: 'Date',
       runtimeError: 'Python error',
+      timeout: 'Your code took too long and was stopped. Is there an infinite loop?',
       noResultYet: 'You have not checked your fix yet.',
     },
   }[language]), [language]);
@@ -171,7 +173,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
       setResult({
         success: false,
         testResults: pyResult.testResults,
-        pythonError: pyResult.pythonError,
+        pythonError: pyResult.errorCodes?.includes('PYTHON_TIMEOUT') ? text.timeout : pyResult.pythonError,
       });
     }
 

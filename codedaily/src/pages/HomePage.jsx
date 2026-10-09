@@ -27,6 +27,7 @@ function HomePage({ onNavigate }) {
         readmeTitle: 'Léeme.txt',
         desk: {
           archive: 'Archivo',
+          weekly: 'Semanal',
           guessOutput: '¿Qué devuelve?',
           findBug: 'Encuentra el bug',
           complexity: 'Complejidad',
@@ -61,6 +62,7 @@ function HomePage({ onNavigate }) {
         readmeTitle: 'ReadMe.txt',
         desk: {
           archive: 'Archive',
+          weekly: 'Weekly',
           guessOutput: 'What does it return?',
           findBug: 'Find the bug',
           complexity: 'Complexity',
@@ -116,6 +118,7 @@ function HomePage({ onNavigate }) {
   const fileName = `reto_${dayNumber}.${isJava ? 'java' : 'py'}`;
 
   const deskIcons = [
+    { icon: 'trophy', label: text.desk.weekly, go: () => onNavigate('weekly') },
     { icon: 'calendar', label: text.desk.archive, go: () => onNavigate('archive') },
     { icon: 'braces', label: text.desk.guessOutput, go: () => onNavigate('modes', { mode: 'guess_output' }) },
     { icon: 'bug', label: text.desk.findBug, go: () => onNavigate('modes', { mode: 'find_bug' }) },

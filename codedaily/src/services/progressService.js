@@ -82,13 +82,16 @@ function markTodayCompleted({ date = new Date(), challengeId = 'unknown', mode =
   if (!previousEntry.completed) {
     if (mode === 'hacker') {
       data.hackerCompleted += 1;
+    } else if (mode === 'weekly') {
+      data.weeklyCompleted = (data.weeklyCompleted || 0) + 1;
     } else {
       data.normalCompleted += 1;
     }
   }
 
-  // Solo el reto del día actual cuenta para la racha; jugar el archivo no la toca
-  if (today === getDayKey(new Date())) {
+  // Solo el reto del día actual cuenta para la racha; jugar el archivo no la toca.
+  // El desafío semanal tampoco: tiene su propio ritmo.
+  if (mode !== 'weekly' && today === getDayKey(new Date())) {
     const yesterdayKey = getYesterdayKey(date);
 
     if (data.lastCompletedDate === yesterdayKey) {
@@ -118,7 +121,7 @@ function getStats() {
   let byLanguage = { python: 0, java: 0 };
 
   // Modos extra
-  let modeStats = { guess_output: 0, find_bug: 0, guess_complexity: 0 };
+  let modeStats = { guess_output: 0, find_bug: 0, guess_complexity: 0, weekly: 0 };
 
   // Distribución de intentos (1, 2, 3, 4+)
   let attemptsDist = { 1: 0, 2: 0, 3: 0, '4+': 0 };
@@ -152,6 +155,10 @@ function getStats() {
     }
     if (challengeId?.startsWith('gc_')) {
       modeStats.guess_complexity += 1;
+      return;
+    }
+    if (challengeId?.startsWith('weekly_')) {
+      modeStats.weekly += 1;
       return;
     }
 

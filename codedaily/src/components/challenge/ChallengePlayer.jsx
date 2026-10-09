@@ -20,43 +20,16 @@ import { ensurePyodideLoaded } from '../../services/pythonRunnerService';
 import { getPreferences, savePreferences } from '../../services/uiService';
 import { useEscapeKey } from '../../hooks/useEscapeKey';
 import { buildPath } from '../../router';
+import { SITE_ORIGIN, shareText as shareResultText } from '../../services/shareService';
 import { formatCountdown, useDayClock } from '../../hooks/useDayClock';
 import Window from '../ui/Window';
 import ArchiveCalendar from './ArchiveCalendar';
 import SolutionWalkthrough from './SolutionWalkthrough';
+import { handleCodeEditorKeyDown } from './codeEditorKeys';
 import PixelIcon from '../ui/PixelIcon';
 import RichText from '../ui/RichText';
 
 const NORMAL_GRID_SLOTS = 5;
-
-const SITE_ORIGIN = 'https://codedaily-nu.vercel.app';
-
-// En móvil se abre el menú nativo de compartir (WhatsApp, Telegram...);
-// en escritorio se copia al portapapeles, que es lo que se espera allí.
-function shouldUseNativeShare() {
-  return typeof navigator !== 'undefined'
-    && typeof navigator.share === 'function'
-    && window.matchMedia?.('(pointer: coarse)').matches;
-}
-
-async function copyToClipboard(value) {
-  try {
-    await navigator.clipboard.writeText(value);
-    return true;
-  } catch {
-    // Fallback for browsers or contexts without the async Clipboard API
-    const helper = document.createElement('textarea');
-    helper.value = value;
-    helper.setAttribute('readonly', '');
-    helper.style.position = 'fixed';
-    helper.style.opacity = '0';
-    document.body.appendChild(helper);
-    helper.select();
-    const ok = document.execCommand('copy');
-    document.body.removeChild(helper);
-    return ok;
-  }
-}
 
 function parseYMDToUTCDate(ymd) {
   const [year, month, day] = ymd.split('-').map(Number);
@@ -284,6 +257,8 @@ function ChallengePlayer({
         PYTHON_SYNTAX_ERROR: 'Python ha detectado un error de sintaxis en tu código.',
         PYTHON_RUNTIME_ERROR: 'Tu código lanzó un error al ejecutarse.',
         PYODIDE_LOAD_ERROR: 'No se pudo inicializar Pyodide para ejecutar Python.',
+        PYTHON_TIMEOUT: 'Tu código tardó demasiado y se detuvo. ¿Hay un bucle infinito o una recursión sin caso base?',
+        RECURSION_DEPTH: 'La recursión es demasiado profunda: revisa el caso base o reduce las llamadas.',
       },
       en: {
         EMPTY_CODE: 'The code is empty.',
@@ -297,6 +272,8 @@ function ChallengePlayer({
         PYTHON_SYNTAX_ERROR: 'Python found a syntax error in your code.',
         PYTHON_RUNTIME_ERROR: 'Your code raised an error while running.',
         PYODIDE_LOAD_ERROR: 'Pyodide could not be initialized to run Python.',
+        PYTHON_TIMEOUT: 'Your code took too long and was stopped. Is there an infinite loop or a recursion without a base case?',
+        RECURSION_DEPTH: 'The recursion is too deep: check the base case or reduce the calls.',
       },
     }[language];
   }, [language]);
@@ -587,21 +564,9 @@ function ChallengePlayer({
       // El enlace lleva al mismo reto: el de hoy o ese día del archivo
       `${SITE_ORIGIN}${buildPath(allowDateSelection ? { page: 'archive', date: getDaySeed(challengeDate) } : { page: 'daily' })}`,
     ];
-    const shareText = lines.join('\n');
-
-    let status;
-    if (shouldUseNativeShare()) {
-      try {
-        await navigator.share({ text: shareText });
-        status = 'shared';
-      } catch (error) {
-        // Cerrar el menú de compartir no es un error
-        if (error?.name === 'AbortError') return;
-        status = (await copyToClipboard(shareText)) ? 'copied' : 'failed';
-      }
-    } else {
-      status = (await copyToClipboard(shareText)) ? 'copied' : 'failed';
-    }
+    const status = await shareResultText(lines.join('\n'));
+    // Cerrar el menú de compartir sin elegir nada no es un error
+    if (!status) return;
 
     setShareStatus(status);
     setTimeout(() => setShareStatus('idle'), 2000);
@@ -614,79 +579,7 @@ function ChallengePlayer({
       : idleLabel
   );
 
-  const handleEditorKeyDown = (event) => {
-    const textarea = event.target;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const TAB = '    ';
-
-    if (event.key === 'Tab') {
-      event.preventDefault();
-
-      const hasSelection = start !== end;
-
-      if (event.shiftKey) {
-        // Shift+Tab: desindenta las líneas seleccionadas (o la línea actual)
-        const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-        const lineEnd = end;
-        const selectedLines = code.substring(lineStart, lineEnd);
-
-        const dedented = selectedLines
-          .split('\n')
-          .map((line) => (line.startsWith(TAB) ? line.slice(TAB.length) : line.replace(/^ {1,3}/, '')))
-          .join('\n');
-
-        const removed = selectedLines.length - dedented.length;
-        const newValue = code.substring(0, lineStart) + dedented + code.substring(lineEnd);
-        setCode(newValue);
-
-        setTimeout(() => {
-          textarea.selectionStart = Math.max(lineStart, start - (hasSelection ? 0 : Math.min(removed, TAB.length)));
-          textarea.selectionEnd = end - removed;
-        }, 0);
-
-      } else if (hasSelection) {
-        // Tab con selección: indenta todas las líneas seleccionadas
-        const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-        const lineEnd = end;
-        const selectedLines = code.substring(lineStart, lineEnd);
-
-        const indented = selectedLines.split('\n').map((line) => TAB + line).join('\n');
-        const added = indented.length - selectedLines.length;
-        const newValue = code.substring(0, lineStart) + indented + code.substring(lineEnd);
-        setCode(newValue);
-
-        setTimeout(() => {
-          textarea.selectionStart = start + TAB.length;
-          textarea.selectionEnd = end + added;
-        }, 0);
-
-      } else {
-        // Tab sin selección: inserta 4 espacios en el cursor
-        const newValue = code.substring(0, start) + TAB + code.substring(end);
-        setCode(newValue);
-        setTimeout(() => {
-          textarea.selectionStart = textarea.selectionEnd = start + TAB.length;
-        }, 0);
-      }
-
-    } else if (event.key === 'Backspace' && start === end) {
-      // Backspace inteligente: borra un TAB completo si el cursor está precedido de espacios
-      const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-      const textBeforeCursor = code.substring(lineStart, start);
-      const trailingSpaces = textBeforeCursor.match(/( +)$/)?.[1] ?? '';
-
-      if (trailingSpaces.length > 0) {
-        event.preventDefault();
-        const toRemove = ((trailingSpaces.length - 1) % TAB.length) + 1;
-        const newValue = code.substring(0, start - toRemove) + code.substring(start);
-        setCode(newValue);
-        setTimeout(() => {
-          textarea.selectionStart = textarea.selectionEnd = start - toRemove;
-        }, 0);
-      }
-    }
-  };
+  const handleEditorKeyDown = (event) => handleCodeEditorKeyDown(event, code, setCode);
 
   const fileName = `solucion.${isPython ? 'py' : 'java'}`;
   const runtimeLabel = isPythonLoading ? text.pythonLoading : text.pythonReady;

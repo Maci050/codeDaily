@@ -1,141 +1,106 @@
-const PYODIDE_INDEX_URL = 'https://cdn.jsdelivr.net/pyodide/v0.29.3/full/';
+// Habla con el worker de Python (src/workers/pythonWorker.js).
+// Si una ejecución supera el tiempo límite, el worker se termina y se crea otro:
+// así un bucle infinito o una recursión sin fin no bloquean la página.
 
-let pyodideInstance = null;
-let pyodidePromise = null;
-let scriptPromise = null;
+const DEFAULT_TIMEOUT_MS = 8000;
 
-// El script de Pyodide se inyecta la primera vez que hace falta,
-// así la portada y el resto de páginas no lo descargan.
-function loadPyodideScript() {
-  if (typeof window !== 'undefined' && typeof window.loadPyodide === 'function') {
-    return Promise.resolve();
-  }
+let worker = null;
+let readyPromise = null;
+let nextId = 0;
+const pending = new Map();
 
-  if (!scriptPromise) {
-    scriptPromise = new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = `${PYODIDE_INDEX_URL}pyodide.js`;
-      script.async = true;
-      script.onload = () => resolve();
-      script.onerror = () => {
-        script.remove();
-        scriptPromise = null;
-        reject(new Error('PYODIDE_SCRIPT_NOT_AVAILABLE'));
-      };
-      document.head.appendChild(script);
-    });
-  }
-
-  return scriptPromise;
-}
-
-async function ensurePyodideLoaded() {
-  if (pyodideInstance) {
-    return pyodideInstance;
-  }
-
-  if (pyodidePromise) {
-    return pyodidePromise;
-  }
-
-  pyodidePromise = (async () => {
-    await loadPyodideScript();
-
-    const instance = await window.loadPyodide({
-      indexURL: PYODIDE_INDEX_URL,
-    });
-
-    pyodideInstance = instance;
-    return instance;
-  })();
-
-  // Si falla (sin conexión, CDN caído), se permite reintentar más tarde
-  pyodidePromise.catch(() => {
-    pyodidePromise = null;
+function rejectAll(error) {
+  pending.forEach(({ reject, timer }) => {
+    clearTimeout(timer);
+    reject(error);
   });
-
-  return pyodidePromise;
+  pending.clear();
 }
 
-async function runPythonChallengeTests(challenge, code) {
-  const pyodide = await ensurePyodideLoaded();
+function resetWorker() {
+  worker?.terminate();
+  worker = null;
+  readyPromise = null;
+}
 
-  pyodide.globals.set('USER_CODE', code);
-  pyodide.globals.set('FUNCTION_NAME', challenge.functionName);
-  pyodide.globals.set('TESTS_JSON', JSON.stringify(challenge.tests));
+function spawnWorker() {
+  worker = new Worker(new URL('../workers/pythonWorker.js', import.meta.url), { type: 'module' });
+
+  worker.onmessage = (event) => {
+    const { id, ok, result, error } = event.data;
+    const request = pending.get(id);
+    if (!request) return;
+    pending.delete(id);
+    clearTimeout(request.timer);
+    if (ok) request.resolve(result);
+    else request.reject(new Error(error));
+  };
+
+  worker.onerror = (event) => {
+    event.preventDefault?.();
+    rejectAll(new Error('PYODIDE_WORKER_ERROR'));
+    resetWorker();
+  };
+}
+
+function send(type, payload, timeoutMs = null) {
+  return new Promise((resolve, reject) => {
+    const id = ++nextId;
+    const request = { resolve, reject, timer: null };
+
+    if (timeoutMs) {
+      request.timer = setTimeout(() => {
+        if (!pending.has(id)) return;
+        pending.delete(id);
+        // No se puede interrumpir Python a medias: se descarta el worker entero
+        rejectAll(new Error('PYODIDE_WORKER_RESET'));
+        resetWorker();
+        const timeout = new Error('PYTHON_TIMEOUT');
+        timeout.name = 'TimeoutError';
+        reject(timeout);
+      }, timeoutMs);
+    }
+
+    pending.set(id, request);
+    worker.postMessage({ id, type, payload });
+  });
+}
+
+// Carga Pyodide en el worker (la primera vez descarga ~5 MB, luego queda en caché del navegador)
+function ensurePyodideLoaded() {
+  if (!readyPromise) {
+    spawnWorker();
+    readyPromise = send('init').catch((error) => {
+      resetWorker();
+      throw error;
+    });
+  }
+  return readyPromise;
+}
+
+async function runPythonChallengeTests(challenge, code, { constraints = null, timeoutMs = DEFAULT_TIMEOUT_MS } = {}) {
+  await ensurePyodideLoaded();
 
   try {
-    const resultJson = await pyodide.runPythonAsync(`
-import json
-import traceback
-
-result = {
-    "success": False,
-    "errorCodes": [],
-    "pythonError": None,
-    "testResults": [],
-    "passedCount": 0,
-    "totalTests": 0,
-}
-
-try:
-    namespace = {}
-    exec(USER_CODE, namespace)
-
-    fn = namespace.get(FUNCTION_NAME)
-
-    if not callable(fn):
-        result["errorCodes"].append("FUNCTION_NOT_CALLABLE")
-    else:
-        tests = json.loads(TESTS_JSON)
-        result["totalTests"] = len(tests)
-
-        for index, test in enumerate(tests):
-            try:
-                actual = fn(*test["input"])
-                expected = test["expected"]
-                passed = actual == expected
-
-                result["testResults"].append({
-                    "index": index,
-                    "passed": passed,
-                    "input": test["input"],
-                    "expected": expected,
-                    "actual": actual,
-                })
-
-                if passed:
-                    result["passedCount"] += 1
-            except Exception as test_error:
-                result["testResults"].append({
-                    "index": index,
-                    "passed": False,
-                    "input": test["input"],
-                    "expected": test["expected"],
-                    "actual": None,
-                    "runtimeError": str(test_error),
-                })
-
-        result["success"] = result["passedCount"] == result["totalTests"]
-
-        if not result["success"]:
-            result["errorCodes"].append("TESTS_FAILED")
-
-except SyntaxError as syntax_error:
-    result["errorCodes"].append("PYTHON_SYNTAX_ERROR")
-    result["pythonError"] = f"{syntax_error.__class__.__name__}: {syntax_error}"
-except Exception as runtime_error:
-    result["errorCodes"].append("PYTHON_RUNTIME_ERROR")
-    result["pythonError"] = f"{runtime_error.__class__.__name__}: {runtime_error}"
-
-json.dumps(result)
-    `);
-
-    return JSON.parse(resultJson);
-  } finally {
-    pyodide.globals.delete('USER_CODE');
-    pyodide.globals.delete('FUNCTION_NAME');
-    pyodide.globals.delete('TESTS_JSON');
+    return await send(
+      'run',
+      { code, functionName: challenge.functionName, tests: challenge.tests, constraints },
+      timeoutMs
+    );
+  } catch (error) {
+    if (error.name === 'TimeoutError') {
+      return {
+        success: false,
+        errorCodes: ['PYTHON_TIMEOUT'],
+        pythonError: null,
+        testResults: [],
+        passedCount: 0,
+        totalTests: challenge.tests.length,
+        violations: [],
+        timeLimitMs: timeoutMs,
+      };
+    }
+    throw error;
   }
 }
 
