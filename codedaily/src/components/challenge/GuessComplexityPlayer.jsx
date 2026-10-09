@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import Window from '../ui/Window';
 import PixelIcon from '../ui/PixelIcon';
+import RichText from '../ui/RichText';
 import { getDaySeed } from '../../services/challengeService';
 import { getProgressEntry, updateProgressEntry, markTodayCompleted } from '../../services/progressService';
 import challenges from '../../data/challenges/guess_complexity.json';
@@ -254,7 +255,7 @@ function GuessComplexityPlayer({ selectedDate }) {
                   <p>
                     {text.expectedLabel}: <code>{challenge.expected}</code>
                   </p>
-                  <p><strong>{text.explanation}:</strong> {localizedExplanation}</p>
+                  <p><strong>{text.explanation}:</strong> <RichText text={localizedExplanation} /></p>
                 </div>
               )}
 
@@ -262,7 +263,7 @@ function GuessComplexityPlayer({ selectedDate }) {
                 <div className="feedback-box success-box">
                   <PixelIcon name="check" size={32} />
                   <h4>{text.correctTitle}</h4>
-                  <p><strong>{text.explanation}:</strong> {localizedExplanation}</p>
+                  <p><strong>{text.explanation}:</strong> <RichText text={localizedExplanation} /></p>
                 </div>
               )}
             </div>

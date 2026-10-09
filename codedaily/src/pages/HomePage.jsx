@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import Window from '../components/ui/Window';
 import PixelIcon from '../components/ui/PixelIcon';
+import RichText from '../components/ui/RichText';
 import { getChallengeText, getDayNumber, getDaySeed, loadDailyChallenge } from '../services/challengeService';
 import { getPreferences } from '../services/uiService';
 import { getStats } from '../services/progressService';
@@ -187,7 +188,7 @@ function HomePage({ onNavigate }) {
                 <span className="pill">{getDaySeed(today)}</span>
               </div>
               <h2 className="today-title">{todayChallenge.localizedTitle}</h2>
-              <p>{todayChallenge.localizedDescription}</p>
+              <p><RichText text={todayChallenge.localizedDescription} /></p>
               <pre className="code-block" aria-label={text.starterCode}>
                 <code>{todayChallenge.starterCode}</code>
               </pre>

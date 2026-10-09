@@ -3,6 +3,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useEscapeKey } from '../hooks/useEscapeKey';
 import Window from './ui/Window';
 import PixelIcon from './ui/PixelIcon';
+import RichText from './ui/RichText';
 
 function HowToPlayModal({ isOpen, onClose }) {
   const { language } = useLanguage();
@@ -115,7 +116,7 @@ function HowToPlayModal({ isOpen, onClose }) {
             <p className="tutorial-intro">{text.dailyIntro}</p>
             <ol className="tutorial-steps">
               {text.dailySteps.map((step) => (
-                <li key={step}>{step}</li>
+                <li key={step}><span><RichText text={step} /></span></li>
               ))}
             </ol>
 

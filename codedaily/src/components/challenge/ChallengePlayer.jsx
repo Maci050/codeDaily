@@ -24,6 +24,7 @@ import { formatCountdown, useDayClock } from '../../hooks/useDayClock';
 import Window from '../ui/Window';
 import ArchiveCalendar from './ArchiveCalendar';
 import PixelIcon from '../ui/PixelIcon';
+import RichText from '../ui/RichText';
 
 const NORMAL_GRID_SLOTS = 5;
 
@@ -831,7 +832,7 @@ function ChallengePlayer({
                   </div>
 
                   <h2 className="challenge-heading">{dailyChallenge.localizedTitle}</h2>
-                  <p className="challenge-description">{dailyChallenge.localizedDescription}</p>
+                  <p className="challenge-description"><RichText text={dailyChallenge.localizedDescription} /></p>
 
                   <dl className="facts">
                     <div>
@@ -854,14 +855,14 @@ function ChallengePlayer({
 
                   <div className="section-block">
                     <h3>{text.instructions}</h3>
-                    <p>{dailyChallenge.localizedInstructions}</p>
+                    <p><RichText text={dailyChallenge.localizedInstructions} /></p>
                   </div>
 
                   <div className="section-block">
                     <h3>{text.restrictions}</h3>
                     <ul className="challenge-list">
                       {dailyChallenge.localizedRestrictions.map((restriction) => (
-                        <li key={restriction}>{restriction}</li>
+                        <li key={restriction}><RichText text={restriction} /></li>
                       ))}
                       {isHackerMode && (
                         <>
@@ -1062,7 +1063,7 @@ function ChallengePlayer({
                     <h4>{text.errorsSection}</h4>
                     <ul className="challenge-list">
                       {translatedErrors.map((error) => (
-                        <li key={error}>{error}</li>
+                        <li key={error}><RichText text={error} /></li>
                       ))}
                     </ul>
                   </div>
@@ -1112,7 +1113,7 @@ function ChallengePlayer({
                   {dailyChallenge.localizedHints.slice(0, revealedHints).map((hint, index) => (
                     <li key={`${index}-${hint}`}>
                       <span className="hint-num">{index + 1}</span>
-                      <span>{hint}</span>
+                      <span><RichText text={hint} /></span>
                     </li>
                   ))}
                 </ol>

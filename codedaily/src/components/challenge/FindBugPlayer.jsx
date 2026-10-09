@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import Window from '../ui/Window';
 import PixelIcon from '../ui/PixelIcon';
+import RichText from '../ui/RichText';
 import { getDaySeed } from '../../services/challengeService';
 import { getProgressEntry, updateProgressEntry, markTodayCompleted } from '../../services/progressService';
 import { ensurePyodideLoaded, runPythonChallengeTests } from '../../services/pythonRunnerService';
@@ -243,7 +244,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
                 </span>
               )}
             </div>
-            <p className="challenge-description">{localizedDescription}</p>
+            <p className="challenge-description"><RichText text={localizedDescription} /></p>
             <pre className="code-block">
               <code>{challenge.buggyCode}</code>
             </pre>
@@ -381,7 +382,7 @@ function FindBugPlayer({ selectedDate, allowDateSelection = false, onDateChange 
               {hints.slice(0, revealedHints).map((hint, i) => (
                 <li key={i}>
                   <span className="hint-num">{i + 1}</span>
-                  <span>{hint}</span>
+                  <span><RichText text={hint} /></span>
                 </li>
               ))}
             </ol>
