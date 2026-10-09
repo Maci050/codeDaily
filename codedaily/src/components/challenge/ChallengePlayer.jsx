@@ -114,8 +114,6 @@ function ChallengePlayer({
         difficultyIntermedio: 'Intermedio',
         difficultyPro: 'Pro',
         selectedDate: 'Fecha del reto',
-        challengeId: 'ID del reto',
-        languageLabel: 'Lenguaje',
         functionLabel: 'Función esperada',
         instructions: 'Instrucciones',
         restrictions: 'Restricciones',
@@ -199,8 +197,6 @@ function ChallengePlayer({
         difficultyIntermedio: 'Intermediate',
         difficultyPro: 'Pro',
         selectedDate: 'Challenge date',
-        challengeId: 'Challenge ID',
-        languageLabel: 'Language',
         functionLabel: 'Expected function',
         instructions: 'Instructions',
         restrictions: 'Restrictions',
@@ -841,14 +837,6 @@ function ChallengePlayer({
                     <div>
                       <dt>{text.selectedDate}</dt>
                       <dd>{getDaySeed(challengeDate)}</dd>
-                    </div>
-                    <div>
-                      <dt>{text.challengeId}</dt>
-                      <dd>{dailyChallenge.id}</dd>
-                    </div>
-                    <div>
-                      <dt>{text.languageLabel}</dt>
-                      <dd>{dailyChallenge.language}</dd>
                     </div>
                     <div>
                       <dt>{text.functionLabel}</dt>
